@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Ahvanam App',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.login,
-      // onGenerateRoute: AppPages.onGenerateRoute,
+      initialRoute: AppRoutes.dashboard,
+      onGenerateRoute: AppPages.onGenerateRoute,
     );
   }
 }
