@@ -1,3 +1,9 @@
+import 'package:aahwanam/blocs/Photographer/photographer_bloc.dart';
+import 'package:aahwanam/blocs/bartender/bartender_bloc.dart';
+import 'package:aahwanam/blocs/chef/chef_bloc.dart';
+import 'package:aahwanam/screens/Photographer/photographer_screen.dart';
+import 'package:aahwanam/screens/dashboard/bartender_screen.dart';
+import 'package:aahwanam/screens/dashboard/chef_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,6 +29,31 @@ class AppPages {
           builder: (_) => BlocProvider(
             create: (_) => DashboardBloc(),
             child: DashboardScreen(),
+          ),
+        );
+
+      case AppRoutes.photographer:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => PhotographerBloc(),
+            child: PhotographerScreen(),
+          ),
+        );
+
+
+      case AppRoutes.chef:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => ChefBloc(),
+            child: ChefScreen(),
+          ),
+        );
+
+      case AppRoutes.bartender:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => BartenderBloc(),
+            child: BartenderScreen(),
           ),
         );
 

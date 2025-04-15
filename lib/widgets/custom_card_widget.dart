@@ -42,7 +42,7 @@ class CustomCardWidgets {
             crossAxisCount: 2,
             crossAxisSpacing: 13.0,
             mainAxisSpacing: 13.0,
-            childAspectRatio: 1.08,
+            childAspectRatio: 1.05,
           ),
           itemCount: data.length,
           padding: EdgeInsets.zero,
@@ -124,7 +124,7 @@ class CustomCardWidgets {
                     ),
                     Row(
                       children: [
-                        const Icon(Icons.star, color: Colors.orange, size: 16),
+                        const Icon(Icons.star, color: Color(0xFFEFAA37), size: 16),
                         const SizedBox(width: 4),
                         Text(
                           item['rating'] ?? "0.0",

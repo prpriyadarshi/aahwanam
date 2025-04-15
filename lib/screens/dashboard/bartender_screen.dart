@@ -1,24 +1,24 @@
+
+import 'package:aahwanam/blocs/bartender/bartender_bloc.dart';
+import 'package:aahwanam/blocs/bartender/bartender_event.dart';
+import 'package:aahwanam/blocs/bartender/bartender_state.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../blocs/Photographer/photographer_bloc.dart';
-import '../../blocs/Photographer/photographer_event.dart';
-import '../../blocs/Photographer/photographer_state.dart';
-import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/package_card.dart';
 
-class PhotographerScreen extends StatelessWidget {
+class BartenderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PhotographerBloc()..add(FetchPhotographers()),
+      create: (context) => BartenderBloc()..add(FetchBartender()),
       child: Scaffold(
-        appBar: AppBar(title: const Text("Photographers")),
-        body: BlocBuilder<PhotographerBloc, PhotographerState>(
+        appBar: AppBar(title: const Text("Bartender")),
+        body: BlocBuilder<BartenderBloc, BartenderState>(
           builder: (context, state) {
-            if (state is PhotographerLoading) {
+            if (state is BartenderLoading) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state is PhotographerLoaded) {
+            } else if (state is BartenderLoaded) {
               return Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: SingleChildScrollView(
@@ -26,22 +26,12 @@ class PhotographerScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Our Services Section
-                      CustomCircleWidget(
-                        heading: "Our Services",
-                        categories: state.photographers,
-                        showViewAll: false,
-                        onCategoryTap: (String categoryName) {
-                          // Navigation logic or category-specific actions
-                        },
-                      ),
-                      const SizedBox(height: 5),
 
-                      // Packages Section
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
-                            "Packages for you",
+                            "Packages",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
@@ -66,9 +56,9 @@ class PhotographerScreen extends StatelessWidget {
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.packages.length,
+                        itemCount: state.Packages.length,
                         itemBuilder: (context, index) {
-                          final package = state.packages[index];
+                          final package = state.Packages[index];
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 8.0), // Adjust spacing between cards
                             child: PackageCard(
@@ -83,11 +73,13 @@ class PhotographerScreen extends StatelessWidget {
                         },
                       ),
 
+
+
                     ],
                   ),
                 ),
               );
-            } else if (state is PhotographerError) {
+            } else if (state is BartenderError) {
               return Center(child: Text(state.message));
             }
             return const Center(child: Text("Select a photographer"));
@@ -96,4 +88,8 @@ class PhotographerScreen extends StatelessWidget {
       ),
     );
   }
+}
+void _navigateTo(BuildContext context, String section) {
+  // Navigation logic
+  Navigator.pushNamed(context, '/$section');
 }

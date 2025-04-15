@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 class CustomCircleWidget extends StatelessWidget {
+  final String heading;
   final List<Map<String, String>> categories;
   final void Function(String categoryName) onCategoryTap;
+  final bool showViewAll; // Add a flag to control "View All" visibility
 
   const CustomCircleWidget({
     Key? key,
+    required this.heading,
     required this.categories,
     required this.onCategoryTap,
+    this.showViewAll = false,
   }) : super(key: key);
 
   @override
@@ -21,14 +25,15 @@ class CustomCircleWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Categories',
+               Text(
+               heading ,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFF575959),
                 ),
               ),
+              if(showViewAll)
               TextButton(
                 onPressed: () {
                   // Handle "View All" navigation if necessary
@@ -48,9 +53,9 @@ class CustomCircleWidget extends StatelessWidget {
         const SizedBox(height: 10),
         // Grid View
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.25, // Dynamic height.
           child: GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
               childAspectRatio: 0.8,

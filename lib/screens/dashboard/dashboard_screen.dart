@@ -1,20 +1,59 @@
+import 'package:aahwanam/routes/app_routes.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/dashboard/dashboard_bloc.dart';
 import '../../blocs/dashboard/dashboard_event.dart';
 import '../../blocs/dashboard/dashboard_state.dart';
+import '../../widgets/custom_bottom_nav.dart';
 import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_image_card_widget.dart';
+import '../Photographer/photographer_screen.dart';
 
-class DashboardScreen extends StatelessWidget {
+
+class DashboardScreen extends StatefulWidget {
+  @override
+  _DashboardScreenState createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _screens = [
+    DashboardContent(), // Full dashboard content
+    Center(child: Text("Services")),
+    Center(child: Text("Concepts")),
+    Center(child: Text("Account")),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: _screens[_selectedIndex],
+      bottomNavigationBar: CustomBottomNavBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
+    );
+  }
+}
+
+class DashboardContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard'),
       ),
+
       body: BlocProvider(
         create: (context) => DashboardBloc()..add(LoadDashboardData()),
         child: BlocBuilder<DashboardBloc, DashboardState>(
@@ -33,14 +72,31 @@ class DashboardScreen extends StatelessWidget {
                       _buildSliderSection(state.sliderImages),
                       const SizedBox(height: 5),
 
-                      CustomCircleWidget(categories: state.categories, onCategoryTap: (String categoryName) {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => CategoryDetailsScreen(categoryName: categoryName),
-                        //   ),
-                        // );
-                      },),
+                      CustomCircleWidget(
+                        heading: "Categories",
+                        categories: state.categories,
+                        showViewAll: true,
+                        onCategoryTap: (String categoryName) {
+                          // Map category names to route names
+                          final Map<String, String> categoryRoutes = {
+                            'Photographer': AppRoutes.photographer,
+                            'Chef': AppRoutes.chef,
+                            'Bartender': AppRoutes.bartender,
+                            // Add more categories and routes here
+                          };
+
+                          final routeName = categoryRoutes[categoryName];
+                          if (routeName != null) {
+                            Navigator.pushNamed(context, routeName);
+                          } else {
+                            // Handle cases where a route is not mapped
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('No route available for $categoryName')),
+                            );
+                          }
+                        },
+                      ),
+
 
                       const SizedBox(height: 5),
                       // Decorators Section
@@ -69,7 +125,7 @@ class DashboardScreen extends StatelessWidget {
                               "Trending",
                               style: TextStyle(
                                 fontSize: 16,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                                 color: Color(0xFF575959),
                               ),
                             ),
