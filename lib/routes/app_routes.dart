@@ -4,4 +4,7 @@ class AppRoutes {
   static const photographer ='/photographer';
   static const chef ='/chef';
   static const bartender ='/bartender';
+  static const makeup ='/makeup';
+  static const entertainment ='/entertainment';
+  static const mehndi ='/mehndi';
 }

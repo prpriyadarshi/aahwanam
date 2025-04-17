@@ -47,7 +47,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
       final mehndiArtists = [
         {'image': 'assets/images/Mehndi & Beauty.png', 'name': 'Mehndi & Beauty', 'price': '₹5,000 Onwards', 'rating': '4.7',},
-        {'image': 'assets/images/Mehndi & Beauty.png', 'name': 'Mehndi Stars', 'price': '₹3,000 Onwards', 'rating': '4.7',},
+        {'image': 'assets/images/Mehndi & Beauty1.png', 'name': 'Mehndi Stars', 'price': '₹3,000 Onwards', 'rating': '4.7',},
       ];
 
       final trendingItems = [

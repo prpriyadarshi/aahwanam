@@ -24,12 +24,12 @@ class ChefBloc extends Bloc<ChefEvent, ChefState> {
         ];
 
         final chefs = [
-          {'image': 'assets/images/Ambika Caters.png', 'name': 'Party Blush', 'price': '₹15,000 Onwards', 'rating': '4.7',},
-          {'image': 'assets/images/Food Zone.png', 'name': 'Dream Decor', 'price': '₹5,000 Onwards', 'rating': '4.7',},
-          {'image': 'assets/images/Food Hut.png', 'name': 'Dream Decor', 'price': '₹5,000 Onwards', 'rating': '4.7',},
-          {'image': 'assets/images/Food Hut1.png', 'name': 'Dream Decor', 'price': '₹5,000 Onwards', 'rating': '4.7',},
-          {'image': 'assets/images/Taza Kitchen.png', 'name': 'Dream Decor', 'price': '₹5,000 Onwards', 'rating': '4.7',},
-          {'image': 'assets/images/Taza Kitchen1.png', 'name': 'Dream Decor', 'price': '₹5,000 Onwards', 'rating': '4.7',},
+          {'image': 'assets/images/Ambika Caters.png', 'name': 'Ambika Cooking', 'price': '₹8,000 Onwards', 'rating': '4.7',},
+          {'image': 'assets/images/Food Zone.png', 'name': 'Food Zone', 'price': '₹3,000 Onwards', 'rating': '4.7',},
+          {'image': 'assets/images/Food Hut.png', 'name': 'Food Hut', 'price': '₹15,000 Onwards', 'rating': '4.7',},
+          {'image': 'assets/images/Food Hut1.png', 'name': 'Food Hut', 'price': '₹15,000 Onwards', 'rating': '4.7',},
+          {'image': 'assets/images/Taza Kitchen.png', 'name': 'Taza Kitchen', 'price': '₹4,000 Onwards', 'rating': '4.7',},
+          {'image': 'assets/images/Taza Kitchen1.png', 'name': 'Taza Kitchen', 'price': '₹4,000 Onwards', 'rating': '4.7',},
 
         ];
 

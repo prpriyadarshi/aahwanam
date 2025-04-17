@@ -36,7 +36,7 @@ class ChefScreen extends StatelessWidget {
                           // Navigation logic or category-specific actions
                         },
                       ),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 2),
 
                       // Packages Section
                       CustomCardWidgets.buildSection(
@@ -45,8 +45,6 @@ class ChefScreen extends StatelessWidget {
                         data: state.chefs,
                         onViewAll: () => _navigateTo(context, "Decorators"),
                       ),
-                      const SizedBox(height: 10),
-
 
 
                     ],

@@ -82,6 +82,9 @@ class DashboardContent extends StatelessWidget {
                             'Photographer': AppRoutes.photographer,
                             'Chef': AppRoutes.chef,
                             'Bartender': AppRoutes.bartender,
+                            'Makeup': AppRoutes.makeup,
+                            'Entertainment': AppRoutes.entertainment,
+                            'Mehndi': AppRoutes.mehndi,
                             // Add more categories and routes here
                           };
 
@@ -162,7 +165,7 @@ class DashboardContent extends StatelessWidget {
                       ),
 
 
-                      // Mehndi Artists Section
+                      // Packages for all Section
                       CustomCardWidgets.buildSection(
                         context,
                         title: "Packages for all events",

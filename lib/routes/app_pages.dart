@@ -1,9 +1,15 @@
 import 'package:aahwanam/blocs/Photographer/photographer_bloc.dart';
 import 'package:aahwanam/blocs/bartender/bartender_bloc.dart';
 import 'package:aahwanam/blocs/chef/chef_bloc.dart';
+import 'package:aahwanam/blocs/entertainment/entertainment_bloc.dart';
+import 'package:aahwanam/blocs/makeup/makeup_bloc.dart';
+import 'package:aahwanam/blocs/mehndi/mehndi_bloc.dart';
 import 'package:aahwanam/screens/Photographer/photographer_screen.dart';
 import 'package:aahwanam/screens/dashboard/bartender_screen.dart';
 import 'package:aahwanam/screens/dashboard/chef_screen.dart';
+import 'package:aahwanam/screens/dashboard/entertainment_screen.dart';
+import 'package:aahwanam/screens/dashboard/makeup_screen.dart';
+import 'package:aahwanam/screens/dashboard/mehndi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -56,6 +62,31 @@ class AppPages {
             child: BartenderScreen(),
           ),
         );
+
+      case AppRoutes.makeup:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => MakeupBloc(),
+            child: MakeupScreen(),
+          ),
+        );
+
+      case AppRoutes.entertainment:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => EntertainmentBloc(),
+            child: EntertainmentScreen(),
+          ),
+        );
+
+      case AppRoutes.mehndi:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => MehndiBloc(),
+            child: MehndiScreen(),
+          ),
+        );
+
 
       default:
       // Default route for undefined paths

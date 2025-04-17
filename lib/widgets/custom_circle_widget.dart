@@ -59,6 +59,8 @@ class CustomCircleWidget extends StatelessWidget {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
               childAspectRatio: 0.8,
+              crossAxisSpacing: 5.0,
+              mainAxisSpacing: 10.0,
             ),
             itemCount: categories.length,
             itemBuilder: (context, index) {
