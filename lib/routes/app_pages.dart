@@ -1,4 +1,6 @@
+import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/eInvitation/eInvitation_bloc.dart';
+import 'package:aahwanam/screens/account/account_screen.dart';
 import 'package:aahwanam/screens/dashboard/e_invitation_screen.dart';
 import 'package:aahwanam/services/services_screen.dart';
 import 'package:bloc/bloc.dart';
@@ -44,6 +46,7 @@ class AppPages {
       AppRoutes.pandit: PanditScreen(),
       AppRoutes.valet: ValetParkingScreen(),
       AppRoutes.einvitation: EInvitationScreen(),
+      AppRoutes.account: AccountScreen(),
       // Screens without BLoC can also be added here
       // Example of screen without Bloc (e.g., a simple screen that doesn’t need state management)
       AppRoutes.login: LoginScreen(),
@@ -64,6 +67,7 @@ class AppPages {
       AppRoutes.pandit: PanditBloc(),
       AppRoutes.valet: ValetParkingBloc(),
       AppRoutes.einvitation: EinvitationBloc(),
+      AppRoutes.account: AccountBloc(),
       // You can add BLoCs for other routes as needed
     };
 

@@ -10,7 +10,6 @@ import '../../widgets/custom_bottom_nav.dart';
 import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_image_card_widget.dart';
-import '../Photographer/photographer_screen.dart';
 import '../account/account_screen.dart';
 
 

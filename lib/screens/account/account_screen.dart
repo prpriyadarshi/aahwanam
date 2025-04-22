@@ -70,7 +70,7 @@ class AccountScreen extends StatelessWidget {
                         CustomTile(
                           imagePath: 'assets/images/cart.png',
                           title: 'Cart',
-                          bgColor: Colors.blue.shade100,
+                          bgColor: Color(0xFFDFF4FF),
                           onTap: () {},
                         ),
                         CustomTile(
