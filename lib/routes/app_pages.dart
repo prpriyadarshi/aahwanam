@@ -16,6 +16,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/dashboard/dashboard_bloc.dart';
 import '../blocs/login/login_bloc.dart';
 import '../screens/dashboard/dashboard_screen.dart';
+import '../blocs/account/account_bloc.dart';
+import '../blocs/account/account_event.dart';
+import '../screens/account/account_screen.dart';
 import '../screens/login/login_screen.dart';
 import 'app_routes.dart';
 
@@ -37,6 +40,15 @@ class AppPages {
             child: DashboardScreen(),
           ),
         );
+
+      case AppRoutes.account:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => AccountBloc(),
+            child: AccountScreen(),
+          ),
+        );
+
 
       case AppRoutes.photographer:
         return MaterialPageRoute(
@@ -99,4 +111,8 @@ class AppPages {
         );
     }
   }
+
+
 }
+
+
