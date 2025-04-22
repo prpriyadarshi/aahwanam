@@ -10,6 +10,7 @@ import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_image_card_widget.dart';
 import '../Photographer/photographer_screen.dart';
+import '../account/account_screen.dart';
 
 
 class DashboardScreen extends StatefulWidget {
@@ -24,7 +25,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     DashboardContent(), // Full dashboard content
     Center(child: Text("Services")),
     Center(child: Text("Concepts")),
-    Center(child: Text("Account")),
+    const AccountScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -37,10 +38,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_selectedIndex],
-      bottomNavigationBar: CustomBottomNavBar(
+      bottomNavigationBar: _selectedIndex != 3
+          ? CustomBottomNavBar(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
-      ),
+      )
+      : null,
     );
   }
 }
