@@ -10,6 +10,8 @@ import '../../widgets/custom_bottom_nav.dart';
 import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_image_card_widget.dart';
+import '../Photographer/photographer_screen.dart';
+import '../account/account_screen.dart';
 
 
 class DashboardScreen extends StatefulWidget {
@@ -24,7 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     DashboardContent(), // Full dashboard content
     ServicesScreen(),
     Center(child: Text("Concepts")),
-    Center(child: Text("Account")),
+    const AccountScreen(),
   ];
 
   void _onItemTapped(int index) {
