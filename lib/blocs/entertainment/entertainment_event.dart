@@ -20,3 +20,10 @@ class SelectEntertainment extends EntertainmentEvent {
   @override
   List<Object?> get props => [entertainmentId];
 }
+
+
+class UpdateSelectedEntertainmentLanguage extends EntertainmentEvent {
+  final String selectedLanguage;
+
+  UpdateSelectedEntertainmentLanguage(this.selectedLanguage);
+}

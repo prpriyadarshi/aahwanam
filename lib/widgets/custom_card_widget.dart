@@ -6,12 +6,13 @@ class CustomCardWidgets {
         required String title,
         required List<Map<String, String>> data,
         required VoidCallback onViewAll,
+        required bool showViewAll, // New boolean parameter
       }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2.0,vertical: 0),
+          padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -22,7 +23,8 @@ class CustomCardWidgets {
                     fontWeight: FontWeight.w600,
                     color: Color(0xFF575959)),
               ),
-              TextButton(
+              if (showViewAll) // Conditionally render the button
+                TextButton(
                   onPressed: onViewAll,
                   child: const Text(
                     "View All",
@@ -31,7 +33,8 @@ class CustomCardWidgets {
                       fontWeight: FontWeight.w400,
                       color: Color(0xFF1E535B),
                     ),
-                  )),
+                  ),
+                ),
             ],
           ),
         ),
@@ -103,7 +106,8 @@ class CustomCardWidgets {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0), // Reduced padding
+            padding:
+            const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0), // Reduced padding
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -124,7 +128,8 @@ class CustomCardWidgets {
                     ),
                     Row(
                       children: [
-                        const Icon(Icons.star, color: Color(0xFFEFAA37), size: 16),
+                        const Icon(Icons.star,
+                            color: Color(0xFFEFAA37), size: 16),
                         const SizedBox(width: 4),
                         Text(
                           item['rating'] ?? "0.0",
@@ -154,6 +159,4 @@ class CustomCardWidgets {
       ),
     );
   }
-
-
 }

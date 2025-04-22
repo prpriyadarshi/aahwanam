@@ -5,9 +5,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../widgets/custom_card_widget.dart';
+import '../../widgets/custom_language_dropdown.dart';
 
-class EntertainmentScreen extends StatelessWidget {
+class EntertainmentScreen extends StatefulWidget {
   @override
+  _EntertainmentScreenState createState() => _EntertainmentScreenState();
+}
+
+
+class _EntertainmentScreenState extends State<EntertainmentScreen> {
+  @override
+  final List<String> languages = ['English', 'Hindi', 'Telugu', 'Tamil'];
+  String? selectedLanguage;
+
   Widget build(BuildContext context) {
 
     return Scaffold(
@@ -29,10 +39,41 @@ class EntertainmentScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Entertainment Section
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "All Services",
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF575959)
+                            ),
+                          ),
+                          Flexible( // Ensures the dropdown gets a proper size within the Row
+                            child: CustomDropdown(
+                              hintText: "Select Language",
+                              items: languages,
+                              selectedItem: selectedLanguage,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedLanguage = value;
+                                });
+                                context.read<EntertainmentBloc>().add(UpdateSelectedEntertainmentLanguage(value!));
+                              },
+                              width: 160,
+                              height: 30,
+                            ),
+                          ),
+                        ],
+                      ),
+
                       CustomCardWidgets.buildSection(
                         context,
-                        title: "All Services",
+                        title: "",
                         data: state.Services,
+                        showViewAll: false,
+
                         onViewAll: () => _navigateTo(context, "Decorators"),
                       ),
 

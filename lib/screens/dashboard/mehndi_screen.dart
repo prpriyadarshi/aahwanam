@@ -60,6 +60,8 @@ class MehndiScreen extends StatelessWidget {
                         context,
                         title: "Mehndi Artists",
                         data: state.mehndiArtists,
+                        showViewAll: true,
+
                         onViewAll: () => _navigateTo(context, "Decorators"),
                       ),
 

@@ -86,6 +86,8 @@ class MakeupScreen extends StatelessWidget {
                         context,
                         title: "Makeup & Hair Artists",
                         data: state.makeupAndHairArtists,
+                        showViewAll: true,
+
                         onViewAll: () => _navigateTo(context, "Decorators"),
                       ),
 

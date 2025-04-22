@@ -72,9 +72,6 @@ class BartenderScreen extends StatelessWidget {
                           );
                         },
                       ),
-
-
-
                     ],
                   ),
                 ),

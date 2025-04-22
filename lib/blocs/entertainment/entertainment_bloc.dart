@@ -2,6 +2,8 @@ import 'package:aahwanam/blocs/entertainment/entertainment_event.dart';
 import 'package:aahwanam/blocs/entertainment/entertainment_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../pandit/pandit_event.dart';
+
 class EntertainmentBloc extends Bloc<EntertainmentEvent, EntertainmentState> {
   EntertainmentBloc(): super(EntertainmentInitial()){
     // Handle the FetchEntertainement event
@@ -29,6 +31,12 @@ class EntertainmentBloc extends Bloc<EntertainmentEvent, EntertainmentState> {
       // Handle Entertainment selection logic
       print("Entertainment selected: ${event.entertainmentId}");
     });
+
+    on<UpdateSelectedEntertainmentLanguage>((event, emit) {
+      // Emit state with updated language if needed
+      print("Selected Language: ${event.selectedLanguage}");
+    });
+
 
   }
 

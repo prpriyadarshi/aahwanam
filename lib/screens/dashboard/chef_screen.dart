@@ -43,6 +43,7 @@ class ChefScreen extends StatelessWidget {
                         context,
                         title: "Chefs for you",
                         data: state.chefs,
+                        showViewAll: true,
                         onViewAll: () => _navigateTo(context, "Decorators"),
                       ),
 

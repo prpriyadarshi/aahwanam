@@ -1,4 +1,5 @@
 import 'package:aahwanam/routes/app_routes.dart';
+import 'package:aahwanam/services/services_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +10,6 @@ import '../../widgets/custom_bottom_nav.dart';
 import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_image_card_widget.dart';
-import '../Photographer/photographer_screen.dart';
 
 
 class DashboardScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   final List<Widget> _screens = [
     DashboardContent(), // Full dashboard content
-    Center(child: Text("Services")),
+    ServicesScreen(),
     Center(child: Text("Concepts")),
     Center(child: Text("Account")),
   ];
@@ -51,10 +51,91 @@ class DashboardContent extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dashboard'),
-      ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        scrolledUnderElevation: 0,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    // Handle onPressed action here
+                    print("Location icon pressed");
+                  },
+                  child: Image.asset(
+                    'assets/images/location.png', // Replace with your image path
+                    width: 24, // Adjust size
+                    height: 24, // Adjust size
+                  ),
+                ),
+                SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
 
-      body: BlocProvider(
+                    Text(
+                      "Hyderabad",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF575959), // Adjust text color
+                      ),
+                    ),
+                    Text(
+                      "Financial District, Kapil Hub",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF757575), // Adjust secondary text color
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    // Handle onPressed action here
+                    print("cart icon pressed");
+                  },
+                  child: Image.asset(
+                    'assets/images/cart.png', // Replace with your image path
+                    width: 24, // Adjust size
+                    height: 24, // Adjust size
+                  ),
+                ),
+
+                SizedBox(width: 10,),
+                IconButton(
+                  onPressed: () {
+                    // Handle favorite action
+                  },
+                  icon: Icon(
+                    Icons.favorite,
+                    color: Colors.red, // Adjust icon color
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    // Navigate to notifications
+                  },
+                  icon: Icon(
+                    Icons.notifications,
+                    color: Color(0xFF004d40), // Adjust icon color
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+        body: BlocProvider(
         create: (context) => DashboardBloc()..add(LoadDashboardData()),
         child: BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, state) {
@@ -62,7 +143,7 @@ class DashboardContent extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             } else if (state is DashboardLoaded) {
               return Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 5.0),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,6 +166,8 @@ class DashboardContent extends StatelessWidget {
                             'Makeup': AppRoutes.makeup,
                             'Entertainment': AppRoutes.entertainment,
                             'Mehndi': AppRoutes.mehndi,
+                            'Decor': AppRoutes.decor,
+                            'Pandit': AppRoutes.pandit,
                             // Add more categories and routes here
                           };
 
@@ -107,6 +190,8 @@ class DashboardContent extends StatelessWidget {
                         context,
                         title: "Decorators in your city",
                         data: state.decorators,
+                        showViewAll: true,
+
                         onViewAll: () => _navigateTo(context, "Decorators"),
                       ),
 
@@ -115,6 +200,7 @@ class DashboardContent extends StatelessWidget {
                         context,
                         title: "Mehndi Artists for you",
                         data: state.mehndiArtists,
+                        showViewAll: true,
                         onViewAll: () => _navigateTo(context, "Mehndi Artists"),
                       ),
 
@@ -170,6 +256,8 @@ class DashboardContent extends StatelessWidget {
                         context,
                         title: "Packages for all events",
                         data: state.packagesForAllItems,
+                        showViewAll: true,
+
                         onViewAll: () => _navigateTo(context, "Mehndi Artists"),
                       ),
                     ],
