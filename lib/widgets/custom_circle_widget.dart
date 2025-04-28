@@ -5,6 +5,7 @@ class CustomCircleWidget extends StatelessWidget {
   final List<Map<String, String>> categories;
   final void Function(String categoryName) onCategoryTap;
   final bool showViewAll; // Add a flag to control "View All" visibility
+  final VoidCallback? onViewAll;
 
   const CustomCircleWidget({
     Key? key,
@@ -12,6 +13,7 @@ class CustomCircleWidget extends StatelessWidget {
     required this.categories,
     required this.onCategoryTap,
     this.showViewAll = false,
+    this.onViewAll,
   }) : super(key: key);
 
   @override
@@ -33,11 +35,9 @@ class CustomCircleWidget extends StatelessWidget {
                   color: Color(0xFF575959),
                 ),
               ),
-              if(showViewAll)
+              if(showViewAll && onViewAll != null)
               TextButton(
-                onPressed: () {
-                  // Handle "View All" navigation if necessary
-                },
+                onPressed: onViewAll,
                 child: const Text(
                   'View All',
                   style: TextStyle(
@@ -65,9 +65,17 @@ class CustomCircleWidget extends StatelessWidget {
             itemCount: categories.length,
             itemBuilder: (context, index) {
               final category = categories[index];
-              return CategoryItem(
-                category: category,
-                onTap: () => onCategoryTap(category['name']!),
+              return GestureDetector(
+                onTap: (){
+
+                },
+                child: CategoryItem(
+                  category: category,
+                  onTap: () {
+                    print("check category--------------cus");
+                    onCategoryTap(category['name']!);
+                  },
+                ),
               );
             },
           ),

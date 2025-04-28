@@ -52,6 +52,8 @@ class MakeupScreen extends StatelessWidget {
                             );
                           }
                         },
+                        onViewAll: () {},
+
                       ),
 
 
@@ -77,6 +79,8 @@ class MakeupScreen extends StatelessWidget {
                             );
                           }
                         },
+                        onViewAll: () {},
+
                       ),
 
 

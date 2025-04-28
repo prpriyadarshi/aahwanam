@@ -13,7 +13,8 @@ class EInvitationScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => EinvitationBloc()..add(FetchEinvitation()),
       child: Scaffold(
-        appBar: AppBar(title: const Text("Chefs")),
+        appBar: AppBar(title: const Text("E-Invitation"),
+        scrolledUnderElevation: 0),
         body: BlocBuilder<EinvitationBloc, EinvitationState>(
           builder: (context, state) {
             if (state is EinvitationLoading) {
@@ -27,19 +28,21 @@ class EInvitationScreen extends StatelessWidget {
                     children: [
                       // Our Services Section
                       CustomCircleWidget(
-                        heading: "Categories",
+                        heading: "Invitation Themes",
                         categories: state.invitationThemes,
                         showViewAll: false,
                         onCategoryTap: (String categoryName) {
                           // Navigation logic or category-specific actions
                         },
+                        onViewAll: () {},
+
                       ),
                       const SizedBox(height: 2),
 
                       // Packages Section
                       CustomTemplateGrid(
                         templates: state.trendyTemplates,
-                        title: 'Trending Templates',
+                        title: 'Trendy Templates',
                         showViewAll: true,
                         onViewAll: () {
                           // Handle "View All" click
@@ -52,7 +55,7 @@ class EInvitationScreen extends StatelessWidget {
                       // Packages Section
                       CustomTemplateGrid(
                         templates: state.videoTemplates,
-                        title: 'Trending Templates',
+                        title: 'Video Templates',
                         showViewAll: true,
                         onViewAll: () {
                           // Handle "View All" click

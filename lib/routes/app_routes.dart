@@ -8,11 +8,12 @@ class AppRoutes {
   static const entertainment ='/entertainment';
   static const mehndi ='/mehndi';
   static const account = '/account';
-
-
   static const decor ='/decor';
   static const pandit ='/pandit';
   static const valet ='/valet';
   static const services ='/services';
   static const einvitation ='/einvitation';
+  static const viewAllPackages = '/viewAllPackages';
+  static const photoAndVideographer = '/photoAndVideographer';
+  static const photostudio = '/photostudio';
 }

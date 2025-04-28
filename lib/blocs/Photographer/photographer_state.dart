@@ -17,11 +17,16 @@ class PhotographerLoading extends PhotographerState {}
 class PhotographerLoaded extends PhotographerState {
   final List<Map<String, String>> photographers;
   final List<Map<String, dynamic>> packages;
+  final List<Map<String, dynamic>> birthdayPackages;
+  final List<Map<String, dynamic>> babyShootPackages;
+  final List<Map<String, dynamic>> preWeddingPackages;
+  final List<Map<String, dynamic>> fullWeddingPackages;
+  final List<Map<String, String>> photoAndvideographers;
 
-  const PhotographerLoaded(this.photographers,this.packages);
+  const PhotographerLoaded(this.photographers,this.packages ,this.birthdayPackages,this.babyShootPackages,this.preWeddingPackages,this.fullWeddingPackages,this.photoAndvideographers);
 
   @override
-  List<Object?> get props => [photographers,packages];
+  List<Object?> get props => [photographers,packages,birthdayPackages,babyShootPackages,preWeddingPackages,fullWeddingPackages,photoAndvideographers];
 }
 
 // State for errors

@@ -1,3 +1,5 @@
+import 'package:aahwanam/routes/app_routes.dart';
+import 'package:aahwanam/screens/dashboard/view_all_packages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +15,9 @@ class PhotographerScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => PhotographerBloc()..add(FetchPhotographers()),
       child: Scaffold(
-        appBar: AppBar(title: const Text("Photographers")),
+        appBar: AppBar(title: const Text("Photographers"),
+
+        ),
         body: BlocBuilder<PhotographerBloc, PhotographerState>(
           builder: (context, state) {
             if (state is PhotographerLoading) {
@@ -32,6 +36,12 @@ class PhotographerScreen extends StatelessWidget {
                         showViewAll: false,
                         onCategoryTap: (String categoryName) {
                           // Navigation logic or category-specific actions
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ViewAllPackages(
+                            categoryName: categoryName,
+                          )));
+                          print("checking cateoerngkj $categoryName");
+                        },
+                        onViewAll: (){
                         },
                       ),
                       const SizedBox(height: 5),
@@ -49,12 +59,17 @@ class PhotographerScreen extends StatelessWidget {
                             ),
                           ),
 
-                          const Text(
-                            "View All",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xFF1E535B),
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> ViewAllPackages(fromViewAll: true,)));
+                            },
+                            child: const Text(
+                              "View All",
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xFF1E535B),
+                              ),
                             ),
                           ),
 
@@ -71,13 +86,18 @@ class PhotographerScreen extends StatelessWidget {
                           final package = state.packages[index];
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 8.0), // Adjust spacing between cards
-                            child: PackageCard(
-                              title: package['title'],
-                              description: package['description'],
-                              price: package['price'],
-                              details: package['details'],
-                              imagePath: package['imagePath'],
-                              rating: package['rating'],
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.pushNamed(context, AppRoutes.photoAndVideographer);
+                              },
+                              child: PackageCard(
+                                title: package['title'],
+                                description: package['description'],
+                                price: package['price'],
+                                details: package['details'],
+                                imagePath: package['imagePath'],
+                                rating: package['rating'],
+                              ),
                             ),
                           );
                         },

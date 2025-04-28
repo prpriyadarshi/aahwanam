@@ -2,7 +2,10 @@ import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/eInvitation/eInvitation_bloc.dart';
 import 'package:aahwanam/screens/account/account_screen.dart';
 import 'package:aahwanam/screens/dashboard/e_invitation_screen.dart';
+import 'package:aahwanam/screens/dashboard/photo_videographers_screen.dart';
+import 'package:aahwanam/screens/dashboard/view_all_packages.dart';
 import 'package:aahwanam/services/services_screen.dart';
+import 'package:aahwanam/widgets/custom_photograph_servicecard.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +40,8 @@ class AppPages {
     final Map<String, Widget> routes = {
       AppRoutes.dashboard: DashboardScreen(),
       AppRoutes.photographer: PhotographerScreen(),
+      AppRoutes.viewAllPackages: ViewAllPackages(),
+      AppRoutes.photoAndVideographer: PhotoAndVideographers(),
       AppRoutes.chef: ChefScreen(),
       AppRoutes.bartender: BartenderScreen(),
       AppRoutes.makeup: MakeupScreen(),
@@ -47,6 +52,7 @@ class AppPages {
       AppRoutes.valet: ValetParkingScreen(),
       AppRoutes.einvitation: EInvitationScreen(),
       AppRoutes.account: AccountScreen(),
+      AppRoutes.photostudio: CustomServiceCard(),
       // Screens without BLoC can also be added here
       // Example of screen without Bloc (e.g., a simple screen that doesn’t need state management)
       AppRoutes.login: LoginScreen(),
@@ -58,6 +64,8 @@ class AppPages {
     final Map<String, Bloc> blocs = {
       AppRoutes.dashboard: DashboardBloc(),
       AppRoutes.photographer: PhotographerBloc(),
+      AppRoutes.viewAllPackages: PhotographerBloc(),
+      AppRoutes.photostudio: PhotographerBloc(),
       AppRoutes.chef: ChefBloc(),
       AppRoutes.bartender: BartenderBloc(),
       AppRoutes.makeup: MakeupBloc(),

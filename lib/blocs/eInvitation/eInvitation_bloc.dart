@@ -13,32 +13,30 @@ class EinvitationBloc extends Bloc<EinvitationEvent, EinvitationState> {
         // Simulating fetching data from a repository or API
         await Future.delayed(Duration(seconds: 2));
         final invitationThemes = [
-          {'name': 'Glam ', 'image': 'assets/images/Glam.png'},
-          {'name': 'Bridal', 'image': 'assets/images/Bridal.png'},
-          {'name': 'Subtle Look', 'image': 'assets/images/Subtle Look.png'},
-          {'name': 'HD ', 'image': 'assets/images/HD.png'},
-          {'name': 'Matte', 'image': 'assets/images/Matte.png'},
-          {'name': 'Natural', 'image': 'assets/images/Natural.png'},
-          {'name': ' Dewy', 'image': 'assets/images/Dewy.png'},
-          {'name': 'Glitter', 'image': 'assets/images/Glitter.png'},
+          {'name': 'Birthday ', 'image': 'assets/images/invitationTheme.png'},
+          {'name': 'Marriage', 'image': 'assets/images/invitationTheme1.png'},
+          {'name': ' Anniversary', 'image': 'assets/images/invitationTheme2.png'},
+          {'name': 'Save Dates ', 'image': 'assets/images/invitationTheme3.png'},
+          {'name': 'Pooja', 'image': 'assets/images/invitationTheme4.png'},
+          {'name': 'Haldi', 'image': 'assets/images/invitationTheme5.png'},
+          {'name': ' Baby shower', 'image': 'assets/images/invitationTheme6.png'},
+          {'name': 'Video Card', 'image': 'assets/images/invitationTheme7.png'},
         ];
 
         final trendyTemplates = [
-          {'name': 'Curl', 'image': 'assets/images/Curl.png'},
-          {'name': 'Straight', 'image': 'assets/images/Straight.png'},
-          {'name': 'Wavy', 'image': 'assets/images/Wavy.png'},
-          {'name': 'Bun', 'image': 'assets/images/Bun.png'},
-          {'name': 'Braid', 'image': 'assets/images/Braid.png'},
-          {'name': 'Floral', 'image': 'assets/images/Floral.png'},
-          {'name': 'Traditional', 'image': 'assets/images/Traditional.png'},
-          {'name': 'Half Down', 'image': 'assets/images/Half Down.png'},
+          { 'image': 'assets/images/trendyTem.png'},
+          { 'image': 'assets/images/trendyTem1.png'},
+          { 'image': 'assets/images/trendyTem2.png'},
+          {'image': 'assets/images/trendyTem3.png'},
+          {'image': 'assets/images/trendyTem4.png'},
+          {'image': 'assets/images/trendyTem5.png'},
         ];
 
         final videoTemplates = [
-          {'image': 'assets/images/Blush Makeover.png', 'name': 'Blush Makeover', 'price': '₹5,000 Onwards', 'rating': '4.5',},
-          {'image': 'assets/images/Heavens Makeup.png', 'name': 'Heavens Makeup', 'price': '₹3,000 Onwards', 'rating': '4.3',},
-          {'image': 'assets/images/Beauty & Blush.png', 'name': 'Beauty & Blush', 'price': '₹4,000 Onwards', 'rating': '4.5',},
-          {'image': 'assets/images/Iconic Makeover.png', 'name': 'Iconic Makeover', 'price': '₹15,000 Onwards', 'rating': '4.3',},
+          {'image': 'assets/images/videoTem.png',},
+          {'image': 'assets/images/videoTem1.png',},
+          {'image': 'assets/images/videoTem2.png',},
+          {'image': 'assets/images/videoTem3.png',},
 
         ];
 
