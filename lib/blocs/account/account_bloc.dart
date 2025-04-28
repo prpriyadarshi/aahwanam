@@ -9,7 +9,9 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       try {
         await Future.delayed(Duration(seconds: 1));
         emit(AccountLoaded(
-          name: 'Chanchal Soni',
+          firstName: 'Chanchal',
+          lastName: 'Soni',
+          phone: '9876543210',
           email: 'Chanchal.soni@payg.in',
           profileUrl: 'assets/images/profile.png',
         ));

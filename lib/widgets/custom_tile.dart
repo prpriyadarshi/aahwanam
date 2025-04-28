@@ -17,7 +17,7 @@ class CustomTile extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: bgColor.withOpacity(0.2),
+      color: bgColor,
       child: ListTile(
         leading: Image.asset(
           imagePath,
