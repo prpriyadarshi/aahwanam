@@ -35,6 +35,11 @@ class ChefScreen extends StatelessWidget {
                         onCategoryTap: (String categoryName) {
                           // Navigation logic or category-specific actions
                         },
+                        onViewAll: () {
+                          Navigator.of(context).maybePop(); // Navigate back to the parent if needed
+                          // final dashboardScreenState = context.findAncestorStateOfType<_DashboardScreenState>();
+                          // dashboardScreenState?._onItemTapped(1); // Navigate to the Services tab (index 1)
+                        },
                       ),
                       const SizedBox(height: 2),
 

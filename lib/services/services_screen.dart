@@ -2,10 +2,10 @@ import 'package:aahwanam/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // Cubit for managing navigation
-class ServiceCubit extends Cubit<Widget?> {
+class ServiceCubit extends Cubit<String?> {
   ServiceCubit() : super(null);
 
-  void navigateTo(Widget route) {
+  void navigateTo(String route) {
     emit(route);
   }
 }
@@ -29,10 +29,10 @@ class ServicesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ServiceCubit(),
-      child: BlocListener<ServiceCubit, Widget?>(
+      child: BlocListener<ServiceCubit, String?>(
         listener: (context, route) {
           if (route != null) {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => route));
+            Navigator.pushNamed(context, route);
           }
         },
         child: Scaffold(
@@ -108,7 +108,7 @@ class ServicesScreen extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: MediaQuery.of(context).size.width * 0.03, // Responsive font size
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                     color: Color(0xFF575959),
                                   ),
                                 ),

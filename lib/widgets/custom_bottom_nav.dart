@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomBottomNavBar extends StatefulWidget {
+class CustomBottomNavBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onItemTapped;
 
@@ -9,13 +9,6 @@ class CustomBottomNavBar extends StatefulWidget {
     required this.selectedIndex,
     required this.onItemTapped,
   }) : super(key: key);
-
-  @override
-  _CustomBottomNavBarState createState() => _CustomBottomNavBarState();
-}
-
-class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
-  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,19 +34,13 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           ),
         ),
       ),
-
     );
   }
 
   Widget _buildNavItem(IconData icon, String label, int index) {
     final isSelected = selectedIndex == index;
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedIndex = index; // Update selectedIndex
-        });
-        widget.onItemTapped(index);
-      },
+      onTap: () => onItemTapped(index), // Call parent's onItemTapped
       child: SizedBox(
         width: 60,
         child: Column(
@@ -82,11 +69,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   Widget _buildCenterFab() {
     final isSelected = selectedIndex == -1; // Use -1 to identify the FAB
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedIndex = -1; // Set selectedIndex to -1 for FAB
-        });
-      },
+      onTap: () => onItemTapped(-1), // Update selectedIndex in parent
       child: Container(
         height: 50, // Decrease FAB size
         width: 50, // Decrease FAB size

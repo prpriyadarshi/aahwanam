@@ -52,16 +52,15 @@ class CustomTemplateGrid extends StatelessWidget {
           shrinkWrap: true,
           itemCount: templates.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // 3 cards per row
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-            childAspectRatio: 3 / 4, // Adjust aspect ratio to match design
+            crossAxisCount: 2, // 2 cards per row
+            crossAxisSpacing: 12, // Horizontal spacing between cards
+            mainAxisSpacing: 12, // Vertical spacing between cards
+            childAspectRatio: 0.7, // Adjust aspect ratio for better alignment
           ),
           itemBuilder: (context, index) {
             final template = templates[index];
             return _CustomTemplateCard(
-              imageUrl: template['image']!,
-              title: template['title']!,
+              imageUrl: template['image'] ?? 'assets/images/defaultImage.png', // Provide a default image
             );
           },
         ),
@@ -72,12 +71,10 @@ class CustomTemplateGrid extends StatelessWidget {
 
 class _CustomTemplateCard extends StatelessWidget {
   final String imageUrl;
-  final String title;
 
   const _CustomTemplateCard({
     Key? key,
     required this.imageUrl,
-    required this.title,
   }) : super(key: key);
 
   @override
@@ -85,30 +82,21 @@ class _CustomTemplateCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          elevation: 5,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 120, // Adjust height as per design
+        Expanded(
+          child: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+            elevation: 1, // Slight elevation for visual distinction
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: Image.asset(
+                imageUrl,
+                fit: BoxFit.cover, // Ensures the image fills the card proportionally
+                width: double.infinity,
+              ),
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0, left: 4.0),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
-            ),
-          ),
-        ),
+        const SizedBox(height: 8), // Space between the card and additional content (if any)
       ],
     );
   }

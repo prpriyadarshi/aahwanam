@@ -52,6 +52,7 @@ class MehndiScreen extends StatelessWidget {
                             );
                           }
                         },
+                        onViewAll: (){},
                       ),
 
                       const SizedBox(height: 2),

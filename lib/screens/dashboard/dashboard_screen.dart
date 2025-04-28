@@ -3,6 +3,7 @@ import 'package:aahwanam/services/services_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../blocs/dashboard/dashboard_bloc.dart';
 import '../../blocs/dashboard/dashboard_event.dart';
 import '../../blocs/dashboard/dashboard_state.dart';
@@ -77,13 +78,26 @@ class DashboardContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
-                    Text(
-                      "Hyderabad",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF575959), // Adjust text color
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          "Hyderabad",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF575959), // Adjust text color
+                          ),
+                        ),
+
+
+
+                        // IconButton(onPressed: (){},
+                        //   icon: Icon(
+                        //     Icons.arrow_drop_down,
+                        //     color: Color(0xFF575959), // Adjust icon color
+                        //   ),
+                        // )
+                      ],
                     ),
                     Text(
                       "Financial District, Kapil Hub",
@@ -136,12 +150,19 @@ class DashboardContent extends StatelessWidget {
           ],
         ),
       ),
+        backgroundColor: Colors.white,
         body: BlocProvider(
         create: (context) => DashboardBloc()..add(LoadDashboardData()),
         child: BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, state) {
             if (state is DashboardLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child:
+                SpinKitSpinningLines(
+                color: Color(0xFF1E535B), // Customize color as needed
+                size: 50.0, // Customize size
+              ),
+              );
             } else if (state is DashboardLoaded) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 5.0),
@@ -182,7 +203,19 @@ class DashboardContent extends StatelessWidget {
                             );
                           }
                         },
+                        onViewAll: () {
+                          final dashboardScreenState = context.findAncestorStateOfType<_DashboardScreenState>();
+                          if (dashboardScreenState != null) {
+                            dashboardScreenState._onItemTapped(1); // Navigate to Services tab
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Unable to navigate to Services tab')),
+                            );
+                          }
+                        },
+
                       ),
+
 
 
                       const SizedBox(height: 5),
