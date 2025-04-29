@@ -1,6 +1,7 @@
 import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/eInvitation/eInvitation_bloc.dart';
 import 'package:aahwanam/screens/account/account_screen.dart';
+import 'package:aahwanam/screens/dashboard/book_service_screen.dart';
 import 'package:aahwanam/screens/dashboard/e_invitation_screen.dart';
 import 'package:aahwanam/screens/dashboard/photo_videographers_screen.dart';
 import 'package:aahwanam/screens/dashboard/view_all_packages.dart';
@@ -53,6 +54,7 @@ class AppPages {
       AppRoutes.einvitation: EInvitationScreen(),
       AppRoutes.account: AccountScreen(),
       AppRoutes.photostudio: CustomServiceCard(),
+      AppRoutes.bookService: BookServiceScreen(),
       // Screens without BLoC can also be added here
       // Example of screen without Bloc (e.g., a simple screen that doesn’t need state management)
       AppRoutes.login: LoginScreen(),
@@ -66,6 +68,7 @@ class AppPages {
       AppRoutes.photographer: PhotographerBloc(),
       AppRoutes.viewAllPackages: PhotographerBloc(),
       AppRoutes.photostudio: PhotographerBloc(),
+      AppRoutes.bookService: PhotographerBloc(),
       AppRoutes.chef: ChefBloc(),
       AppRoutes.bartender: BartenderBloc(),
       AppRoutes.makeup: MakeupBloc(),
