@@ -1,9 +1,11 @@
 import 'package:aahwanam/routes/app_routes.dart';
+import 'package:aahwanam/screens/concepts/concepts_screen.dart';
 import 'package:aahwanam/services/services_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import '../../blocs/concepts/concepts_bloc.dart';
 import '../../blocs/dashboard/dashboard_bloc.dart';
 import '../../blocs/dashboard/dashboard_event.dart';
 import '../../blocs/dashboard/dashboard_state.dart';
@@ -25,7 +27,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final List<Widget> _screens = [
     DashboardContent(), // Full dashboard content
     ServicesScreen(),
-    Center(child: Text("Concepts")),
+    BlocProvider(
+      create: (_) => ConceptsBloc(),
+      child: ConceptsScreen(),
+    ),
     const AccountScreen(),
   ];
 
