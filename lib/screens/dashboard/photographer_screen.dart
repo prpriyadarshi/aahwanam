@@ -1,5 +1,8 @@
+// photographer_screen.dart
+
 import 'package:aahwanam/routes/app_routes.dart';
 import 'package:aahwanam/screens/dashboard/view_all_packages.dart';
+import 'package:aahwanam/widgets/custom_combined_event_date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,15 +12,45 @@ import '../../blocs/Photographer/photographer_state.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/package_card.dart';
 
-class PhotographerScreen extends StatelessWidget {
+class PhotographerScreen extends StatefulWidget {
+  @override
+  _PhotographerScreenState createState() => _PhotographerScreenState();
+}
+
+class _PhotographerScreenState extends State<PhotographerScreen> {
+  late PhotographerBloc photographerBloc;
+
+  @override
+  void initState() {
+    super.initState();
+
+    photographerBloc = PhotographerBloc()..add(FetchPhotographers());
+
+    // Show the DateTime Picker after the frame is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _showUnifiedDateTimePicker(context);
+    });
+  }
+
+  void _showUnifiedDateTimePicker(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false, // Prevent closing unless "Set" is pressed
+      builder: (_) => EventCombinedDateTimePicker(
+        onDateTimeSelected: (selectedDateTime) {
+          print("Date and time selected: $selectedDateTime");
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PhotographerBloc()..add(FetchPhotographers()),
+      create: (context) => photographerBloc,
       child: Scaffold(
-        appBar: AppBar(title: const Text("Photographers"),
-
-        ),
+        appBar: AppBar(title: const Text("Photographers")),
         body: BlocBuilder<PhotographerBloc, PhotographerState>(
           builder: (context, state) {
             if (state is PhotographerLoading) {
@@ -29,24 +62,17 @@ class PhotographerScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Our Services Section
                       CustomCircleWidget(
                         heading: "Our Services",
                         categories: state.photographers,
                         showViewAll: false,
                         onCategoryTap: (String categoryName) {
-                          // Navigation logic or category-specific actions
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ViewAllPackages(
-                            categoryName: categoryName,
-                          )));
-                          print("checking cateoerngkj $categoryName");
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => ViewAllPackages(categoryName: categoryName)));
                         },
-                        onViewAll: (){
-                        },
+                        onViewAll: () {},
                       ),
                       const SizedBox(height: 5),
-
-                      // Packages Section
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -58,10 +84,10 @@ class PhotographerScreen extends StatelessWidget {
                               color: Color(0xFF575959),
                             ),
                           ),
-
                           GestureDetector(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> ViewAllPackages(fromViewAll: true,)));
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => ViewAllPackages(fromViewAll: true)));
                             },
                             child: const Text(
                               "View All",
@@ -72,12 +98,9 @@ class PhotographerScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-
-
                         ],
                       ),
                       const SizedBox(height: 10),
-
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -85,9 +108,9 @@ class PhotographerScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final package = state.packages[index];
                           return Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0), // Adjust spacing between cards
+                            padding: const EdgeInsets.only(bottom: 8.0),
                             child: GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 Navigator.pushNamed(context, AppRoutes.photoAndVideographer);
                               },
                               child: PackageCard(
@@ -102,7 +125,6 @@ class PhotographerScreen extends StatelessWidget {
                           );
                         },
                       ),
-
                     ],
                   ),
                 ),
