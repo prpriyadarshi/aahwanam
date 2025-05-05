@@ -16,5 +16,6 @@ class AppRoutes {
   static const viewAllPackages = '/viewAllPackages';
   static const photoAndVideographer = '/photoAndVideographer';
   static const photostudio = '/photostudio';
+  static const  concepts='/concepts';
   static const bookService = '/bookService';
 }
