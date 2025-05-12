@@ -1,5 +1,5 @@
 import 'package:aahwanam/routes/app_routes.dart';
-import 'package:aahwanam/screens/dashboard/view_all_packages.dart';
+import 'package:aahwanam/widgets/custom_book_service.dart';
 import 'package:aahwanam/widgets/custom_event_date_time%20_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,10 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/Photographer/photographer_bloc.dart';
 import '../../blocs/Photographer/photographer_event.dart';
 import '../../blocs/Photographer/photographer_state.dart';
-import '../../widgets/custom_circle_widget.dart';
-import '../../widgets/package_card.dart';
 
-class BookServiceScreen extends StatelessWidget {
+class PhotographBookServiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -27,7 +25,7 @@ class BookServiceScreen extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.bookService);
+                  Navigator.pushNamed(context, AppRoutes.bookPhotographService);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFF1E535B),
@@ -51,249 +49,14 @@ class BookServiceScreen extends StatelessWidget {
             if (state is PhotographerLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is PhotographerLoaded) {
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(12),
-                      margin: EdgeInsets.symmetric(vertical: 8),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFFF2E4),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Image.asset(
-                              'assets/images/bookservice.png',
-                              height: 80,
-                              width: 60,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  'Silver Package by Photo Studio',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF575959),
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w300,
-                                    color: Color(0xFF757575),
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                SizedBox(height: 6),
-                                Text(
-                                  '₹8,000',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xFF1E535B),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
 
-                    /// 👉 Add spacing below the container here
-                    SizedBox(height: 12),
-                    // Event Details Section with Centered Text and Lines
-                    Row(
-                      children: [
-                        // Left Line
-                        Expanded(
-                          child: Divider(
-                            color: Color(0xFFF1F1F1),
-                            thickness: 1,
-                          ),
-                        ),
-                        // Text
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            "Event Details",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF575959),
-                            ),
-                          ),
-                        ),
-                        // Right Line
-                        Expanded(
-                          child: Divider(
-                            color: Color(0xFFF1F1F1),
-                            thickness: 1,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 16), // Add some spacing after the heading
-                    EventDateTimePicker(),
-                    SizedBox(height: 16), // Add some spacing after the heading
-
-                    Text(
-                      'Event Address*',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF575959),
-                      ),
-                    ),
-
-                    SizedBox(
-                      height: 10,
-                    ),
-
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Color(0xFFE4E4E4)),
-                          borderRadius: BorderRadius.circular(9)),
-                      child: Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment
-                                .spaceBetween, // Distribute space between title and button
-                            children: [
-                              Text(
-                                "Financial District", // Your title here
-                                style: TextStyle(
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF575959)),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  _showChangeAddress(context);
-                                },
-                                child: Text(
-                                  "Change",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor:
-                                      Color(0xFF1E535B), // Text color
-                                  backgroundColor:
-                                      Colors.white, // Button background color
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        5.0), // Rounded corners
-                                    side: BorderSide(
-                                        color: Color(0xFF1E535B),
-                                        width: 1), // Border color and width
-                                  ),
-                                  padding: EdgeInsets.all(
-                                      6.00), // No extra space inside the button
-                                  minimumSize: Size(0,
-                                      0), // Ensures the button size matches the content
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(
-                              height:
-                                  8.0), // Add spacing between Row and paragraph
-                          Text(
-                            "This is the paragraph text that appears below the title and button \n This is the paragraph text that appears below the title and button.",
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xFF757575),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    // Event Details Section with Centered Text and Lines
-                    Row(
-                      children: [
-                        // Left Line
-                        Expanded(
-                          child: Divider(
-                            color: Color(0xFFF1F1F1),
-                            thickness: 1,
-                          ),
-                        ),
-                        // Text
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            "Bill Details",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF575959),
-                            ),
-                          ),
-                        ),
-                        // Right Line
-                        Expanded(
-                          child: Divider(
-                            color: Color(0xFFF1F1F1),
-                            thickness: 1,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 16),
-
-
-                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildChargeRow('Service Charges', '₹ 8,000'),
-                        SizedBox(height: 8),
-                        _buildChargeRow('Platform Fee', '100'),
-                        SizedBox(height: 8),
-                        _buildChargeRow(
-                          'Transport Fee',
-                          'FREE',
-                          valueColor: Color(0xFF1E535B), // Teal color for "FREE"
-                        ),
-                        SizedBox(height: 8),
-
-                        _buildChargeRow(
-                          'Total',
-                          '₹ 8,100',
-                          isBold: true,
-                        ),
-                      ],
-                    ),
-
-
-
-                  ],
+              return SingleChildScrollView(
+                child: CustomBookService(
+                  data: state.bookServiceDetails,
+                  onChangeAddress: () => _showChangeAddress(context),
                 ),
               );
+
             } else if (state is PhotographerError) {
               return Center(child: Text(state.message));
             }

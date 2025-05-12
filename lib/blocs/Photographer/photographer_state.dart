@@ -1,3 +1,5 @@
+import 'package:aahwanam/models/book_service_details.dart';
+import 'package:aahwanam/models/service_details.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class PhotographerState extends Equatable {
@@ -22,11 +24,13 @@ class PhotographerLoaded extends PhotographerState {
   final List<Map<String, dynamic>> preWeddingPackages;
   final List<Map<String, dynamic>> fullWeddingPackages;
   final List<Map<String, String>> photoAndvideographers;
+  final ServiceDetails serviceDetails;
+  final BookServiceDetails bookServiceDetails;
 
-  const PhotographerLoaded(this.photographers,this.packages ,this.birthdayPackages,this.babyShootPackages,this.preWeddingPackages,this.fullWeddingPackages,this.photoAndvideographers);
+  const PhotographerLoaded(this.photographers,this.packages ,this.birthdayPackages,this.babyShootPackages,this.preWeddingPackages,this.fullWeddingPackages,this.photoAndvideographers,this.serviceDetails,this.bookServiceDetails);
 
   @override
-  List<Object?> get props => [photographers,packages,birthdayPackages,babyShootPackages,preWeddingPackages,fullWeddingPackages,photoAndvideographers];
+  List<Object?> get props => [photographers,packages,birthdayPackages,babyShootPackages,preWeddingPackages,fullWeddingPackages,photoAndvideographers,serviceDetails,bookServiceDetails];
 }
 
 // State for errors
