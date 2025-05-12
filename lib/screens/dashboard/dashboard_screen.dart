@@ -44,10 +44,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_selectedIndex],
-      bottomNavigationBar: CustomBottomNavBar(
+      bottomNavigationBar:  _selectedIndex != 3
+          ? CustomBottomNavBar(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
-      ),
+      )
+          : null,
     );
   }
 }

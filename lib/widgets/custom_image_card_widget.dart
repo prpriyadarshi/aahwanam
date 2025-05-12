@@ -4,18 +4,25 @@ class CustomImageCard extends StatelessWidget {
   final String imageUrl;
   final bool isAsset;
   final bool showFavoriteIcon;
+  final bool favoriteSelected;
+  final double width;
+  final double height;
+
 
   const CustomImageCard({
     Key? key,
     required this.imageUrl,
     this.isAsset = false,
     this.showFavoriteIcon = true,
+    this.favoriteSelected = false,
+    this.width = 100,
+    this.height = 102,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 110,
+      width: width,
       margin: const EdgeInsets.symmetric(horizontal: 4.0),
       child: Column(
         children: [
@@ -26,14 +33,14 @@ class CustomImageCard extends StatelessWidget {
                 child: isAsset
                     ? Image.asset(
                   imageUrl,
-                  width: 100,
-                  height: 102,
+                  width: width,
+                  height: height,
                   fit: BoxFit.cover,
                 )
                     : Image.network(
                   imageUrl,
-                  width: 100,
-                  height: 102,
+                  width: width,
+                  height: height,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -45,7 +52,9 @@ class CustomImageCard extends StatelessWidget {
                     backgroundColor: Colors.white,
                     radius: 10,
                     child: Icon(
-                      Icons.favorite_border,
+                      showFavoriteIcon && favoriteSelected
+                          ? Icons.favorite  // Show favorite icon if both conditions are true
+                          : Icons.favorite_border,  // Show favorite_border icon if the conditions are false
                       size: 14,
                       color: Colors.red,
                     ),
