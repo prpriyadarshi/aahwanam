@@ -20,4 +20,6 @@ class AppRoutes {
   static const entertainmentSubServices = '/entertainmentSubServices';
   static const entertainmentAllDetails = '/entertainmentAllDetails';
   static const entertainmentBookServiceScreen = '/entertainmentBookServiceScreen';
+  static const  concepts='/concepts';
+  static const bookService = '/bookService';
 }

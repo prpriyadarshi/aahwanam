@@ -1,8 +1,11 @@
 import 'package:aahwanam/blocs/account/account_bloc.dart';
+import 'package:aahwanam/blocs/concepts/concepts_bloc.dart';
 import 'package:aahwanam/blocs/eInvitation/eInvitation_bloc.dart';
 import 'package:aahwanam/screens/account/account_screen.dart';
 import 'package:aahwanam/screens/dashboard/entertainment_book_service_screen.dart';
 import 'package:aahwanam/screens/dashboard/photograph_book_service_screen.dart';
+import 'package:aahwanam/screens/concepts/concepts_screen.dart';
+import 'package:aahwanam/screens/dashboard/book_service_screen.dart';
 import 'package:aahwanam/screens/dashboard/e_invitation_screen.dart';
 import 'package:aahwanam/screens/dashboard/entertainment_all_details_screen.dart';
 import 'package:aahwanam/screens/dashboard/entertainment_all_services_sub_list.dart';
@@ -65,6 +68,8 @@ class AppPages {
       // Example of screen without Bloc (e.g., a simple screen that doesn’t need state management)
       AppRoutes.login: LoginScreen(),
       AppRoutes.services: ServicesScreen(),
+      AppRoutes.concepts: ConceptsScreen(),
+
       // Add other screens without BLoC here
     };
 
@@ -88,6 +93,7 @@ class AppPages {
       AppRoutes.valet: ValetParkingBloc(),
       AppRoutes.einvitation: EinvitationBloc(),
       AppRoutes.account: AccountBloc(),
+      AppRoutes.concepts:ConceptsBloc(),
       // You can add BLoCs for other routes as needed
     };
 
