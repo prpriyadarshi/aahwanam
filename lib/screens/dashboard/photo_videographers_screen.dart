@@ -2,6 +2,7 @@ import 'package:aahwanam/blocs/Photographer/photographer_bloc.dart';
 import 'package:aahwanam/blocs/Photographer/photographer_event.dart';
 import 'package:aahwanam/blocs/Photographer/photographer_state.dart';
 import 'package:aahwanam/routes/app_routes.dart';
+import 'package:aahwanam/screens/dashboard/photostudio_details_screen.dart';
 import 'package:aahwanam/widgets/custom_card_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +28,13 @@ class PhotoAndVideographers extends StatelessWidget{
                     children: [
                       // Our Services Section
                       GestureDetector(
-                        onTap: (){
-                          Navigator.pushNamed(context, AppRoutes.photostudio);
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PhotostudioDetailsScreen()),
+                          );
                         },
+
                         child: CustomCardWidgets.buildSection(
                           context,
                           title: "Photo & Videographers",

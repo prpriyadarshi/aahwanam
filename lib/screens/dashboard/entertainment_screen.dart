@@ -1,6 +1,8 @@
 import 'package:aahwanam/blocs/entertainment/entertainment_bloc.dart';
 import 'package:aahwanam/blocs/entertainment/entertainment_event.dart';
 import 'package:aahwanam/blocs/entertainment/entertainment_state.dart';
+import 'package:aahwanam/routes/app_routes.dart';
+import 'package:aahwanam/widgets/custom_combined_event_date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,11 +12,39 @@ import '../../widgets/custom_language_dropdown.dart';
 class EntertainmentScreen extends StatefulWidget {
   @override
   _EntertainmentScreenState createState() => _EntertainmentScreenState();
+
+
 }
 
 
 class _EntertainmentScreenState extends State<EntertainmentScreen> {
+  late EntertainmentBloc entertainmentBloc;
+
   @override
+  void initState() {
+    super.initState();
+
+    entertainmentBloc = EntertainmentBloc()..add(FetchEntertainment());
+
+    // Show the DateTime Picker after the frame is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _showUnifiedDateTimePicker(context);
+    });
+  }
+
+  void _showUnifiedDateTimePicker(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false, // Prevent closing unless "Set" is pressed
+      builder: (_) => EventCombinedDateTimePicker(
+        onDateTimeSelected: (selectedDateTime) {
+          print("Date and time selected: $selectedDateTime");
+        },
+      ),
+    );
+  }
+
   final List<String> languages = ['English', 'Hindi', 'Telugu', 'Tamil'];
   String? selectedLanguage;
 
@@ -68,13 +98,19 @@ class _EntertainmentScreenState extends State<EntertainmentScreen> {
                         ],
                       ),
 
-                      CustomCardWidgets.buildSection(
-                        context,
-                        title: "",
-                        data: state.Services,
-                        showViewAll: false,
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pushNamed(context, AppRoutes.entertainmentSubServices);
 
-                        onViewAll: () => _navigateTo(context, "Decorators"),
+                        },
+                        child: CustomCardWidgets.buildSection(
+                          context,
+                          title: "",
+                          data: state.Services,
+                          showViewAll: false,
+
+                          onViewAll: () => _navigateTo(context, "Decorators"),
+                        ),
                       ),
 
                       const SizedBox(height: 10,)

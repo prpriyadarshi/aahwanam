@@ -1,5 +1,8 @@
 import 'package:aahwanam/blocs/Photographer/photographer_event.dart';
 import 'package:aahwanam/blocs/Photographer/photographer_state.dart';
+import 'package:aahwanam/models/book_service_details.dart';
+import 'package:aahwanam/models/gallery_section.dart';
+import 'package:aahwanam/models/service_details.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PhotographerBloc extends Bloc<PhotographerEvent, PhotographerState> {
@@ -173,8 +176,87 @@ class PhotographerBloc extends Bloc<PhotographerEvent, PhotographerState> {
 
         ];
 
+        final serviceDetails = ServiceDetails(
+          name: "Photo Studio",
+          imagePath: "assets/images/baby shoot main.png",
+          price: 15000.0,
+          rating: 4.7,
+          heading: "Silver Package",
+          packagePrice: "₹20,000",
+          description: "Silver Package Photography Service offers a fantastic choice When all you need a budget friendly photography and personal photoshoot for your event. ",
+          subHeading: "Included in this Package are:",
+          subHeadingDetails: "1 Professional Photographer + Videographe Candid Photos and Hd quality. Premium quality soft copies of your event. .",
+          eventTitle: "Get quotes for your event",
+          address: "Financial District",
+          addressDescription: "OLorem ipsum dolor sit amet, dolor consectetur adipiscing elit,Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,",
+          mediaSections: [
+            GallerySection(
+              title: "Birthday Photoshoot",
+              mediaPaths: [
+                'assets/images/birthdayGallery.png',
+                'assets/images/birthdayGallery1.png',
+                'assets/images/birthdayGallery2.png',
+                'assets/images/birthdayGallery3.png',
+              ],
+              isVideo: false,
+            ),
+            GallerySection(
+              title: "Prewedding Videos",
+              mediaPaths: [
+                'assets/images/preweddingGallery.png',
+                'assets/images/preweddingGallery1.png',
+                'assets/images/preweddingGallery2.png',
+                'assets/images/preweddingGallery3.png',
+              ],
+              isVideo: true,
+            ),
+            GallerySection(
+              title: "Photos & Videos",
+              mediaPaths: [
+                'assets/images/babyshootGallery.png',
+                'assets/images/babyshootGallery3.png',
+                'assets/images/babyshootGallery2.png',
+                'assets/images/babyshootGallery3.png',
+              ],
+              isVideo: false,
+              // useGrid: true,
+            ),
+          ],
+          // Add actual GallerySection list here
+          reviewPhotoUrls: [
+            'assets/images/baby shoot main.png',
+            'assets/images/baby shoot main.png',
+            'assets/images/baby shoot main.png',
+            'assets/images/baby shoot main.png',
+            'assets/images/baby shoot main.png',
+            'assets/images/baby shoot main.png',
+          ],
+          totalRatings: 120,
+          totalReviews: 45,
+          averageRating: 4.5,
+
+
+        );
+
+        final bookServiceDetails = BookServiceDetails(
+            title: 'Silver Package by Photo Studio',
+            imagePath: 'assets/images/photographer.png',
+            description: 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            price: '8,000 ',
+            locationTitle: 'Financial District',
+            locationDescription: 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            eventDate: '',
+            eventTime: '',
+            serviceCharge: '1,000',
+            platformFee: '500',
+            transportFee: ' 500',
+            totalAmount: '2,000',
+
+        );
+
+
         emit(PhotographerLoaded(photographers, packages, birthdayPackages,
-            babyShootPackages, preWeddingPackages, fullWeddingPackages,photoAndvideographers));
+            babyShootPackages, preWeddingPackages, fullWeddingPackages,photoAndvideographers,serviceDetails,bookServiceDetails));
       } catch (e) {
         emit(PhotographerError("Failed to load photographers"));
       }
