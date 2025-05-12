@@ -1,10 +1,16 @@
 import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/account/account_event.dart';
 import 'package:aahwanam/blocs/account/account_state.dart';
+import 'package:aahwanam/screens/account/mypackages_screen.dart';
 import 'package:aahwanam/screens/account/profile_screen.dart';
+import 'package:aahwanam/screens/account/booking_screen.dart';
+import 'package:aahwanam/screens/account/wishlist_screen.dart';
 import 'package:aahwanam/widgets/custom_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../dashboard/dashboard_screen.dart';
+import 'cart_screen.dart';
 
 
 class AccountScreen extends StatelessWidget {
@@ -17,7 +23,18 @@ class AccountScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Account Information'),
-          leading: const BackButton(),
+          // leading: const BackButton(),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DashboardScreen()),
+              );
+            },
+          ),
+
+
         ),
         body: BlocBuilder<AccountBloc, AccountState>(
           builder: (context, state) {
@@ -61,10 +78,58 @@ class AccountScreen extends StatelessWidget {
                     );
 
                   },),
-                  CustomTile(imagePath: 'assets/images/bookings.png', title: 'Bookings', bgColor: Color(0xFFDFE3FF), onTap: () {}),
-                  CustomTile(imagePath: 'assets/images/cart.png', title: 'Cart', bgColor: Color(0xFFDFF4FF), onTap: () {}),
-                  CustomTile(imagePath: 'assets/images/wishlist.png', title: 'Wishlist', bgColor: Color(0xFFFFECEC), onTap: () {}),
-                  CustomTile(imagePath: 'assets/images/mypackages.png', title: 'My Packages', bgColor: Color(0xFFE9FFE2), onTap: () {}),
+                  CustomTile(imagePath: 'assets/images/bookings.png', title: 'Bookings', bgColor: Color(0xFFDFE3FF), onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return BlocProvider.value(
+                            value: BlocProvider.of<AccountBloc>(context),
+                            child: const BookingScreen(),
+                          );
+                        },
+                      ),
+                    );
+                  }),
+                  CustomTile(imagePath: 'assets/images/cart.png', title: 'Cart', bgColor: Color(0xFFDFF4FF), onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return BlocProvider.value(
+                            value: BlocProvider.of<AccountBloc>(context),
+                            child: const CartScreen(),
+                          );
+                        },
+                      ),
+                    );
+                  }),
+                  CustomTile(imagePath: 'assets/images/wishlist.png', title: 'Wishlist', bgColor: Color(0xFFFFECEC), onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return BlocProvider.value(
+                            value: BlocProvider.of<AccountBloc>(context),
+                            child: const WishlistScreen(),
+                          );
+                        },
+                      ),
+                    );
+                  }),
+                  CustomTile(imagePath: 'assets/images/mypackages.png', title: 'My Packages', bgColor: Color(0xFFE9FFE2), onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return BlocProvider.value(
+                            value: BlocProvider.of<AccountBloc>(context),
+                            child: const MyPackagesScreen(),
+                          );
+                        },
+                      ),
+                    );
+                  }),
                   const SizedBox(height: 10),
                   const Text("Other", style: TextStyle(fontWeight: FontWeight.bold)),
                   CustomTile(imagePath: 'assets/images/budget planner.png', title: 'Budget Planner', bgColor: Color(0xFFFFF4DF), onTap: () {}),
