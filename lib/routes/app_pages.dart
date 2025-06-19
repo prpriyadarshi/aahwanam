@@ -3,9 +3,12 @@ import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/concepts/concepts_bloc.dart';
 import 'package:aahwanam/blocs/eInvitation/eInvitation_bloc.dart';
 import 'package:aahwanam/screens/account/account_screen.dart';
+import 'package:aahwanam/screens/dashboard/entertainment_book_service_screen.dart';
+import 'package:aahwanam/screens/dashboard/photograph_book_service_screen.dart';
 import 'package:aahwanam/screens/concepts/concepts_screen.dart';
-import 'package:aahwanam/screens/dashboard/book_service_screen.dart';
 import 'package:aahwanam/screens/dashboard/e_invitation_screen.dart';
+import 'package:aahwanam/screens/dashboard/entertainment_all_details_screen.dart';
+import 'package:aahwanam/screens/dashboard/entertainment_all_services_sub_list.dart';
 import 'package:aahwanam/screens/dashboard/photo_videographers_screen.dart';
 import 'package:aahwanam/screens/dashboard/view_all_packages.dart';
 import 'package:aahwanam/services/services_screen.dart';
@@ -25,6 +28,11 @@ import '../blocs/entertainment/entertainment_bloc.dart';
 import '../blocs/makeup/makeup_bloc.dart';
 import '../blocs/mehndi/mehndi_bloc.dart';
 import '../blocs/valetParking/valetParking_bloc.dart';
+import '../screens/auth/otp_verification_screen.dart';
+import '../screens/auth/home_screen.dart';
+import '../screens/auth/sigin_screen.dart';
+import '../screens/auth/signup_screen.dart';
+import '../screens/auth/welcome_screen.dart';
 import '../screens/dashboard/bartender_screen.dart';
 import '../screens/dashboard/chef_screen.dart';
 import '../screens/dashboard/dashboard_screen.dart';
@@ -42,6 +50,11 @@ class AppPages {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     // Define a map for screens and their corresponding BLoC classes
     final Map<String, Widget> routes = {
+      AppRoutes.welcome: const WelcomeScreen(),
+      AppRoutes.signIn: const SignInScreen(),
+      AppRoutes.signUp: const SignupScreen(),
+      AppRoutes.home: const HomeScreen(),
+      AppRoutes.otpVerification: const OtpVerificationScreen(),
       AppRoutes.dashboard: DashboardScreen(),
       AppRoutes.photographer: PhotographerScreen(),
       AppRoutes.viewAllPackages: ViewAllPackages(),
@@ -56,8 +69,11 @@ class AppPages {
       AppRoutes.valet: ValetParkingScreen(),
       AppRoutes.einvitation: EInvitationScreen(),
       AppRoutes.account: AccountScreen(),
-      AppRoutes.photostudio: CustomServiceCard(),
-      AppRoutes.bookService: BookServiceScreen(),
+      AppRoutes.entertainmentAllDetails: EntertainmentAllDetailsScreen(),
+      // AppRoutes.photostudio: CustomServiceCard(),
+      AppRoutes.bookPhotographService: PhotographBookServiceScreen(),
+      AppRoutes.entertainmentSubServices: EntertainmentAllServicesSubList(),
+      AppRoutes.entertainmentBookServiceScreen: EntertainmentBookServiceScreen(),
       // Screens without BLoC can also be added here
       // Example of screen without Bloc (e.g., a simple screen that doesn’t need state management)
       AppRoutes.login: LoginScreen(),
@@ -73,10 +89,14 @@ class AppPages {
       AppRoutes.photographer: PhotographerBloc(),
       AppRoutes.viewAllPackages: PhotographerBloc(),
       AppRoutes.photostudio: PhotographerBloc(),
+      AppRoutes.bookPhotographService: PhotographerBloc(),
       AppRoutes.chef: ChefBloc(),
       AppRoutes.bartender: BartenderBloc(),
       AppRoutes.makeup: MakeupBloc(),
       AppRoutes.entertainment: EntertainmentBloc(),
+      AppRoutes.entertainmentSubServices: EntertainmentBloc(),
+      AppRoutes.entertainmentAllDetails: EntertainmentBloc(),
+      AppRoutes.entertainmentBookServiceScreen: EntertainmentBloc(),
       AppRoutes.mehndi: MehndiBloc(),
       AppRoutes.decor: DecorBloc(),
       AppRoutes.pandit: PanditBloc(),
