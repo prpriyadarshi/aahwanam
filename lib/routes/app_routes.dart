@@ -28,4 +28,5 @@ class AppRoutes {
   static const entertainmentBookServiceScreen = '/entertainmentBookServiceScreen';
   static const  concepts='/concepts';
   static const bookService = '/bookService';
+  static const events = '/events';
 }
