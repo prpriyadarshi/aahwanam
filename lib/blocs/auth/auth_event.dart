@@ -12,7 +12,7 @@ class VerifyOTP extends AuthEvent {
 
 class LoginWithEmail extends AuthEvent {
   final String email, password;
-  LoginWithEmail(this.email, this.password);
+  LoginWithEmail(this.email, this.password );
 }
 
 class SignUpUser extends AuthEvent {
