@@ -14,6 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading());
       await Future.delayed(Duration(seconds: 1));
       emit(AuthSuccess());
+
     });
 
     on<LoginWithEmail>((event, emit) async {

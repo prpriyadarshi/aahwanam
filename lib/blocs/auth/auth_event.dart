@@ -10,6 +10,7 @@ class VerifyOTP extends AuthEvent {
   VerifyOTP(this.otp);
 }
 
+
 class LoginWithEmail extends AuthEvent {
   final String email, password;
   LoginWithEmail(this.email, this.password);
