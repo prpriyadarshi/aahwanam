@@ -27,6 +27,11 @@ import '../blocs/entertainment/entertainment_bloc.dart';
 import '../blocs/makeup/makeup_bloc.dart';
 import '../blocs/mehndi/mehndi_bloc.dart';
 import '../blocs/valetParking/valetParking_bloc.dart';
+import '../screens/auth/otp_verification_screen.dart';
+import '../screens/auth/home_screen.dart';
+import '../screens/auth/sigin_screen.dart';
+import '../screens/auth/signup_screen.dart';
+import '../screens/auth/welcome_screen.dart';
 import '../screens/dashboard/bartender_screen.dart';
 import '../screens/dashboard/chef_screen.dart';
 import '../screens/dashboard/dashboard_screen.dart';
@@ -44,6 +49,11 @@ class AppPages {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     // Define a map for screens and their corresponding BLoC classes
     final Map<String, Widget> routes = {
+      AppRoutes.welcome: const WelcomeScreen(),
+      AppRoutes.signIn: const SignInScreen(),
+      AppRoutes.signUp: const SignupScreen(),
+      AppRoutes.home: const HomeScreen(),
+      AppRoutes.otpVerification: const OtpVerificationScreen(),
       AppRoutes.dashboard: DashboardScreen(),
       AppRoutes.photographer: PhotographerScreen(),
       AppRoutes.viewAllPackages: ViewAllPackages(),
