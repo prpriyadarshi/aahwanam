@@ -1,4 +1,5 @@
 import 'package:aahwanam/routes/app_routes.dart';
+import 'package:aahwanam/screens/Packages/events_sereen.dart';
 import 'package:aahwanam/screens/concepts/concepts_screen.dart';
 import 'package:aahwanam/services/services_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -32,11 +33,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: ConceptsScreen(),
     ),
     const AccountScreen(),
+    const EventScreen()
+    // const event(),
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      print('index $index');
     });
   }
 

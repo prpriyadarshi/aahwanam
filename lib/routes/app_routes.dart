@@ -18,4 +18,5 @@ class AppRoutes {
   static const photostudio = '/photostudio';
   static const  concepts='/concepts';
   static const bookService = '/bookService';
+  static const events = '/events';
 }

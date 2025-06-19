@@ -1,3 +1,4 @@
+import 'package:aahwanam/blocs/Packages/events_bloc.dart';
 import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/concepts/concepts_bloc.dart';
 import 'package:aahwanam/blocs/eInvitation/eInvitation_bloc.dart';
@@ -83,6 +84,7 @@ class AppPages {
       AppRoutes.einvitation: EinvitationBloc(),
       AppRoutes.account: AccountBloc(),
       AppRoutes.concepts:ConceptsBloc(),
+      AppRoutes.events:EventBloc(),
       // You can add BLoCs for other routes as needed
     };
 
