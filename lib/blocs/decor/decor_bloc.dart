@@ -29,6 +29,12 @@ class DecorBloc extends Bloc<DecorEvent, DecorState> {
           {'image': 'assets/images/Dream Decor.png', 'name': 'Dream Decor', 'price': '₹3,000 Onwards', 'rating': '4.3',},
           {'image': 'assets/images/party blush1.png', 'name': 'Party Blush', 'price': '₹4,000 Onwards', 'rating': '4.5',},
           {'image': 'assets/images/party blush2.png', 'name': 'Dream Decor', 'price': '₹15,000 Onwards', 'rating': '4.3',},
+          {'image': 'assets/images/party blush3.jpg', 'name': 'Dream Decor', 'price': '₹4,000 Onwards', 'rating': '4.5',},
+          {'image': 'assets/images/party blush4.jpg', 'name': 'Dream Decor', 'price': '₹15,000 Onwards', 'rating': '4.3',},
+          {'image': 'assets/images/dream decor1.jpg', 'name': 'Dream Decor', 'price': '₹5,000 Onwards', 'rating': '4.3',},
+          {'image': 'assets/images/party blush2.png', 'name': 'Dream Decor', 'price': '₹8,000 Onwards', 'rating': '4.3',},
+          {'image': 'assets/images/party blush3.jpg', 'name': 'Dream Decor', 'price': '₹4,000 Onwards', 'rating': '4.5',},
+          {'image': 'assets/images/party blush4.jpg', 'name': 'Dream Decor', 'price': '₹15,000 Onwards', 'rating': '4.3',},
         ];
 
         final trendingDecorations = [

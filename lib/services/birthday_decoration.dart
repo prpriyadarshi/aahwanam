@@ -1,6 +1,11 @@
-// ✅ BirthdayDecoration Page
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
+import '../blocs/decor/decor_bloc.dart';
+import '../blocs/decor/decor_event.dart';
+import '../blocs/decor/decor_state.dart';
+import '../screens/dashboard/decoration_theme.dart';
+import '../widgets/custom_card_widget.dart';
 
 class BirthdayDecoration extends StatelessWidget {
   final Map<String, String> decorator;
@@ -14,6 +19,7 @@ class BirthdayDecoration extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
+        scrolledUnderElevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -26,67 +32,75 @@ class BirthdayDecoration extends StatelessWidget {
                       context: context,
                       isScrollControlled: true,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(24)),
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                       ),
                       builder: (context) => CustomDateTimeBottomSheet(
                         onConfirm: (DateTime fullDateTime) {
-                          print("Selected DateTime: \$fullDateTime");
+                          print("Selected DateTime: $fullDateTime");
                         },
                       ),
                     );
                   },
                   child: Stack(
                     alignment: Alignment.center,
-                    children: const [
-                      Icon(Icons.calendar_today,
-                          size: 24, color: Color(0xFF004d40)),
+                    children: [
+                      Icon(Icons.calendar_today, size: 24, color: Color(0xFF004d40)),
                       Positioned(
                         bottom: 0,
                         right: 0,
-                        child: Icon(Icons.access_time,
-                            size: 10, color: Color(0xFF004d40)),
+                        child: Icon(Icons.access_time, size: 10, color: Color(0xFF004d40)),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 10),
-                const Icon(Icons.favorite, color: Colors.red),
+                SizedBox(width: 10),
+                IconButton(
+                  icon: Icon(Icons.favorite, color: Colors.red),
+                  onPressed: () {},
+                ),
               ],
             ),
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              decorator['name'] ?? '',
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Image.asset(
-              decorator['image'] ?? '',
-              height: 200,
-              fit: BoxFit.cover,
-            ),
-            const SizedBox(height: 10),
-            Text(
-              decorator['price'] ?? '',
-              style: const TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              "Rating: \${decorator['rating'] ?? '0.0'}",
-              style: const TextStyle(fontSize: 16),
-            ),
-          ],
+      body: BlocProvider(
+        create: (context) => DecorBloc()..add(FetchDecor()),
+        child: BlocBuilder<DecorBloc, DecorState>(
+          builder: (context, state) {
+            if (state is DecorLoading) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is DecorLoaded) {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: CustomCardWidgets.buildSection(
+                    context,
+                    title: "Decorators",
+                    data: state.decorators, // ← from Bloc state
+                    showViewAll: true,
+                    onViewAll: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DecorationTheme(decorator: decorator),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              );
+
+            } else {
+              return Center(child: Text("Something went wrong"));
+            }
+          },
         ),
+
       ),
     );
   }
+
+
 
   Widget _buildSearchBar() {
     return TextField(
@@ -102,100 +116,4 @@ class BirthdayDecoration extends StatelessWidget {
       ),
     );
   }
-}
-
-// ✅ Modified CustomCardWidgets to enable navigation on card tap
-Widget buildCard(Map<String, String> item, BuildContext context) {
-  return GestureDetector(
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => BirthdayDecoration(decorator: item),
-        ),
-      );
-    },
-    child: Card(
-      elevation: 0,
-      color: const Color(0xFFFFEFDF),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6.0),
-      ),
-      margin: EdgeInsets.zero,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(6.0)),
-                child: item['image']!.startsWith('assets/')
-                    ? Image.asset(item['image']!,
-                        height: 120, width: double.infinity, fit: BoxFit.cover)
-                    : Image.network(item['image']!,
-                        height: 120, width: double.infinity, fit: BoxFit.cover),
-              ),
-              const Positioned(
-                top: 8,
-                right: 8,
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 10,
-                  child:
-                      Icon(Icons.favorite_border, size: 14, color: Colors.red),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        item['name']!,
-                        style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959)),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        const Icon(Icons.star,
-                            color: Color(0xFFEFAA37), size: 16),
-                        const SizedBox(width: 4),
-                        Text(
-                          item['rating'] ?? "0.0",
-                          style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xFF575959)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4.0),
-                Text(
-                  item['price']!,
-                  style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF1E535B),
-                      fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
 }
