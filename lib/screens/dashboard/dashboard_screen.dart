@@ -1,5 +1,5 @@
 import 'package:aahwanam/routes/app_routes.dart';
-import 'package:aahwanam/screens/Packages/events_sereen.dart';
+import 'package:aahwanam/screens/Packages/events_screen.dart';
 import 'package:aahwanam/screens/concepts/concepts_screen.dart';
 import 'package:aahwanam/services/services_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
