@@ -1,3 +1,19 @@
-abstract class EventEvent {}
+import '../../models/Event_model.dart';
 
-class LoadEvents extends EventEvent {}
+abstract class EventsEvent {}
+
+class LoadEvents extends EventsEvent {}
+
+class LoadAddressesEvent extends EventsEvent {}
+
+class SelectAddressEvent extends EventsEvent {
+  final AddressModel address;
+  SelectAddressEvent(this.address);
+}
+
+class AddAddressEvent extends EventsEvent {
+  final AddressModel address;
+  AddAddressEvent(this.address);
+}
+
+

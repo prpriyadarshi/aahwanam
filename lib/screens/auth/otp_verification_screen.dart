@@ -71,13 +71,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   bool get isOtpComplete {
-    print("errro..............");
     return _controllers.every((controller) => controller.text.trim().isNotEmpty);
   }
 
   void _submitOtp() {
-    print("Working..............");
-
     if (!isOtpComplete) return;
     final otp = getEnteredOTP();
     // context.read<AuthBloc>().add(VerifyOTP(otp));
@@ -101,10 +98,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final screenWidth = size.width;
+
     final otpFields = List.generate(6, (index) {
       return Container(
-        width: 42,
-        height: 41,
+        width: screenWidth * 0.11,
+        height: screenWidth * 0.11,
         decoration: BoxDecoration(
           border: Border.all(color: const Color(0xFF1E535B), width: 1),
           borderRadius: BorderRadius.circular(12),
@@ -120,10 +120,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               textAlign: TextAlign.center,
               maxLength: 1,
               cursorColor: const Color(0xFF575959),
-              style: const TextStyle(
-                color: Color(0xFF1E535B),
+              style: TextStyle(
+                color: const Color(0xFF1E535B),
                 fontWeight: FontWeight.w600,
-                fontSize: 20,
+                fontSize: screenWidth * 0.05,
               ),
               decoration: const InputDecoration(
                 counterText: '',
@@ -141,129 +141,141 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFFDF3EA),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 10),
-              const Text(
-                "OTP Verification",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF575959),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 20),
+                        const Text(
+                          "OTP Verification",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF575959),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        RichText(
+                          text: const TextSpan(
+                            text: "Enter the code from sms we have sent to\n",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF757575),
+                            ),
+                            children: [
+                              TextSpan(
+                                text: "9837401241",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF757575),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        Center(
+                          child: Text(
+                            _formatDuration(_remainingTime),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: Color(0xFF1E535B),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 18),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(otpFields.length, (index) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 6),
+                              child: otpFields[index],
+                            );
+                          }),
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Didn’t get OTP? ",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                                color: Color(0xFF575959),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                // Add resend OTP logic here
+                              },
+                              child: const Text(
+                                "Resend OTP",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                  color: Color(0xFF1E535B),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 30),
+                        CustomActionButton(
+                          text: "Submit",
+                          onPressed: isOtpComplete ? _submitOtp : null,
+                          backgroundColor: const Color(0xFF1E535B),
+                          borderColor: Colors.transparent,
+                          textColor: Colors.white,
+                          height: 50,
+                          width: double.infinity,
+                        ),
+                        const SizedBox(height: 480),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Don’t have an account? ",
+                                style: TextStyle(
+                                  color: Color(0xFF6B6B6B),
+                                  fontSize: 14,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, AppRoutes.signUp);
+                                },
+                                child: const Text(
+                                  "Sign up",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color(0xFF1E535B),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-              const SizedBox(height: 8),
-              RichText(
-                textAlign: TextAlign.left,
-                text: const TextSpan(
-                  text: "Enter the code from sms we have sent to\n",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF757575),
-                  ),
-                  children: [
-                    TextSpan(
-                      text: "9837401241",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF757575),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 24),
-              Center(
-                child: Text(
-                  _formatDuration(_remainingTime),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: Color(0xFF1E535B),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 18),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(otpFields.length, (index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 9),
-                    child: otpFields[index],
-                  );
-                }),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Didn’t get OTP? ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: Color(0xFF575959),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // Add resend OTP logic here
-                    },
-                    child: const Text(
-                      "Resend OTP",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
-                        color: Color(0xFF1E535B),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 45),
-              CustomActionButton(
-                text: "Submit",
-                onPressed: isOtpComplete ? _submitOtp : null,
-                backgroundColor: const Color(0xFF1E535B),
-                borderColor: Colors.transparent,
-                textColor: Colors.white,
-                height: 50,
-                width: double.infinity,
-              ),
-              const SizedBox(height: 430),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Don’t have an account? ",
-                    style: TextStyle(
-                      color: Color(0xFF6B6B6B),
-                      fontSize: 14,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, AppRoutes.signUp);
-                    },
-                    child: const Text(
-                      "Sign up",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xFF1E535B),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
