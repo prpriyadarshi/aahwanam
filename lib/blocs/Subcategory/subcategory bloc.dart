@@ -23,7 +23,7 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
             price: '₹8,000',
           ),
           ServiceItem(
-            title: 'kids special',
+            title: 'Kids Special', // Corrected from 'kids special'
             imageUrl: 'assets/images/Kids special event.png',
             price: '₹6,000',
           ),
@@ -77,6 +77,7 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
             imageUrl: 'assets/images/Kids special 5 event.png',
             price: '₹6,000',
           ),
+
         ],
       ),
       CategoryModel(
@@ -206,14 +207,28 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
         image: 'assets/images/Entertainment event.png',
         services: [
           ServiceItem(
-            title: 'DJ Night',
-            imageUrl: 'assets/images/dj.png',
-            price: '₹15,000',
+            title: 'Band',
+            imageUrl: 'assets/images/Band event.png', // Placeholder, ensure you have this image
+            price: '₹8,000',
+            description: 'When all you need a budget friendly Band for your event.' ,
           ),
           ServiceItem(
-            title: 'Live Band',
-            imageUrl: 'assets/images/live_band.png',
-            price: '₹40,000',
+            title: 'Drums',
+            imageUrl: 'assets/images/Drums event.png', // Placeholder, ensure you have this image
+            price: '₹12,000',
+            description: 'When all you need a budget friendly Drum for your event.'
+          ),
+          ServiceItem(
+            title: 'DJ',
+            imageUrl: 'assets/images/DJ event.png', // Placeholder, ensure you have this image
+            price: '₹12,000',
+            description: 'When all you need a budget friendly DJ for your event. ',
+          ),
+          ServiceItem(
+            title: 'Choreographer',
+            imageUrl: 'assets/images/Choreographer event.png', // Placeholder, ensure you have this image
+            price: '₹12,000',
+            description: 'When all you need a budget friendly choreographer for your event. ',
           ),
         ],
       ),
@@ -222,14 +237,16 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
         image: 'assets/images/Bartender event.png',
         services: [
           ServiceItem(
-            title: 'Basic Bartender Service',
-            imageUrl: 'assets/images/bartender_basic.png',
+            title: 'Bartender Service',
+            imageUrl: 'assets/images/Bartender event.png',
             price: '₹5,000',
+            description: 'When all you need a budget friendly Bartender.',
           ),
           ServiceItem(
-            title: 'Premium Bartender with Bar Setup',
-            imageUrl: 'assets/images/bartender_premium.png',
+            title: 'Mixologist',
+            imageUrl: 'assets/images/Mixologist event.png',
             price: '₹12,000',
+            description: 'When all you need a budget friendly Mixologist.',
           ),
         ],
       ),
@@ -238,14 +255,16 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
         image: 'assets/images/Valetparking event.png',
         services: [
           ServiceItem(
-            title: 'Valet with 2 Staff',
-            imageUrl: 'assets/images/valet1.png',
+            title: 'Basic Service',
+            imageUrl: 'assets/images/Basic parking event.png',
             price: '₹3,500',
+            description: 'When all you need a budget friendly Vallet Associate. ',
           ),
           ServiceItem(
-            title: 'Valet with 5 Staff',
-            imageUrl: 'assets/images/valet2.png',
+            title: 'Royal Service',
+            imageUrl: 'assets/images/Royal parking event.png',
             price: '₹7,500',
+            description: 'When all you need a budget friendly Vallet Associate. ',
           ),
         ],
       ),
@@ -257,11 +276,13 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
             title: 'North Indian Pandit',
             imageUrl: 'assets/images/pandit_north.png',
             price: '₹4,000',
+            description: 'dejvyhjebcvyejnvchjevcxhyejncvjevcgmcvegjc',
           ),
           ServiceItem(
-            title: 'South Indian Purohit',
+            title: 'South Indian Pandit',
             imageUrl: 'assets/images/pandit_south.png',
             price: '₹4,500',
+            description: 'dejvyhjebcvyejnvchjevcxhyejncvjevcgmcvegjc',
           ),
         ],
       ),
@@ -270,14 +291,22 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
         image: 'assets/images/Photography event.png',
         services: [
           ServiceItem(
-            title: 'Wedding Photography',
-            imageUrl: 'assets/images/wedding_photo.png',
+            title: 'Silver Package',
+            imageUrl: 'assets/images/Silver package event photos.png',
             price: '₹25,000',
+            description: 'When all you need a budget friendly photographer.',
           ),
           ServiceItem(
-            title: 'Candid Photography',
-            imageUrl: 'assets/images/candid.png',
+            title: 'Gold Package',
+            imageUrl: 'assets/images/Gold event photos.png',
             price: '₹18,000',
+            description: 'When all you need a budget friendly photographer.',
+          ),
+          ServiceItem(
+            title: 'Diamond Package',
+            imageUrl: 'assets/images/Diamond event photos.png',
+            price: '₹18,000',
+            description: 'When all you need a budget friendly photographer.',
           ),
         ],
       ),
