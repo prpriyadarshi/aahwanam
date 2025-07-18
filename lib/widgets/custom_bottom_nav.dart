@@ -67,9 +67,9 @@ class CustomBottomNavBar extends StatelessWidget {
   }
 
   Widget _buildCenterFab() {
-    final isSelected = selectedIndex == -1; // Use -1 to identify the FAB
+    final isSelected = selectedIndex ==4; // Use -1 to identify the FAB
     return GestureDetector(
-      onTap: () => onItemTapped(-1), // Update selectedIndex in parent
+      onTap: () => onItemTapped(4), // Update selectedIndex in parent
       child: Container(
         height: 50, // Decrease FAB size
         width: 50, // Decrease FAB size

@@ -1,3 +1,4 @@
+import 'package:aahwanam/blocs/Packages/events_bloc.dart';
 import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/concepts/concepts_bloc.dart';
 import 'package:aahwanam/blocs/eInvitation/eInvitation_bloc.dart';
@@ -19,6 +20,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/Pandit/Pandit_bloc.dart';
 import '../blocs/Photographer/photographer_bloc.dart';
+import '../blocs/Subcategory/subcategory bloc.dart';
 import '../blocs/bartender/bartender_bloc.dart';
 import '../blocs/chef/chef_bloc.dart';
 import '../blocs/dashboard/dashboard_bloc.dart';
@@ -27,6 +29,14 @@ import '../blocs/entertainment/entertainment_bloc.dart';
 import '../blocs/makeup/makeup_bloc.dart';
 import '../blocs/mehndi/mehndi_bloc.dart';
 import '../blocs/valetParking/valetParking_bloc.dart';
+import '../screens/Packages/event_details_popup.dart';
+import '../screens/Packages/events_screen.dart';
+import '../screens/Subcategory/subcategory_screen.dart';
+import '../screens/auth/otp_verification_screen.dart';
+import '../screens/auth/home_screen.dart';
+import '../screens/auth/sigin_screen.dart';
+import '../screens/auth/signup_screen.dart';
+import '../screens/auth/welcome_screen.dart';
 import '../screens/dashboard/bartender_screen.dart';
 import '../screens/dashboard/chef_screen.dart';
 import '../screens/dashboard/dashboard_screen.dart';
@@ -38,12 +48,18 @@ import '../screens/dashboard/pandit_screen.dart';
 import '../screens/dashboard/photographer_screen.dart';
 import '../screens/dashboard/valet_parking_screen.dart';
 import '../screens/login/login_screen.dart';
+
 import 'app_routes.dart';
 
 class AppPages {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     // Define a map for screens and their corresponding BLoC classes
     final Map<String, Widget> routes = {
+      AppRoutes.welcome: const WelcomeScreen(),
+      AppRoutes.signIn: const SignInScreen(),
+      AppRoutes.signUp: const SignupScreen(),
+      AppRoutes.home: const HomeScreen(),
+      AppRoutes.otpVerification: const OtpVerificationScreen(),
       AppRoutes.dashboard: DashboardScreen(),
       AppRoutes.photographer: PhotographerScreen(),
       AppRoutes.viewAllPackages: ViewAllPackages(),
@@ -59,17 +75,15 @@ class AppPages {
       AppRoutes.einvitation: EInvitationScreen(),
       AppRoutes.account: AccountScreen(),
       AppRoutes.entertainmentAllDetails: EntertainmentAllDetailsScreen(),
-      // AppRoutes.photostudio: CustomServiceCard(),
       AppRoutes.bookPhotographService: PhotographBookServiceScreen(),
       AppRoutes.entertainmentSubServices: EntertainmentAllServicesSubList(),
       AppRoutes.entertainmentBookServiceScreen: EntertainmentBookServiceScreen(),
-      // Screens without BLoC can also be added here
-      // Example of screen without Bloc (e.g., a simple screen that doesn’t need state management)
       AppRoutes.login: LoginScreen(),
       AppRoutes.services: ServicesScreen(),
       AppRoutes.concepts: ConceptsScreen(),
+      AppRoutes.event:EventScreen(),
+      AppRoutes.Subcategory: SubcategoryScreen(),
 
-      // Add other screens without BLoC here
     };
 
     // Define a map for the corresponding BLoC classes
@@ -77,7 +91,6 @@ class AppPages {
       AppRoutes.dashboard: DashboardBloc(),
       AppRoutes.photographer: PhotographerBloc(),
       AppRoutes.viewAllPackages: PhotographerBloc(),
-      AppRoutes.photostudio: PhotographerBloc(),
       AppRoutes.bookPhotographService: PhotographerBloc(),
       AppRoutes.chef: ChefBloc(),
       AppRoutes.bartender: BartenderBloc(),
@@ -92,8 +105,12 @@ class AppPages {
       AppRoutes.valet: ValetParkingBloc(),
       AppRoutes.einvitation: EinvitationBloc(),
       AppRoutes.account: AccountBloc(),
-      AppRoutes.concepts:ConceptsBloc(),
-      // You can add BLoCs for other routes as needed
+      AppRoutes.concepts: ConceptsBloc(),
+      AppRoutes.event:EventBloc(),
+      AppRoutes.Subcategory: SubcategoryBloc(),
+      // AppRoutes.events: EventBloc(),
+      // // Add EventBloc for eventDetails route:
+      // AppRoutes.eventDetails: EventBloc(),
     };
 
     // Check if the route has an associated Bloc
@@ -105,6 +122,8 @@ class AppPages {
             create: (_) => blocs[settings.name]!,
             child: routes[settings.name]!,
           ),
+          // Add fullscreenDialog for eventDetails popup:
+
         );
       } else {
         // If there is no BLoC, just return the screen directly
