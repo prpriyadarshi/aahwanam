@@ -191,7 +191,11 @@ class DashboardContent extends StatelessWidget {
                         categories: state.categories,
                         showViewAll: true,
                         onCategoryTap: (String categoryName) {
-                          // Map category names to route names
+                          // Map category names to route namesMicrosoft Teams
+                          //
+                          //
+                          // Profile picture.
+                          // Renuka Chinthala
                           final Map<String, String> categoryRoutes = {
                             'Photographer': AppRoutes.photographer,
                             'Chef': AppRoutes.chef,

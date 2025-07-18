@@ -1,6 +1,7 @@
 import 'package:aahwanam/blocs/makeup/makeup_bloc.dart';
 import 'package:aahwanam/blocs/makeup/makeup_event.dart';
 import 'package:aahwanam/blocs/makeup/makeup_state.dart';
+import 'package:aahwanam/services/makeup_hair_service/makeup_hair_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +11,8 @@ import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_image_card_widget.dart';
 
 class MakeupScreen extends StatelessWidget {
+
+  const MakeupScreen({super.key});
   @override
   Widget build(BuildContext context) {
 
@@ -92,7 +95,18 @@ class MakeupScreen extends StatelessWidget {
                         data: state.makeupAndHairArtists,
                         showViewAll: true,
 
-                        onViewAll: () => _navigateTo(context, "Decorators"),
+                        onViewAll: () {
+                          // Show first item or navigate to a full list page
+                          if (state.makeupAndHairArtists.isNotEmpty) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MakeupHairService(makeupAndHairArtist: state.makeupAndHairArtists[0]),
+                              ),
+                            );
+                          }
+
+                        },
                       ),
 
 
