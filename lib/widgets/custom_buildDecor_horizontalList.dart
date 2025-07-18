@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/dashboard/photograph_book_service_screen.dart';
 import 'custom_addcounter_button.dart';
 
 class CustomBuildDecorHorizontalList {
@@ -8,17 +9,27 @@ class CustomBuildDecorHorizontalList {
     {'image': 'assets/images/Birthdaydecoration3.jpg', 'price': '₹5400'},
     {'image': 'assets/images/Birthdaydecoration4.jpg', 'price': '₹5600'},
   ];
+  final makeupHair = [
+    {'name': 'Glam ', 'image': 'assets/images/Glam.png'},
+    {'name': 'Bridal', 'image': 'assets/images/Bridal.png'},
+    {'name': 'Subtle Look', 'image': 'assets/images/Subtle Look.png'},
+    {'name': 'HD ', 'image': 'assets/images/HD.png'},
+    {'name': 'Matte', 'image': 'assets/images/Matte.png'},
+    {'name': 'Natural', 'image': 'assets/images/Natural.png'},
+    {'name': ' Dewy', 'image': 'assets/images/Dewy.png'},
+    {'name': 'Glitter', 'image': 'assets/images/Glitter.png'},
+  ];
+
 
   static Widget build({
     required String title,
     required List<Map<String, String>> items,
-
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 20,),
+          padding: const EdgeInsets.only(left: 20),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -31,76 +42,90 @@ class CustomBuildDecorHorizontalList {
             ),
           ),
         ),
+        const SizedBox(height: 10),
+        SizedBox(
+          height: 142,
+          child: ListView.builder(
+            padding: const EdgeInsets.only(left: 20.0),
+            scrollDirection: Axis.horizontal,
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              final image = item['image'] ?? '';
+              final price = item['price'] ?? '';
 
-
-
-          SizedBox(
-              height: 142,
-              child: ListView.builder(
-                padding: const EdgeInsets.only(left: 20.0),
-                scrollDirection: Axis.horizontal,
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  final item = items[index];
-                  return Container(
-                    width: 98,
-                    margin: const EdgeInsets.only(right: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              return Container(
+                width: 98,
+                margin: const EdgeInsets.only(right: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(
                       children: [
-                        Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.asset(
-                                item['image']!,
-                                width: 98,
-                                height: 110,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Positioned(
-                              top: 6,
-                              right: 6,
-                              child: Container(
-                                width: 24,
-                                height: 24,
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(
-                                  Icons.favorite_border,
-                                  size: 10.5,
-                                  color: Color(0xFFB10000),
-                                ),
-                              ),
-                            ),
-                          ],
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            image,
+                            width: 98,
+                            height: 110,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              item['price'] ?? '',
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF575959),
-                              ),
+                        Positioned(
+                          top: 6,
+                          right: 6,
+                          child: Container(
+                            width: 24,
+                            height: 24,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
                             ),
-                            const CustomAddCounterButton(),
-                          ],
+                            child: const Icon(
+                              Icons.favorite_border,
+                              size: 10.5,
+                              color: Color(0xFFB10000),
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                  );
-                },
-              ),
-            ),
-
-
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          price,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF575959),
+                          ),
+                        ),
+                        CustomAddCounterButton(
+                          imagePath: image,
+                          price: price,
+                          onAdd: (count) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PhotographBookServiceScreen(
+                                  imagePath: image,
+                                  price: price,
+                                  count: count,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
       ],
     );
   }

@@ -5,13 +5,7 @@ abstract class MehndiEvent extends Equatable {
 
   @override
   List<Object?> get props => [];
-
 }
-
-// Event to fetch MehndiID data
-class FetchMehndi extends MehndiEvent {}
-
-// Event to select a specific Mehndi
 class SelectMehndi extends MehndiEvent {
   final String mehndiId;
 
@@ -19,4 +13,20 @@ class SelectMehndi extends MehndiEvent {
 
   @override
   List<Object?> get props => [mehndiId];
+}
+class FetchMehndi extends MehndiEvent {}
+
+class LoadMehndiTabScreen extends MehndiEvent {
+  final int index;
+
+  const LoadMehndiTabScreen(this.index);
+
+  @override
+  List<Object?> get props => [index];
+}
+
+
+// Triggered when reviews are to be loaded
+class LoadMehndiReview extends MehndiEvent {
+  const LoadMehndiReview();
 }

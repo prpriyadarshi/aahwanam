@@ -3,12 +3,12 @@ import '../screens/dashboard/decoration_theme.dart';
 
 class CustomCardWidgets {
   static Widget buildSection(
-      BuildContext context, {
-        required String title,
-        required List<Map<String, String>> data,
-        required VoidCallback onViewAll,
-        required bool showViewAll,
-      }) {
+    BuildContext context, {
+    required String title,
+    required List<Map<String, String>> data,
+    required VoidCallback onViewAll,
+    required bool showViewAll,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -40,6 +40,7 @@ class CustomCardWidgets {
             ],
           ),
         ),
+        const SizedBox(height: 10),
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -53,24 +54,14 @@ class CustomCardWidgets {
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
             final item = data[index];
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DecorationTheme(decorator: item),
-                  ),
-                );
-              },
-              child: buildCard(item),
-            );
+            return buildCarditem(item);
           },
+
         ),
       ],
     );
   }
-
-  static Widget buildCard(Map<String, String> item) {
+  static Widget buildCarditem(Map<String, String> item) {
     return Card(
       elevation: 0,
       color: const Color(0xFFFFEFDF),
@@ -170,4 +161,6 @@ class CustomCardWidgets {
       ),
     );
   }
+
+
 }
