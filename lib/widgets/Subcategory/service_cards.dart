@@ -29,7 +29,7 @@ class EventServiceCard extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(10.1),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
