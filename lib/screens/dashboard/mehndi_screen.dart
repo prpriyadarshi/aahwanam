@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../services/mehandi_service/mehandi.dart';
 import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_image_card_widget.dart';
@@ -62,8 +63,18 @@ class MehndiScreen extends StatelessWidget {
                         title: "Mehndi Artists",
                         data: state.mehndiArtists,
                         showViewAll: true,
+                        onViewAll: () {
+                          // Show first item or navigate to a full list page
+                          if (state.mehndiArtists.isNotEmpty) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MehndiService( MehndiAndHairArtist:state.mehndiArtists[0]),
+                              ),
+                            );
+                          }
+                        },
 
-                        onViewAll: () => _navigateTo(context, "Decorators"),
                       ),
 
 

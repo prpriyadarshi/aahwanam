@@ -15,12 +15,12 @@ class PhotographerBloc extends Bloc<PhotographerEvent, PhotographerState> {
         // Simulating fetching data from a repository or API
         await Future.delayed(Duration(seconds: 2));
         final photographers = [
-          {'name': 'Birthday', 'image': 'assets/images/Birthday1.png'},
-          {'name': 'Marriage', 'image': 'assets/images/Marriage.png'},
-          {'name': 'Anniversary', 'image': 'assets/images/Anniversary2.png'},
-          {'name': 'Baby Shoot', 'image': 'assets/images/Baby Shoot.png'},
-          {'name': 'Prewedding', 'image': 'assets/images/Prewedding.png'},
-          {'name': 'Corporate', 'image': 'assets/images/Corporate.png'},
+          {'name': 'Birthday', 'image': 'assets/images/Birthday1.png','type': 'service'},
+          {'name': 'Marriage', 'image': 'assets/images/Marriage.png','type': 'service'},
+          {'name': 'Anniversary', 'image': 'assets/images/Anniversary2.png','type': 'service'},
+          {'name': 'Baby Shoot', 'image': 'assets/images/Baby Shoot.png','type': 'service'},
+          {'name': 'Prewedding', 'image': 'assets/images/Prewedding.png','type': 'service'},
+          {'name': 'Corporate', 'image': 'assets/images/Corporate.png','type': 'service'},
           {
             'name': 'Maternity Shoot',
             'image': 'assets/images/Maternity shoot.png'
@@ -37,6 +37,7 @@ class PhotographerBloc extends Bloc<PhotographerEvent, PhotographerState> {
             "details": "This includes 1 Photographer & soft copies of photos.",
             "imagePath": "assets/images/Silver package.png",
             "rating": 4.2,
+            'type': 'service'
           },
 
           {

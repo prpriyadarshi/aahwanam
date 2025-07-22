@@ -1,4 +1,11 @@
 class AppRoutes {
+  static const String welcome = '/';
+  static const String signIn = '/sign-in';
+  // static const String EventScreen='/event_details_popup';
+  static const String signUp = '/sign-up';
+  static const String phoneSignIn = '/phone-sign-in';
+  static const String otpVerification = '/otp-verification';
+  static const String home ='/home';
   static const login = '/login';
   static const dashboard ='/dashboard';
   static const photographer ='/photographer';
@@ -22,4 +29,8 @@ class AppRoutes {
   static const entertainmentBookServiceScreen = '/entertainmentBookServiceScreen';
   static const  concepts='/concepts';
   static const bookService = '/bookService';
+  static const event='/event';
+  static const String Subcategory = '/subcategory';
+  // static const String events = '/events';
+  // static const String eventDetails = '/event-details';
 }
