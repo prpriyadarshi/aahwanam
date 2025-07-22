@@ -92,12 +92,12 @@ class DetailedInprogressScreen extends StatelessWidget {
                     totalRatings: details.totalRatings,
                     totalReviews: details.totalReviews,
                     averageRating: details.averageRating,
-                    tabs: [
-                      const Tab(text: 'Themes'),
-                      const Tab(text: 'Get Quotes'),
-                      const Tab(text: 'Gallery'),
-                      const Tab(text: 'Review'),
-                    ],
+                    // tabs: [
+                    //   const Tab(text: 'Themes'),
+                    //   const Tab(text: 'Get Quotes'),
+                    //   const Tab(text: 'Gallery'),
+                    //   const Tab(text: 'Review'),
+                    // ],
 
                   ));
             } else if (state is AccountError) {

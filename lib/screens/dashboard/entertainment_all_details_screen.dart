@@ -58,11 +58,6 @@ class EntertainmentAllDetailsScreen extends StatelessWidget {
                     totalRatings: details.totalRatings,
                     totalReviews: details.totalReviews,
                     averageRating: details.averageRating,
-                    tabs: [
-                      const Tab(text: 'Overview'),
-                      const Tab(text: 'Gallery'),
-                      const Tab(text: 'Review'),
-                    ],
                   ));
             } else if (state is EntertainmentError) {
               return Center(child: Text(state.message));
