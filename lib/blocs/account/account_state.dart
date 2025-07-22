@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:aahwanam/models/service_details.dart';
 
 abstract class AccountState extends Equatable {
   const AccountState();
@@ -23,6 +24,8 @@ class AccountLoaded extends AccountState {
   final List<Map<String, dynamic>> wishlist;
   final List<Map<String, dynamic>> conceptsTabImages;
   final List<Map<String, dynamic>> packages;
+  final List<Map<String, dynamic>> cartdata;
+  final ServiceDetails serviceDetails;
 
 
   const AccountLoaded({
@@ -37,10 +40,12 @@ class AccountLoaded extends AccountState {
     required this.wishlist,
     required this.conceptsTabImages,
     required this.packages,
+    required this.cartdata,
+    required this.serviceDetails,
   });
 
   @override
-  List<Object> get props => [firstName, lastName, phone, email, profileUrl, bookings, inProgressBookings, addToCart, wishlist, conceptsTabImages, packages];
+  List<Object> get props => [firstName, lastName, phone, email, profileUrl, bookings, inProgressBookings, addToCart, wishlist, conceptsTabImages, packages, cartdata, serviceDetails];
 }
 
 class AccountError extends AccountState {

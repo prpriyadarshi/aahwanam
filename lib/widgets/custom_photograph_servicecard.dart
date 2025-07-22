@@ -31,6 +31,7 @@ class CustomServiceCard extends StatelessWidget {
   final String? label2;
   final String? initialValue1;
   final String? initialValue2;
+  final List<Tab> tabs;
 
 
   CustomServiceCard ({
@@ -56,6 +57,7 @@ class CustomServiceCard extends StatelessWidget {
     this.label2,
     this.initialValue1,
     this.initialValue2,
+    required this.tabs,
 
   }) : super(key: key);
 
@@ -64,7 +66,7 @@ class CustomServiceCard extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return DefaultTabController(
-      length: 3,
+      length: tabs.length,
       child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -132,11 +134,12 @@ class CustomServiceCard extends StatelessWidget {
                   unselectedLabelColor: Color(0xFF757575),
                   dividerHeight: 0,
                   indicatorColor: Color(0xFF575959),
-                  tabs: [
-                    Tab(child: Align(child: Text("All Details"), alignment: Alignment.center)),
-                    Tab(child: Align(child: Text("Gallery"), alignment: Alignment.center)),
-                    Tab(child: Align(child: Text("Reviews"), alignment: Alignment.center)),
-                  ],
+                  // tabs: [
+                  //   Tab(child: Align(child: Text("All Details"), alignment: Alignment.center)),
+                  //   Tab(child: Align(child: Text("Gallery"), alignment: Alignment.center)),
+                  //   Tab(child: Align(child: Text("Reviews"), alignment: Alignment.center)),
+                  // ],
+                  tabs: tabs,
                 ),
               ),
 

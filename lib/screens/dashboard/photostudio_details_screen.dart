@@ -54,6 +54,11 @@ class PhotostudioDetailsScreen extends StatelessWidget {
                     totalRatings: details.totalRatings,
                     totalReviews: details.totalReviews,
                     averageRating: details.averageRating,
+                    tabs: [
+                      const Tab(text: 'Overview'),
+                      const Tab(text: 'Gallery'),
+                      const Tab(text: 'Review'),
+                    ],
 
                   ));
             } else if (state is PhotographerError) {

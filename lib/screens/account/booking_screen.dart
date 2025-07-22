@@ -1,3 +1,6 @@
+import 'package:aahwanam/screens/account/detailed_all_booking_screen.dart';
+import 'package:aahwanam/screens/account/detailed_inprogress_screen.dart';
+import 'package:aahwanam/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aahwanam/blocs/account/account_bloc.dart';
@@ -111,6 +114,34 @@ class _BookingScreenState extends State<BookingScreen> {
                             details: package['details'],
                             imagePath: package['imagePath'],
                             rating: package['rating'],
+                            // onTap: (){
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => DetailedAllBookingScreen(package: package)
+                            //     ),
+                            //   );
+                            // },
+                            onTap: () {
+                              if (isAllBookingsSelected) {
+                                // Navigate to All Bookings Details Page
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailedAllBookingScreen(package: package),
+                                  ),
+                                );
+                              } else {
+                                // Navigate to In Progress Page (create a new screen if not done)
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailedInprogressScreen(), // 👈 your new screen
+                                  ),
+                                );
+                              }
+                            },
+
                           ),
                         );
                       },
