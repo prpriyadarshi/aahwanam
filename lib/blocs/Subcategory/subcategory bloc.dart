@@ -5,9 +5,12 @@ import 'subcategory state.dart';
 
 class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
   SubcategoryBloc()
-      : super(SubcategoryState(categories: [], selectedIndex: 0)) {
+      : super(SubcategoryState(categories: [], selectedIndex: 0, eventDetails: [], serviceCounts: const {}, )) {
     on<LoadSubcategoryData>(_onLoadData);
     on<SelectCategory>(_onSelectCategory);
+    on<LoadEventDetails>(_onLoadEventDetails);
+    on<UpdateServiceCount>(_onUpdateServiceCount); // ADD HANDLER
+
   }
 
   void _onLoadData(
@@ -23,7 +26,7 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
             price: '₹8,000',
           ),
           ServiceItem(
-            title: 'Kids Special', // Corrected from 'kids special'
+            title: 'Kids Special',
             imageUrl: 'assets/images/Kids special event.png',
             price: '₹6,000',
           ),
@@ -213,10 +216,10 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
             description: 'When all you need a budget friendly Band for your event.' ,
           ),
           ServiceItem(
-            title: 'Drums',
-            imageUrl: 'assets/images/Drums event.png', // Placeholder, ensure you have this image
-            price: '₹12,000',
-            description: 'When all you need a budget friendly Drum for your event.'
+              title: 'Drums',
+              imageUrl: 'assets/images/Drums event.png', // Placeholder, ensure you have this image
+              price: '₹12,000',
+              description: 'When all you need a budget friendly Drum for your event.'
           ),
           ServiceItem(
             title: 'DJ',
@@ -350,5 +353,32 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
   void _onSelectCategory(
       SelectCategory event, Emitter<SubcategoryState> emit) {
     emit(state.copyWith(selectedIndex: event.selectedIndex));
+  }
+
+  void _onLoadEventDetails(
+      LoadEventDetails event,Emitter<SubcategoryState> emit){ // Corrected Emitter type
+    final eventDetails = [
+      EventDetails(
+        eventImage: 'assets/images/Chef event.png',
+        eventPrice: '3000',
+        Description: 'Hi ehllo cuejbcudb ddhehb ehv hhfut rgrueyvhe ehbcveucheucgehc ehhev ',
+        perviousWorkImages: [
+          'assets/images/Chef event.png',
+          'assets/images/Chef event.png',
+          'assets/images/Chef event.png',
+          'assets/images/Chef event.png',
+          'assets/images/Chef event.png',
+        ],
+      ),
+    ];
+    // Don't forget to emit the new state!
+    emit(state.copyWith(eventDetails: eventDetails));
+  }
+
+  void _onUpdateServiceCount(
+      UpdateServiceCount event, Emitter<SubcategoryState> emit) {
+    final newCounts = Map<String, int>.from(state.serviceCounts);
+    newCounts[event.serviceTitle] = event.newCount;
+    emit(state.copyWith(serviceCounts: newCounts));
   }
 }

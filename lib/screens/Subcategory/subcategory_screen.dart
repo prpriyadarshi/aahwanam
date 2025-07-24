@@ -1,3 +1,4 @@
+import 'package:aahwanam/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/Subcategory/subcategory bloc.dart';
@@ -31,15 +32,15 @@ class SubcategoryScreen extends StatelessWidget {
             builder: (context, state) {
               final bloc = context.read<SubcategoryBloc>();
 
-              // 🔹 Full list from state
+
               final List<CategoryModel> allCategories = state.categories;
 
-              // 🔹 Filtered list based on event
+
               final List<CategoryModel> filteredCategories = _getCategoriesForEvent(eventName, allCategories);
               print("check allCategories list length------------${allCategories.length}");
               print("check filtered list length------------${filteredCategories.length}");
 
-              // 🔹 Find selected category in filtered list
+
               final selectedCategory = filteredCategories.isNotEmpty
                   ? filteredCategories.firstWhere(
                     (cat) => cat.name == allCategories[state.selectedIndex].name,
@@ -84,12 +85,18 @@ class SubcategoryScreen extends StatelessWidget {
                           final item = selectedCategory!.services[index];
                           return EventServiceCard(
                             title: item.title,
-                            description: item.description,
                             imageUrl: item.imageUrl,
                             price: item.price,
-                            isListLayout: true, // Force list layout for these categories
+                            description: item.description,
+                            isListLayout: useListLayout,
+                            count: state.serviceCounts[item.title] ?? 0,
+                            onCountChanged: (newCount) {
+                              print("Count changed for ${item.title}: $newCount");
+
+                              context.read<SubcategoryBloc>().add(UpdateServiceCount(item.title, newCount));
+                            },
                             onAddTap: () {
-                              print('Added ${item.title} (List View)');
+                              Navigator.pushNamed(context, AppRoutes.EventDetail);
                             },
                           );
                         },
@@ -108,9 +115,16 @@ class SubcategoryScreen extends StatelessWidget {
                             title: item.title,
                             imageUrl: item.imageUrl,
                             price: item.price,
-                            isListLayout: false, // Force grid layout for these categories
+                            description: item.description,
+                            isListLayout: useListLayout,
+                            count: state.serviceCounts[item.title] ?? 0,
+                            onCountChanged: (newCount) {
+                              print("Count changed for ${item.title}: $newCount");
+
+                              context.read<SubcategoryBloc>().add(UpdateServiceCount(item.title, newCount));
+                            },
                             onAddTap: () {
-                              print('Added ${item.title} (Grid View)');
+                              Navigator.pushNamed(context, AppRoutes.EventDetail);
                             },
                           );
                         },
