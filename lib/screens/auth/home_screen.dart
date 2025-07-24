@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // Navigate after 5 seconds
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 1), () {
       Navigator.pushNamedAndRemoveUntil(
         context,
         AppRoutes.welcome,

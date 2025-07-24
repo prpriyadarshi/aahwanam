@@ -31,6 +31,7 @@ class AppRoutes {
   static const bookService = '/bookService';
   static const event='/event';
   static const String Subcategory = '/subcategory';
+  static const String EventDetail = '/EventDetail';
   // static const String events = '/events';
   // static const String eventDetails = '/event-details';
 }
