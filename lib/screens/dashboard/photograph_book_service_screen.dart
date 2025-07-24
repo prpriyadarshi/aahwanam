@@ -8,8 +8,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/Photographer/photographer_bloc.dart';
 import '../../blocs/Photographer/photographer_event.dart';
 import '../../blocs/Photographer/photographer_state.dart';
+import '../../services/proceedpay.dart';
 
 class PhotographBookServiceScreen extends StatelessWidget {
+  final String? imagePath;
+  final String? price;
+  final int? count;
+
+  const PhotographBookServiceScreen({
+    super.key,
+    this.imagePath,
+    this.price,
+    this.count,
+  });
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -30,14 +41,33 @@ class PhotographBookServiceScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFF1E535B),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 14), // controls content padding
+                  padding: EdgeInsets.symmetric(horizontal: 50,), // controls content padding
                 ),
-                child: Text(
-                  "Proceed to pay",
-                  style: TextStyle(color: Colors.white),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PaymentOptionsScreen(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1E535B),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5), // 👈 decreased height
+                  ),
+                  child: const Text(
+                    "Proceed to pay",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
+
+
               ),
             ],
           ),

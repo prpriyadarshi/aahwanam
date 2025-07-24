@@ -4,30 +4,24 @@ abstract class MehndiState extends Equatable {
   const MehndiState();
 
   @override
-  List<Object?> get props => []; // Fixed to 'props'
-
+  List<Object?> get props => [];
 }
 
-// Initial state
 class MehndiInitial extends MehndiState {}
 
-// State when loading MehndiState data
 class MehndiLoading extends MehndiState {}
 
-// State when MehndiState data is loaded
 class MehndiLoaded extends MehndiState {
   final List<Map<String, String>> mehndiTheme;
   final List<Map<String, String>> mehndiArtists;
   final List<Map<String, String>> trendingMehndiDesigns;
 
-  const MehndiLoaded(this.mehndiTheme,this.mehndiArtists,this.trendingMehndiDesigns);
+  const MehndiLoaded(this.mehndiTheme, this.mehndiArtists, this.trendingMehndiDesigns);
 
   @override
-  List<Object?> get props => [mehndiTheme,mehndiArtists,trendingMehndiDesigns];
-
+  List<Object?> get props => [mehndiTheme, mehndiArtists, trendingMehndiDesigns];
 }
 
-// State for errors
 class MehndiLoadedError extends MehndiState {
   final String message;
 
@@ -35,4 +29,38 @@ class MehndiLoadedError extends MehndiState {
 
   @override
   List<Object?> get props => [message];
+}
+
+// Tab Specific States
+class ThemesMehndiLoaded extends MehndiState {
+  final List<Map<String, String>> themes;
+
+  const ThemesMehndiLoaded(this.themes);
+
+  @override
+  List<Object?> get props => [themes];
+}
+
+class GetQuotesMehndiLoaded extends MehndiState {}
+
+class MehndiGalleryLoaded extends MehndiState {
+  final List<String> galleryImages;
+
+  const MehndiGalleryLoaded({this.galleryImages = const []});
+
+  @override
+  List<Object?> get props => [galleryImages];
+}
+
+class MehndiReviewLoaded extends MehndiState {
+  final List<String> photos;
+  final Map<int, int> ratingData;
+
+  const MehndiReviewLoaded({
+    required this.photos,
+    required this.ratingData,
+  });
+
+  @override
+  List<Object?> get props => [photos, ratingData];
 }

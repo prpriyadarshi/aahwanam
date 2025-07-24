@@ -66,137 +66,137 @@ class CustomServiceCard extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Card Section (non-scrollable)
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xFFF4F4F4), width: 0.8),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Card(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  margin: EdgeInsets.zero,
-                  color: Color(0xFFF4F4F4),
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.asset(
-                            imagePath,
-                            width: double.infinity,
-                            height: 150,
-                            fit: BoxFit.fill,
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Card Section (non-scrollable)
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Color(0xFFF4F4F4), width: 0.8),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Card(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                margin: EdgeInsets.zero,
+                color: Color(0xFFF4F4F4),
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          imagePath,
+                          width: double.infinity,
+                          height: 150,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                              SizedBox(height: 4),
+                              Text( "${price}" , style: TextStyle(fontSize: 14, color: Color(0xFF1E535B), fontWeight: FontWeight.w600)),
+                            ],
                           ),
-                        ),
-                        SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-                                SizedBox(height: 4),
-                                Text( "${price}" , style: TextStyle(fontSize: 14, color: Color(0xFF1E535B), fontWeight: FontWeight.w600)),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(Icons.star, color: Colors.amber, size: 20),
-                                SizedBox(width: 4),
-                                Text("${rating}" , style: TextStyle(fontSize: 16)),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          Row(
+                            children: [
+                              Icon(Icons.star, color: Colors.amber, size: 20),
+                              SizedBox(width: 4),
+                              Text("${rating}" , style: TextStyle(fontSize: 16)),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
+            ),
 
-              SizedBox(height: 16),
+            SizedBox(height: 16),
 
-              // TabBar
-              PreferredSize(
-                preferredSize: Size.fromHeight(50), // Adjust height as needed
-                child: TabBar(
-                  labelColor: Color(0xFF575959),
-                  unselectedLabelColor: Color(0xFF757575),
-                  dividerHeight: 0,
-                  indicatorColor: Color(0xFF575959),
-                  tabs: [
-                    Tab(child: Align(child: Text("All Details"), alignment: Alignment.center)),
-                    Tab(child: Align(child: Text("Gallery"), alignment: Alignment.center)),
-                    Tab(child: Align(child: Text("Reviews"), alignment: Alignment.center)),
-                  ],
-                ),
+            // TabBar
+            PreferredSize(
+              preferredSize: Size.fromHeight(50), // Adjust height as needed
+              child: TabBar(
+                labelColor: Color(0xFF575959),
+                unselectedLabelColor: Color(0xFF757575),
+                dividerHeight: 0,
+                indicatorColor: Color(0xFF575959),
+                tabs: [
+                  Tab(child: Align(child: Text("All Details"), alignment: Alignment.center)),
+                  Tab(child: Align(child: Text("Gallery"), alignment: Alignment.center)),
+                  Tab(child: Align(child: Text("Reviews"), alignment: Alignment.center)),
+                ],
               ),
+            ),
 
 
-              // Tab content (scrollable only inside tabs)
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    SingleChildScrollView(
-                      child: ServiceOverviewTab(
-                        heading: heading,
-                        packagePrice: packagePrice,
-                        description: description,
-                        subHeading: subHeading,
-                        subHeadingDetails: subHeadingDetails,
-                        eventTitle: eventTitle,
-                        address: address,
-                        addressDescription: addressDescription,
-                        onChangeAddress: () => _showChangeAddress(context),
-                        label1: label1,
-                        label2: label2,
-                        initialValue1: initialValue1,
-                        initialValue2: initialValue2,
-                      ),
+            // Tab content (scrollable only inside tabs)
+            Expanded(
+              child: TabBarView(
+                children: [
+                  SingleChildScrollView(
+                    child: ServiceOverviewTab(
+                      heading: heading,
+                      packagePrice: packagePrice,
+                      description: description,
+                      subHeading: subHeading,
+                      subHeadingDetails: subHeadingDetails,
+                      eventTitle: eventTitle,
+                      address: address,
+                      addressDescription: addressDescription,
+                      onChangeAddress: () => _showChangeAddress(context),
+                      label1: label1,
+                      label2: label2,
+                      initialValue1: initialValue1,
+                      initialValue2: initialValue2,
                     ),
+                  ),
 
 
-                    SingleChildScrollView(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        children: mediaSections.map((section) {
-                          return GallerySectionWidget(
-                            title: section.title,
-                            mediaPaths: section.mediaPaths,
-                            isVideo: section.isVideo,
-                            isGrid: section.useGrid, // Add this property if needed
-                          );
-                        }).toList(),
-                      ),
+                  SingleChildScrollView(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: mediaSections.map((section) {
+                        return GallerySectionWidget(
+                          title: section.title,
+                          mediaPaths: section.mediaPaths,
+                          isVideo: section.isVideo,
+                          isGrid: section.useGrid, // Add this property if needed
+                        );
+                      }).toList(),
                     ),
+                  ),
 
 
-                    SingleChildScrollView(
+                  SingleChildScrollView(
 
-                      child: ReviewsTab(
-                        reviewPhotoUrls: reviewPhotoUrls ,
-                        totalRatings: totalRatings,
-                        totalReviews: totalReviews,
-                        averageRating: averageRating,
-                      ),
+                    child: ReviewsTab(
+                      reviewPhotoUrls: reviewPhotoUrls ,
+                      totalRatings: totalRatings,
+                      totalReviews: totalReviews,
+                      averageRating: averageRating,
                     ),
+                  ),
 
-                  ],
-                ),
+                ],
               ),
+            ),
 
 
-            ],
-          ),
+          ],
         ),
+      ),
 
     );
   }
@@ -426,10 +426,10 @@ void _showAddNewAddress(BuildContext context) {
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
-                        Navigator.pop(context); // Close Add New Address
-                        Future.delayed(Duration(milliseconds: 20), () {
-                          Navigator.pop(context); // Close Change Address
-                        });
+                      Navigator.pop(context); // Close Add New Address
+                      Future.delayed(Duration(milliseconds: 20), () {
+                        Navigator.pop(context); // Close Change Address
+                      });
 
                     },
                     style: ElevatedButton.styleFrom(

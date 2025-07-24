@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import '../screens/dashboard/decoration_theme.dart';
 
 class CustomCardWidgets {
   static Widget buildSection(
-      BuildContext context, {
-        required String title,
-        required List<Map<String, String>> data,
-        required VoidCallback onViewAll,
-        required bool showViewAll, // New boolean parameter
-      }) {
+    BuildContext context, {
+    required String title,
+    required List<Map<String, String>> data,
+    required VoidCallback onViewAll,
+    required bool showViewAll,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -19,11 +20,12 @@ class CustomCardWidgets {
               Text(
                 title,
                 style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF575959)),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF575959),
+                ),
               ),
-              if (showViewAll) // Conditionally render the button
+              if (showViewAll)
                 TextButton(
                   onPressed: onViewAll,
                   child: const Text(
@@ -38,6 +40,7 @@ class CustomCardWidgets {
             ],
           ),
         ),
+        const SizedBox(height: 10),
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -51,14 +54,14 @@ class CustomCardWidgets {
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
             final item = data[index];
-            return buildCard(item);
+            return buildCarditem(item);
           },
+
         ),
       ],
     );
   }
-
-  static Widget buildCard(Map<String, String> item) {
+  static Widget buildCarditem(Map<String, String> item) {
     return Card(
       elevation: 0,
       color: const Color(0xFFFFEFDF),
@@ -67,7 +70,7 @@ class CustomCardWidgets {
       ),
       margin: EdgeInsets.zero,
       child: Column(
-        mainAxisSize: MainAxisSize.min, // Ensures minimal vertical space
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
@@ -106,8 +109,7 @@ class CustomCardWidgets {
             ],
           ),
           Padding(
-            padding:
-            const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0), // Reduced padding
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -116,7 +118,7 @@ class CustomCardWidgets {
                   children: [
                     Expanded(
                       child: Text(
-                        item['name']!,
+                        item['name'] ?? '',
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -143,9 +145,9 @@ class CustomCardWidgets {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4.0), // Space between name and price
+                const SizedBox(height: 4.0),
                 Text(
-                  item['price']!,
+                  item['price'] ?? '',
                   style: const TextStyle(
                     fontSize: 12,
                     color: Color(0xFF1E535B),
@@ -159,4 +161,6 @@ class CustomCardWidgets {
       ),
     );
   }
+
+
 }

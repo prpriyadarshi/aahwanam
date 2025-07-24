@@ -39,6 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      print('index $index');
     });
   }
 
@@ -59,6 +60,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 class DashboardContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -169,6 +171,11 @@ class DashboardContent extends StatelessWidget {
                         categories: state.categories,
                         showViewAll: true,
                         onCategoryTap: (String categoryName) {
+                          // Map category names to route namesMicrosoft Teams
+                          //
+                          //
+                          // Profile picture.
+                          // Renuka Chinthala
                           final Map<String, String> categoryRoutes = {
                             'Photographer': AppRoutes.photographer,
                             'Chef': AppRoutes.chef,
