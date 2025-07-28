@@ -9,10 +9,12 @@ import '../../widgets/package_card.dart';
 class DetailedAllBookingScreen extends StatefulWidget {
   final Map<String, dynamic> package;
 
-  const DetailedAllBookingScreen({required this.package, Key? key}) : super(key: key);
+  const DetailedAllBookingScreen({required this.package, Key? key})
+      : super(key: key);
 
   @override
-  State<DetailedAllBookingScreen> createState() => _DetailedAllBookingScreenState();
+  State<DetailedAllBookingScreen> createState() =>
+      _DetailedAllBookingScreenState();
 }
 
 class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
@@ -31,14 +33,14 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             // Main Package Card
             Card(
               elevation: 4,
               color: const Color(0xFFFFEFDF),
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Row( // <-- this is key: use Row, not Column
+                child: Row(
+                  // <-- this is key: use Row, not Column
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Stack(
@@ -89,7 +91,6 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                                 color: Color(0xFF1E535B),
                               ),
                             ),
-
                           ],
                         ),
                       ),
@@ -98,7 +99,6 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                 ),
               ),
             ),
-
 
             SizedBox(height: 20),
 
@@ -111,7 +111,6 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   // Event Date & Time in a Row
                   Row(
                     children: [
@@ -120,9 +119,10 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Event Date", style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF575959))),
+                            const Text("Event Date",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xFF575959))),
                             const SizedBox(height: 6),
                             _buildInputBox("22, Feb 2025"),
                           ],
@@ -134,9 +134,10 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Event Time", style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF575959))),
+                            const Text("Event Time",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xFF575959))),
                             const SizedBox(height: 6),
                             _buildInputBox("11:15 PM"),
                           ],
@@ -148,18 +149,17 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                   const SizedBox(height: 16),
 
                   // Event Address
-                  const Text("Event Address", style: TextStyle(
-                      fontWeight: FontWeight.w500, color: Color(0xFF575959))),
+                  const Text("Event Address",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF575959))),
                   const SizedBox(height: 6),
                   _buildInputBoxWithTitle("Financial District, Hyderabad",
                       "Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,"),
 
                   const SizedBox(height: 16),
-
-
                 ],
               ),
-
             ),
             SizedBox(height: 18),
 
@@ -175,8 +175,8 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                   _buildInfoRow("Hairstyle Charges", "₹ 2,000"),
                   _buildInfoRow("Platform Fee", "100"),
                   _buildInfoRow("Transport Fee", "FREE", isFree: true),
-                  _buildInfoRow(
-                      "Paid", "₹ 10,100", isPaid: true, isPaidValue: true),
+                  _buildInfoRow("Paid", "₹ 10,100",
+                      isPaid: true, isPaidValue: true),
                 ],
               ),
             ),
@@ -204,18 +204,20 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
 
             // Artist Card
             Card(
+              color: const Color(0xFFF8F8F8),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(60), // Set border radius here
+                borderRadius:
+                    BorderRadius.circular(60), // Set border radius here
               ),
               child: ListTile(
                 leading: SizedBox(
                   width: 50,
                   height: 50,
                   child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/profile_pic.png'),
+                    backgroundImage:
+                        AssetImage('assets/images/profile_pic.png'),
                   ),
                 ),
-
                 title: Text("Janey Cooper"),
                 subtitle: Text("Support Team"),
                 trailing: Row(
@@ -225,18 +227,13 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                     const SizedBox(width: 8),
                     _buildCircleIcon(Icons.chat),
                   ],
-
                 ),
               ),
             ),
 
             SizedBox(height: 20),
-
-
           ],
-
         ),
-
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -293,18 +290,23 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
       child: Column(
         children: [
           ListTile(
-            title: Text(title, style: TextStyle(fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: Color(0xFF575959))),
+            title: Text(title,
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: Color(0xFF575959))),
             trailing: IconButton(
-              icon: Icon(expanded ? Icons.keyboard_arrow_up : Icons
-                  .keyboard_arrow_down),
+              icon: Icon(expanded
+                  ? Icons.keyboard_arrow_up
+                  : Icons.keyboard_arrow_down),
               onPressed: onToggle,
             ),
           ),
-          if (expanded) Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: child),
+          if (expanded)
+            Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: child),
         ],
       ),
     );
@@ -327,8 +329,9 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
     );
   }
 
-
-  Widget _buildInfoRow(String label, String value, {
+  Widget _buildInfoRow(
+    String label,
+    String value, {
     bool isPaid = false,
     bool isFree = false,
     bool isPaidValue = false,
@@ -345,8 +348,7 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
     } else if (isPaidValue) {
       valueColor = Color(0xFF1E535B);
       valueWeight = FontWeight.w600;
-    }
-    else {
+    } else {
       valueColor = Colors.grey;
       valueWeight = FontWeight.w500;
     }
@@ -355,10 +357,12 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(
-              fontWeight: valueWeight, color: valueColor, fontSize: 14)),
-          Text(value, style: TextStyle(
-              fontWeight: valueWeight, color: valueColor, fontSize: 14)),
+          Text(label,
+              style: TextStyle(
+                  fontWeight: valueWeight, color: valueColor, fontSize: 14)),
+          Text(value,
+              style: TextStyle(
+                  fontWeight: valueWeight, color: valueColor, fontSize: 14)),
         ],
       ),
     );
@@ -397,7 +401,6 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
     );
   }
 
-
   Widget _buildInputBox(String value) {
     return Container(
       width: double.infinity,
@@ -412,8 +415,8 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
     );
   }
 
-
-  Widget _buildStatusStep(String title, String date, bool completed, {bool isLast = false}) {
+  Widget _buildStatusStep(String title, String date, bool completed,
+      {bool isLast = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
@@ -476,7 +479,4 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
       ),
     );
   }
-
 }
-
-

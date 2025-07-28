@@ -168,61 +168,122 @@ class PackageCard extends StatelessWidget {
                         children: [
                           if (secondaryButtonText != null)
                             SizedBox(
+                              width: 122,
                               height: 29,
                               child: OutlinedButton(
                                 onPressed: onSecondaryButtonPressed,
                                 style: OutlinedButton.styleFrom(
+                                  backgroundColor: const Color(0xFFFFFDFC), // ✅ correct bg color
                                   side: const BorderSide(
                                     color: Color(0xFF1E535B),
-                                    width: 1, // Border width
+                                    width: 1,
                                   ),
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: const Color(0xFF1E535B),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(9), // Border radius
+                                    borderRadius: BorderRadius.circular(9),
                                   ),
-                                  padding: EdgeInsets.all(8),
-                                  // Ensure text fits properly without extra padding
+                                  padding: EdgeInsets.zero, // ✅ remove default padding
                                 ),
                                 child: Text(
                                   secondaryButtonText!,
-                                  style: const TextStyle(fontSize: 12),
-                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                    color: Color(0xFF1E535B),
+                                  ),
                                 ),
                               ),
                             ),
 
                           if (secondaryButtonText != null && primaryButtonText != null)
                             const SizedBox(width: 8),
+
                           if (primaryButtonText != null)
                             SizedBox(
-
+                              width: 74,
                               height: 29,
                               child: ElevatedButton(
                                 onPressed: onPrimaryButtonPressed,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF1E535B),
-                                  foregroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(9), // Border radius 9px
-                                    side: const BorderSide(
-                                      color: Color(0xFF1E535B), // Border color
-                                      width: 1,                // Border width 1px
-                                    ),
+                                    borderRadius: BorderRadius.circular(9),
                                   ),
-                                  padding: EdgeInsets.all(8),
-                                  // Remove default padding
+                                  padding: EdgeInsets.zero,
                                 ),
-                                child: Text(
-                                  primaryButtonText!,
-                                  style: const TextStyle(fontSize: 12),
-                                  textAlign: TextAlign.center,
+                                child: const Text(
+                                  "Book Now",
+                                  style: TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
-
                         ],
-                      ),
+                      )
+
+                      // Row(
+                      //   children: [
+                      //     if (secondaryButtonText != null)
+                      //       SizedBox(
+                      //         height: 29,
+                      //         child: OutlinedButton(
+                      //           onPressed: onSecondaryButtonPressed,
+                      //           style: OutlinedButton.styleFrom(
+                      //             side: const BorderSide(
+                      //               color: Color(0xFF1E535B),
+                      //               width: 1, // Border width
+                      //             ),
+                      //             backgroundColor: Colors.white,
+                      //             foregroundColor: const Color(0xFF1E535B),
+                      //             shape: RoundedRectangleBorder(
+                      //               borderRadius: BorderRadius.circular(9), // Border radius
+                      //             ),
+                      //             padding: EdgeInsets.all(8),
+                      //             // Ensure text fits properly without extra padding
+                      //           ),
+                      //           child: Text(
+                      //             secondaryButtonText!,
+                      //             style: const TextStyle(fontSize: 12),
+                      //             textAlign: TextAlign.center,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //
+                      //     if (secondaryButtonText != null && primaryButtonText != null)
+                      //       const SizedBox(width: 8),
+                      //     if (primaryButtonText != null)
+                      //       SizedBox(
+                      //
+                      //         height: 29,
+                      //         child: ElevatedButton(
+                      //           onPressed: onPrimaryButtonPressed,
+                      //           style: ElevatedButton.styleFrom(
+                      //             backgroundColor: const Color(0xFF1E535B),
+                      //             foregroundColor: Colors.white,
+                      //             shape: RoundedRectangleBorder(
+                      //               borderRadius: BorderRadius.circular(9), // Border radius 9px
+                      //               side: const BorderSide(
+                      //                 color: Color(0xFF1E535B), // Border color
+                      //                 width: 1,                // Border width 1px
+                      //               ),
+                      //             ),
+                      //             padding: EdgeInsets.all(8),
+                      //             // Remove default padding
+                      //           ),
+                      //           child: Text(
+                      //             primaryButtonText!,
+                      //             style: const TextStyle(fontSize: 12),
+                      //             textAlign: TextAlign.center,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //
+                      //   ],
+                      // ),
                     ],
                   ],
                 ),

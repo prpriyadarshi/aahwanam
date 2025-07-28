@@ -27,7 +27,6 @@ class AccountLoaded extends AccountState {
   final List<Map<String, dynamic>> cartdata;
   final ServiceDetails serviceDetails;
 
-
   const AccountLoaded({
     required this.firstName,
     required this.lastName,
@@ -45,7 +44,21 @@ class AccountLoaded extends AccountState {
   });
 
   @override
-  List<Object> get props => [firstName, lastName, phone, email, profileUrl, bookings, inProgressBookings, addToCart, wishlist, conceptsTabImages, packages, cartdata, serviceDetails];
+  List<Object> get props => [
+        firstName,
+        lastName,
+        phone,
+        email,
+        profileUrl,
+        bookings,
+        inProgressBookings,
+        addToCart,
+        wishlist,
+        conceptsTabImages,
+        packages,
+        cartdata,
+        serviceDetails
+      ];
 }
 
 class AccountError extends AccountState {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomCartCard extends StatelessWidget {
+class CustomCartCard extends StatefulWidget  {
   final String title;
   final String description;
   final String price;
@@ -13,6 +13,26 @@ class CustomCartCard extends StatelessWidget {
     required this.price,
     required this.imageUrl,
   });
+  @override
+  State<CustomCartCard> createState() => _CustomCartCardState();
+}
+
+class _CustomCartCardState extends State<CustomCartCard> {
+  int quantity = 1; // Start from 1
+
+  void _incrementQuantity() {
+    setState(() {
+      quantity += 1;
+    });
+  }
+
+  void _decrementQuantity() {
+    if (quantity > 1) {
+      setState(() {
+        quantity -= 1;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +54,7 @@ class CustomCartCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  imageUrl,
+                  widget.imageUrl,
                   height: 80,
                   width: 73,
                   fit: BoxFit.cover,
@@ -47,34 +67,48 @@ class CustomCartCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title,
+                    Text( widget.title,
                         style: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 12, color: Color(0xFF575959),)
                     ),
                     const SizedBox(height: 4),
-                    Text(description, style: const TextStyle( fontWeight: FontWeight.w300, fontSize: 12, color: Color(0xFF757575),)),
+                    Text( widget.description, style: const TextStyle( fontWeight: FontWeight.w300, fontSize: 12, color: Color(0xFF757575),)),
                     const SizedBox(height: 4),
-                    Text('₹$price',
+                    Text('₹${ widget.price}',
                         style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: Color(0xFF1E535B),)),
                   ],
                 ),
               ),
 
-              // Quantity controls (aligned vertically center)
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding:
+                const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black54),
+                  color: Color(0xFF1E535B), // 👈 background white
+                  border: Border.all(color: const Color(0xFF1E535B)),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Icon(Icons.remove, size: 16),
-                    SizedBox(width: 4),
-                    Text('1', style: TextStyle(fontWeight: FontWeight.w500, color: Color(0xFF575959),fontSize: 12,),),
-                    SizedBox(width: 4),
-                    Icon(Icons.add, size: 16),
+                  children: [
+                    GestureDetector(
+                      onTap: _decrementQuantity,
+                      child: const Icon(Icons.remove, size: 16, color: Colors.white,),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      quantity.toString(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    GestureDetector(
+                      onTap: _incrementQuantity,
+                      child: const Icon(Icons.add, size: 16, color: Colors.white),
+                    ),
                   ],
                 ),
               ),

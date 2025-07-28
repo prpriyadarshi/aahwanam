@@ -1,4 +1,7 @@
+import 'package:aahwanam/screens/account/detailed_deliversoon_screen.dart';
 import 'package:aahwanam/screens/account/detailed_deliveredmy_packages.dart';
+import 'package:aahwanam/screens/account/detailed_packagecart_screen.dart';
+import 'package:aahwanam/screens/dashboard/dashboard_screen.dart';
 import 'package:aahwanam/widgets/custom_image_card_widget.dart';
 import 'package:aahwanam/widgets/custom_package_card.dart';
 import 'package:flutter/material.dart';
@@ -113,13 +116,23 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                       price: package['price'],
                       status: package['status'],
                       onTap: () {
-                        print("Tapped: ${package['title']}");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailedDeliveredmyPackagesScreen(package: package),
-                          ),
-                        );
+                        final status = package['status'].toString().toLowerCase();
+
+                        if (status == 'delivered') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailedDeliveredmyPackagesScreen(package: package),
+                            ),
+                          );
+                        } else if (status == 'deliver soon') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailedDeliverSoonScreen(package: package), // <-- create this screen
+                            ),
+                          );
+                        }
                       },
                     ),
                   );
@@ -151,12 +164,6 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
               width: double.infinity,
               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              // decoration: const BoxDecoration(
-              //   color: Colors.white,
-              //   boxShadow: [
-              //     BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, -2)),
-              //   ],
-              // ),
               child: Row(
                 children: [
                   Expanded(
@@ -180,7 +187,12 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        // TODO: Create package logic
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DetailedPackageCartScreen(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF1E535B),

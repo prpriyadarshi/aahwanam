@@ -14,7 +14,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         final bookings = [
           {
             'title': 'Bridal Makeup by Blush Makeover',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '8,000',
             'details': 'Booked On - 22, Feb 2025',
             'imagePath': 'assets/images/bridal_makeup.png',
@@ -22,7 +23,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           },
           {
             'title': 'Hair Style by Blush Makeover',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '2,000',
             'details': 'Booked On - 22, Feb 2025',
             'imagePath': 'assets/images/hair_style.png',
@@ -30,7 +32,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           },
           {
             'title': 'Minimal Mehndi by Mehndi & Beauty',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '2,000',
             'details': 'Delivered',
             'imagePath': 'assets/images/minimal_mehandi.png',
@@ -38,7 +41,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           },
           {
             'title': 'Floral Decor by Dream Decor',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '2,000',
             'details': 'Delivered',
             'imagePath': 'assets/images/floral_decor.png',
@@ -48,7 +52,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         final addToCart = [
           {
             'title': 'Bridal Makeup by Blush Makeover',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '8,000',
             'details': 'Booked On - 22, Feb 2025',
             'imagePath': 'assets/images/bridal_makeup.png',
@@ -56,7 +61,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           },
           {
             'title': 'Hair Style by Blush Makeover',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '2,000',
             'details': 'Booked On - 22, Feb 2025',
             'imagePath': 'assets/images/hair_style.png',
@@ -66,25 +72,27 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         final inProgressBookings = [
           {
             'title': 'Birthday Decor by Dream decor',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '8,000',
             'details': 'Waiting for Artist..',
             'imagePath': 'assets/images/birthday_decor.png',
-
           },
           {
             'title': 'Hair Style by Blush Makeover',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '2,000',
             'details': 'Waiting for Artist..',
             'imagePath': 'assets/images/hair_style_booking.png',
-
           },
         ];
-        final wishlist = [ // <-- ✅ Add this list
+        final wishlist = [
+          // <-- ✅ Add this list
           {
             'title': 'Bridal Makeup by Blush Makeover',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '8,000',
             'details': 'Booked On - 22, Feb 2025',
             'imagePath': 'assets/images/bridal_makeup.png',
@@ -92,7 +100,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           },
           {
             'title': 'Hair Style by Blush Makeover',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '2,000',
             'details': 'Booked On - 22, Feb 2025',
             'imagePath': 'assets/images/hair_style.png',
@@ -144,33 +153,52 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         ];
 
         final packages = [
-          {'title': "Birthday Party Package", 'servicesIncluded': 4, 'price': "28,000", 'status': "Delivered"},
-          {'title': "Kids Party Package", 'servicesIncluded': 3, 'price': "28,000", 'status': "Delivered"},
-          {'title': "Anniversary Package", 'servicesIncluded': 3, 'price': "28,000", 'status': "Deliver Soon"},
+          {
+            'title': "Birthday Party Package",
+            'servicesIncluded': 4,
+            'price': "28,000",
+            'status': "Delivered"
+          },
+          {
+            'title': "Kids Party Package",
+            'servicesIncluded': 3,
+            'price': "28,000",
+            'status': "Delivered"
+          },
+          {
+            'title': "Anniversary Package",
+            'servicesIncluded': 3,
+            'price': "28,000",
+            'status': "Deliver Soon"
+          },
         ];
 
         final cartdata = [
           {
             'title': 'Decoration',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '8,000 ',
             'imageUrl': 'assets/images/cartdecoration.png',
           },
           {
             'title': 'Decoration',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '8,000 ',
             'imageUrl': 'assets/images/cartdecoration2.png',
           },
           {
             'title': 'Bartender',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '8,000 ',
             'imageUrl': 'assets/images/cartbortender.png',
           },
           {
             'title': 'Royal valet Service',
-            'description': 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+            'description':
+                'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '8,000 ',
             'imageUrl': 'assets/images/RoyalvaletService.png',
           },
@@ -182,12 +210,15 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           rating: 4.3,
           heading: "Silver Package",
           packagePrice: "₹20,000",
-          description: "Silver Package Photography Service offers a fantastic choice When all you need a budget friendly photography and personal photoshoot for your event. ",
+          description:
+              "Silver Package Photography Service offers a fantastic choice When all you need a budget friendly photography and personal photoshoot for your event. ",
           subHeading: "Included in this Package are:",
-          subHeadingDetails: "1 Professional Photographer + Videographe Candid Photos and Hd quality. Premium quality soft copies of your event. .",
+          subHeadingDetails:
+              "1 Professional Photographer + Videographe Candid Photos and Hd quality. Premium quality soft copies of your event. .",
           eventTitle: "Get quotes for your event",
           address: "Financial District",
-          addressDescription: "OLorem ipsum dolor sit amet, dolor consectetur adipiscing elit,Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,",
+          addressDescription:
+              "OLorem ipsum dolor sit amet, dolor consectetur adipiscing elit,Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,",
           mediaSections: [
             GallerySection(
               title: "Birthday Decor",
@@ -233,10 +264,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           totalRatings: 120,
           totalReviews: 45,
           averageRating: 4.5,
-
-
         );
-
 
         emit(AccountLoaded(
           firstName: 'Chanchal',
@@ -251,12 +279,9 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           wishlist: wishlist,
           packages: packages,
           cartdata: cartdata,
-            serviceDetails: serviceDetails,
-
-
+          serviceDetails: serviceDetails,
         ));
-      }
-      catch (e) {
+      } catch (e) {
         emit(AccountError("Failed to load data"));
       }
     });

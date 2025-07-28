@@ -51,13 +51,17 @@ class CartScreen extends StatelessWidget {
                       primaryButtonText: "Book Now",
                       onPrimaryButtonPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("${booking['title']} booked successfully")),
+                          SnackBar(
+                              content: Text(
+                                  "${booking['title']} booked successfully")),
                         );
                       },
                       secondaryButtonText: "Move to Wishlist",
                       onSecondaryButtonPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("${booking['title']} moved to Wishlist")),
+                          SnackBar(
+                              content: Text(
+                                  "${booking['title']} moved to Wishlist")),
                         );
                       },
                     ),

@@ -25,7 +25,8 @@ class DetailedInprogressScreen extends StatelessWidget {
               child: Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.chevron_left, size: 32, color: Colors.black),
+                    icon: const Icon(Icons.chevron_left,
+                        size: 32, color: Colors.black),
                     onPressed: () => Navigator.pop(context),
                   ),
                   Expanded(
@@ -48,12 +49,14 @@ class DetailedInprogressScreen extends StatelessWidget {
                   const SizedBox(width: 10),
                   GestureDetector(
                     onTap: () => print("Time icon pressed"),
-                    child: Image.asset('assets/images/timer.png', width: 24, height: 24),
+                    child: Image.asset('assets/images/timer.png',
+                        width: 24, height: 24),
                   ),
                   const SizedBox(width: 10),
                   GestureDetector(
                     onTap: () => print("Cart icon pressed"),
-                    child: Image.asset('assets/images/cart.png', width: 24, height: 24),
+                    child: Image.asset('assets/images/cart.png',
+                        width: 24, height: 24),
                   ),
                   const SizedBox(width: 10),
                   IconButton(
@@ -65,7 +68,6 @@ class DetailedInprogressScreen extends StatelessWidget {
             ),
           ),
         ),
-
         body: BlocBuilder<AccountBloc, AccountState>(
           builder: (context, state) {
             if (state is AccountLoading) {
@@ -92,20 +94,12 @@ class DetailedInprogressScreen extends StatelessWidget {
                     totalRatings: details.totalRatings,
                     totalReviews: details.totalReviews,
                     averageRating: details.averageRating,
-                    // tabs: [
-                    //   const Tab(text: 'Themes'),
-                    //   const Tab(text: 'Get Quotes'),
-                    //   const Tab(text: 'Gallery'),
-                    //   const Tab(text: 'Review'),
-                    // ],
-
                   ));
             } else if (state is AccountError) {
               return Center(child: Text(state.message));
             }
             return const Center(child: Text("Select a booking"));
           },
-
         ),
       ),
     );
