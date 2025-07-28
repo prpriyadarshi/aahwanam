@@ -84,7 +84,7 @@ class AppPages {
       AppRoutes.concepts: ConceptsScreen(),
       AppRoutes.event:EventScreen(),
       AppRoutes.Subcategory: SubcategoryScreen(),
-      AppRoutes.EventDetail: EventDetailsScreen(),
+      AppRoutes.EventDetail: EventDetailsScreen(serviceId: '',),
 
     };
 

@@ -1,3 +1,5 @@
+// Updated EventDetailsScreen with dynamic service loading
+
 import 'package:aahwanam/blocs/Subcategory/subcategory%20event.dart';
 import 'package:aahwanam/blocs/Subcategory/subcategory%20state.dart';
 import 'package:flutter/material.dart';
@@ -7,15 +9,21 @@ import '../../blocs/Subcategory/subcategory bloc.dart';
 import '../../widgets/Subcategory/service_card_details.dart';
 import '../../widgets/custom_top_bar.dart';
 
-// Completed EventDetailsScreen using BlocBuilder
 class EventDetailsScreen extends StatelessWidget {
-  const EventDetailsScreen({Key? key}) : super(key: key);
+  final String serviceId; // Add serviceId parameter
+  final bool showIncludedPackages;
+
+  const EventDetailsScreen({
+    super.key,
+    required this.serviceId, // Make serviceId required
+    this.showIncludedPackages = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      // Ensure the correct bloc is provided and event is dispatched
-      create: (context) => SubcategoryBloc()..add(LoadEventDetails()),
+      // Load specific event details based on serviceId
+      create: (context) => SubcategoryBloc()..add(LoadEventDetails(serviceId)),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomTopBar(
@@ -37,10 +45,11 @@ class EventDetailsScreen extends StatelessWidget {
           builder: (context, state) {
             // Check if eventDetails list is not empty
             if (state.eventDetails.isNotEmpty) {
-              // The bloc should load a single EventDetails object.
-              // Assuming the first item in the list is the one to display.
               final eventPackageDetails = state.eventDetails.first;
-              return PackageDetails(eventpackagedetails: eventPackageDetails, onChangeAddress: () {  },);
+              return PackageDetails(
+                eventpackagedetails: eventPackageDetails,
+                showIncludedPackages: showIncludedPackages,
+              );
             } else {
               // Handle the case where data is not yet loaded or is empty
               return const Center(child: CircularProgressIndicator());

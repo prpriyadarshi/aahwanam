@@ -1,3 +1,5 @@
+// Updated SubcategoryScreen with dynamic navigation
+
 import 'package:aahwanam/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,8 +8,9 @@ import '../../blocs/Subcategory/subcategory event.dart';
 import '../../blocs/Subcategory/subcategory state.dart';
 import '../../models/subcategory_model.dart';
 import '../../widgets/Subcategory/service_cards.dart';
-import '../../widgets/custom_category_menu.dart'; // Assuming this is VerticalCategoryMenu
+import '../../widgets/custom_category_menu.dart';
 import '../../widgets/custom_top_bar.dart';
+import '../Packages/event_details_screen.dart';
 
 class SubcategoryScreen extends StatelessWidget {
   const SubcategoryScreen({super.key});
@@ -32,14 +35,11 @@ class SubcategoryScreen extends StatelessWidget {
             builder: (context, state) {
               final bloc = context.read<SubcategoryBloc>();
 
-
               final List<CategoryModel> allCategories = state.categories;
-
-
               final List<CategoryModel> filteredCategories = _getCategoriesForEvent(eventName, allCategories);
+
               print("check allCategories list length------------${allCategories.length}");
               print("check filtered list length------------${filteredCategories.length}");
-
 
               final selectedCategory = filteredCategories.isNotEmpty
                   ? filteredCategories.firstWhere(
@@ -56,12 +56,11 @@ class SubcategoryScreen extends StatelessWidget {
                   selectedCategory?.name == 'Pandit' ||
                   selectedCategory?.name == 'Bartender' ||
                   selectedCategory?.name == 'Photography' ||
-                  // selectedCategory?.name == 'Invitation' ||
                   selectedCategory?.name == 'Chef';
 
               return Row(
                 children: [
-                  // 🔸 Vertical category list
+                  // Vertical category list
                   VerticalCategoryMenu(
                     categories: filteredCategories,
                     selectedIndex: filteredCategories.indexWhere(
@@ -74,7 +73,7 @@ class SubcategoryScreen extends StatelessWidget {
                     },
                   ),
 
-                  // 🔸 Dynamic Service Display (using a single widget and conditional layout)
+                  // Dynamic Service Display
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(10),
@@ -89,15 +88,23 @@ class SubcategoryScreen extends StatelessWidget {
                             price: item.price,
                             description: item.description,
                             isListLayout: useListLayout,
-                            count: state.serviceCounts[item.title] ?? 0,
+                            count: state.serviceCounts[item.id] ?? 0, // Use item.id
                             onCountChanged: (newCount) {
-                              print("Count changed for ${item.title}: $newCount");
-
-                              context.read<SubcategoryBloc>().add(UpdateServiceCount(item.title, newCount));
+                              print("Count changed for ${item.title} (ID: ${item.id}): $newCount");
+                              context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, newCount));
                             },
                             onAddTap: () {
-                              Navigator.pushNamed(context, AppRoutes.EventDetail);
-                            },
+                              // Navigate to EventDetailsScreen with specific service data
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EventDetailsScreen(
+                                    serviceId: item.id, // Pass the service ID
+                                    showIncludedPackages: true,
+                                  ),
+                                ),
+                              );
+                            }, uniqueKey: '',
                           );
                         },
                       )
@@ -117,15 +124,23 @@ class SubcategoryScreen extends StatelessWidget {
                             price: item.price,
                             description: item.description,
                             isListLayout: useListLayout,
-                            count: state.serviceCounts[item.title] ?? 0,
+                            count: state.serviceCounts[item.id] ?? 0, // Use item.id
                             onCountChanged: (newCount) {
-                              print("Count changed for ${item.title}: $newCount");
-
-                              context.read<SubcategoryBloc>().add(UpdateServiceCount(item.title, newCount));
+                              print("Count changed for ${item.title} (ID: ${item.id}): $newCount");
+                              context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, newCount));
                             },
                             onAddTap: () {
-                              Navigator.pushNamed(context, AppRoutes.EventDetail);
-                            },
+                              // Navigate to EventDetailsScreen with specific service data
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EventDetailsScreen(
+                                    serviceId: item.id, // Pass the service ID
+                                    showIncludedPackages: false, // For grid layout, don't show packages by default
+                                  ),
+                                ),
+                              );
+                            }, uniqueKey: '',
                           );
                         },
                       ),
@@ -140,7 +155,7 @@ class SubcategoryScreen extends StatelessWidget {
     );
   }
 
-  /// ✅ Helper function to filter categories per event
+  /// Helper function to filter categories per event
   List<CategoryModel> _getCategoriesForEvent(String event, List<CategoryModel> all) {
     switch (event) {
       case 'Birthday':

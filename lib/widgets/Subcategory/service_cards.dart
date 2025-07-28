@@ -10,6 +10,7 @@ class EventServiceCard extends StatelessWidget {
   final int count;
   final ValueChanged<int>? onCountChanged;
   final VoidCallback? onAddTap;
+  final String uniqueKey; // Add this unique identifier
 
   const EventServiceCard({
     super.key,
@@ -21,6 +22,7 @@ class EventServiceCard extends StatelessWidget {
     this.count = 0,
     this.onCountChanged,
     this.onAddTap,
+    required this.uniqueKey, // Require this parameter
   });
 
   @override
@@ -58,7 +60,10 @@ class EventServiceCard extends StatelessWidget {
         ),
         Text(
           '$count',
-          style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
         ),
         IconButton(
           icon: const Icon(Icons.add, size: 20, color: Colors.white),

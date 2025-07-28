@@ -15,19 +15,7 @@ class CategoryModel {
   });
 }
 
-class ServiceItem {
-  final String title;
-  final String imageUrl;
-  final String price;
-  final String? description;
 
-  ServiceItem({
-    required this.title,
-    required this.imageUrl,
-    required this.price,
-    this.description,
-  });
-}
 
 
 class AddressModel {
@@ -70,19 +58,43 @@ class AddressModel {
   @override
   String toString() => 'AddressModel(title: $title, subtitle: $subtitle)';
 }
+// models/subcategory_model.dart - Updated ServiceItem class
 
-class EventDetails{
-  final String eventImage;
-  final String eventPrice;
-  final String Description;
-  final List<String> perviousWorkImages;
+class ServiceItem {
+  final String id; // Add unique identifier
+  final String title;
+  final String imageUrl;
+  final String price;
+  final String? description;
+
+  ServiceItem({
+    required this.id, // Make id required
+    required this.title,
+    required this.imageUrl,
+    required this.price,
+    this.description,
+  });
+}
+
+// Updated EventDetails to include service-specific data
+class EventDetails {
+  final String? serviceId; // Add serviceId to link with specific service
+  final String? eventImage;
+  final String? eventPrice;
+  final String? title; // Add title field
+  final String? description;
+  final List<String>? perviousWorkImages;
+  final List<String>? packagesIncluded;
 
   EventDetails({
-    required this.eventImage,
-    required this.eventPrice,
-    required this.Description,
-    required this.perviousWorkImages,
-});
+    this.serviceId,
+    this.eventImage,
+    this.eventPrice,
+    this.title,
+    this.description,
+    this.perviousWorkImages,
+    this.packagesIncluded,
+  });
 }
 
 
