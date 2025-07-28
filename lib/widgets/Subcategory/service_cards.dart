@@ -1,14 +1,16 @@
 // lib/widgets/subcategory/event_service_card.dart
-
 import 'package:flutter/material.dart';
 
 class EventServiceCard extends StatelessWidget {
   final String title;
   final String imageUrl;
   final String price;
-  final String? description; // Make description optional
-  final bool isListLayout; // New parameter to control layout
-  final VoidCallback? onAddTap; // Add onAddTap for consistency
+  final String? description;
+  final bool isListLayout;
+  final int count;
+  final ValueChanged<int>? onCountChanged;
+  final VoidCallback? onAddTap;
+  final String uniqueKey; // Add this unique identifier
 
   const EventServiceCard({
     super.key,
@@ -16,14 +18,62 @@ class EventServiceCard extends StatelessWidget {
     required this.imageUrl,
     required this.price,
     this.description,
-    this.isListLayout = false, // Default to grid layout
+    this.isListLayout = false,
+    this.count = 0,
+    this.onCountChanged,
     this.onAddTap,
+    required this.uniqueKey, // Require this parameter
   });
 
   @override
   Widget build(BuildContext context) {
+    final Widget countWidget = count == 0
+        ? GestureDetector(
+      onTap: () {
+        onCountChanged?.call(1);
+        onAddTap?.call();
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.teal),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: const Text(
+          "Add",
+          style: TextStyle(
+            color: Color(0xFF1E535B),
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+    )
+        : Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+          icon: const Icon(Icons.remove, size: 20, color: Colors.white),
+          onPressed: () => onCountChanged?.call(count - 1),
+          splashRadius: 20,
+        ),
+        Text(
+          '$count',
+          style: const TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+        ),
+        IconButton(
+          icon: const Icon(Icons.add, size: 20, color: Colors.white),
+          onPressed: () => onCountChanged?.call(count + 1),
+          splashRadius: 20,
+        ),
+      ],
+    );
+
     if (isListLayout) {
-      // List layout (like EntertainmentServiceCard)
       return Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
         padding: const EdgeInsets.all(12.0),
@@ -35,14 +85,13 @@ class EventServiceCard extends StatelessWidget {
               color: Colors.grey.withOpacity(0.2),
               spreadRadius: 1,
               blurRadius: 5,
-              offset: const Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3),
             ),
           ],
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Service Image
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: Image.asset(
@@ -50,18 +99,9 @@ class EventServiceCard extends StatelessWidget {
                 height: 100,
                 width: 100,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.grey[300],
-                    // child: const Icon(Icons.broken_image, color: Colors.grey),
-                  );
-                },
               ),
             ),
             const SizedBox(width: 12.0),
-            // Service Details
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,8 +114,7 @@ class EventServiceCard extends StatelessWidget {
                       color: Color(0xFF575959),
                     ),
                   ),
-                  const SizedBox(height: 4.0),
-                  if (description != null && description!.isNotEmpty) // Conditionally show description
+                  if (description != null && description!.isNotEmpty)
                     Text(
                       description!,
                       style: TextStyle(
@@ -97,25 +136,7 @@ class EventServiceCard extends StatelessWidget {
                           color: Colors.teal,
                         ),
                       ),
-                      GestureDetector(
-                        onTap: onAddTap,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.teal),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: const Text(
-                            "Add",
-                            style: TextStyle(
-                              color: Color(0xFF1E535B),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
+                      countWidget,
                     ],
                   ),
                 ],
@@ -125,7 +146,6 @@ class EventServiceCard extends StatelessWidget {
         ),
       );
     } else {
-      // Grid layout (original ServiceCard)
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -138,38 +158,12 @@ class EventServiceCard extends StatelessWidget {
                   height: 160,
                   width: 140,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      height: 160,
-                      width: 140,
-                      color: Colors.grey[300],
-                      child: const Icon(Icons.broken_image, color: Colors.grey),
-                    );
-                  },
                 ),
               ),
               Positioned(
                 right: 6,
                 top: 6,
-                child: GestureDetector( // Added GestureDetector for Add button in GridView
-                  onTap: onAddTap,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.teal),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: const Text(
-                      "Add",
-                      style: TextStyle(
-                        color: Color(0xFF1E535B),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
+                child: countWidget,
               ),
             ],
           ),
