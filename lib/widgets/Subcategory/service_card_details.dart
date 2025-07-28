@@ -1,20 +1,18 @@
-// package_details.dart
+// Updated PackageDetails widget
 
 import 'package:aahwanam/models/subcategory_model.dart';
 import 'package:flutter/material.dart';
-
-// Import the new custom address widget
-
 import '../custom_ChangeAddressSheet.dart';
-import '../custom_event_date_time _picker.dart'; // ✨ IMPORTANT: Update this path to your actual project structure
+import '../custom_event_date_time _picker.dart';
 
 class PackageDetails extends StatelessWidget {
   final EventDetails eventpackagedetails;
+  final bool showIncludedPackages;
 
   const PackageDetails({
     Key? key,
-    required this.eventpackagedetails, required Null Function() onChangeAddress,
-    // Removed 'required Null Function() onChangeAddress,' as the address logic is now self-contained
+    required this.eventpackagedetails,
+    required this.showIncludedPackages,
   }) : super(key: key);
 
   @override
@@ -45,7 +43,7 @@ class PackageDetails extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
-                        eventpackagedetails.eventImage,
+                        eventpackagedetails.eventImage ?? '',
                         fit: BoxFit.cover,
                         height: MediaQuery.of(context).size.height * 118 / 812,
                         width: MediaQuery.of(context).size.width * 308 / 375,
@@ -59,16 +57,16 @@ class PackageDetails extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Ballon Decoration',
-                                style: TextStyle(
+                              Text(
+                                eventpackagedetails.title ?? 'Service Package', // Dynamic title
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 14.0,
                                   color: Color(0xFF575959),
                                 ),
                               ),
                               Text(
-                                eventpackagedetails.eventPrice,
+                                eventpackagedetails.eventPrice ?? "",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w700,
                                   fontSize: 14.0,
@@ -96,7 +94,7 @@ class PackageDetails extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              eventpackagedetails.Description,
+              eventpackagedetails.description ?? "", // Dynamic description
               style: const TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 14.0,
@@ -104,6 +102,48 @@ class PackageDetails extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
+            if (showIncludedPackages) ...[
+              const Text(
+                'Included in this Package are',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16.0,
+                  color: Color(0xFF575959),
+                ),
+              ),
+              const SizedBox(height: 8),
+              ...(eventpackagedetails.packagesIncluded ?? []).map((point) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 4.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "• ",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                          color: Color.fromRGBO(117, 117, 117, 1),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          point,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                            color: Color.fromRGBO(117, 117, 117, 1),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+              const SizedBox(height: 16),
+            ],
             const Text(
               'Event Details',
               style: TextStyle(
@@ -113,7 +153,7 @@ class PackageDetails extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            EventDateTimePicker(),
+            const EventDateTimePicker(),
             const SizedBox(height: 16),
             const Text(
               'Event Address',
@@ -124,7 +164,6 @@ class PackageDetails extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            // ✨ Use the new, self-contained CustomChangeAddressSheet widget here
             const CustomChangeAddressSheet(),
             const SizedBox(height: 16),
             const Text(
@@ -136,9 +175,9 @@ class PackageDetails extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Birthday Decor',
-              style: TextStyle(
+            Text(
+              eventpackagedetails.title ?? 'Our Work', // Dynamic work title
+              style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 14.0,
                 color: Color(0xFF575959),
@@ -152,8 +191,6 @@ class PackageDetails extends StatelessWidget {
       ),
     );
   }
-
-  // --- Helper methods for PackageDetails (no address-related pop-up methods here) ---
 
   Widget _buildQuantityCounter() {
     return Container(
@@ -188,14 +225,14 @@ class PackageDetails extends StatelessWidget {
       height: 70,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: eventpackagedetails.perviousWorkImages.length,
+        itemCount: eventpackagedetails.perviousWorkImages?.length ?? 0,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(right: 12.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: Image.asset(
-                eventpackagedetails.perviousWorkImages[index],
+                eventpackagedetails.perviousWorkImages?[index] ?? "",
                 width: 70,
                 height: 70,
                 fit: BoxFit.cover,
