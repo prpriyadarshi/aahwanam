@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class EventDateTimePicker extends StatefulWidget {
-  const EventDateTimePicker({Key? key}) : super(key: key);
+  const EventDateTimePicker({Key? key, String? label}) : super(key: key);
 
   @override
   _EventDateTimePickerState createState() => _EventDateTimePickerState();
