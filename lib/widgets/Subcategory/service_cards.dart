@@ -50,28 +50,31 @@ class EventServiceCard extends StatelessWidget {
         ),
       ),
     )
-        : Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.remove, size: 20, color: Colors.white),
-          onPressed: () => onCountChanged?.call(count - 1),
-          splashRadius: 20,
-        ),
-        Text(
-          '$count',
-          style: const TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-              fontWeight: FontWeight.bold),
-        ),
-        IconButton(
-          icon: const Icon(Icons.add, size: 20, color: Colors.white),
-          onPressed: () => onCountChanged?.call(count + 1),
-          splashRadius: 20,
-        ),
-      ],
-    );
+        : Container(
+      color: Colors.black,
+          child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+          IconButton(
+            icon: const Icon(Icons.remove, size: 20, color: Colors.white),
+            onPressed: () => onCountChanged?.call(count - 1),
+            splashRadius: 20,
+          ),
+          Text(
+            '$count',
+            style: const TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
+          IconButton(
+            icon: const Icon(Icons.add, size: 20, color: Colors.white),
+            onPressed: () => onCountChanged?.call(count + 1),
+            splashRadius: 20,
+          ),
+                ],
+              ),
+        );
 
     if (isListLayout) {
       return Container(
