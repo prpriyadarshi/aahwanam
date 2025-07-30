@@ -1,5 +1,3 @@
-// Updated EventDetailsScreen with dynamic service loading
-
 import 'package:aahwanam/blocs/Subcategory/subcategory%20event.dart';
 import 'package:aahwanam/blocs/Subcategory/subcategory%20state.dart';
 import 'package:flutter/material.dart';
@@ -9,21 +7,54 @@ import '../../blocs/Subcategory/subcategory bloc.dart';
 import '../../widgets/Subcategory/service_card_details.dart';
 import '../../widgets/custom_top_bar.dart';
 
-class EventDetailsScreen extends StatelessWidget {
-  final String serviceId; // Add serviceId parameter
+class EventDetailsScreen extends StatefulWidget {
+  final String serviceId;
   final bool showIncludedPackages;
 
   const EventDetailsScreen({
-    super.key,
-    required this.serviceId, // Make serviceId required
+    Key? key,
+    required this.serviceId,
     this.showIncludedPackages = false,
-  });
+  }) : super(key: key);
+
+  @override
+  State<EventDetailsScreen> createState() => _EventDetailsScreenState();
+}
+
+class _EventDetailsScreenState extends State<EventDetailsScreen> {
+  late int _currentQuantity;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the quantity.
+    // If you're coming from EventServiceCard and want to reflect its count,
+    // you'd need to pass the initial quantity here via widget.
+    // For now, it defaults to 1.
+    _currentQuantity = 1;
+  }
+
+  void _updatePackageQuantity(int newQuantity) {
+    setState(() {
+      _currentQuantity = newQuantity;
+      // Ensure quantity doesn't go below zero if not navigating back immediately
+      if (_currentQuantity < 0) {
+        _currentQuantity = 0;
+      }
+    });
+
+    // ✨ NEW LOGIC: If quantity becomes 0, navigate back
+    if (_currentQuantity == 0) {
+      print('Quantity reached 0, navigating back to previous screen.');
+      Navigator.pop(context);
+    }
+    print('PackageDetails quantity updated to: $_currentQuantity');
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      // Load specific event details based on serviceId
-      create: (context) => SubcategoryBloc()..add(LoadEventDetails(serviceId)),
+      create: (context) => SubcategoryBloc()..add(LoadEventDetails(widget.serviceId)),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomTopBar(
@@ -43,16 +74,22 @@ class EventDetailsScreen extends StatelessWidget {
         ),
         body: BlocBuilder<SubcategoryBloc, SubcategoryState>(
           builder: (context, state) {
-            // Check if eventDetails list is not empty
             if (state.eventDetails.isNotEmpty) {
               final eventPackageDetails = state.eventDetails.first;
               return PackageDetails(
                 eventpackagedetails: eventPackageDetails,
-                showIncludedPackages: showIncludedPackages,
+                showIncludedPackages: widget.showIncludedPackages,
+                quantity: _currentQuantity, // Pass the state quantity
+                onQuantityChanged: _updatePackageQuantity, // Pass the update callback
+              );
+            } else if (state.status == SubcategoryStatus.loading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state.status == SubcategoryStatus.failure) {
+              return const Center(
+                child: Text('Failed to load event details. Please try again.'),
               );
             } else {
-              // Handle the case where data is not yet loaded or is empty
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: Text('No event details found.'));
             }
           },
         ),
@@ -62,7 +99,10 @@ class EventDetailsScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print('Checking out with quantity: $_currentQuantity');
+                    // Add your checkout logic here
+                  },
                   style: OutlinedButton.styleFrom(
                     foregroundColor: const Color(0xFF233B32),
                     side: const BorderSide(color: Color(0xFF233B32)),
@@ -81,7 +121,8 @@ class EventDetailsScreen extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    print('Adding other services. Current quantity: $_currentQuantity');
+                    Navigator.pop(context); // Or navigate to a service selection screen
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF233B32),

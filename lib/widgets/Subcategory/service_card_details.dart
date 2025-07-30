@@ -1,5 +1,3 @@
-// Updated PackageDetails widget
-
 import 'package:aahwanam/models/subcategory_model.dart';
 import 'package:flutter/material.dart';
 import '../custom_ChangeAddressSheet.dart';
@@ -8,11 +6,15 @@ import '../custom_event_date_time _picker.dart';
 class PackageDetails extends StatelessWidget {
   final EventDetails eventpackagedetails;
   final bool showIncludedPackages;
+  final int quantity; // New: Current quantity for this package
+  final ValueChanged<int>? onQuantityChanged; // New: Callback for quantity changes
 
   const PackageDetails({
     Key? key,
     required this.eventpackagedetails,
     required this.showIncludedPackages,
+    this.quantity = 1, // Default quantity
+    this.onQuantityChanged,
   }) : super(key: key);
 
   @override
@@ -27,7 +29,9 @@ class PackageDetails extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8),
               child: Container(
-                height: MediaQuery.of(context).size.height * 184 / 812,
+                // Use a constrained box instead of fixed height/width if possible,
+                // or ensure content fits within given dimensions
+                height: MediaQuery.of(context).size.height * 200 / 812,
                 width: MediaQuery.of(context).size.width * 328 / 375,
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
@@ -64,6 +68,8 @@ class PackageDetails extends StatelessWidget {
                                   fontSize: 14.0,
                                   color: Color(0xFF575959),
                                 ),
+                                maxLines: 1, // Crucial for preventing text overflow
+                                overflow: TextOverflow.ellipsis, // Add ellipsis
                               ),
                               Text(
                                 eventpackagedetails.eventPrice ?? "",
@@ -76,7 +82,7 @@ class PackageDetails extends StatelessWidget {
                             ],
                           ),
                         ),
-                        _buildQuantityCounter(),
+                        _buildQuantityCounter(), // This widget's size needs to be well-behaved
                       ],
                     ),
                   ],
@@ -201,20 +207,34 @@ class PackageDetails extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: const [
-          Icon(Icons.remove, size: 20, color: Color(0xFF575959)),
+        children: [
+          IconButton(
+            icon: const Icon(Icons.remove, size: 20, color: Color(0xFF575959)),
+            onPressed: () {
+              if (quantity > 0) {
+                onQuantityChanged?.call(quantity - 1);
+              }
+            },
+            splashRadius: 20,
+          ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              '1',
-              style: TextStyle(
+              '$quantity', // Display the dynamic quantity
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF575959),
               ),
             ),
           ),
-          Icon(Icons.add, size: 20, color: Color(0xFF575959)),
+          IconButton(
+            icon: const Icon(Icons.add, size: 20, color: Color(0xFF575959)),
+            onPressed: () {
+              onQuantityChanged?.call(quantity + 1);
+            },
+            splashRadius: 20,
+          ),
         ],
       ),
     );
