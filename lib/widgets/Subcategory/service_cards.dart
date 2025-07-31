@@ -1,5 +1,5 @@
-// lib/widgets/subcategory/event_service_card.dart
 import 'package:flutter/material.dart';
+import '../custom_text_field.dart'; // Ensure this import is correct
 
 class EventServiceCard extends StatelessWidget {
   final String title;
@@ -10,7 +10,7 @@ class EventServiceCard extends StatelessWidget {
   final int count;
   final ValueChanged<int>? onCountChanged;
   final VoidCallback? onAddTap;
-  final String uniqueKey; // Add this unique identifier
+  final String uniqueKey;
 
   const EventServiceCard({
     super.key,
@@ -22,7 +22,7 @@ class EventServiceCard extends StatelessWidget {
     this.count = 0,
     this.onCountChanged,
     this.onAddTap,
-    required this.uniqueKey, // Require this parameter
+    required this.uniqueKey,
   });
 
   @override
@@ -40,37 +40,35 @@ class EventServiceCard extends StatelessWidget {
           border: Border.all(color: Colors.teal),
           borderRadius: BorderRadius.circular(4),
         ),
-        child: const Text(
+        child: Text(
           "Add",
-          style: TextStyle(
-            color: Color(0xFF1E535B),
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
+          style: TextFontStyle.textFontStyle(
+              12, const Color(0xFF1E535B), FontWeight.w500),
         ),
       ),
     )
-        : Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.remove, size: 20, color: Colors.white),
-          onPressed: () => onCountChanged?.call(count - 1),
-          splashRadius: 20,
-        ),
-        Text(
-          '$count',
-          style: const TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-              fontWeight: FontWeight.bold),
-        ),
-        IconButton(
-          icon: const Icon(Icons.add, size: 20, color: Colors.white),
-          onPressed: () => onCountChanged?.call(count + 1),
-          splashRadius: 20,
-        ),
-      ],
+        : Container(
+      color: Colors.black,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.remove, size: 20, color: Colors.white),
+            onPressed: () => onCountChanged?.call(count - 1),
+            splashRadius: 20,
+          ),
+          Text(
+            '$count',
+            style: TextFontStyle.textFontStyle(
+                18, Colors.white, FontWeight.bold),
+          ),
+          IconButton(
+            icon: const Icon(Icons.add, size: 20, color: Colors.white),
+            onPressed: () => onCountChanged?.call(count + 1),
+            splashRadius: 20,
+          ),
+        ],
+      ),
     );
 
     if (isListLayout) {
@@ -108,19 +106,14 @@ class EventServiceCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                      color: Color(0xFF575959),
-                    ),
+                    style: TextFontStyle.textFontStyle(
+                        16, const Color(0xFF575959), FontWeight.bold),
                   ),
                   if (description != null && description!.isNotEmpty)
                     Text(
                       description!,
-                      style: TextStyle(
-                        fontSize: 13.0,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextFontStyle.textFontStyle(
+                          13, Colors.grey[600]!, FontWeight.w400),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -130,11 +123,8 @@ class EventServiceCard extends StatelessWidget {
                     children: [
                       Text(
                         price,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.0,
-                          color: Colors.teal,
-                        ),
+                        style: TextFontStyle.textFontStyle(
+                            15, Colors.teal, FontWeight.bold),
                       ),
                       countWidget,
                     ],
@@ -170,19 +160,13 @@ class EventServiceCard extends StatelessWidget {
           const SizedBox(height: 5),
           Text(
             title,
-            style: const TextStyle(
-              color: Color(0xFF575959),
-              fontWeight: FontWeight.w600,
-              fontSize: 13,
-            ),
+            style: TextFontStyle.textFontStyle(
+                13, const Color(0xFF575959), FontWeight.w600),
           ),
           Text(
             price,
-            style: const TextStyle(
-              color: Colors.teal,
-              fontWeight: FontWeight.w600,
-              fontSize: 13,
-            ),
+            style: TextFontStyle.textFontStyle(
+                13, Colors.teal, FontWeight.w600),
           ),
         ],
       );
