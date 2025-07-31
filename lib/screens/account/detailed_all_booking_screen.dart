@@ -1,6 +1,7 @@
 import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/account/account_event.dart';
 import 'package:aahwanam/blocs/account/account_state.dart';
+import 'package:aahwanam/screens/dashboard/e_invitation_screen.dart';
 import 'package:aahwanam/services/services_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -244,6 +245,10 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EInvitationScreen()),
+                  );
                   // TODO: Add send invitation logic
                 },
                 style: ElevatedButton.styleFrom(
