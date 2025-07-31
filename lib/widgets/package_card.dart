@@ -97,8 +97,8 @@ class PackageCard extends StatelessWidget {
     style: const TextStyle(
     fontFamily: 'Poppins', // Font family
     fontSize: 14, // Size in px (Flutter uses logical pixels)
-    fontWeight: FontWeight.w600, // Equivalent to weight 500 (Medium)
-    height: 1.0, // Line height = 100% (1.0 means 100%)
+    fontWeight: FontWeight.w500, // Equivalent to weight 500 (Medium)
+    // height: 1.0, // Line height = 100% (1.0 means 100%)
     letterSpacing: 0.0, // 0% letter spacing
     color: Color(0xFF575959), // Text color
     ),
@@ -134,9 +134,9 @@ class PackageCard extends StatelessWidget {
       fontFamily: 'Poppins',      // Font family
       fontSize: 14,              // Size in px (Flutter uses logical pixels)
       fontWeight: FontWeight.w400, // Equivalent to weight 500 (Medium)
-      height: 1.0,               // Line height = 100% (1.0 means 100%)
+      // height: 1.0,               // Line height = 100% (1.0 means 100%)
       letterSpacing: 0.0,        // 0% letter spacing
-      color: Color(0xFF575959),  // Text color
+      color: Color(0xFF757575),  // Text color
     ),
     ),
     const SizedBox(height: 8),
@@ -154,9 +154,9 @@ class PackageCard extends StatelessWidget {
       fontFamily: 'Poppins',      // Font family
       fontSize: 12,              // Size in px (Flutter uses logical pixels)
       fontWeight: FontWeight.w600, // Equivalent to weight 500 (Medium)
-      height: 1.0,               // Line height = 100% (1.0 means 100%)
+      // height: 1.0,               // Line height = 100% (1.0 means 100%)
       letterSpacing: 0.0,        // 0% letter spacing
-      color: Color(0xFF575959),  // Text color
+      color: Color(0xFF1E535B),  // Text color
     ),
     ),
     ],
@@ -170,8 +170,8 @@ class PackageCard extends StatelessWidget {
       fontFamily: 'Poppins',
       // Font family
       fontSize: 12,              // Size in px (Flutter uses logical pixels)
-      fontWeight: FontWeight.w400, // Equivalent to weight 500 (Medium)
-      height: 1.0,               // Line height = 100% (1.0 means 100%)
+      fontWeight: FontWeight.w500, // Equivalent to weight 500 (Medium)
+      // height: 1.0,               // Line height = 100% (1.0 means 100%)
       letterSpacing: 0.0,        // 0% letter spacing
       color: Color(0xFF575959),  // Text color
     ),
