@@ -5,6 +5,7 @@ class CustomPackageCard extends StatelessWidget {
   final int servicesIncluded;
   final String price;
   final String status;
+  final VoidCallback? onTap;
 
   const CustomPackageCard({
     super.key,
@@ -12,6 +13,7 @@ class CustomPackageCard extends StatelessWidget {
     required this.servicesIncluded,
     required this.price,
     required this.status,
+    this.onTap,
   });
 
   @override
@@ -19,43 +21,84 @@ class CustomPackageCard extends StatelessWidget {
     final isDelivered = status.toLowerCase() == "delivered";
     final statusColor = isDelivered ? Colors.green : Colors.orange;
 
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFF4E8),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: const Color(0xFFFFF4E8),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-              const Icon(Icons.chevron_right, size: 20, color: Colors.black54),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            "Including $servicesIncluded Services",
-            style: const TextStyle(fontSize: 13),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("₹$price", style: const TextStyle(fontWeight: FontWeight.bold)),
-              Text(status, style: TextStyle(color: statusColor, fontSize: 12)),
-            ],
-          ),
-        ],
+                const Icon(Icons.chevron_right, size: 20, color: Colors.black54),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Text(
+              "Including $servicesIncluded Services",
+              style: const TextStyle(fontSize: 13),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("₹$price", style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(status, style: TextStyle(color: statusColor, fontSize: 12)),
+              ],
+            ),
+          ],
+        ),
       ),
     );
+
+    // return Container(
+    //   margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+    //   padding: const EdgeInsets.all(12),
+    //   decoration: BoxDecoration(
+    //     color: const Color(0xFFFFF4E8),
+    //     borderRadius: BorderRadius.circular(12),
+    //   ),
+    //   child: Column(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: [
+    //       Row(
+    //         children: [
+    //           Expanded(
+    //             child: Text(
+    //               title,
+    //               style: const TextStyle(fontWeight: FontWeight.bold),
+    //             ),
+    //           ),
+    //           const Icon(Icons.chevron_right, size: 20, color: Colors.black54),
+    //         ],
+    //       ),
+    //       const SizedBox(height: 4),
+    //       Text(
+    //         "Including $servicesIncluded Services",
+    //         style: const TextStyle(fontSize: 13),
+    //       ),
+    //       const SizedBox(height: 8),
+    //       Row(
+    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //         children: [
+    //           Text("₹$price", style: const TextStyle(fontWeight: FontWeight.bold)),
+    //           Text(status, style: TextStyle(color: statusColor, fontSize: 12)),
+    //         ],
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 
 }
