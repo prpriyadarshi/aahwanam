@@ -113,7 +113,7 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
           ServiceItem(
             id: 'makeup_bridal_traditional_1',
             title: 'Bridal & Traditional',
-            imageUrl: 'assets/images/Bridal Makeup event.png',
+            imageUrl: 'assets/images/Bridal makeup1.png',
             price: '₹10,000',
             description: 'Exquisite bridal makeup with a traditional touch.',
           ),
