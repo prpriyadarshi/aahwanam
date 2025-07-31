@@ -189,12 +189,15 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
               expanded: _showStatusDetails,
               onToggle: () =>
                   setState(() => _showStatusDetails = !_showStatusDetails),
-              child: Column(
-                children: [
-                  _buildStatusStep("Booking Confirmed", "22, Feb", true),
-                  _buildStatusStep("Artist Assigned", "Today", true),
-                  _buildStatusStep("Delivery", "25, Feb", false, isLast: true),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0), // customize as needed
+                child: Column(
+                  children: [
+                    _buildStatusStep("Booking Confirmed", "22, Feb", true),
+                    _buildStatusStep("Artist Assigned", "Today", true),
+                    _buildStatusStep("Delivery", "25, Feb", false, isLast: true),
+                  ],
+                ),
               ),
             ),
 
@@ -427,7 +430,7 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
   Widget _buildStatusStep(String title, String date, bool completed,
       {bool isLast = false}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
