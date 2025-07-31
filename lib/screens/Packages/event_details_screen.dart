@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/Subcategory/subcategory bloc.dart';
 import '../../widgets/Subcategory/service_card_details.dart';
+import '../../widgets/custom_text_field.dart';
 import '../../widgets/custom_top_bar.dart';
 
 class EventDetailsScreen extends StatefulWidget {
@@ -27,23 +28,17 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize the quantity.
-    // If you're coming from EventServiceCard and want to reflect its count,
-    // you'd need to pass the initial quantity here via widget.
-    // For now, it defaults to 1.
     _currentQuantity = 1;
   }
 
   void _updatePackageQuantity(int newQuantity) {
     setState(() {
       _currentQuantity = newQuantity;
-      // Ensure quantity doesn't go below zero if not navigating back immediately
       if (_currentQuantity < 0) {
         _currentQuantity = 0;
       }
     });
 
-    // ✨ NEW LOGIC: If quantity becomes 0, navigate back
     if (_currentQuantity == 0) {
       print('Quantity reached 0, navigating back to previous screen.');
       Navigator.pop(context);
@@ -79,17 +74,27 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
               return PackageDetails(
                 eventpackagedetails: eventPackageDetails,
                 showIncludedPackages: widget.showIncludedPackages,
-                quantity: _currentQuantity, // Pass the state quantity
-                onQuantityChanged: _updatePackageQuantity, // Pass the update callback
+                quantity: _currentQuantity,
+                onQuantityChanged: _updatePackageQuantity,
               );
             } else if (state.status == SubcategoryStatus.loading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state.status == SubcategoryStatus.failure) {
-              return const Center(
-                child: Text('Failed to load event details. Please try again.'),
+              return Center(
+                child: Text(
+                  'Failed to load event details. Please try again.',
+                  style: TextFontStyle.textFontStyle(
+                      14, const Color(0xFF575959), FontWeight.w600),
+                ),
               );
             } else {
-              return const Center(child: Text('No event details found.'));
+              return Center(
+                child: Text(
+                  'No event details found.',
+                  style: TextFontStyle.textFontStyle(
+                      14, const Color(0xFF575959), FontWeight.w600),
+                ),
+              );
             }
           },
         ),
@@ -101,7 +106,6 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                 child: OutlinedButton(
                   onPressed: () {
                     print('Checking out with quantity: $_currentQuantity');
-                    // Add your checkout logic here
                   },
                   style: OutlinedButton.styleFrom(
                     foregroundColor: const Color(0xFF233B32),
@@ -111,9 +115,10 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Check Out',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextFontStyle.textFontStyle(
+                        14, const Color(0xFF233B32), FontWeight.bold),
                   ),
                 ),
               ),
@@ -122,7 +127,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     print('Adding other services. Current quantity: $_currentQuantity');
-                    Navigator.pop(context); // Or navigate to a service selection screen
+                    Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF233B32),
@@ -132,9 +137,10 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Add other services',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextFontStyle.textFontStyle(
+                        14, Colors.white, FontWeight.bold),
                   ),
                 ),
               ),

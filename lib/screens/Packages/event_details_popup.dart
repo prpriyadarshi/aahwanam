@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../widgets/custom_text_field.dart'; // Make sure this path is correct
 
 class EventDetailsPopup extends StatelessWidget {
   const EventDetailsPopup({Key? key}) : super(key: key);
@@ -19,24 +20,18 @@ class EventDetailsPopup extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Center(
+            Center(
               child: Text(
                 "Event Details",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF575959),
-                ),
+                style: TextFontStyle.textFontStyle(
+                    18, const Color(0xFF575959), FontWeight.bold),
               ),
             ),
             const SizedBox(height: 24),
-            const Text(
+            Text(
               "Event Name*",
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF575959),
-              ),
+              style: TextFontStyle.textFontStyle(
+                  14, const Color(0xFF575959), FontWeight.w500),
             ),
             const SizedBox(height: 8),
             const TextField(
@@ -60,13 +55,10 @@ class EventDetailsPopup extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         "Event Date*",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF575959),
-                        ),
+                        style: TextFontStyle.textFontStyle(
+                            14, const Color(0xFF575959), FontWeight.w500),
                       ),
                       const SizedBox(height: 8),
                       TextField(
@@ -77,15 +69,16 @@ class EventDetailsPopup extends StatelessWidget {
                           hintText: "22,Feb 2025",
                           hintStyle: const TextStyle(color: Color(0xFF8E8E8E)),
                           border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(10)),
                             borderSide: BorderSide.none,
                           ),
                           suffixIcon: const Icon(
                             Icons.calendar_today,
                             color: Color(0xFF575959),
                           ),
-                          contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
                         ),
                         onTap: () {
                           // TODO: Implement date picker
@@ -99,13 +92,10 @@ class EventDetailsPopup extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         "Event Time*",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF575959),
-                        ),
+                        style: TextFontStyle.textFontStyle(
+                            14, const Color(0xFF575959), FontWeight.w500),
                       ),
                       const SizedBox(height: 8),
                       TextField(
@@ -116,15 +106,16 @@ class EventDetailsPopup extends StatelessWidget {
                           hintText: "11:30 pm",
                           hintStyle: const TextStyle(color: Color(0xFF8E8E8E)),
                           border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(10)),
                             borderSide: BorderSide.none,
                           ),
                           suffixIcon: const Icon(
                             Icons.access_time,
                             color: Color(0xFF575959),
                           ),
-                          contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
                         ),
                         onTap: () {
                           // TODO: Implement time picker
@@ -136,22 +127,19 @@ class EventDetailsPopup extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               "Number Of Guests*",
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF575959),
-              ),
+              style: TextFontStyle.textFontStyle(
+                  14, const Color(0xFF575959), FontWeight.w500),
             ),
             const SizedBox(height: 8),
             const TextField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: const Color(0xFFF1F1F1),
+                fillColor: Color(0xFFF1F1F1),
                 hintText: "250",
-                hintStyle: const TextStyle(color: Color(0xFF8E8E8E)),
+                hintStyle: TextStyle(color: Color(0xFF8E8E8E)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   borderSide: BorderSide.none,
@@ -161,13 +149,10 @@ class EventDetailsPopup extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               "Event Address*",
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF575959),
-              ),
+              style: TextFontStyle.textFontStyle(
+                  14, const Color(0xFF575959), FontWeight.w500),
             ),
             const SizedBox(height: 8),
             Container(
@@ -181,24 +166,19 @@ class EventDetailsPopup extends StatelessWidget {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
                           "Financial District",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959),
-                          ),
+                          style: TextFontStyle.textFontStyle(
+                              16, const Color(0xFF575959), FontWeight.w500),
                         ),
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Text(
                           "Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,",
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Color(0xFF8E8E8E),
-                          ),
+                          style: TextFontStyle.textFontStyle(
+                              12, const Color(0xFF8E8E8E), FontWeight.w400),
                         ),
                       ],
                     ),
@@ -207,12 +187,10 @@ class EventDetailsPopup extends StatelessWidget {
                     onPressed: () {
                       // TODO: Implement change address logic
                     },
-                    child: const Text(
+                    child: Text(
                       "Change",
-                      style: TextStyle(
-                        color: Color(0xFF98858C),
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: TextFontStyle.textFontStyle(
+                          14, const Color(0xFF98858C), FontWeight.w500),
                     ),
                   ),
                 ],
@@ -231,16 +209,12 @@ class EventDetailsPopup extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 "Save Details",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
+                style: TextFontStyle.textFontStyle(
+                    16, Colors.white, FontWeight.w600),
               ),
             ),
-            // This adds bottom padding for the keyboard
             Padding(
               padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom,

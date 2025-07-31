@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../custom_text_field.dart';
+
 class CategoryTile extends StatelessWidget {
   final String image;
   final String label;
@@ -18,7 +20,7 @@ class CategoryTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 6),
+        margin: const EdgeInsets.symmetric(vertical: 5),
         decoration: BoxDecoration(
           // border: isSelected ? Border.all(color: Colors.teal, width: 3) : null,
           // borderRadius: BorderRadius.circular(10),
@@ -27,7 +29,12 @@ class CategoryTile extends StatelessWidget {
           children: [
             Image.asset(image, height: 50, width: 50, fit: BoxFit.cover),
             const SizedBox(height: 6),
-            Text(label, textAlign: TextAlign.center, style: const TextStyle(fontSize: 14)),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextFontStyle.textFontStyle(
+                  13, Color(0xFF575959), FontWeight.w400),
+            ),
           ],
         ),
       ),
