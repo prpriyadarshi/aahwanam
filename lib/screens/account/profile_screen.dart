@@ -4,6 +4,8 @@ import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/account/account_event.dart';
 import 'package:aahwanam/blocs/account/account_state.dart';
 import '../../widgets/custom_inputfield.dart'; // Your custom widget for input fields
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -13,6 +15,18 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  File? _profileImage;
+
+  Future<void> _pickProfileImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _profileImage = File(pickedFile.path);
+      });
+    }
+  }
+
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -53,20 +67,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Center(
                     child: Stack(
                       children: [
-                        const CircleAvatar(
+                        CircleAvatar(
                           radius: 40,
-                          backgroundImage: AssetImage('assets/images/profile.png'), // Replace with actual image if available
+                          backgroundImage: _profileImage != null
+                              ? FileImage(_profileImage!)
+                              : const AssetImage('assets/images/profile.png')
+                                  as ImageProvider,
                         ),
                         Positioned(
                           bottom: 0,
                           right: 0,
-                          child: Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
+                          child: GestureDetector(
+                            onTap: _pickProfileImage,
+                            child: Container(
+                              padding: const EdgeInsets.all(4),
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(Icons.edit,
+                                  size: 18, color: Colors.black),
                             ),
-                            child: const Icon(Icons.edit, size: 18, color: Colors.black),
                           ),
                         ),
                       ],
@@ -75,7 +96,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 30),
                   const Text(
                     "Profile Details",
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF575959)),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: Color(0xFF575959)),
                   ),
                   const SizedBox(height: 16),
 
@@ -89,7 +113,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           keyboardType: TextInputType.text,
                         ),
                       ),
-                      const SizedBox(width: 10), // Add spacing between the two fields
+                      const SizedBox(width: 10),
+                      // Add spacing between the two fields
                       Expanded(
                         child: CustomInputField(
                           controller: _lastNameController,
@@ -122,12 +147,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
+                        Navigator.pop(context);
+
                         context.read<AccountBloc>().add(UpdateAccountInfo(
-                          firstName: _firstNameController.text,
-                          lastName: _lastNameController.text,
-                          phone: _phoneController.text,
-                          email: _emailController.text,
-                        ));
+                              firstName: _firstNameController.text,
+                              lastName: _lastNameController.text,
+                              phone: _phoneController.text,
+                              email: _emailController.text,
+                            ));
+
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF1E535B),
@@ -138,7 +166,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       child: const Text(
                         "Submit",
-                        style: TextStyle(color: Colors.white), // White text color
+                        style:
+                            TextStyle(color: Colors.white), // White text color
                       ),
                     ),
                   ),
@@ -155,13 +184,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                     child: const Text(
                       "Delete Account",
-                      style: TextStyle(color: Color(0xFFD75252), fontWeight: FontWeight.bold, fontSize: 14),
+                      style: TextStyle(
+                          color: Color(0xFFD75252),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
                     ),
                   ),
                   const SizedBox(height: 5),
                   const Text(
                     "Deleting your account will remove all the orders and history of your account.",
-                    style: TextStyle(color: Color(0xFF757575), fontWeight: FontWeight.w400, fontSize: 14),
+                    style: TextStyle(
+                        color: Color(0xFF757575),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14),
                   ),
                 ],
               ),

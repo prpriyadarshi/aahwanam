@@ -1,9 +1,11 @@
+import 'package:aahwanam/widgets/booking_bottom_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/account/account_bloc.dart';
 import '../../blocs/account/account_state.dart';
 import '../../widgets/custom_image_card_widget.dart';
 import '../../widgets/package_card.dart'; // Your custom card
+
 class WishlistScreen extends StatefulWidget {
   const WishlistScreen({super.key});
 
@@ -72,7 +74,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                               ),
                             ),
                           ),
-                          child: const Text("Booked Packages"),
+                          child: const Text("Services"),
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -98,7 +100,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                               ),
                             ),
                           ),
-                          child: const Text("Cart"),
+                          child: const Text("Concepts"),
                         ),
                       ),
                     ],
@@ -110,62 +112,76 @@ class _WishlistScreenState extends State<WishlistScreen> {
                     child: wishlistItems.isEmpty
                         ? const Center(child: Text("Your wishlist is empty"))
                         : isAllSelected
-                    // For "Services"
-                        ? ListView.builder(
-                      itemCount: wishlistItems.length,
-                      itemBuilder: (context, index) {
-                        final item = wishlistItems[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
-                          child: PackageCard(
-                            title: item['title'],
-                            description: item['description'],
-                            price: item['price'],
-                            details: item['details'],
-                            imagePath: item['imagePath'],
-                            rating: item['rating'],
-                            showLikeIcon: true,
-                            primaryButtonText: "Move to Cart",
-                            onPrimaryButtonPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("${item['title']} booked successfully")),
-                              );
-                            },
-                            secondaryButtonText: "Remove",
-                            onSecondaryButtonPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("${item['title']} removed from Wishlist")),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                    )
-                    // For "Concepts"
-                        : GridView.builder(
-                      padding: EdgeInsets.zero,
-                      itemCount: conceptsTabImages.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 8,
-                        crossAxisSpacing: 8,// Only one item per row, making the image take the full width// Increase space between rows
-                      // You can adjust this if you want a different height-to-width ratio
-                        childAspectRatio: 1.2,
-                      ),
-                      itemBuilder: (context, index) {
-                        final item = conceptsTabImages[index];
-                        return CustomImageCard(
-                          imageUrl: item['imagePath'],
-                          width: MediaQuery.of(context).size.width - 40, // Making the image width take full screen width minus margin
-                          height: 150, // You can adjust height as necessary
-                          isAsset: true,
-                          favoriteSelected: true,
-                        );
-                      },
-                    ),
-
+                            // For "Services"
+                            ? ListView.builder(
+                                itemCount: wishlistItems.length,
+                                itemBuilder: (context, index) {
+                                  final item = wishlistItems[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 12),
+                                    child: PackageCard(
+                                      title: item['title'],
+                                      description: item['description'],
+                                      price: item['price'],
+                                      imagePath: item['imagePath'],
+                                      rating: item['rating'],
+                                      showLikeIcon: true,
+                                      primaryButtonText: "Book Now",
+                                      onPrimaryButtonPressed: () {
+                                        showModalBottomSheet(
+                                          context: context,
+                                          isScrollControlled: true,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                          ),
+                                          builder: (context) {
+                                            return BookingBottomSheet(
+                                              booking: item, // You can pass more data if needed
+                                            );
+                                          },
+                                        );
+                                      },
+                                      secondaryButtonText: "Remove",
+                                      onSecondaryButtonPressed: () {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                              content: Text(
+                                                  "${item['title']} removed from Wishlist")),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                              )
+                            // For "Concepts"
+                            : GridView.builder(
+                                padding: EdgeInsets.zero,
+                                itemCount: conceptsTabImages.length,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 8,
+                                  crossAxisSpacing: 8,
+                                  // Only one item per row, making the image take the full width// Increase space between rows
+                                  // You can adjust this if you want a different height-to-width ratio
+                                  childAspectRatio: 1.2,
+                                ),
+                                itemBuilder: (context, index) {
+                                  final item = conceptsTabImages[index];
+                                  return CustomImageCard(
+                                    imageUrl: item['imagePath'],
+                                    width:
+                                        MediaQuery.of(context).size.width - 40,
+                                    // Making the image width take full screen width minus margin
+                                    height: 146,
+                                    // You can adjust height as necessary
+                                    isAsset: true,
+                                    favoriteSelected: true,
+                                  );
+                                },
+                              ),
                   ),
-
                 ],
               ),
             ),
@@ -179,6 +195,3 @@ class _WishlistScreenState extends State<WishlistScreen> {
     );
   }
 }
-
-
-
