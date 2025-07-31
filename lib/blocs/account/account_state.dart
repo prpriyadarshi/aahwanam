@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:aahwanam/models/service_details.dart';
 
+import '../../models/book_service_details.dart';
+
 abstract class AccountState extends Equatable {
   const AccountState();
 
@@ -26,6 +28,7 @@ class AccountLoaded extends AccountState {
   final List<Map<String, dynamic>> packages;
   final List<Map<String, dynamic>> cartdata;
   final ServiceDetails serviceDetails;
+  final BookServiceDetails bookServiceDetails;
 
   const AccountLoaded({
     required this.firstName,
@@ -41,6 +44,7 @@ class AccountLoaded extends AccountState {
     required this.packages,
     required this.cartdata,
     required this.serviceDetails,
+    required this.bookServiceDetails
   });
 
   @override
@@ -57,7 +61,8 @@ class AccountLoaded extends AccountState {
         conceptsTabImages,
         packages,
         cartdata,
-        serviceDetails
+        serviceDetails,
+    bookServiceDetails
       ];
 }
 

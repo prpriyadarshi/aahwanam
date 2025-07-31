@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../models/book_service_details.dart';
 import 'account_event.dart';
 import 'account_state.dart';
 import 'package:aahwanam/models/gallery_section.dart';
@@ -55,7 +56,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             'description':
                 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '8,000',
-            'details': 'Booked On - 22, Feb 2025',
             'imagePath': 'assets/images/bridal_makeup.png',
             // 'status': 'Delivered',
           },
@@ -64,7 +64,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             'description':
                 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '2,000',
-            'details': 'Booked On - 22, Feb 2025',
             'imagePath': 'assets/images/hair_style.png',
             // 'status': 'Delivered',
           },
@@ -94,7 +93,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             'description':
                 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '8,000',
-            'details': 'Booked On - 22, Feb 2025',
             'imagePath': 'assets/images/bridal_makeup.png',
             'showLikeIcon': 'true',
           },
@@ -103,7 +101,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             'description':
                 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             'price': '2,000',
-            'details': 'Booked On - 22, Feb 2025',
             'imagePath': 'assets/images/hair_style.png',
             'showLikeIcon': 'true',
           },
@@ -175,6 +172,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
         final cartdata = [
           {
+            'id': 'decoration_balloon_1',
             'title': 'Decoration',
             'description':
                 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
@@ -182,6 +180,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             'imageUrl': 'assets/images/cartdecoration.png',
           },
           {
+            'id': 'makeup_natural_braid_1',
             'title': 'Decoration',
             'description':
                 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
@@ -189,6 +188,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             'imageUrl': 'assets/images/cartdecoration2.png',
           },
           {
+            'id': 'bartender_service_1',
             'title': 'Bartender',
             'description':
                 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
@@ -196,6 +196,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             'imageUrl': 'assets/images/cartbortender.png',
           },
           {
+            'id': 'valet_royal_1',
             'title': 'Royal valet Service',
             'description':
                 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
@@ -203,6 +204,24 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             'imageUrl': 'assets/images/RoyalvaletService.png',
           },
         ];
+
+        final bookServiceDetails = BookServiceDetails(
+          title: 'Silver Package by Photo Studio',
+          imagePath: 'assets/images/photographer.png',
+          description: 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+          price: '8,000 ',
+          locationTitle: 'Financial District',
+          locationDescription: 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+          eventDate: '',
+          eventTime: '',
+          serviceCharge: '',
+          platformFee: '100',
+          transportFee: 'Free',
+          totalAmount: '',
+
+        );
+
+
         final serviceDetails = ServiceDetails(
           name: "Dream Decor",
           imagePath: "assets/images/dream decor 1.png",
@@ -280,6 +299,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           packages: packages,
           cartdata: cartdata,
           serviceDetails: serviceDetails,
+            bookServiceDetails: bookServiceDetails
         ));
       } catch (e) {
         emit(AccountError("Failed to load data"));

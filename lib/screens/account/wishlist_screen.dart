@@ -1,3 +1,4 @@
+import 'package:aahwanam/widgets/booking_bottom_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/account/account_bloc.dart';
@@ -122,17 +123,22 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                       title: item['title'],
                                       description: item['description'],
                                       price: item['price'],
-                                      details: item['details'],
                                       imagePath: item['imagePath'],
                                       rating: item['rating'],
                                       showLikeIcon: true,
-                                      primaryButtonText: "Move to Cart",
+                                      primaryButtonText: "Book Now",
                                       onPrimaryButtonPressed: () {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                              content: Text(
-                                                  "${item['title']} booked successfully")),
+                                        showModalBottomSheet(
+                                          context: context,
+                                          isScrollControlled: true,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                          ),
+                                          builder: (context) {
+                                            return BookingBottomSheet(
+                                              booking: item, // You can pass more data if needed
+                                            );
+                                          },
                                         );
                                       },
                                       secondaryButtonText: "Remove",

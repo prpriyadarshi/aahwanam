@@ -4,7 +4,7 @@ class PackageCard extends StatelessWidget {
   final String title;
   final String description;
   final String price;
-  final String details;
+  final String? details;
   final String imagePath;
   final double? rating;
   final bool showLikeIcon;
@@ -21,7 +21,7 @@ class PackageCard extends StatelessWidget {
     required this.title,
     required this.description,
     required this.price,
-    required this.details,
+    this.details,
     required this.imagePath,
     this.rating,
     this.primaryButtonText,
@@ -152,14 +152,17 @@ class PackageCard extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 4),
-                    Text(
-                      details,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF757575),
+                    if (details != null) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        details!,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFF757575),
+                        ),
                       ),
-                    ),
+                    ],
 
                     // Now the buttons immediately after text!
                     if (primaryButtonText != null || secondaryButtonText != null) ...[
@@ -224,66 +227,6 @@ class PackageCard extends StatelessWidget {
                             ),
                         ],
                       )
-
-                      // Row(
-                      //   children: [
-                      //     if (secondaryButtonText != null)
-                      //       SizedBox(
-                      //         height: 29,
-                      //         child: OutlinedButton(
-                      //           onPressed: onSecondaryButtonPressed,
-                      //           style: OutlinedButton.styleFrom(
-                      //             side: const BorderSide(
-                      //               color: Color(0xFF1E535B),
-                      //               width: 1, // Border width
-                      //             ),
-                      //             backgroundColor: Colors.white,
-                      //             foregroundColor: const Color(0xFF1E535B),
-                      //             shape: RoundedRectangleBorder(
-                      //               borderRadius: BorderRadius.circular(9), // Border radius
-                      //             ),
-                      //             padding: EdgeInsets.all(8),
-                      //             // Ensure text fits properly without extra padding
-                      //           ),
-                      //           child: Text(
-                      //             secondaryButtonText!,
-                      //             style: const TextStyle(fontSize: 12),
-                      //             textAlign: TextAlign.center,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //
-                      //     if (secondaryButtonText != null && primaryButtonText != null)
-                      //       const SizedBox(width: 8),
-                      //     if (primaryButtonText != null)
-                      //       SizedBox(
-                      //
-                      //         height: 29,
-                      //         child: ElevatedButton(
-                      //           onPressed: onPrimaryButtonPressed,
-                      //           style: ElevatedButton.styleFrom(
-                      //             backgroundColor: const Color(0xFF1E535B),
-                      //             foregroundColor: Colors.white,
-                      //             shape: RoundedRectangleBorder(
-                      //               borderRadius: BorderRadius.circular(9), // Border radius 9px
-                      //               side: const BorderSide(
-                      //                 color: Color(0xFF1E535B), // Border color
-                      //                 width: 1,                // Border width 1px
-                      //               ),
-                      //             ),
-                      //             padding: EdgeInsets.all(8),
-                      //             // Remove default padding
-                      //           ),
-                      //           child: Text(
-                      //             primaryButtonText!,
-                      //             style: const TextStyle(fontSize: 12),
-                      //             textAlign: TextAlign.center,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //
-                      //   ],
-                      // ),
                     ],
                   ],
                 ),

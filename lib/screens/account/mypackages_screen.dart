@@ -1,3 +1,4 @@
+import 'package:aahwanam/screens/Packages/event_details_screen.dart';
 import 'package:aahwanam/screens/account/detailed_deliversoon_screen.dart';
 import 'package:aahwanam/screens/account/detailed_deliveredmy_packages.dart';
 import 'package:aahwanam/screens/account/detailed_packagecart_screen.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/account/account_bloc.dart';
 import '../../blocs/account/account_state.dart';
+import '../../routes/app_routes.dart';
 import '../../widgets/custom_cart_card.dart';
 
 class MyPackagesScreen extends StatefulWidget {
@@ -151,6 +153,17 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                       description: cartItem['description'],
                       price: cartItem['price'],
                       imageUrl: cartItem['imageUrl'],
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EventDetailsScreen(
+                              serviceId: cartItem['id'], // using index as ID
+                              showIncludedPackages: true,
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
@@ -169,6 +182,10 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.Subcategory,
+                        );
                         // TODO: Add other services logic
                       },
                       style: ElevatedButton.styleFrom(

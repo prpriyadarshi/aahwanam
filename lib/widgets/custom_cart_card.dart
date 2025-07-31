@@ -5,6 +5,7 @@ class CustomCartCard extends StatefulWidget  {
   final String description;
   final String price;
   final String imageUrl;
+  final VoidCallback? onTap;
 
   const CustomCartCard({
     super.key,
@@ -12,6 +13,7 @@ class CustomCartCard extends StatefulWidget  {
     required this.description,
     required this.price,
     required this.imageUrl,
+    this.onTap,
   });
   @override
   State<CustomCartCard> createState() => _CustomCartCardState();
@@ -132,7 +134,9 @@ class _CustomCartCardState extends State<CustomCartCard> {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                widget.onTap?.call();
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [

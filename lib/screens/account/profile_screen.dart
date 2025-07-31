@@ -147,12 +147,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
+                        Navigator.pop(context);
+
                         context.read<AccountBloc>().add(UpdateAccountInfo(
                               firstName: _firstNameController.text,
                               lastName: _lastNameController.text,
                               phone: _phoneController.text,
                               email: _emailController.text,
                             ));
+
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF1E535B),

@@ -73,7 +73,7 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
             // const SizedBox(height: 5),
 
             const Padding(
-              padding: EdgeInsets.only(top: 12),
+              padding: EdgeInsets.only(top: 12, left: 8),
               child: Text(
                 "Connect with us",
                 style: TextStyle(
@@ -85,8 +85,8 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
               ),
             ),
             Container(
-              width: 328,
-              height: 49,
+              width: 320,
+              height: 60,
               margin: EdgeInsets.only(top: 8),
               decoration: BoxDecoration(
                 color: Color(0xFFF8F8F8),
@@ -95,7 +95,7 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
               child: Row(
                 children: [
                   const Padding(
-                    padding: EdgeInsets.only(left: 8),
+                    padding: EdgeInsets.only(top: 10, bottom: 10, left: 8),
                     child: CircleAvatar(
                       radius: 17.5, // 35/2
                       backgroundImage: AssetImage('assets/images/profile.png'),
