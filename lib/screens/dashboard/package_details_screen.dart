@@ -60,7 +60,8 @@ class PackageDetailScreen extends StatelessWidget {
                 children: [
                   // ✅ Ensure these widgets are not wrapped in Scaffold or another DefaultTabController
                   _buildDetailsTab(state),
-                   PhotoGallery(images: state.gallery),
+                  PhotoGallery(photoGallery: package["photo_gallery"]),
+
                   ReviewList(reviews: package["reviews"], galleryImages: state.gallery),
                 ],
               ),

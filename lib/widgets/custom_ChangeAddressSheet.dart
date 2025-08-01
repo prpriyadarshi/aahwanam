@@ -10,10 +10,17 @@ class CustomChangeAddressSheet extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
+
+        border: Border.all(
+          width: 1,
+          color: const Color(0xFFE4E4E4), // This is your border color
+        ),
+
         color: const Color(0xFFFAFAFA),
         border: Border.all(width: 1, color: const Color(0xFFF4F4F4)),
         borderRadius: BorderRadius.circular(8.0),
       ),
+
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
