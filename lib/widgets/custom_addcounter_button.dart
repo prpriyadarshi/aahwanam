@@ -40,46 +40,57 @@ class _CustomAddCounterButtonState extends State<CustomAddCounterButton> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                OutlinedButton(
+                Expanded(
+                  child: OutlinedButton(
+                    style: ElevatedButton.styleFrom(
 
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Add to Cart'),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E535B), // Button color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PhotographBookServiceScreen(
-                          imagePath: widget.imagePath,
-                          price: widget.price,
-                          count: count,
-                        ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
                       ),
-                    );
-                  },
-                  child: const Text(
-                    "Book Service",
-                    style: TextStyle(
-                      color: Colors.white, // ✅ Text color white
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Add to Cart'),
+                  ),
+                ),
+                const SizedBox(width: 10), // spacing between buttons
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF1E535B),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PhotographBookServiceScreen(
+                            imagePath: widget.imagePath,
+                            price: widget.price,
+                            count: count,
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Book Service",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                 ),
-
               ],
             ),
+
           ),
         );
       },

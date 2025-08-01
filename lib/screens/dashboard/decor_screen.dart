@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/decor/decor_bloc.dart';
 import '../../blocs/decor/decor_event.dart';
 import '../../blocs/decor/decor_state.dart';
-import '../../services/birthday_decoration.dart';
+import '../../services/decoration/birthday_decoration.dart';
 import '../../services/services_screen.dart';
 import '../../widgets/custom_card_birthday.dart';
 import '../../widgets/custom_card_widget.dart';

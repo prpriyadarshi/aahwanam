@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/dashboard/decoration_theme.dart';
+
 import '../services/pandit/pandit_theme.dart';
 
 class CustomPanditCardWidgets {
