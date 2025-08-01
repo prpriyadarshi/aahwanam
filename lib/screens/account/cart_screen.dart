@@ -1,3 +1,4 @@
+import 'package:aahwanam/widgets/booking_bottom_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/account/account_bloc.dart';
@@ -45,19 +46,29 @@ class CartScreen extends StatelessWidget {
                       title: booking['title'],
                       description: booking['description'],
                       price: booking['price'],
-                      details: booking['details'],
                       imagePath: booking['imagePath'],
                       rating: booking['rating'],
                       primaryButtonText: "Book Now",
                       onPrimaryButtonPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("${booking['title']} booked successfully")),
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                          ),
+                          builder: (context) {
+                            return BookingBottomSheet(
+                              booking: booking, // You can pass more data if needed
+                            );
+                          },
                         );
                       },
                       secondaryButtonText: "Move to Wishlist",
                       onSecondaryButtonPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("${booking['title']} moved to Wishlist")),
+                          SnackBar(
+                              content: Text(
+                                  "${booking['title']} moved to Wishlist")),
                         );
                       },
                     ),
