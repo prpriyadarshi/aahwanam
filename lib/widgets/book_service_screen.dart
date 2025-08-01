@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aahwanam/widgets/custom_event_date_time%20_picker.dart';
 
+import '../screens/dashboard/payment_option_page.dart';
+import '../services/proceedpay.dart';
 import 'custom_ChangeAddressSheet.dart';
 import 'custom_inputfield.dart';
 
@@ -23,7 +25,7 @@ class BookingState {
     this.transportFee = 0,
   });
 
-  int get total => (basePackagePrice * 2) + (barTablePrice * quantity) + platformFee + transportFee;
+  int get total => basePackagePrice + (barTablePrice * quantity) + platformFee + transportFee;
 
   BookingState copyWith({int? quantity}) {
     return BookingState(
@@ -124,13 +126,52 @@ class BookServiceScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: 20),
-              buildPortableBarTableItem(),
+              package['title'] == 'Mixologist package'
+                  ? buildPortableBarTableItem()
+                  : SizedBox.shrink(), // Empty widget if condition is false
+
 
               /// ✅ Event & Service Details
-              const Text("Event & Service Details",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-              const Divider(color: Color(0xFFE0E0E0)),
+              // const Text("Event & Service Details",
+              //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              // const Divider(color: Color(0xFFE0E0E0)),
+              // const SizedBox(height: 12),
+              Column(
+                children: [
+                  const SizedBox(height: 10), // Push it down
+
+                  Row(
+                    children: [
+                      const Expanded(
+                        child: Divider(
+                          thickness: 1,
+                          color: Color(0xFFDDDDDD), // Light grey color
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+
+                      const Text(
+                        "Event & Service Details",
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                          color: Color(0xFF575959),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      const Expanded(
+                        child: Divider(
+                          thickness: 1,
+                          color: Color(0xFFDDDDDD),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
               const SizedBox(height: 12),
+
               EventDateTimePicker(),
               const SizedBox(height: 12),
 
@@ -138,7 +179,7 @@ class BookServiceScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomInputField(
-                      labelText: 'No. Of Guests',
+                      labelText: 'No. Of Guests *',
                       controller: TextEditingController(),
                       keyboardType: TextInputType.number,
                     ),
@@ -146,7 +187,7 @@ class BookServiceScreen extends StatelessWidget {
                   const SizedBox(width: 16),
                   Expanded(
                     child: CustomInputField(
-                      labelText: 'No. Of Bartenders',
+                      labelText: 'No. Of Bartenders *',
 
                       controller: TextEditingController(),
                       keyboardType: TextInputType.number,
@@ -157,48 +198,106 @@ class BookServiceScreen extends StatelessWidget {
               const SizedBox(height: 12),
               CustomChangeAddressSheet(),
 
+              const SizedBox(height: 12),
+              Column(
+                children: [
+                  const SizedBox(height: 10), // Push it down
 
-              const SizedBox(height: 20),
-
-              /// ✅ Bill Details (Dynamic)
-              const Text("Bill Details",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-              const Divider(color: Color(0xFFE0E0E0)),
-              BlocBuilder<BookingCubit, BookingState>(
-                builder: (context, state) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      _buildBillRow("Package service charges", "₹ ${state.basePackagePrice} * 2"),
-                      _buildBillRow("Portable bar table", "₹ ${state.barTablePrice * state.quantity}"),
-                      _buildBillRow("Platform Fee", "₹ ${state.platformFee}"),
-                      _buildBillRow("Transport Fee", "FREE", highlight: true),
-                      _buildBillRow("Total", "₹ ${state.total}", bold: true),
+                      const Expanded(
+                        child: Divider(
+                          thickness: 1,
+                          color: Color(0xFFDDDDDD), // Light grey color
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+
+                      const Text(
+                        "Bill Details",
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                          color: Color(0xFF575959),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      const Expanded(
+                        child: Divider(
+                          thickness: 1,
+                          color: Color(0xFFDDDDDD),
+                        ),
+                      ),
                     ],
-                  );
-                },
+                  ),
+                ],
               ),
-            ],
+        BlocBuilder<BookingCubit, BookingState>(
+          builder: (context, state) {
+            // ✅ Debug values
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildBillRow("Package service charges", "₹ ${state.basePackagePrice}"),
+                _buildBillRow("Portable bar table", "₹ ${state.barTablePrice * state.quantity}"),
+                _buildBillRow("Platform Fee", "₹ ${state.platformFee}"),
+                _buildBillRow("Transport Fee", "FREE", highlight: true),
+                _buildBillRow("Total", "₹ ${state.total}", bold: true),
+              ],
+            );
+          },
+        ),
+
+        ],
           ),
         ),
 
         /// ✅ Bottom Button
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-              backgroundColor: const Color(0xFF184A45),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        bottomNavigationBar: Builder(
+          builder: (innerContext) {
+    return Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: SizedBox(
+    width: double.infinity,
+    child:BlocBuilder<BookingCubit, BookingState>(
+      builder: (context, state) {
+        return ElevatedButton(
+          onPressed: () {
+            final total = state.total.toDouble(); // ✅ Direct from state
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PaymentOptionsScreen(total: total),
+              ),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF1E535B),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
             ),
-            onPressed: () {},
-            child: const Text(
-              "Proceed to pay",
-              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           ),
-        ),
-      ),
+          child: const Text(
+            "Proceed to pay",
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      },
+    ),
+
+
+
+
+    ),
+    );
+
+    },
+    ),
+
+    ),
     );
   }
 
