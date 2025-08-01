@@ -69,11 +69,11 @@ class _CustomAddCounterButtonState extends State<CustomAddCounterButton> {
                     );
                   },
                   child: const Text(
-                    "Book Decorator",
+                    "Book Service",
                     style: TextStyle(
                       color: Colors.white, // ✅ Text color white
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
                     ),
                   ),
                 ),

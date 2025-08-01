@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/makeup/makeup_bloc.dart';
-import '../../blocs/makeup/makeup_state.dart';
+import '../../blocs/mehndi/mehndi_bloc.dart';
+import '../../blocs/mehndi/mehndi_state.dart';
 
 
 
@@ -20,8 +20,9 @@ class MehndiImageList extends StatelessWidget {
             title,
             style: const TextStyle(
               fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF1E535B),
+              fontWeight: FontWeight.w500,
+              color: Color(0xFF575959),
+              fontFamily: 'Poppins',
             ),
           ),
         ),
@@ -52,25 +53,25 @@ class MehndiImageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MakeupBloc, MakeupState>(
+    return BlocBuilder<MehndiBloc, MehndiState>(
       builder: (context, state) {
         List<String> galleryImages = [];
 
-        if (state is makeupGalleryLoaded) {
+        if (state is MehndiGalleryLoaded) {
           galleryImages = state.galleryImages;
         }
 
         // Split images into 3 groups
-        final birthdayImages = galleryImages.take(4).toList();       // 0-3
-        final anniversaryImages = galleryImages.skip(4).take(4).toList(); // 4-6
-        final poojaImages = galleryImages.skip(7).take(4).toList();       // 7-10
+        final mehndiImages = galleryImages.take(4).toList();       // 0-3
+
+        final trendyImages = galleryImages.skip(7).take(4).toList();       // 7-10
 
         return SingleChildScrollView(
           child: Column(
             children: [
-              _buildImageRow('Bridal Makeup ', birthdayImages),
-              _buildImageRow('Hair Style', anniversaryImages),
-              _buildImageRow('Natural Makeup', poojaImages),
+              _buildImageRow('Bridal Mehndi ', mehndiImages),
+              _buildImageRow( '',mehndiImages),
+              _buildImageRow('Trendy Mehndi', trendyImages),
             ],
           ),
         );

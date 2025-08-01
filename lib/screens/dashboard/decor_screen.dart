@@ -7,6 +7,7 @@ import '../../blocs/decor/decor_event.dart';
 import '../../blocs/decor/decor_state.dart';
 import '../../services/birthday_decoration.dart';
 import '../../services/services_screen.dart';
+import '../../widgets/custom_card_birthday.dart';
 import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
@@ -138,7 +139,7 @@ class DecorScreen extends StatelessWidget {
 
                       const SizedBox(height: 2),
                       // Decorators Section
-                      CustomCardWidgets.buildSection(
+                      CustomCardBirthdayWidgets.buildSection(
                         context,
                         title: "Decorators",
                         data: state.decorators,

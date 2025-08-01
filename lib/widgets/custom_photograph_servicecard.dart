@@ -455,6 +455,41 @@ void _showAddNewAddress(BuildContext context) {
     },
   );
 }
+class BulletPointList extends StatelessWidget {
+  final List<String> points;
+
+  const BulletPointList({Key? key, required this.points}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: points.map(
+            (point) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 6.0),
+                  child: Icon(Icons.circle, size: 6, color: Colors.black),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    point,
+                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ).toList(),
+    );
+  }
+}
 
 /// Common textfield builder
 Widget _buildTextField({

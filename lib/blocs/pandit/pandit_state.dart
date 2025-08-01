@@ -17,9 +17,9 @@ class PanditLoading extends PanditState {}
 // State when PanditState data is loaded
 class PanditLoaded extends PanditState {
   final List<Map<String, String>> poojaTheme;
+  final List<Map<String, String>> Theme;
 
-
-  const PanditLoaded(this.poojaTheme);
+  const PanditLoaded(this.poojaTheme,  this.Theme);
 
   @override
   List<Object?> get props => [poojaTheme];

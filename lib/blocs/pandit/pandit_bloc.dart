@@ -21,10 +21,42 @@ class PanditBloc extends Bloc<PanditEvent, PanditState> {
           {'image': 'assets/images/poojatheme5.png', 'name': 'Durga Pooja', 'price': '₹15,000 Onwards', 'rating': '4.3',},
           {'image': 'assets/images/poojatheme6.png', 'name': 'Satyanarayana ', 'price': '₹15,000 Onwards', 'rating': '4.3',},
           {'image': 'assets/images/poojatheme7.png', 'name': 'Ganesh Pooja', 'price': '₹15,000 Onwards', 'rating': '4.3',},
+
         ];
+        final Theme = [
+        {
+          'title': 'Griha Pravesh Pooja (Simple)',
+      'price': '₹5,000',
+      'description':
+      'This will be a shorter pooja performed by 1 purohit with basic rituals.',
+      'details':
+      'Pooja Rituals Includes-\nDwara Mahalaxmi Pravesh Pooja, Gau Pooja, Kitchen Pooja, Ganpati Pooja, Kalasha Pooja, Vastu Pooja.',
+      'duration': '1.5 - 2 hrs',
+      'rating': '4.3',
+    },
+      {
+      'title': 'Griha Pravesh Pooja (Regular)',
+      'price': '₹5,000',
+      'description':
+      'This will be a shorter pooja performed by 1 purohit with basic rituals.',
+      'details':
+      'Pooja Rituals Includes-\nDwara Mahalaxmi Pravesh Pooja, Gau Pooja, Kitchen Pooja, Ganpati Pooja, Kalasha Pooja, Vastu Pooja.',
+      'duration': '1.5 - 2 hrs',
+      'rating': '4.3',
+      },
+      {
+      'title': 'Griha Pravesh Pooja (Premium)',
+      'price': '₹5,000',
+      'description':
+      'This will be a shorter pooja performed by 1 purohit with basic rituals.',
+      'details':
+      'Pooja Rituals Includes-\nDwara Mahalaxmi Pravesh Pooja, Gau Pooja, Kitchen Pooja, Ganpati Pooja, Kalasha Pooja, Vastu Pooja.',
+      'duration': '1.5 - 2 hrs',
+      'rating': '4.3',
+      },
+      ];
 
-
-        emit(PanditLoaded(poojaTheme));
+        emit(PanditLoaded(poojaTheme,Theme));
       }catch (e) {
         emit(PanditLoadedError("Failed to load photographers"));
       }

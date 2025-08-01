@@ -1,34 +1,35 @@
-import 'package:equatable/equatable.dart';
+import '../../models/service_details.dart';
 
-abstract class ValetParkingState extends Equatable {
-  const ValetParkingState();
+abstract class ValetParkingState {}
 
-  @override
-  List<Object?> get props => []; // Fixed to 'props'
-}
-
-// Initial state
 class ValetParkingInitial extends ValetParkingState {}
 
-// State when loading  valetParking data
-class  ValetParkingLoading extends ValetParkingState {}
+class ValetParkingLoading extends ValetParkingState {}
 
-// State when  valetParking data is loaded
 class ValetParkingLoaded extends ValetParkingState {
   final List<Map<String, dynamic>> Packages;
-
-  const ValetParkingLoaded(this.Packages);
+  final ServiceDetails serviceDetails;
+  ValetParkingLoaded(this.Packages, this.serviceDetails);
 
   @override
-  List<Object?> get props => [Packages];
+  List<Object?> get props => [serviceDetails];
 }
 
-// State for errors
+class ValetParkingGalleryLoaded extends ValetParkingState {
+  final List<String> galleryImages;
+
+  ValetParkingGalleryLoaded(this.galleryImages);
+}
+
+class ValetParkingReviewLoaded extends ValetParkingState {
+  final List<String> photos;
+  final Map<int, int> ratingData;
+
+  ValetParkingReviewLoaded({required this.photos, required this.ratingData});
+}
+
 class ValetParkingError extends ValetParkingState {
   final String message;
 
-  const ValetParkingError(this.message);
-
-  @override
-  List<Object?> get props => [message];
+  ValetParkingError(this.message);
 }

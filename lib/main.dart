@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: AppPages.onGenerateRoute,
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.dashboard,
     );
   }
 }

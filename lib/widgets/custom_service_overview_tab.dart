@@ -158,7 +158,165 @@ class ServiceOverviewTab extends StatelessWidget {
           ],
 
           const SizedBox(height: 16),
+          if (label1 != null && label2 != null) ...[
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        label1!,
+                        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF575959)),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        initialValue: initialValue1 ?? '',
+                        cursorColor: Color(0xFF1E535B), // Set your desired cursor color
+                        decoration: InputDecoration(
+                          hintText: 'Enter $label1',
+                          hintStyle: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF757575),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(color: Color(0xFFE4E4E4)), // Border color when NOT focused
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFF1E535B), width: 1.5), // Custom focus color
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          isDense: true,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        label2!,
+                        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF575959)),
+                      ),
+                      const SizedBox(height: 8),
 
+                      TextFormField(
+                        initialValue: initialValue2 ?? '',
+                        cursorColor: Color(0xFF1E535B), // Set your desired cursor color
+                        decoration: InputDecoration(
+                          hintText: 'Enter $label2',
+                          hintStyle: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF757575),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(color: Color(0xFFE4E4E4)), // Border color when NOT focused
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFF1E535B), width: 1.5), // Custom focus color
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          isDense: true,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+          ],
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "No. Of Vehicle *",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF575959),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    TextFormField(
+                      initialValue: initialValue1 ?? '',
+                      cursorColor: Color(0xFF1E535B),
+                      decoration: InputDecoration(
+
+                        hintStyle: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF757575),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(color: Color(0xFFE4E4E4)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Color(0xFF1E535B), width: 1.5),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "No. Of Associates",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF575959),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    TextFormField(
+                      initialValue: initialValue2 ?? '',
+                      cursorColor: Color(0xFF1E535B),
+                      decoration: InputDecoration(
+
+                        hintStyle: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF757575),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(color: Color(0xFFE4E4E4)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Color(0xFF1E535B), width: 1.5),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
           // Address Section
           const Text('Event Address*', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF575959))),
           const SizedBox(height: 10),
