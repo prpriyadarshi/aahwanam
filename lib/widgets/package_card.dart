@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'custom_text_field.dart';
+
 class PackageCard extends StatelessWidget {
   final String title;
   final String description;
@@ -88,14 +90,8 @@ class PackageCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           title,
-                          style: const TextStyle(
-                            fontFamily: 'Poppins',      // Font family
-                            fontSize: 14,              // Size in px (Flutter uses logical pixels)
-                            fontWeight: FontWeight.w600, // Equivalent to weight 500 (Medium)
-                            height: 1.0,               // Line height = 100% (1.0 means 100%)
-                            letterSpacing: 0.0,        // 0% letter spacing
-                            color: Color(0xFF575959),  // Text color
-                          ),
+                          style:
+                          TextFontStyle.textFontStyle( 14, Color(0xFF575959),FontWeight.w600),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -110,11 +106,8 @@ class PackageCard extends StatelessWidget {
                             const SizedBox(width: 4),
                             Text(
                               rating.toString(),
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF575959),
-                              ),
+                              style:
+                                TextFontStyle.textFontStyle( 12, Color(0xFF575959),FontWeight.w500)
                             ),
                           ],
                         ),
@@ -124,14 +117,8 @@ class PackageCard extends StatelessWidget {
                   // Description
                   Text(
                     description,
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',      // Font family
-                      fontSize: 14,              // Size in px (Flutter uses logical pixels)
-                      fontWeight: FontWeight.w400, // Equivalent to weight 500 (Medium)
-                      height: 1.0,               // Line height = 100% (1.0 means 100%)
-                      letterSpacing: 0.0,        // 0% letter spacing
-                      color: Color(0xFF575959),  // Text color
-                    ),
+                    style:
+                      TextFontStyle.textFontStyle( 14, Color(0xFF575959),FontWeight.w400)
                   ),
                   const SizedBox(height: 8),
                   // Price and Details
@@ -144,29 +131,17 @@ class PackageCard extends StatelessWidget {
                       ),
                       Text(
                         price,
-                        style: const TextStyle(
-                          fontFamily: 'Poppins',      // Font family
-                          fontSize: 12,              // Size in px (Flutter uses logical pixels)
-                          fontWeight: FontWeight.w600, // Equivalent to weight 500 (Medium)
-                          height: 1.0,               // Line height = 100% (1.0 means 100%)
-                          letterSpacing: 0.0,        // 0% letter spacing
-                          color: Color(0xFF575959),  // Text color
-                        ),
+                        style:
+                          TextFontStyle.textFontStyle( 12, Color(0xFF575959),FontWeight.w600)
                       ),
+
                     ],
                   ),
                   const SizedBox(height: 4),
                   Text(
                     details,
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      // Font family
-                      fontSize: 12,              // Size in px (Flutter uses logical pixels)
-                      fontWeight: FontWeight.w400, // Equivalent to weight 500 (Medium)
-                      height: 1.0,               // Line height = 100% (1.0 means 100%)
-                      letterSpacing: 0.0,        // 0% letter spacing
-                      color: Color(0xFF575959),  // Text color
-                    ),
+                    style:
+                      TextFontStyle.textFontStyle( 12, Color(0xFF575959),FontWeight.w400)
                   ),
 
                   // Now the buttons immediately after text!
@@ -194,7 +169,7 @@ class PackageCard extends StatelessWidget {
                               ),
                               child: Text(
                                 secondaryButtonText!,
-                                style: const TextStyle(fontSize: 12),
+                                style: TextFontStyle.textFontStyle( 12, Colors.black87),
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -223,7 +198,7 @@ class PackageCard extends StatelessWidget {
                               ),
                               child: Text(
                                 primaryButtonText!,
-                                style: const TextStyle(fontSize: 12),
+                                style: TextFontStyle.textFontStyle( 12, Colors.black87),
                                 textAlign: TextAlign.center,
                               ),
                             ),
