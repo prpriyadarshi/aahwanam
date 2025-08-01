@@ -1,3 +1,5 @@
+// blocs/Subcategory/subcategory event.dart - Updated events
+
 abstract class SubcategoryEvent {}
 
 class LoadSubcategoryData extends SubcategoryEvent {}
@@ -7,12 +9,14 @@ class SelectCategory extends SubcategoryEvent {
   SelectCategory(this.selectedIndex);
 }
 
-class LoadEventDetails extends SubcategoryEvent {}
+class LoadEventDetails extends SubcategoryEvent {
+  final String serviceId; // Add serviceId parameter
+  LoadEventDetails(this.serviceId);
+}
 
-/// 🔥 New event to track service count
 class UpdateServiceCount extends SubcategoryEvent {
-  final String serviceTitle; // Usually service name or ID
-  final int newCount;        // Value after + or - tap
+  final String serviceId; // Use unique service ID instead of title
+  final int newCount;     // Value after + or - tap
 
-  UpdateServiceCount(this.serviceTitle, this.newCount);
+  UpdateServiceCount(this.serviceId, this.newCount);
 }
