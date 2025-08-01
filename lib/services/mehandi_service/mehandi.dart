@@ -4,13 +4,14 @@ import '../../blocs/mehndi/mehndi_bloc.dart';
 import '../../blocs/mehndi/mehndi_event.dart';
 import '../../blocs/mehndi/mehndi_state.dart';
 import '../../widgets/custom_card_makup.dart';
+import '../../widgets/custom_card_mehndi.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 
 
 class MehndiService extends StatelessWidget {
-  final Map<String, String> MehndiAndHairArtist;
+  final Map<String, String> mehndiArtist;
 
-  const MehndiService({super.key, required this.MehndiAndHairArtist});
+  const MehndiService({super.key, required this.mehndiArtist,});
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +90,7 @@ class MehndiService extends StatelessWidget {
               return SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                  child: CustomCardMakUpWidgets.buildSection(
+                  child: CustomCardMehndiWidgets.buildSection(
                     context,
                     title: "Mehndi",
                     data: state.mehndiArtists,
@@ -100,7 +101,7 @@ class MehndiService extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => MehndiService(
-                              MehndiAndHairArtist: state.mehndiArtists[0], // pass the first artist
+                              mehndiArtist: state.mehndiArtists[0], // pass the first artist
                             ),
                           ),
                         );

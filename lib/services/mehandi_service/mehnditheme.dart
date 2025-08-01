@@ -1,24 +1,19 @@
 import 'dart:io';
 
-
-import 'package:aahwanam/services/mehandi_service/thememehndi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
 import '../../blocs/mehndi/mehndi_bloc.dart';
 import '../../blocs/mehndi/mehndi_event.dart';
 import '../../blocs/mehndi/mehndi_state.dart';
 
+import '../../services/mehandi_service/thememehndi.dart';
 import '../../services/getquotesscreen.dart';
-
 import '../../services/reviewsscreen.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 import 'mehndiimagelist.dart';
-
-
 
 class MehndiTheme extends StatefulWidget {
   final Map<String, String> mehndi;
@@ -33,9 +28,20 @@ class _MehndiThemeState extends State<MehndiTheme> with SingleTickerProviderStat
   final List<File> _selectedImages = [];
   late TabController _tabController;
 
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   Future<void> _pickImageFromGallery() async {
-    var permission = Permission.photos;
-    if (await permission.request().isGranted) {
+    if (await Permission.photos.request().isGranted) {
       final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (picked != null) {
         setState(() {
@@ -47,18 +53,6 @@ class _MehndiThemeState extends State<MehndiTheme> with SingleTickerProviderStat
         const SnackBar(content: Text('Permission denied')),
       );
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 4, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
   }
 
   @override
@@ -91,10 +85,7 @@ class _MehndiThemeState extends State<MehndiTheme> with SingleTickerProviderStat
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8),
-                      child: SizedBox(
-                        height: 40,
-                        child: _buildSearchBar(),
-                      ),
+                      child: SizedBox(height: 40, child: _buildSearchBar()),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -106,8 +97,8 @@ class _MehndiThemeState extends State<MehndiTheme> with SingleTickerProviderStat
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                         ),
-                        builder: (context) => CustomDateTimeBottomSheet(
-                          onConfirm: (DateTime fullDateTime) {
+                        builder: (_) => CustomDateTimeBottomSheet(
+                          onConfirm: (fullDateTime) {
                             print("Selected DateTime: $fullDateTime");
                           },
                         ),
@@ -140,18 +131,16 @@ class _MehndiThemeState extends State<MehndiTheme> with SingleTickerProviderStat
             body: BlocBuilder<MehndiBloc, MehndiState>(
               builder: (context, state) {
                 List<Map<String, String>> themes = [];
+                List<String> galleryImages = [];
                 List<String> photos = [];
                 Map<int, int> ratingData = {};
-                List<String> galleryImages = [];
-
-                if (state is MehndiGalleryLoaded) {
-                  galleryImages = state.galleryImages;
-                }
 
                 if (state is ThemesMehndiLoaded) {
                   themes = state.themes;
                 }
-
+                if (state is MehndiGalleryLoaded) {
+                  galleryImages = state.galleryImages;
+                }
                 if (state is MehndiReviewLoaded) {
                   photos = state.photos;
                   ratingData = state.ratingData;
@@ -159,83 +148,7 @@ class _MehndiThemeState extends State<MehndiTheme> with SingleTickerProviderStat
 
                 return Column(
                   children: [
-                    // Top Card
-                    Container(
-                      width: 378,
-                      height: 162,
-                      margin: const EdgeInsets.only(left: 10, top: 10),
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFFAFAFA),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFFF4F4F4), width: 1),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (widget.mehndi['image'] != null)
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: widget.mehndi['image']!.startsWith('assets/')
-                                  ? Image.asset(
-                                widget.mehndi['image']!,
-                                height: 96,
-                                width: 350,
-                                fit: BoxFit.cover,
-                              )
-                                  : Image.network(
-                                widget.mehndi['image']!,
-                                height: 96,
-                                width: 308,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          const SizedBox(height: 3),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  widget.mehndi['name'] ?? '',
-                                  style: const TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF575959),
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  const Icon(Icons.star, color: Color(0xFFEFAA37), size: 16),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    widget.mehndi['rating'] ?? '0.0',
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xFF575959),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            widget.mehndi['price'] ?? '',
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF1E535B),
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    // Tabs
+                    _buildTopCard(),
                     TabBar(
                       controller: _tabController,
                       indicatorSize: TabBarIndicatorSize.label,
@@ -256,15 +169,13 @@ class _MehndiThemeState extends State<MehndiTheme> with SingleTickerProviderStat
                         Tab(text: 'Reviews'),
                       ],
                     ),
-
-                    // Tab Views
                     Expanded(
                       child: TabBarView(
                         controller: _tabController,
                         children: [
-                          ThemesMehndiScreen(mehndiItems: themes, mehndi: widget.mehndi ),
+                          ThemesMehndiScreen(mehndiItems: themes, mehndi: widget.mehndi),
                           const Getquotescreen(),
-                           MehndiImageList(),
+                          MehndiImageList(),
                           ReviewScreen(photos: photos, ratingData: ratingData),
                         ],
                       ),
@@ -275,6 +186,61 @@ class _MehndiThemeState extends State<MehndiTheme> with SingleTickerProviderStat
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildTopCard() {
+    return Container(
+      width: 378,
+      height: 162,
+      margin: const EdgeInsets.only(left: 10, top: 10),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFAFAFA),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFF4F4F4), width: 1),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (widget.mehndi['image'] != null)
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: widget.mehndi['image']!.startsWith('assets/')
+                  ? Image.asset(widget.mehndi['image']!, height: 96, width: 350, fit: BoxFit.cover)
+                  : Image.network(widget.mehndi['image']!, height: 96, width: 350, fit: BoxFit.cover),
+            ),
+          const SizedBox(height: 3),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  widget.mehndi['name'] ?? '',
+                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF575959)),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Row(
+                children: [
+                  const Icon(Icons.star, color: Color(0xFFEFAA37), size: 16),
+                  const SizedBox(width: 4),
+                  Text(
+                    widget.mehndi['rating'] ?? '0.0',
+                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Color(0xFF575959)),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 2),
+          Text(
+            widget.mehndi['price'] ?? '',
+            style: const TextStyle(fontSize: 12, color: Color(0xFF1E535B), fontWeight: FontWeight.w600),
+          ),
+        ],
       ),
     );
   }

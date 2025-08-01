@@ -6,9 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/account/account_state.dart';
 
+import '../../services/decoration/decoration_theme.dart';
 import '../../services/makeup_hair_service/MakeupDecor.dart';
 import '../../widgets/package_card.dart';
-import '../dashboard/decoration_theme.dart';
+
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
