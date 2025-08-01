@@ -1,18 +1,21 @@
-// Updated PackageDetails widget
-
 import 'package:aahwanam/models/subcategory_model.dart';
 import 'package:flutter/material.dart';
 import '../custom_ChangeAddressSheet.dart';
 import '../custom_event_date_time _picker.dart';
+import '../custom_text_field.dart';
 
 class PackageDetails extends StatelessWidget {
   final EventDetails eventpackagedetails;
   final bool showIncludedPackages;
+  final int quantity;
+  final ValueChanged<int>? onQuantityChanged;
 
   const PackageDetails({
     Key? key,
     required this.eventpackagedetails,
     required this.showIncludedPackages,
+    this.quantity = 1,
+    this.onQuantityChanged,
   }) : super(key: key);
 
   @override
@@ -23,11 +26,10 @@ class PackageDetails extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Main Image Container
             Padding(
               padding: const EdgeInsets.all(8),
               child: Container(
-                height: MediaQuery.of(context).size.height * 184 / 812,
+                height: MediaQuery.of(context).size.height * 200 / 812,
                 width: MediaQuery.of(context).size.width * 328 / 375,
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
@@ -58,20 +60,16 @@ class PackageDetails extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                eventpackagedetails.title ?? 'Service Package', // Dynamic title
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14.0,
-                                  color: Color(0xFF575959),
-                                ),
+                                eventpackagedetails.title ?? 'Service Package',
+                                style: TextFontStyle.textFontStyle(
+                                    14, const Color(0xFF575959), FontWeight.w400),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               Text(
                                 eventpackagedetails.eventPrice ?? "",
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14.0,
-                                  color: Color(0xFF575959),
-                                ),
+                                style: TextFontStyle.textFontStyle(
+                                    14, const Color(0xFF575959), FontWeight.w700),
                               ),
                             ],
                           ),
@@ -84,32 +82,23 @@ class PackageDetails extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'Description',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 16.0,
-                color: Color(0xFF575959),
-              ),
+              style: TextFontStyle.textFontStyle(
+                  16, const Color(0xFF575959), FontWeight.w700),
             ),
             const SizedBox(height: 8),
             Text(
-              eventpackagedetails.description ?? "", // Dynamic description
-              style: const TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 14.0,
-                color: Color(0xFF575959),
-              ),
+              eventpackagedetails.description ?? "",
+              style: TextFontStyle.textFontStyle(
+                  14, const Color(0xFF575959), FontWeight.w400),
             ),
             const SizedBox(height: 16),
             if (showIncludedPackages) ...[
-              const Text(
+              Text(
                 'Included in this Package are',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16.0,
-                  color: Color(0xFF575959),
-                ),
+                style: TextFontStyle.textFontStyle(
+                    16, const Color(0xFF575959), FontWeight.w700),
               ),
               const SizedBox(height: 8),
               ...(eventpackagedetails.packagesIncluded ?? []).map((point) {
@@ -118,24 +107,16 @@ class PackageDetails extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         "• ",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w400,
-                          color: Color.fromRGBO(117, 117, 117, 1),
-                        ),
+                        style: TextFontStyle.textFontStyle(
+                            14, const Color(0xFF757575), FontWeight.w400),
                       ),
                       Expanded(
                         child: Text(
                           point,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                            color: Color.fromRGBO(117, 117, 117, 1),
-                          ),
+                          style: TextFontStyle.textFontStyle(
+                              14, const Color(0xFF757575), FontWeight.w400),
                         ),
                       ),
                     ],
@@ -144,44 +125,32 @@ class PackageDetails extends StatelessWidget {
               }).toList(),
               const SizedBox(height: 16),
             ],
-            const Text(
+            Text(
               'Event Details',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 16.0,
-                color: Color(0xFF575959),
-              ),
+              style: TextFontStyle.textFontStyle(
+                  16, const Color(0xFF575959), FontWeight.w700),
             ),
             const SizedBox(height: 12),
             const EventDateTimePicker(),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'Event Address',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 16.0,
-                color: Color(0xFF575959),
-              ),
+              style: TextFontStyle.textFontStyle(
+                  16, const Color(0xFF575959), FontWeight.w700),
             ),
             const SizedBox(height: 8),
             const CustomChangeAddressSheet(),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'Previous Work',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 16.0,
-                color: Color(0xFF575959),
-              ),
+              style: TextFontStyle.textFontStyle(
+                  16, const Color(0xFF575959), FontWeight.w700),
             ),
             const SizedBox(height: 8),
             Text(
-              eventpackagedetails.title ?? 'Our Work', // Dynamic work title
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 14.0,
-                color: Color(0xFF575959),
-              ),
+              eventpackagedetails.title ?? 'Our Work',
+              style: TextFontStyle.textFontStyle(
+                  14, const Color(0xFF575959), FontWeight.w600),
             ),
             const SizedBox(height: 8),
             _buildPreviousWorkList(),
@@ -201,20 +170,31 @@ class PackageDetails extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: const [
-          Icon(Icons.remove, size: 20, color: Color(0xFF575959)),
+        children: [
+          IconButton(
+            icon: const Icon(Icons.remove, size: 20, color: Color(0xFF575959)),
+            onPressed: () {
+              if (quantity > 0) {
+                onQuantityChanged?.call(quantity - 1);
+              }
+            },
+            splashRadius: 20,
+          ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              '1',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF575959),
-              ),
+              '$quantity',
+              style: TextFontStyle.textFontStyle(
+                  16, const Color(0xFF575959), FontWeight.bold),
             ),
           ),
-          Icon(Icons.add, size: 20, color: Color(0xFF575959)),
+          IconButton(
+            icon: const Icon(Icons.add, size: 20, color: Color(0xFF575959)),
+            onPressed: () {
+              onQuantityChanged?.call(quantity + 1);
+            },
+            splashRadius: 20,
+          ),
         ],
       ),
     );

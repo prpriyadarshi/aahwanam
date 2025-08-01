@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/account/account_event.dart';
 import 'package:aahwanam/blocs/account/account_state.dart';
@@ -11,10 +13,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../dashboard/dashboard_screen.dart';
 import 'cart_screen.dart';
+import 'package:image_picker/image_picker.dart';
 
-
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
+
+  @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  File? _profileImage; // ✅ store picked image
+
+  Future<void> _pickProfileImage() async {
+    final picker = ImagePicker();
+    final pickedFile =
+        await picker.pickImage(source: ImageSource.gallery); // or camera
+    if (pickedFile != null) {
+      setState(() {
+        _profileImage = File(pickedFile.path); // ✅ update state
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,136 +53,233 @@ class AccountScreen extends StatelessWidget {
               );
             },
           ),
-
-
         ),
         body: BlocBuilder<AccountBloc, AccountState>(
           builder: (context, state) {
             if (state is AccountLoading) {
               return const Center(child: CircularProgressIndicator());
-            }
-            else if (state is AccountLoaded) {
+            } else if (state is AccountLoaded) {
               return ListView(
                 padding: const EdgeInsets.all(12),
                 children: [
                   Card(
                     color: const Color(0xFF1E535B),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                    child: ListTile(
-                      leading: CircleAvatar(backgroundImage: AssetImage(state.profileUrl)),
-                      title: Text(
-                        '${state.firstName} ${state.lastName}',
-                        style: const TextStyle(color: Colors.white),
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(16), // ✅ border-radius: 16px
+                    ),
+                    child: SizedBox(
+                      width: 328, // ✅ fixed width
+                      height: 83, // ✅ fixed height
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 16),
+                        child: Row(
+                          children: [
+                            // ✅ Profile Image with edit icon
+                            Stack(
+                              children: [
+                                CircleAvatar(
+                                  radius: 25.5, // ✅ diameter ~51px
+                                  backgroundImage: AssetImage(state.profileUrl),
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: GestureDetector(
+                                    onTap: _pickProfileImage,
+                                    // Implement method
+                                    child: Container(
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.edit,
+                                        size: 14,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 12),
+
+                            // ✅ Texts: Name & Email
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '${state.firstName} ${state.lastName}',
+                                  style: const TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    height: 1.0, // ✅ line-height: 100%
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  state.email,
+                                  style: const TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: Color(0xFFE4E4E4),
+                                    height: 1.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      subtitle: Text(state.email, style: const TextStyle(color: Colors.white70)),
                     ),
                   ),
                   const SizedBox(height: 10),
-                  const Text("Your Information", style: TextStyle(fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      height: 1.0, // 100% line-height
-                      letterSpacing: 0,
-                      color: Color(0xFF575959))),
-                  CustomTile(imagePath: 'assets/images/Vector.png', title: 'Profile', bgColor: Color(0xFFE3FDEE), onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) {
-                          return BlocProvider.value(
-                            value: BlocProvider.of<AccountBloc>(context),
-                            child: const ProfileScreen(),
-                          );
-                        },
-                      ),
-                    );
-
-                  },),
-                  CustomTile(imagePath: 'assets/images/bookings.png', title: 'Bookings', bgColor: Color(0xFFDFE3FF), onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) {
-                          return BlocProvider.value(
-                            value: BlocProvider.of<AccountBloc>(context),
-                            child: const BookingScreen(),
-                          );
-                        },
-                      ),
-                    );
-                  }),
-                  CustomTile(imagePath: 'assets/images/cart.png', title: 'Cart', bgColor: Color(0xFFDFF4FF), onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) {
-                          return BlocProvider.value(
-                            value: BlocProvider.of<AccountBloc>(context),
-                            child: const CartScreen(),
-                          );
-                        },
-                      ),
-                    );
-                  }),
-                  CustomTile(imagePath: 'assets/images/wishlist.png', title: 'Wishlist', bgColor: Color(0xFFFFECEC), onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) {
-                          return BlocProvider.value(
-                            value: BlocProvider.of<AccountBloc>(context),
-                            child: const WishlistScreen(),
-                          );
-                        },
-                      ),
-                    );
-                  }),
-                  CustomTile(imagePath: 'assets/images/mypackages.png', title: 'My Packages', bgColor: Color(0xFFE9FFE2), onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) {
-                          return BlocProvider.value(
-                            value: BlocProvider.of<AccountBloc>(context),
-                            child: const MyPackagesScreen(),
-                          );
-                        },
-                      ),
-                    );
-                  }),
+                  const Text("Your Information",
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          height: 1.0,
+                          // 100% line-height
+                          letterSpacing: 0,
+                          color: Color(0xFF575959))),
+                  CustomTile(
+                    imagePath: 'assets/images/Vector.png',
+                    title: 'Profile',
+                    bgColor: Color(0xFFE3FDEE),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) {
+                            return BlocProvider.value(
+                              value: BlocProvider.of<AccountBloc>(context),
+                              child: const ProfileScreen(),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                  CustomTile(
+                      imagePath: 'assets/images/bookings.png',
+                      title: 'Bookings',
+                      bgColor: Color(0xFFDFE3FF),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) {
+                              return BlocProvider.value(
+                                value: BlocProvider.of<AccountBloc>(context),
+                                child: const BookingScreen(),
+                              );
+                            },
+                          ),
+                        );
+                      }),
+                  CustomTile(
+                      imagePath: 'assets/images/cart.png',
+                      title: 'Cart',
+                      bgColor: Color(0xFFDFF4FF),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) {
+                              return BlocProvider.value(
+                                value: BlocProvider.of<AccountBloc>(context),
+                                child: const CartScreen(),
+                              );
+                            },
+                          ),
+                        );
+                      }),
+                  CustomTile(
+                      imagePath: 'assets/images/wishlist.png',
+                      title: 'Wishlist',
+                      bgColor: Color(0xFFFFECEC),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) {
+                              return BlocProvider.value(
+                                value: BlocProvider.of<AccountBloc>(context),
+                                child: const WishlistScreen(),
+                              );
+                            },
+                          ),
+                        );
+                      }),
+                  CustomTile(
+                      imagePath: 'assets/images/mypackages.png',
+                      title: 'My Packages',
+                      bgColor: Color(0xFFE9FFE2),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) {
+                              return BlocProvider.value(
+                                value: BlocProvider.of<AccountBloc>(context),
+                                child: const MyPackagesScreen(),
+                              );
+                            },
+                          ),
+                        );
+                      }),
                   const SizedBox(height: 10),
-                  const Text("Other", style: TextStyle(fontWeight: FontWeight.bold)),
-                  CustomTile(imagePath: 'assets/images/budget planner.png', title: 'Budget Planner', bgColor: Color(0xFFFFF4DF), onTap: () {}),
-                  CustomTile(imagePath: 'assets/images/refer people.png', title: 'Refer People', bgColor: Color(0xFFFFE8FB), onTap: () {}),
+                  const Text("Other",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  CustomTile(
+                      imagePath: 'assets/images/budget planner.png',
+                      title: 'Budget Planner',
+                      bgColor: Color(0xFFFFF4DF),
+                      onTap: () {}),
+                  CustomTile(
+                      imagePath: 'assets/images/refer people.png',
+                      title: 'Refer People',
+                      bgColor: Color(0xFFFFE8FB),
+                      onTap: () {}),
                   const SizedBox(height: 80),
                   Container(
                     width: 328,
                     height: 40,
-                    margin: const EdgeInsets.only(left: 10, top: 16), // Optional: Matches your `left` and `top`
+                    margin: const EdgeInsets.only(left: 10, top: 16),
+                    // Optional: Matches your `left` and `top`
                     child: OutlinedButton(
                       onPressed: () {
                         // Handle logout action here
                       },
                       style: OutlinedButton.styleFrom(
-                        side: const BorderSide(width: 1, color: Color(0xFF1E535B)), // Border width and color
+                        side: const BorderSide(
+                            width: 1,
+                            color: Color(0xFF1E535B)), // Border width and color
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12), // Border radius
+                          borderRadius:
+                              BorderRadius.circular(12), // Border radius
                         ),
                         backgroundColor: Colors.transparent,
                       ),
-                      child: const Text("Logout", style: TextStyle(color: Color(0xFF1E535B))),
+                      child: const Text("Logout",
+                          style: TextStyle(color: Color(0xFF1E535B))),
                     ),
                   )
-
                 ],
               );
-            }
-            else if (state is AccountError) {
+            } else if (state is AccountError) {
               return Center(child: Text(state.message));
             }
             return const SizedBox.shrink();
           },
-
         ),
       ),
     );
