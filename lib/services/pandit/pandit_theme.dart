@@ -4,9 +4,18 @@ import '../../blocs/pandit/pandit_bloc.dart';
 import '../../blocs/pandit/pandit_event.dart';
 import '../../blocs/pandit/pandit_state.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
+import '../../widgets/custom_language_dropdown.dart';
 
-class PanditTheme extends StatelessWidget {
+class PanditTheme extends StatefulWidget {
   const PanditTheme({super.key});
+
+  @override
+  State<PanditTheme> createState() => _PanditThemeState();
+}
+
+class _PanditThemeState extends State<PanditTheme> {
+  final List<String> languages = ['English', 'Hindi', 'Telugu', 'Tamil'];
+  String? selectedLanguage;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +23,6 @@ class PanditTheme extends StatelessWidget {
       create: (_) => PanditBloc()..add(FetchPandit()),
       child: Scaffold(
         appBar: AppBar(
-
           elevation: 0,
           automaticallyImplyLeading: false,
           scrolledUnderElevation: 0,
@@ -25,9 +33,7 @@ class PanditTheme extends StatelessWidget {
             children: [
               IconButton(
                 icon: const Icon(Icons.arrow_back_ios_new, size: 24, color: Color(0xFF1E535B)),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                onPressed: () => Navigator.pop(context),
                 padding: const EdgeInsets.only(left: 8),
                 splashRadius: 20,
                 constraints: const BoxConstraints(),
@@ -87,109 +93,166 @@ class PanditTheme extends StatelessWidget {
             if (state is PanditLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is PanditLoaded) {
-              return ListView.builder(
-                itemCount: state.Theme.length,
-                padding: const EdgeInsets.all(12),
-                itemBuilder: (context, index) {
-                  final pooja = state.Theme[index];
-                  return Card(
-                    elevation: 1,
-                    color: const Color(0xFFFFEFDF),
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+              return Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  children: [
+                    /// Header Row
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Pooja Theme",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF575959),
+                          ),
+                        ),
+                        CustomDropdown(
+                          hintText: "Select Language",
+                          items: languages,
+                          selectedItem: selectedLanguage,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedLanguage = value;
+                            });
+                            context.read<PanditBloc>().add(UpdateSelectedLanguage(value!));
+                          },
+                          width: 160,
+                          height: 30,
+                        ),
+                      ],
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          /// Title and Price
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  pooja['title'] ?? '',
-                                  style: const TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                    color: Color(0xFF575959), // using your requested hex color
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
+                    const SizedBox(height: 12),
 
-                              const SizedBox(width: 10),
-                              Text(
-                                pooja['price'] ?? '',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                  color: Color(0xFF1E535B),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
+                    /// Pooja List
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: state.Theme.length,
+                        itemBuilder: (context, index) {
+                          final pooja = state.Theme[index];
 
-                          /// Description
-                          Text(
-                            pooja['description'] ?? '',
-                            style: const TextStyle(fontSize: 14),
-                          ),
-                          const SizedBox(height: 8),
-
-                          /// Details
-                          Text(
-                            pooja['details'] ?? '',
-                            style: const TextStyle(
-
-                              fontSize: 14,
+                          return Card(
+                            elevation: 1,
+                            color: const Color(0xFFFFEFDF),
+                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                          ),
-                          const SizedBox(height: 8),
-
-                          /// Duration
-                          Text(
-                            "Duration - ${pooja['duration'] ?? 'N/A'}",
-                            style: const TextStyle(fontSize: 14),
-                          ),
-                          const SizedBox(height: 12),
-
-                          /// Footer Row
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  "Includes Purohit's dakshina & travel (within city)",
-                                  style: const TextStyle(fontSize: 12),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              const SizedBox(width: 6),
-                              Row(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Icon(Icons.star,
-                                      color: Colors.orange, size: 18),
-                                  const SizedBox(width: 4),
+                                  /// Title and Price
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          pooja['title'] ?? '',
+                                          style: const TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16,
+                                            color: Color(0xFF575959),
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        pooja['price'] ?? '',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 15,
+                                          color: Color(0xFF1E535B),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+
+                                  /// Description
                                   Text(
-                                    pooja['rating'] ?? '0',
+                                    pooja['description'] ?? '',
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0xFF757575),
+                                    ),
+                                  ),
+
+                                  /// Heading and Details
+                                  if ((pooja['details_heading'] ?? '').isNotEmpty)
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 6),
+                                      child: Text(
+                                        pooja['details_heading']!,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xFF575959),
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+
+                                  if ((pooja['details'] ?? '').isNotEmpty)
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 2),
+                                      child: Text(
+                                        pooja['details']!,
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xFF575959), // Updated as requested
+                                        ),
+                                      ),
+                                    ),
+
+                                  const SizedBox(height: 8),
+
+                                  /// Duration
+                                  Text(
+                                    "Duration - ${pooja['duration'] ?? 'N/A'}",
                                     style: const TextStyle(fontSize: 14),
+                                  ),
+                                  const SizedBox(height: 12),
+
+                                  /// Address and Rating
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          pooja['address'] ?? '',
+                                          style: const TextStyle(fontSize: 12),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Row(
+                                        children: [
+                                          const Icon(Icons.star, color: Colors.orange, size: 18),
+                                          const SizedBox(width: 4),
+                                          Text(
+                                            pooja['rating'] ?? '0',
+                                            style: const TextStyle(fontSize: 14),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                        ],
+                            ),
+                          );
+                        },
                       ),
                     ),
-                  );
-                },
+                  ],
+                ),
               );
             } else if (state is PanditLoadedError) {
               return Center(
@@ -206,6 +269,7 @@ class PanditTheme extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildSearchBar() {
     return TextField(
       decoration: InputDecoration(
