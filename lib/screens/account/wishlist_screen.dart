@@ -119,38 +119,38 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                   final item = wishlistItems[index];
                                   return Padding(
                                     padding: const EdgeInsets.only(bottom: 12),
-                                    child: PackageCard(
-                                      title: item['title'],
-                                      description: item['description'],
-                                      price: item['price'],
-                                      imagePath: item['imagePath'],
-                                      rating: item['rating'],
-                                      showLikeIcon: true,
-                                      primaryButtonText: "Book Now",
-                                      onPrimaryButtonPressed: () {
-                                        showModalBottomSheet(
-                                          context: context,
-                                          isScrollControlled: true,
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                                          ),
-                                          builder: (context) {
-                                            return BookingBottomSheet(
-                                              booking: item, // You can pass more data if needed
-                                            );
-                                          },
-                                        );
-                                      },
-                                      secondaryButtonText: "Remove",
-                                      onSecondaryButtonPressed: () {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                              content: Text(
-                                                  "${item['title']} removed from Wishlist")),
-                                        );
-                                      },
-                                    ),
+                                    // child: PackageCard(
+                                    //   title: item['title'],
+                                    //   description: item['description'],
+                                    //   price: item['price'],
+                                    //   imagePath: item['imagePath'],
+                                    //   rating: item['rating'],
+                                    //   showLikeIcon: true,
+                                    //   primaryButtonText: "Book Now",
+                                    //   onPrimaryButtonPressed: () {
+                                    //     showModalBottomSheet(
+                                    //       context: context,
+                                    //       isScrollControlled: true,
+                                    //       shape: const RoundedRectangleBorder(
+                                    //         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                    //       ),
+                                    //       builder: (context) {
+                                    //         return BookingBottomSheet(
+                                    //           booking: item, // You can pass more data if needed
+                                    //         );
+                                    //       },
+                                    //     );
+                                    //   },
+                                    //   secondaryButtonText: "Remove",
+                                    //   onSecondaryButtonPressed: () {
+                                    //     ScaffoldMessenger.of(context)
+                                    //         .showSnackBar(
+                                    //       SnackBar(
+                                    //           content: Text(
+                                    //               "${item['title']} removed from Wishlist")),
+                                    //     );
+                                    //   },
+                                    // ),
                                   );
                                 },
                               )

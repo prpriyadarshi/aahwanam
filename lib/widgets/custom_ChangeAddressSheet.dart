@@ -17,7 +17,7 @@ class CustomChangeAddressSheet extends StatelessWidget {
         ),
 
         color: const Color(0xFFFAFAFA),
-        border: Border.all(width: 1, color: const Color(0xFFF4F4F4)),
+
         borderRadius: BorderRadius.circular(8.0),
       ),
 
