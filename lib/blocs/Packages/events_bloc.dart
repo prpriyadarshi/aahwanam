@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/Event_model.dart';
+import '../../models/subcategory_model.dart';
 import 'events_event.dart';
 import 'events_state.dart';
 

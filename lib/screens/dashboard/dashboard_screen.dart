@@ -26,15 +26,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    DashboardContent(), // Full dashboard content
-    ServicesScreen(),
+    DashboardContent(), // Index 0
+    ServicesScreen(),   // Index 1
     BlocProvider(
       create: (_) => ConceptsBloc(),
-      child: ConceptsScreen(),
+      child: ConceptsScreen(), // Index 2
     ),
-    const AccountScreen(),
-    const EventScreen()
-    // const event(),
+    const AccountScreen(), // Index 3
+    const EventScreen(showPopupOnLoad: true), // Index 4: Event Screen with popup flag
   ];
 
   void _onItemTapped(int index) {
@@ -48,7 +47,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_selectedIndex],
-      bottomNavigationBar:  _selectedIndex != 3
+      bottomNavigationBar: _selectedIndex != 3
           ? CustomBottomNavBar(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
@@ -75,20 +74,18 @@ class DashboardContent extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    // Handle onPressed action here
                     print("Location icon pressed");
                   },
                   child: Image.asset(
-                    'assets/images/location.png', // Replace with your image path
-                    width: 24, // Adjust size
-                    height: 24, // Adjust size
+                    'assets/images/location.png',
+                    width: 24,
+                    height: 24,
                   ),
                 ),
                 SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Row(
                       children: [
                         Text(
@@ -96,18 +93,9 @@ class DashboardContent extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959), // Adjust text color
+                            color: Color(0xFF575959),
                           ),
                         ),
-
-
-
-                        // IconButton(onPressed: (){},
-                        //   icon: Icon(
-                        //     Icons.arrow_drop_down,
-                        //     color: Color(0xFF575959), // Adjust icon color
-                        //   ),
-                        // )
                       ],
                     ),
                     Text(
@@ -115,7 +103,7 @@ class DashboardContent extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xFF757575), // Adjust secondary text color
+                        color: Color(0xFF757575),
                       ),
                     ),
                   ],
@@ -127,33 +115,27 @@ class DashboardContent extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    // Handle onPressed action here
                     print("cart icon pressed");
                   },
                   child: Image.asset(
-                    'assets/images/cart.png', // Replace with your image path
-                    width: 24, // Adjust size
-                    height: 24, // Adjust size
+                    'assets/images/cart.png',
+                    width: 24,
+                    height: 24,
                   ),
                 ),
-
                 SizedBox(width: 10,),
                 IconButton(
-                  onPressed: () {
-                    // Handle favorite action
-                  },
+                  onPressed: () {},
                   icon: Icon(
                     Icons.favorite,
-                    color: Colors.red, // Adjust icon color
+                    color: Colors.red,
                   ),
                 ),
                 IconButton(
-                  onPressed: () {
-                    // Navigate to notifications
-                  },
+                  onPressed: () {},
                   icon: Icon(
                     Icons.notifications,
-                    color: Color(0xFF004d40), // Adjust icon color
+                    color: Color(0xFF004d40),
                   ),
                 ),
               ],
@@ -161,18 +143,17 @@ class DashboardContent extends StatelessWidget {
           ],
         ),
       ),
-        backgroundColor: Colors.white,
-        body: BlocProvider(
+      backgroundColor: Colors.white,
+      body: BlocProvider(
         create: (context) => DashboardBloc()..add(LoadDashboardData()),
         child: BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, state) {
             if (state is DashboardLoading) {
               return const Center(
-                child:
-                SpinKitSpinningLines(
-                color: Color(0xFF1E535B), // Customize color as needed
-                size: 50.0, // Customize size
-              ),
+                child: SpinKitSpinningLines(
+                  color: Color(0xFF1E535B),
+                  size: 50.0,
+                ),
               );
             } else if (state is DashboardLoaded) {
               return Padding(
@@ -185,7 +166,6 @@ class DashboardContent extends StatelessWidget {
                       const SizedBox(height: 5),
                       _buildSliderSection(state.sliderImages),
                       const SizedBox(height: 5),
-
                       CustomCircleWidget(
                         heading: "Categories",
                         categories: state.categories,
@@ -205,14 +185,12 @@ class DashboardContent extends StatelessWidget {
                             'Mehndi': AppRoutes.mehndi,
                             'Decor': AppRoutes.decor,
                             'Pandit': AppRoutes.pandit,
-                            // Add more categories and routes here
                           };
 
                           final routeName = categoryRoutes[categoryName];
                           if (routeName != null) {
                             Navigator.pushNamed(context, routeName);
                           } else {
-                            // Handle cases where a route is not mapped
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('No route available for $categoryName')),
                             );
@@ -221,30 +199,22 @@ class DashboardContent extends StatelessWidget {
                         onViewAll: () {
                           final dashboardScreenState = context.findAncestorStateOfType<_DashboardScreenState>();
                           if (dashboardScreenState != null) {
-                            dashboardScreenState._onItemTapped(1); // Navigate to Services tab
+                            dashboardScreenState._onItemTapped(1);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('Unable to navigate to Services tab')),
                             );
                           }
                         },
-
                       ),
-
-
-
                       const SizedBox(height: 5),
-                      // Decorators Section
                       CustomCardWidgets.buildSection(
                         context,
                         title: "Decorators in your city",
                         data: state.decorators,
                         showViewAll: true,
-
                         onViewAll: () => _navigateTo(context, "Decorators"),
                       ),
-
-                      // Mehndi Artists Section
                       CustomCardWidgets.buildSection(
                         context,
                         title: "Mehndi Artists for you",
@@ -252,10 +222,8 @@ class DashboardContent extends StatelessWidget {
                         showViewAll: true,
                         onViewAll: () => _navigateTo(context, "Mehndi Artists"),
                       ),
-
-                      // Trending Section
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0, right: 8.0, bottom: 8.0), // No left padding
+                        padding: const EdgeInsets.only(top: 8.0, right: 8.0, bottom: 8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -298,15 +266,11 @@ class DashboardContent extends StatelessWidget {
                           ),
                         ),
                       ),
-
-
-                      // Packages for all Section
                       CustomCardWidgets.buildSection(
                         context,
                         title: "Packages for all events",
                         data: state.packagesForAllItems,
                         showViewAll: true,
-
                         onViewAll: () => _navigateTo(context, "Mehndi Artists"),
                       ),
                     ],
@@ -346,15 +310,15 @@ Widget _buildSliderSection(List<String> images) {
         borderRadius: BorderRadius.circular(12.0),
         child: image.startsWith('assets/')
             ? Image.asset(
-                image,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              )
+          image,
+          fit: BoxFit.cover,
+          width: double.infinity,
+        )
             : Image.network(
-                image,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
+          image,
+          fit: BoxFit.cover,
+          width: double.infinity,
+        ),
       );
     }).toList(),
     options: CarouselOptions(
@@ -367,6 +331,5 @@ Widget _buildSliderSection(List<String> images) {
 }
 
 void _navigateTo(BuildContext context, String section) {
-  // Navigation logic
   Navigator.pushNamed(context, '/$section');
 }

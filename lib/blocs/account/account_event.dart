@@ -15,5 +15,3 @@ class UpdateAccountInfo extends AccountEvent {
     required this.email,
   });
 }
-
-

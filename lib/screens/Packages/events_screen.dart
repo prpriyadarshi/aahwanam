@@ -4,8 +4,9 @@ import '../../blocs/Packages/events_bloc.dart';
 import '../../blocs/Packages/events_event.dart';
 import '../../blocs/Packages/events_state.dart';
 import '../../routes/app_routes.dart';
+import '../../widgets/custom_text_field.dart';
 import '../../widgets/custom_top_bar.dart';
-import 'event_details_popup.dart';
+import 'event_details_popup.dart'; // Ensure this import is correct
 
 class EventScreen extends StatefulWidget {
   final bool showPopupOnLoad;
@@ -28,6 +29,7 @@ class _EventScreenState extends State<EventScreen> {
     });
 
     if (widget.showPopupOnLoad) {
+      // Delay before showing the popup to allow the screen to render first
       Future.delayed(const Duration(milliseconds: 500), () {
         if (!_popupShown) {
           _popupShown = true;
@@ -38,9 +40,11 @@ class _EventScreenState extends State<EventScreen> {
   }
 
   void _showEventDetailPopup() {
-    showDialog(
+    // Corrected to use showModalBottomSheet for bottom-up animation
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: true,
+      isScrollControlled: true, // Allows the sheet to take up more space
+      backgroundColor: Colors.transparent,
       builder: (_) => const EventDetailsPopup(),
     );
   }
@@ -55,19 +59,15 @@ class _EventScreenState extends State<EventScreen> {
       appBar: CustomTopBar(
         onBack: () => Navigator.pop(context),
         onSearchChanged: (value) {
-          // Optional: handle live search/filtering
           print("Search typed: $value");
         },
         onCalendarTap: () {
-          // Optional: add logic for calendar
           print("Calendar tapped");
         },
         onCartTap: () {
-          // Optional: navigate to cart
           print("Cart tapped");
         },
         onFavoriteTap: () {
-          // Optional: show favorites
           print("Favorite tapped");
         },
       ),
@@ -84,13 +84,9 @@ class _EventScreenState extends State<EventScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                     Text(
                       "Events",
-                      style: TextStyle(
-                        color: Color(0xFF575959),
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: TextFontStyle.textFontStyle(18,const Color(0xFF575959),FontWeight.w500),
                     ),
                     const SizedBox(height: 16),
                     GridView.builder(
@@ -101,7 +97,7 @@ class _EventScreenState extends State<EventScreen> {
                         crossAxisCount: crossAxisCount,
                         mainAxisSpacing: 12,
                         crossAxisSpacing: 14,
-                        childAspectRatio: 0.70,
+                        childAspectRatio: 0.65,
                       ),
                       itemBuilder: (context, index) {
                         final event = state.events[index];
@@ -133,14 +129,10 @@ class _EventScreenState extends State<EventScreen> {
                               Text(
                                 event['name'] ?? '',
                                 textAlign: TextAlign.center,
-                                maxLines: 2,
+                                maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  color: Color(0xFF575959),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                                style:TextFontStyle.textFontStyle(12,const Color(0xFF575959), FontWeight.w400),
                                 ),
-                              ),
                             ],
                           ),
                         );
@@ -151,7 +143,6 @@ class _EventScreenState extends State<EventScreen> {
               ),
             );
           }
-
           return const SizedBox.shrink();
         },
       ),

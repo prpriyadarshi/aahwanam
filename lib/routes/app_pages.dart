@@ -30,6 +30,7 @@ import '../blocs/makeup/makeup_bloc.dart';
 import '../blocs/mehndi/mehndi_bloc.dart';
 import '../blocs/valetParking/valetParking_bloc.dart';
 import '../screens/Packages/event_details_popup.dart';
+import '../screens/Packages/event_details_screen.dart';
 import '../screens/Packages/events_screen.dart';
 import '../screens/Subcategory/subcategory_screen.dart';
 import '../screens/auth/otp_verification_screen.dart';
@@ -83,6 +84,7 @@ class AppPages {
       AppRoutes.concepts: ConceptsScreen(),
       AppRoutes.event:EventScreen(),
       AppRoutes.Subcategory: SubcategoryScreen(),
+      AppRoutes.EventDetail: EventDetailsScreen(serviceId: '',),
 
     };
 

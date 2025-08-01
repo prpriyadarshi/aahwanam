@@ -11,7 +11,7 @@ class ServiceOverviewTab extends StatelessWidget {
   final String eventTitle;
   final String address;
   final String addressDescription;
-  final VoidCallback onChangeAddress;
+    final VoidCallback onChangeAddress;
   final String? label1;
   final String? label2;
   final String? initialValue1;
