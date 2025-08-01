@@ -56,10 +56,10 @@ class MehndiBloc extends Bloc<MehndiEvent, MehndiState> {
         case 0:
         // Themes
           final themes = [
-            {'image': 'assets/images/Mehndi & Beauty.png', 'name': 'Mehndi & Beauty', 'price': '₹5,000 Onwards', 'rating': '4.5'},
-            {'image': 'assets/images/Mehndi & Beauty1.png', 'name': 'Mehndi Stars', 'price': '₹3,000 Onwards', 'rating': '4.3'},
-            {'image': 'assets/images/Mehndi & Art.png', 'name': 'Mehndi & Art', 'price': '₹4,000 Onwards', 'rating': '4.5'},
-            {'image': 'assets/images/Iconic Mehndi.png', 'name': 'Iconic Mehndi', 'price': '₹15,000 Onwards', 'rating': '4.3'},
+            {'image': 'assets/images/Mehndi & Beauty.png', 'name': 'Mehndi & Beauty', 'price': '₹5,000 ', 'rating': '4.5'},
+            {'image': 'assets/images/Mehndi & Beauty1.png', 'name': 'Mehndi Stars', 'price': '₹3,000 ', 'rating': '4.3'},
+            {'image': 'assets/images/Mehndi & Art.png', 'name': 'Mehndi & Art', 'price': '₹4,000 ', 'rating': '4.5'},
+            {'image': 'assets/images/Iconic Mehndi.png', 'name': 'Iconic Mehndi', 'price': '₹15,000 ', 'rating': '4.3'},
           ];
           emit(ThemesMehndiLoaded(themes));
           break;
@@ -68,12 +68,22 @@ class MehndiBloc extends Bloc<MehndiEvent, MehndiState> {
           emit(GetQuotesMehndiLoaded());
           break;
         case 2:
-        // Gallery
-          emit(MehndiGalleryLoaded(galleryImages: [
-            'assets/images/m1.png',
-            'assets/images/m2.png',
-            'assets/images/m3.png',
-          ]));
+          final galleryImages = [
+            'assets/images/Mehndi & Beauty.png',
+            'assets/images/Mehndi & Beauty1.png',
+            'assets/images/Mehndi & Art.png',
+            'assets/images/Iconic Mehndi.png',
+            'assets/images/TrendingMehndi4.png',
+            'assets/images/TrendingMehndi.png',
+            'assets/images/TrendingMehndi1.png',
+            'assets/images/TrendingMehndi2.png',
+            'assets/images/TrendingMehndi3.png',
+            'assets/images/TrendingMehndi4.png',
+            'assets/images/Mehndi & Art.png',
+          ];
+
+          emit(MehndiGalleryLoaded(galleryImages: galleryImages));
+
           break;
         case 3:
         // Reviews

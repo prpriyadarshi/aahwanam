@@ -5,13 +5,10 @@ abstract class ChefEvent extends Equatable {
 
   @override
   List<Object?> get props => [];
-
 }
 
-// Event to fetch chef data
 class FetchChefs extends ChefEvent {}
 
-// Event to select a specific chef
 class SelectChefs extends ChefEvent {
   final String chefId;
 
@@ -19,4 +16,13 @@ class SelectChefs extends ChefEvent {
 
   @override
   List<Object?> get props => [chefId];
+}
+
+class LoadChefTabScreen extends ChefEvent {
+  final int index;
+
+  const LoadChefTabScreen(this.index);
+
+  @override
+  List<Object?> get props => [index];
 }

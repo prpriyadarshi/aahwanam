@@ -93,7 +93,7 @@ class MakeupHairService extends StatelessWidget {
               return SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                  child: CustomCardMakUpWidgets.buildSection(
+                  child: CustomCardMakeUpWidgets.buildSection(
                     context,
                     title: "Makeup",
                     data: state.makeupAndHairArtists,

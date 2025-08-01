@@ -38,7 +38,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
               ),
               onPressed: () {  },
               child: const Text(
-                "Proceed to Pay ₹2,100",
+                "Proceed to Pay ₹1",
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),

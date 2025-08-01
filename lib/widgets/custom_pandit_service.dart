@@ -1,0 +1,154 @@
+import 'package:flutter/material.dart';
+
+import '../services/pandit/pandit_theme.dart';
+
+class CustomPanditCardWidgets {
+  static Widget buildSection(
+      BuildContext context, {
+        required String title,
+        required List<Map<String, String>> data,
+        required VoidCallback onViewAll,
+        required bool showViewAll,
+      }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 0),
+
+        ),
+        const SizedBox(height: 10),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 13.0,
+            mainAxisSpacing: 13.0,
+            childAspectRatio: 1.05,
+          ),
+          itemCount: data.length,
+          padding: EdgeInsets.zero,
+          itemBuilder: (context, index) {
+            final item = data[index];
+            return buildCarditem(context as BuildContext, item,data);
+          },
+
+        ),
+      ],
+    );
+  }
+  static Widget buildCarditem(BuildContext context, Map<String, String> item, List<Map<String, String>> data) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PanditTheme(),
+          ),
+        );
+      },
+      child: Card(
+        elevation: 0,
+        color: const Color(0xFFFFEFDF),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6.0),
+        ),
+        margin: EdgeInsets.zero,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(6.0),
+                  ),
+                  child: item['image'] != null && item['image']!.startsWith('assets/')
+                      ? Image.asset(
+                    item['image']!,
+                    height: 120,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  )
+                      : Image.network(
+                    item['image'] ?? '',
+                    height: 120,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const Positioned(
+                  top: 8,
+                  right: 8,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 10,
+                    child: Icon(
+                      Icons.favorite_border,
+                      size: 14,
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          item['name'] ?? '',
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF575959),
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          const Icon(Icons.star,
+                              color: Color(0xFFEFAA37), size: 16),
+                          const SizedBox(width: 4),
+                          Text(
+                            item['rating'] ?? "0.0",
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF575959),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4.0),
+                  Text(
+                    item['price'] ?? '',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF1E535B),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
