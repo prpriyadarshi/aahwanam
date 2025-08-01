@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/custom_text_field.dart';
+
 class ReviewList extends StatelessWidget {
   final List<dynamic> reviews;
   final List<String> galleryImages;
@@ -11,7 +13,7 @@ class ReviewList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          Text(stars.toString(), style: const TextStyle(fontSize: 14)),
+          Text(stars.toString(), style: TextFontStyle.textFontStyle( 14, Colors.black87)),
           const SizedBox(width: 4),
           const Icon(Icons.star, color: Colors.amber, size: 16),
           const SizedBox(width: 6),
@@ -25,7 +27,7 @@ class ReviewList extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          Text(count.toString(), style: const TextStyle(fontSize: 14)),
+          Text(count.toString(), style: TextFontStyle.textFontStyle( 14, Colors.black87)),
         ],
       ),
     );
@@ -56,13 +58,8 @@ class ReviewList extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Rating & Reviews",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: Color(0xFF575959),
-                      )),
+                    Text("Rating & Reviews",
+                      style: TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500)),
                     const SizedBox(height: 12),
                     _buildRatingRow(5, 80),
                     _buildRatingRow(4, 60),
@@ -83,25 +80,17 @@ class ReviewList extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10), // Rounded pill shape
                         ),
                       ),
-                      child: const Text(
+                      child: Text(
                         "Rate Service",
-                        style: TextStyle(
-                          color: const Color(0xFF1E535B), // Text color same as border
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Poppins',
-                        ),
+                        style:
+                          TextFontStyle.textFontStyle( 14,Color(0xFF1E535B),FontWeight.w500),
                       ),
                     ),
 
                     const SizedBox(height: 8),
-                    const Text("Very Good",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: Color(0xFF575959),
-                      )),
+                    Text("Very Good",
+                      style:
+                        TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500)),
                     const SizedBox(height: 4),
                     Row(
                       children: const [
@@ -113,8 +102,9 @@ class ReviewList extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 4),
-                    const Text("200 ratings and 160 reviews",
-                        style: TextStyle(fontSize: 14, color: Colors.grey)),
+                     Text("200 ratings and 160 reviews",
+                        style:
+                        TextFontStyle.textFontStyle( 14, Colors.grey)),
                   ],
                 ),
               ],
@@ -123,12 +113,8 @@ class ReviewList extends StatelessWidget {
           const SizedBox(height: 20),
 
           // ✅ Photo Gallery
-          const Text("Photos",  style: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w500,
-            fontSize: 18,
-            color: Color(0xFF575959),
-          )),
+          Text("Photos",  style: TextFontStyle.textFontStyle( 18, Color(0xFF575959),FontWeight.w500)
+          ),
           const SizedBox(height: 10),
           SizedBox(
             height: 80,
@@ -170,35 +156,21 @@ class ReviewList extends StatelessWidget {
                         const SizedBox(width: 6),
                         Text(
                           review['rating'].toString(),
-                          style:const TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18,
-                            color: Color(0xFF575959),
-                          ),
-
+                          style: TextFontStyle.textFontStyle( 18, Color(0xFF575959),FontWeight.w500),
                         ),
                         const SizedBox(width: 6),
                         Text(
                           review['comment'],
-                            style:const TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                              color: Color(0xFF575959),
-                            ),
+                            style:
+                            TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w400),
                         ),
                       ],
                     ),
                     const SizedBox(height: 6),
                     Text(
                       review['description'],
-                      style:const TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 15,
-                        color: Color(0xFF575959),
-                      ),
+                      style:
+                        TextFontStyle.textFontStyle( 15, Color(0xFF575959),FontWeight.w400)
                     ),
                     const SizedBox(height: 10),
                     Row(

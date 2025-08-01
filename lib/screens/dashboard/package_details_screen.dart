@@ -14,6 +14,7 @@ import '../../widgets/custom_ChangeAddressSheet.dart';
 import '../../widgets/custom_bottom_sheet.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 import '../../widgets/custom_inputfield.dart';
+import '../../widgets/custom_text_field.dart';
 
 
 class PackageDetailScreen extends StatelessWidget {
@@ -37,18 +38,12 @@ class PackageDetailScreen extends StatelessWidget {
                 backgroundColor: Colors.white,
                 elevation: 0,
                 iconTheme: const IconThemeData(color: Colors.black),
-                titleTextStyle: const TextStyle(color: Colors.black, fontSize: 18),
-                bottom: const TabBar(
+                titleTextStyle: TextFontStyle.textFontStyle( 18, Colors.black),
+                bottom: TabBar(
                   indicatorColor: Colors.teal,
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey,
-                  labelStyle: const TextStyle(
-                  fontSize: 18,
-
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF575959),
-                  fontFamily: 'Poppins',
-                ),
+                  labelStyle: TextFontStyle.textFontStyle( 18, Color(0xFF575959),FontWeight.w500),
                   tabs: [
                     Tab(text: "All Details"),
                     Tab(text: "Gallery"),
@@ -106,63 +101,36 @@ class PackageDetailScreen extends StatelessWidget {
             children: [
               Text(
                 "About ${state.package?['title']}",
-                style: const TextStyle(
-                  fontFamily: 'Poppins',
-                  // Font family
-                  fontSize: 16,              // Size in px (Flutter uses logical pixels)
-                  fontWeight: FontWeight.w500, // Equivalent to weight 500 (Medium)
-                  height: 1.0,               // Line height = 100% (1.0 means 100%)
-                  letterSpacing: 0.0,        // 0% letter spacing
-                  color: Color(0xFF575959),  // Text color
-                ),
+                style:
+                  TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500)
               ),
               Text(
                 "₹${state.package?['price']}",
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.teal,
-                  fontFamily: 'Poppins',
-                ),
+                style:
+                  TextFontStyle.textFontStyle( 16, Colors.teal,FontWeight.bold)
               ),
             ],
           ),
           const SizedBox(height: 8),
           Text(
             state.package?['description'],
-            style: const TextStyle(
-            fontFamily: 'Poppins',
-            // Font family
-            fontSize: 16,              // Size in px (Flutter uses logical pixels)
-            fontWeight: FontWeight.w400, // Equivalent to weight 500 (Medium)
-            height: 1.5,               // Line height = 100% (1.0 means 100%)
-            letterSpacing: 0.0,        // 0% letter spacing
-            color: Color(0xFF575959),  // Text color
-          ),
+            style:
+              TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w400)
           ),
           const SizedBox(height: 16),
-          const Text(
+          Text(
             "Included in this Package are:",
-            style:const TextStyle(
-              fontSize: 16,
-
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF575959),
-              fontFamily: 'Poppins',
-            ),
+            style:
+              TextFontStyle.textFontStyle( 16,Color(0xFF575959),FontWeight.w500)
           ),
           const SizedBox(height: 6),
           ...((package["included"] as List<String>)
               .map((item) => Padding(
             padding: const EdgeInsets.only(bottom: 4.0),
             child: Text("• $item",
-                style: const TextStyle(
-              fontSize: 16,
+                style:
+                TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w400)),
 
-              fontWeight: FontWeight.w400,
-              color: Color(0xFF575959),
-              fontFamily: 'Poppins',
-            ),),
           )).toList()),
           // const SizedBox(height: 20),
           // const Divider(),
@@ -185,14 +153,10 @@ class PackageDetailScreen extends StatelessWidget {
               ),
               const SizedBox(width: 10),
 
-              const Text(
+              Text(
                 "Details & Requirements",
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18,
-                  color: Color(0xFF575959),
-                ),
+                style:
+                  TextFontStyle.textFontStyle( 18, Color(0xFF575959),FontWeight.w500)
               ),
               const SizedBox(width: 10),
               const Expanded(
@@ -214,7 +178,7 @@ class PackageDetailScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomInputField(
-                  labelText: 'No. Of Guests',
+                  labelText: 'No. Of Guests*',
                   controller: TextEditingController(),
                   keyboardType: TextInputType.number,
                 ),
@@ -222,7 +186,7 @@ class PackageDetailScreen extends StatelessWidget {
               const SizedBox(width: 16),
               Expanded(
                 child: CustomInputField(
-                  labelText: 'No. Of Bartenders',
+                  labelText: 'No. Of Bartenders*',
 
                   controller: TextEditingController(),
                   keyboardType: TextInputType.number,

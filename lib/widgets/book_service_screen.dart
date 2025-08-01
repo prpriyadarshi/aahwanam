@@ -6,6 +6,7 @@ import '../screens/dashboard/payment_option_page.dart';
 import '../services/proceedpay.dart';
 import 'custom_ChangeAddressSheet.dart';
 import 'custom_inputfield.dart';
+import 'custom_text_field.dart';
 
 /// ----------------------------
 /// ✅ BLoC: BookingCubit & State
@@ -71,8 +72,8 @@ class BookServiceScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text('Book Service',
-              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+          title:  Text('Book Service',
+              style:  TextFontStyle.textFontStyle(  18,Colors.black,FontWeight.bold)),
           backgroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,
@@ -106,21 +107,18 @@ class BookServiceScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(package["title"],
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold)),
+                              style:  TextFontStyle.textFontStyle( 16, Colors.black87,FontWeight.bold) ),
                           const SizedBox(height: 4),
                           Text(package["description"],
-                              style: TextStyle(color: Colors.grey.shade700)),
+                              style:  TextFontStyle.textFontStyle( 14, Colors.grey.shade700)),
                         ],
                       ),
                     ),
                     Text(
                       "₹ ${package["price"]}",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF184A45),
-                          fontSize: 16),
+                      style: TextFontStyle.textFontStyle( 16, Color(0xFF184A45),FontWeight.bold),
                     )
+
                   ],
                 ),
               ),
@@ -150,14 +148,10 @@ class BookServiceScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 10),
 
-                      const Text(
+                      Text(
                         "Event & Service Details",
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          color: Color(0xFF575959),
-                        ),
+                        style:
+                          TextFontStyle.textFontStyle( 18, Color(0xFF575959),FontWeight.w500)
                       ),
                       const SizedBox(width: 10),
                       const Expanded(
@@ -213,14 +207,10 @@ class BookServiceScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 10),
 
-                      const Text(
+                       Text(
                         "Bill Details",
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          color: Color(0xFF575959),
-                        ),
+                        style:
+                          TextFontStyle.textFontStyle( 18, Color(0xFF575959),FontWeight.w500)
                       ),
                       const SizedBox(width: 10),
                       const Expanded(
@@ -280,9 +270,10 @@ class BookServiceScreen extends StatelessWidget {
             ),
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           ),
-          child: const Text(
+          child:  Text(
             "Proceed to pay",
-            style: TextStyle(color: Colors.white),
+            style:
+              TextFontStyle.textFontStyle( 14, Colors.white,FontWeight.w500),
           ),
         );
       },
@@ -316,12 +307,12 @@ class BookServiceScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Portable Bar Table", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+               Text("Portable Bar Table", style: TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w500)),
               Row(
                 children: [
                   Text(
                     "₹ ${state.barTablePrice * state.quantity}",
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black87),
+                    style: TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w600),
                   ),
                   const SizedBox(width: 12),
                   Container(
@@ -340,7 +331,7 @@ class BookServiceScreen extends StatelessWidget {
                             child: Icon(Icons.remove, color: Colors.white, size: 16),
                           ),
                         ),
-                        Text("${state.quantity}", style: const TextStyle(color: Colors.white, fontSize: 14)),
+                        Text("${state.quantity}", style: TextFontStyle.textFontStyle( 14, Colors.white)),
                         GestureDetector(
                           onTap: () => context.read<BookingCubit>().incrementQuantity(),
                           child: const Padding(
@@ -365,7 +356,7 @@ class BookServiceScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
+        Text(label, style: TextFontStyle.textFontStyle( 12, Colors.black87,FontWeight.w500)),
         const SizedBox(height: 4),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
@@ -377,7 +368,7 @@ class BookServiceScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(value, style: const TextStyle(fontSize: 14)),
+              Text(value, style: TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w500)),
               if (icon != null) Icon(icon, size: 18, color: Colors.grey.shade600),
             ],
           ),
@@ -393,12 +384,10 @@ class BookServiceScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontWeight: bold ? FontWeight.bold : FontWeight.normal)),
+          Text(label, style: TextFontStyle.textFontStyle( 14, Colors.black87, bold ? FontWeight.bold : FontWeight.normal)),
           Text(amount,
-              style: TextStyle(
-                fontWeight: bold ? FontWeight.bold : FontWeight.normal,
-                color: highlight ? const Color(0xFF184A45) : Colors.black,
-              )),
+              style:TextFontStyle.textFontStyle( 14,highlight ?  Color(0xFF184A45) : Colors.black, bold ? FontWeight.bold : FontWeight.normal)
+          ),
         ],
       ),
     );
