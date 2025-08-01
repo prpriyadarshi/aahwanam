@@ -6,10 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/account/account_state.dart';
 
-
+import '../../services/decoration/decoration_theme.dart';
 import '../../services/makeup_hair_service/MakeupDecor.dart';
 import '../../widgets/package_card.dart';
-import '../dashboard/decoration_theme.dart';
 
 
 class BookingScreen extends StatefulWidget {
@@ -94,7 +93,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           style: OutlinedButton.styleFrom(
                             foregroundColor: isAllBookingsSelected
                                 ? Color(
-                                0xFF1E535B) // Text color when not selected
+                                    0xFF1E535B) // Text color when not selected
                                 : Colors.white,
                             // Text color when selected
                             backgroundColor: isAllBookingsSelected
@@ -134,56 +133,56 @@ class _BookingScreenState extends State<BookingScreen> {
                             details: package['details'],
                             imagePath: package['imagePath'],
                             rating: package['rating'],
-                            // onTap: () {
-                            //   if (isAllBookingsSelected) {
-                            //     // Navigate to All Bookings Details Page
-                            //     Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //         builder: (context) =>
-                            //             DetailedAllBookingScreen(
-                            //                 package: package),
-                            //       ),
-                            //     );
-                            //   } else {
-                            //     final title =
-                            //         package['title']?.toLowerCase() ?? '';
-                            //     if (title.contains('dream decor')) {
-                            //       // Pass necessary data to DecorationTheme screen
-                            //       Navigator.push(
-                            //         context,
-                            //         MaterialPageRoute(
-                            //           builder: (context) => DecorationTheme(
-                            //             decorator: {
-                            //               'name': _extractDecoratorName(
-                            //                   package['title'] ?? ''),
-                            //               'image': package['imagePath'] ?? '',
-                            //               'rating': '4.5',
-                            //               // Provide default or real rating
-                            //               'price': package['price'] ?? '',
-                            //             },
-                            //           ),
-                            //         ),
-                            //       );
-                            //     } else if (title.contains('blush makeover')) {
-                            //       Navigator.push(
-                            //         context,
-                            //         MaterialPageRoute(
-                            //           builder: (context) => MakeUpTheme(
-                            //             makeupHair: {
-                            //               'name': _extractDecoratorName(
-                            //                   package['title'] ?? ''),
-                            //               'image': package['imagePath'] ?? '',
-                            //               'rating': '4.2',
-                            //               // Or dynamic if available
-                            //               'price': package['price'] ?? '',
-                            //             },
-                            //           ),
-                            //         ),
-                            //       );
-                            //     }
-                            //   }
-                            // },
+                            onTap: () {
+                              if (isAllBookingsSelected) {
+                                // Navigate to All Bookings Details Page
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DetailedAllBookingScreen(
+                                            package: package),
+                                  ),
+                                );
+                              } else {
+                                final title =
+                                    package['title']?.toLowerCase() ?? '';
+                                if (title.contains('dream decor')) {
+                                  // Pass necessary data to DecorationTheme screen
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DecorationTheme(
+                                        decorator: {
+                                          'name': _extractDecoratorName(
+                                              package['title'] ?? ''),
+                                          'image': package['imagePath'] ?? '',
+                                          'rating': '4.5',
+                                          // Provide default or real rating
+                                          'price': package['price'] ?? '',
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                } else if (title.contains('blush makeover')) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MakeUpTheme(
+                                        makeupHair: {
+                                          'name': _extractDecoratorName(
+                                              package['title'] ?? ''),
+                                          'image': package['imagePath'] ?? '',
+                                          'rating': '4.2',
+                                          // Or dynamic if available
+                                          'price': package['price'] ?? '',
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                }
+                              }
+                            },
                           ),
                         );
                       },

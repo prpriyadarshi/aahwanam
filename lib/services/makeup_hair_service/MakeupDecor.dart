@@ -10,9 +10,9 @@ import '../../blocs/makeup/makeup_event.dart';
 import '../../blocs/makeup/makeup_state.dart';
 
 
-import '../../services/ThemesScreen.dart';
+import '../decoration/DecorThemesScreen.dart';
 import '../../services/getquotesscreen.dart';
-import '../../services/decorimagelist.dart';
+import '../decoration/decorimagelist.dart';
 import '../../services/reviewsscreen.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 import 'makeupTheme.dart';
