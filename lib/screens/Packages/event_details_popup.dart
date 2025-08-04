@@ -1,3 +1,4 @@
+import 'package:aahwanam/widgets/custom_event_date_time%20_picker.dart';
 import 'package:flutter/material.dart';
 
 class EventDetailsPopup extends StatelessWidget {
@@ -54,87 +55,7 @@ class EventDetailsPopup extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Event Date*",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF575959),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      TextField(
-                        readOnly: true,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color(0xFFF1F1F1),
-                          hintText: "22,Feb 2025",
-                          hintStyle: const TextStyle(color: Color(0xFF8E8E8E)),
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide.none,
-                          ),
-                          suffixIcon: const Icon(
-                            Icons.calendar_today,
-                            color: Color(0xFF575959),
-                          ),
-                          contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                        ),
-                        onTap: () {
-                          // TODO: Implement date picker
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Event Time*",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF575959),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      TextField(
-                        readOnly: true,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color(0xFFF1F1F1),
-                          hintText: "11:30 pm",
-                          hintStyle: const TextStyle(color: Color(0xFF8E8E8E)),
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide.none,
-                          ),
-                          suffixIcon: const Icon(
-                            Icons.access_time,
-                            color: Color(0xFF575959),
-                          ),
-                          contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                        ),
-                        onTap: () {
-                          // TODO: Implement time picker
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            EventDateTimePicker(),
             const SizedBox(height: 16),
             const Text(
               "Number Of Guests*",
