@@ -5,13 +5,12 @@ abstract class ValetParkingEvent extends Equatable {
 
   @override
   List<Object?> get props => [];
-
 }
 
-// Event to fetch valetParking data
+// Fetches initial valet packages
 class FetchValetParking extends ValetParkingEvent {}
 
-// Event to select a specific valetParking
+// User selects a valet package
 class SelectValetParking extends ValetParkingEvent {
   final String valetId;
 
@@ -19,4 +18,14 @@ class SelectValetParking extends ValetParkingEvent {
 
   @override
   List<Object?> get props => [valetId];
+}
+
+// Handles tab screen changes (All Details, Gallery, Reviews)
+class LoadValetParkingTabScreen extends ValetParkingEvent {
+  final int index;
+
+  const LoadValetParkingTabScreen(this.index);
+
+  @override
+  List<Object?> get props => [index];
 }

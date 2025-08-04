@@ -4,6 +4,7 @@ import '../../blocs/Packages/events_bloc.dart';
 import '../../blocs/Packages/events_event.dart';
 import '../../blocs/Packages/events_state.dart';
 import '../../routes/app_routes.dart';
+import '../../widgets/custom_text_field.dart';
 import '../../widgets/custom_top_bar.dart';
 import 'event_details_popup.dart'; // Ensure this import is correct
 
@@ -83,13 +84,9 @@ class _EventScreenState extends State<EventScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                     Text(
                       "Events",
-                      style: TextStyle(
-                        color: Color(0xFF575959),
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: TextFontStyle.textFontStyle(18,const Color(0xFF575959),FontWeight.w500),
                     ),
                     const SizedBox(height: 16),
                     GridView.builder(
@@ -132,14 +129,10 @@ class _EventScreenState extends State<EventScreen> {
                               Text(
                                 event['name'] ?? '',
                                 textAlign: TextAlign.center,
-                                maxLines: 2,
+                                maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  color: Color(0xFF575959),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                                style:TextFontStyle.textFontStyle(12,const Color(0xFF575959), FontWeight.w400),
                                 ),
-                              ),
                             ],
                           ),
                         );

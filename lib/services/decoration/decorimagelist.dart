@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/decor/decor_bloc.dart';
-import '../blocs/decor/decor_state.dart';
+import '../../blocs/decor/decor_bloc.dart';
+import '../../blocs/decor/decor_state.dart';
 
 
 class DecorImageList extends StatelessWidget {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../screens/dashboard/decoration_theme.dart';
+
+import '../services/decoration/decoration_theme.dart';
+
 
 class CustomCardBirthdayWidgets {
   static Widget buildSection(

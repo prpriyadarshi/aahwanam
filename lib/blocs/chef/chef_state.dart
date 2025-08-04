@@ -4,27 +4,56 @@ abstract class ChefState extends Equatable {
   const ChefState();
 
   @override
-  List<Object?> get props => []; // Fixed to 'props'
+  List<Object?> get props => [];
 }
 
-// Initial state
 class ChefInitial extends ChefState {}
 
-// State when loading Chef data
 class ChefLoading extends ChefState {}
 
-// State when Chef data is loaded
 class ChefLoaded extends ChefState {
-  final List<Map<String, String>> Categories;
+  final List<Map<String, String>> categories;
   final List<Map<String, String>> chefs;
 
-  const ChefLoaded(this.Categories,this.chefs);
+  const ChefLoaded(this.categories, this.chefs);
 
   @override
-  List<Object?> get props => [Categories,chefs];
+  List<Object?> get props => [categories, chefs];
 }
 
-// State for errors
+class ChefThemesLoaded extends ChefState {
+  final List<Map<String, String>> themes;
+
+  const ChefThemesLoaded(this.themes);
+
+  @override
+  List<Object?> get props => [themes];
+}
+
+class ChefGalleryLoaded extends ChefState {
+  final List<String> galleryImages;
+
+  const ChefGalleryLoaded({this.galleryImages = const []});
+
+  @override
+  List<Object?> get props => [galleryImages];
+}
+
+class ChefReviewLoaded extends ChefState {
+  final List<String> photos;
+  final Map<int, int> ratingData;
+
+  const ChefReviewLoaded({
+    required this.photos,
+    required this.ratingData,
+  });
+
+  @override
+  List<Object?> get props => [photos, ratingData];
+}
+
+class GetQuotesChefLoaded extends ChefState {}
+
 class ChefError extends ChefState {
   final String message;
 
@@ -32,4 +61,9 @@ class ChefError extends ChefState {
 
   @override
   List<Object?> get props => [message];
+}
+class ChefMenuLoaded extends ChefState {
+  final List<Map<String, dynamic>> menuItems;
+
+  const ChefMenuLoaded(this.menuItems);
 }

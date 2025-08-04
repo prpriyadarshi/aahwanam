@@ -53,7 +53,7 @@ import '../screens/login/login_screen.dart';
 import 'app_routes.dart';
 
 class AppPages {
-  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+  static Route<dynamic> onGenerateRoute( settings) {
     // Define a map for screens and their corresponding BLoC classes
     final Map<String, Widget> routes = {
       AppRoutes.welcome: const WelcomeScreen(),

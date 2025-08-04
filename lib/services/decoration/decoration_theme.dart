@@ -8,9 +8,9 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../blocs/decor/decor_bloc.dart';
 import '../../blocs/decor/decor_event.dart';
 import '../../blocs/decor/decor_state.dart';
-import '../../services/ThemesScreen.dart';
+import '../../services/decoration/DecorThemesScreen.dart';
 import '../../services/getquotesscreen.dart';
-import '../../services/decorimagelist.dart';
+import '../../services/decoration/decorimagelist.dart';
 import '../../services/reviewsscreen.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 

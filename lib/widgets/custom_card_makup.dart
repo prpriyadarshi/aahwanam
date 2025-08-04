@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../screens/dashboard/decoration_theme.dart';
+
 import '../services/makeup_hair_service/MakeupDecor.dart';
 
-class CustomCardMakUpWidgets {
+class CustomCardMakeUpWidgets {
   static Widget buildSection(
       BuildContext context, {
         required String title,

@@ -4,8 +4,10 @@ import 'package:aahwanam/blocs/pandit/pandit_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../services/pandit/pandit_theme.dart';
 import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_language_dropdown.dart';
+import '../../widgets/custom_pandit_service.dart';
 
 
 class PanditScreen extends StatefulWidget {
@@ -69,12 +71,25 @@ class _PanditScreenState extends State<PanditScreen> {
                       ),
 
                       // Decorators Section
-                      CustomCardWidgets.buildSection(
+                      CustomPanditCardWidgets.buildSection(
                         context,
-                        title: "",
+                        title: "Pooja Themes",
                         data: state.poojaTheme,
-                        showViewAll: false,
-                        onViewAll: () => _navigateTo(context, "Decorators"),
+                        showViewAll: true,
+                          onViewAll: () {
+                            // Show first item or navigate to a full list page
+                            if (state.poojaTheme.isNotEmpty) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => PanditTheme(),
+                                ),
+                              );
+                            }
+                          }, // Or appropriate route
+
+
+
                       ),
 
 

@@ -4,6 +4,9 @@ import 'package:aahwanam/blocs/eInvitation/eInvitation_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../services/e_invitation/canvas_editor.dart';
+import '../../services/e_invitation/e_invitation_template.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_template_widget.dart';
 
@@ -40,13 +43,20 @@ class EInvitationScreen extends StatelessWidget {
                       const SizedBox(height: 2),
 
                       // Packages Section
+
                       CustomTemplateGrid(
                         templates: state.trendyTemplates,
                         title: 'Trendy Templates',
                         showViewAll: true,
                         onViewAll: () {
-                          // Handle "View All" click
-                          print('View All clicked!');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => CanvasEditorScreen(
+
+                              ),
+                            ),
+                          );
                         },
                       ),
 

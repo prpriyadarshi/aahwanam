@@ -2,12 +2,13 @@ import 'package:aahwanam/widgets/custom_card_birthday.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/decor/decor_bloc.dart';
-import '../blocs/decor/decor_event.dart';
-import '../blocs/decor/decor_state.dart';
-import '../screens/dashboard/decoration_theme.dart';
-import '../widgets/custom_card_widget.dart';
-import '../widgets/custom_date_time_bottom_sheet.dart';
+import '../../blocs/decor/decor_bloc.dart';
+import '../../blocs/decor/decor_event.dart';
+import '../../blocs/decor/decor_state.dart';
+
+import '../../widgets/custom_card_widget.dart';
+import '../../widgets/custom_date_time_bottom_sheet.dart';
+import 'decoration_theme.dart';
 
 
 class BirthdayDecoration extends StatelessWidget {
