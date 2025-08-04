@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/custom_text_field.dart';
+
 class PhotoGallery extends StatelessWidget {
   final List<Map<String, Object>> photoGallery;
 
@@ -35,7 +37,7 @@ class PhotoGallery extends StatelessWidget {
       children: [
         Text(
           categoryTitle,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black87),
+          style: TextFontStyle.textFontStyle( 16, Colors.black87,FontWeight.w600),
         ),
         const SizedBox(height: 12),
         GridView.builder(
@@ -121,7 +123,9 @@ class _FullScreenImageViewerState extends State<_FullScreenImageViewer> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text('${currentIndex + 1} / ${widget.images.length}', style: const TextStyle(color: Colors.white)),
+        title: Text('${currentIndex + 1} / ${widget.images.length}', style:
+            TextFontStyle.textFontStyle( 14, Colors.white)
+        ),
       ),
       body: PageView.builder(
         controller: _pageController,
