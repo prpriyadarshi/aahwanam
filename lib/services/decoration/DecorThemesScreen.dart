@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/custom_buildDecor_horizontalList.dart';
+import '../../widgets/custom_buildDecor_horizontalList.dart';
 
 class ThemesScreen extends StatelessWidget {
   final List<Map<String, String>> birthdayItems;

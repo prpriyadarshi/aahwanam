@@ -7,6 +7,7 @@ import 'package:aahwanam/screens/account/mypackages_screen.dart';
 import 'package:aahwanam/screens/account/profile_screen.dart';
 import 'package:aahwanam/screens/account/booking_screen.dart';
 import 'package:aahwanam/screens/account/wishlist_screen.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:aahwanam/widgets/custom_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -114,24 +115,15 @@ class _AccountScreenState extends State<AccountScreen> {
                               children: [
                                 Text(
                                   '${state.firstName} ${state.lastName}',
-                                  style: const TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    height: 1.0, // ✅ line-height: 100%
-                                  ),
+                              style: TextFontStyle.textFontStyle(
+                                  16, Colors.white, FontWeight.w500),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   state.email,
-                                  style: const TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                    color: Color(0xFFE4E4E4),
-                                    height: 1.0,
-                                  ),
+                                  style: TextFontStyle.textFontStyle(
+                                      14, Color(0xFFE4E4E4), FontWeight.w400),
+
                                 ),
                               ],
                             ),
@@ -141,15 +133,10 @@ class _AccountScreenState extends State<AccountScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  const Text("Your Information",
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          height: 1.0,
-                          // 100% line-height
-                          letterSpacing: 0,
-                          color: Color(0xFF575959))),
+                  Text("Your Information",
+                      style: TextFontStyle.textFontStyle(
+                          14, Color(0xFF575959), FontWeight.w500),
+                  ),
                   CustomTile(
                     imagePath: 'assets/images/Vector.png',
                     title: 'Profile',
@@ -237,8 +224,9 @@ class _AccountScreenState extends State<AccountScreen> {
                         );
                       }),
                   const SizedBox(height: 10),
-                  const Text("Other",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text("Other",
+                      style: TextStyle(fontWeight: FontWeight.bold)
+                  ),
                   CustomTile(
                       imagePath: 'assets/images/budget planner.png',
                       title: 'Budget Planner',

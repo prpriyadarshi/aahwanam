@@ -10,10 +10,17 @@ class CustomChangeAddressSheet extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
+
+        border: Border.all(
+          width: 1,
+          color: const Color(0xFFE4E4E4), // This is your border color
+        ),
+
         color: const Color(0xFFFAFAFA),
-        border: Border.all(width: 1, color: const Color(0xFFF4F4F4)),
+
         borderRadius: BorderRadius.circular(8.0),
       ),
+
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -22,12 +29,12 @@ class CustomChangeAddressSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '16-6-679, Sangeet Nagar, Phase 2, Madhapur, Hyderabad, Telangana',
+                 'Financial District',
                   style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Pincode : 500081',
+                  'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
                   style: TextFontStyle.textFontStyle(12, const Color(0xFF757575), FontWeight.w400),
                 ),
               ],
@@ -38,12 +45,12 @@ class CustomChangeAddressSheet extends StatelessWidget {
             onPressed: () => _showChangeAddress(context),
             style: OutlinedButton.styleFrom(
               minimumSize: const Size(45, 30),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
               side: const BorderSide(color: Color(0xFF1E535B)),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
             ),
             child: Text(
-              'Change Address',
+              'Change',
               style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w400),
             ),
           ),
