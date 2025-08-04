@@ -140,14 +140,14 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
           ),
           ServiceItem(
             id: 'makeup_blush_halfdown_1',
-            title: 'Blush Makeover & Half Down',
+            title: 'Blush & Half Down',
             imageUrl: 'assets/images/Blush makeover event.png',
             price: '₹10,000',
             description: 'Fresh blush makeover with a charming half-up half-down hairstyle.',
           ),
           ServiceItem(
             id: 'makeup_iconic_floral_1',
-            title: 'Iconic Makeover & Floral',
+            title: 'Iconic & Floral',
             imageUrl: 'assets/images/Iconic makeover event.png',
             price: '₹10,000',
             description: 'Bold iconic makeover complemented by floral hair accessories.',
@@ -351,16 +351,23 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
         image: 'assets/images/Pandit event.png',
         services: [
           ServiceItem(
-            id: 'pandit_north_indian_1',
+            id: 'Indian pandit',
+            title: 'Indian Pandit',
+            imageUrl: 'assets/images/indian pandit event.png',
+            price: '₹4,500',
+            description: 'Experienced Indian Pandit for religious ceremonies.',
+          ),
+          ServiceItem(
+            id: 'pandit_north_indian',
             title: 'North Indian Pandit',
-            imageUrl: 'assets/images/pandit_north.png',
+            imageUrl: 'assets/images/north pandit event.png',
             price: '₹4,000',
             description: 'Experienced North Indian Pandit for religious ceremonies.',
           ),
           ServiceItem(
-            id: 'pandit_south_indian_1',
+            id: 'pandit_south_indian',
             title: 'South Indian Pandit',
-            imageUrl: 'assets/images/pandit_south.png',
+            imageUrl: 'assets/images/south pandit event.png',
             price: '₹4,500',
             description: 'Experienced South Indian Pandit for religious ceremonies.',
           ),
@@ -418,16 +425,23 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
         image: 'assets/images/Chef event.png',
         services: [
           ServiceItem(
+            id: 'chef buffet',
+            title: 'Chef',
+            imageUrl: 'assets/images/Chef1.png',
+            price: '₹350 / plate',
+            description: 'Delicious vegetarian buffet spread.',
+          ),
+          ServiceItem(
             id: 'chef_veg_buffet_1',
             title: 'Veg Buffet',
-            imageUrl: 'assets/images/veg_buffet.png',
+            imageUrl: 'assets/images/veg buffet event.png',
             price: '₹350 / plate',
             description: 'Delicious vegetarian buffet spread.',
           ),
           ServiceItem(
             id: 'chef_nonveg_buffet_1',
             title: 'Non-Veg Buffet',
-            imageUrl: 'assets/images/nonveg_buffet.png',
+            imageUrl: 'assets/images/non veg buffet event.png',
             price: '₹500 / plate',
             description: 'Sumptuous non-vegetarian buffet options.',
           ),
@@ -568,14 +582,16 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
         return EventDetails(
           serviceId: serviceId,
           title: 'Bridal & Traditional Makeup',
-          eventImage: 'assets/images/Bridal Makeup event.png',
+          eventImage: 'assets/images/Bridal makeup1.png',
           eventPrice: '₹10,000',
           description: 'Get a stunning bridal look with traditional makeup techniques. Our artists ensure you look perfect on your special day.',
           perviousWorkImages: [
-            'assets/images/Bridal Makeup event.png',
-            'assets/images/Bridal makeup 2 event.png',
-            'assets/images/Glow makeup event.png',
-            'assets/images/Beauty HD event.png',
+            'assets/images/Bridal makeup1.png',
+            'assets/images/Bridal makeup1.png',
+            'assets/images/Bridal makeup1.png',
+            'assets/images/Bridal makeup1.png',
+            'assets/images/Bridal makeup1.png'
+
           ],
           packagesIncluded: [
             "Bridal makeup application",
@@ -941,9 +957,14 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
           description: 'Achieve a fresh and elegant look with natural makeup and a beautifully styled braid, perfect for a subtle yet sophisticated appearance.',
           perviousWorkImages: [
             'assets/images/Natural makeup event.png',
-            'assets/images/Bridal Makeup event.png',
-            'assets/images/Beauty makeover event.png',
-            'assets/images/Dewy blush event.png',
+            'assets/images/Natural makeup event.png',
+            'assets/images/Natural makeup event.png',
+            'assets/images/Natural makeup event.png',
+            'assets/images/Natural makeup event.png',
+            'assets/images/Natural makeup event.png',
+            'assets/images/Natural makeup event.png',
+            'assets/images/Natural makeup event.png',
+            'assets/images/Natural makeup event.png',
           ],
           packagesIncluded: [
             "Natural-look makeup application",

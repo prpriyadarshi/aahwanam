@@ -96,7 +96,7 @@ class _EventScreenState extends State<EventScreen> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: crossAxisCount,
                         mainAxisSpacing: 4,
-                        crossAxisSpacing: 18,
+                        crossAxisSpacing: 20,
                         childAspectRatio: 0.70,
                       ),
                       itemBuilder: (context, index) {
@@ -131,7 +131,7 @@ class _EventScreenState extends State<EventScreen> {
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style:TextFontStyle.textFontStyle(14,const Color(0xFF575959), FontWeight.w500),
+                                style:TextFontStyle.textFontStyle(12,const Color(0xFF575959), FontWeight.w500),
                                 ),
                             ],
                           ),

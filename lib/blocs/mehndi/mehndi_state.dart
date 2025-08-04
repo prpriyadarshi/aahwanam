@@ -64,3 +64,5 @@ class MehndiReviewLoaded extends MehndiState {
   @override
   List<Object?> get props => [photos, ratingData];
 }
+
+/// State when reviews tab is loaded

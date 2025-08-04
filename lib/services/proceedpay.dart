@@ -5,7 +5,9 @@ import 'addcard.dart';
 import 'paymentsuccess.dart';
 
 class PaymentOptionsScreen extends StatefulWidget {
-  const PaymentOptionsScreen({super.key});
+  final double? total; // ✅ Make it nullable if optional
+
+  const PaymentOptionsScreen({Key? key, this.total}) : super(key: key);
 
   @override
   State<PaymentOptionsScreen> createState() => _PaymentOptionsScreenState();
@@ -36,7 +38,7 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
   void _launchRazorpay({String? upiId}) {
     var options = {
       'key': 'rzp_live_KK4RDkGbtZzQf1',
-      'amount': int.parse(amount) * 100, // in paise
+      'amount': ((widget.total ?? 0) * 100).toInt(), // ✅ Correct conversion
       'name': 'Aahwanam',
       'description': 'Service Payment',
       'prefill': {
@@ -138,10 +140,11 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
-              child: const Text(
-                "Proceed to Pay ₹1",
-                style: TextStyle(color: Colors.white, fontSize: 16),
+              child: Text(
+                "Proceed to Pay ₹${widget.total?.toStringAsFixed(2) ?? '0.00'}",
+                style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
+
             ),
           ),
         ),

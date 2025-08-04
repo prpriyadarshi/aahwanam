@@ -41,6 +41,35 @@ class BartenderBloc extends Bloc<BartenderEvent, BartenderState> {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
                 "image": "assets/images/Bartender-review.png"
               }
+            ],
+            "photo_gallery": [
+              {
+
+                "category": "Kitty Party",
+                "images": [
+                  "assets/images/KittyParty4.png",
+                  "assets/images/Kitty-party2.png",
+                  "assets/images/Kitty-party1.png"
+                ],
+              },
+              {
+
+                "category": "Get Together",
+                "images": [
+                  "assets/images/Get-Together1.png",
+                  "assets/images/Get-Together2.png",
+                  "assets/images/Get-Together3.png"
+                ]
+              },
+              {
+                "category": "Birthday Party",
+                "images": [
+                  "assets/images/Get-Together1.png",
+                  "assets/images/Birthday-Party1.png",
+                  "assets/images/Get-Together2.png"
+                ]
+
+              }
             ]
           },
 
@@ -71,6 +100,35 @@ class BartenderBloc extends Bloc<BartenderEvent, BartenderState> {
                 "comment": "Very good service",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
                 "image": "assets/images/Bartender-review.png"
+              }
+            ],
+            "photo_gallery": [
+              {
+
+                "category": "Kitty Party",
+                "images": [
+                  "assets/images/KittyParty4.png",
+                  "assets/images/Kitty-party2.png",
+                  "assets/images/Kitty-party1.png"
+                ],
+              },
+              {
+
+                "category": "Get Together",
+                "images": [
+                  "assets/images/Get-Together1.png",
+                  "assets/images/Get-Together2.png",
+                  "assets/images/Get-Together3.png"
+                ]
+              },
+              {
+                "category": "Birthday Party",
+                "images": [
+                  "assets/images/Get-Together1.png",
+                  "assets/images/Birthday-Party1.png",
+                  "assets/images/Get-Together2.png"
+                ]
+
               }
             ],
           },
@@ -109,6 +167,36 @@ class BartenderBloc extends Bloc<BartenderEvent, BartenderState> {
                 "comment": "Very good service",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
                 "image": "assets/images/Bartender-review.png"
+              }
+
+            ],
+            "photo_gallery": [
+              {
+
+                "category": "Kitty Party",
+                "images": [
+                  "assets/images/KittyParty4.png",
+                  "assets/images/Kitty-party2.png",
+                  "assets/images/Kitty-party1.png"
+                ],
+              },
+              {
+
+                "category": "Get Together",
+                "images": [
+                  "assets/images/Get-Together1.png",
+                  "assets/images/Get-Together2.png",
+                  "assets/images/Get-Together3.png"
+                ]
+              },
+              {
+                "category": "Birthday Party",
+                "images": [
+                  "assets/images/Get-Together1.png",
+                  "assets/images/Birthday-Party1.png",
+                  "assets/images/Get-Together2.png"
+                ]
+
               }
             ],
           },

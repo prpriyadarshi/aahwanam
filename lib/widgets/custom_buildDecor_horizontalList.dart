@@ -19,6 +19,25 @@ class CustomBuildDecorHorizontalList {
     {'name': ' Dewy', 'image': 'assets/images/Dewy.png'},
     {'name': 'Glitter', 'image': 'assets/images/Glitter.png'},
   ];
+  final chefs = [
+    {'image': 'assets/images/Ambika Caters.png', 'name': 'Ambika Cooking', 'price': '₹8,000 ', 'rating': '4.7'},
+    {'image': 'assets/images/Food Zone.png', 'name': 'Food Zone', 'price': '₹3,000 ', 'rating': '4.7'},
+    {'image': 'assets/images/Food Hut.png', 'name': 'Food Hut', 'price': '₹15,000 ', 'rating': '4.7'},
+    {'image': 'assets/images/Food Hut1.png', 'name': 'Food Hut', 'price': '₹15,000 ', 'rating': '4.7'},
+    {'image': 'assets/images/Taza Kitchen.png', 'name': 'Taza Kitchen', 'price': '₹4,000 ', 'rating': '4.7'},
+    {'image': 'assets/images/Taza Kitchen1.png', 'name': 'Taza Kitchen', 'price': '₹4,000 ', 'rating': '4.7'},
+  ];
+  final mehndiArtist = [
+    {'image': 'assets/images/Mehndi & Beauty.png', 'name': 'Mehndi & Beauty', 'price': '₹5,000 Onwards', 'rating': '4.5'},
+    {'image': 'assets/images/Mehndi & Beauty1.png', 'name': 'Mehndi Stars', 'price': '₹3,000 Onwards', 'rating': '4.3'},
+    {'image': 'assets/images/Mehndi & Art.png', 'name': 'Mehndi & Art', 'price': '₹4,000 Onwards', 'rating': '4.5'},
+    {'image': 'assets/images/Iconic Mehndi.png', 'name': 'Iconic Mehndi', 'price': '₹15,000 Onwards', 'rating': '4.3'},
+    {'image': 'assets/images/Mehndi & Beauty.png', 'name': 'Mehndi & Beauty', 'price': '₹5,000 Onwards', 'rating': '4.5'},
+    {'image': 'assets/images/Mehndi & Beauty1.png', 'name': 'Mehndi Stars', 'price': '₹3,000 Onwards', 'rating': '4.3'},
+    {'image': 'assets/images/Mehndi & Art.png', 'name': 'Mehndi & Art', 'price': '₹4,000 Onwards', 'rating': '4.5'},
+    {'image': 'assets/images/Iconic Mehndi.png', 'name': 'Iconic Mehndi', 'price': '₹15,000 Onwards', 'rating': '4.3'},
+  ];
+
 
 
   static Widget build({
@@ -91,34 +110,38 @@ class CustomBuildDecorHorizontalList {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          price,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            price,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF575959),
+                            ),
                           ),
-                        ),
-                        CustomAddCounterButton(
-                          imagePath: image,
-                          price: price,
-                          onAdd: (count) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PhotographBookServiceScreen(
-                                  imagePath: image,
-                                  price: price,
-                                  count: count,
+                          CustomAddCounterButton(
+                            imagePath: image,
+                            price: price,
+                            onAdd: (count) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PhotographBookServiceScreen(
+                                    imagePath: image,
+                                    price: price,
+                                    count: count,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

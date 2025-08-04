@@ -106,7 +106,7 @@ class EventServiceCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Color(0xFFFFEFDF),
           borderRadius: BorderRadius.circular(10.1),
           boxShadow: [
             BoxShadow(
@@ -137,13 +137,13 @@ class EventServiceCard extends StatelessWidget {
                   Text(
                     title,
                     style: TextFontStyle.textFontStyle(
-                        16, const Color(0xFF575959), FontWeight.bold),
+                        16, const Color(0xFF575959), FontWeight.w500),
                   ),
                   if (description != null && description!.isNotEmpty)
                     Text(
                       description!,
                       style: TextFontStyle.textFontStyle(
-                          13, Colors.grey[600]!, FontWeight.w400),
+                          13, Color(0xFF575959), FontWeight.w400),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -154,7 +154,7 @@ class EventServiceCard extends StatelessWidget {
                       Text(
                         price,
                         style: TextFontStyle.textFontStyle(
-                            15, commonTealColor, FontWeight.bold),
+                            15, commonTealColor, FontWeight.w500),
                       ),
                       countWidget,
                     ],
@@ -191,12 +191,12 @@ class EventServiceCard extends StatelessWidget {
           Text(
             title,
             style: TextFontStyle.textFontStyle(
-                13, const Color(0xFF575959), FontWeight.w600),
+                13, const Color(0xFF575959), FontWeight.w500),
           ),
           Text(
             price,
             style: TextFontStyle.textFontStyle(
-                13, commonTealColor, FontWeight.w600),
+                13, commonTealColor, FontWeight.w500),
           ),
         ],
       );
