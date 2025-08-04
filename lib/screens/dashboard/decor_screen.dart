@@ -12,6 +12,7 @@ import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 import '../../widgets/custom_image_card_widget.dart';
+import '../../widgets/custom_text_field.dart';
 
 class DecorScreen extends StatelessWidget {
   @override
@@ -216,7 +217,7 @@ Widget _buildSearchBar() {
     height: 40, // decreased height\
     width: 220,
     child: TextField(
-      style: TextStyle(fontSize: 14), // smaller text
+      style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400), // smaller text
       decoration: InputDecoration(
         hintText: 'Search here...',
         prefixIcon: const Icon(Icons.search, size: 20),

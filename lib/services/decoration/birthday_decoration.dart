@@ -79,6 +79,7 @@ class BirthdayDecoration extends StatelessWidget {
                 const SizedBox(width: 10),
                 IconButton(
                   icon: const Icon(Icons.favorite, color: Colors.red),
+
                   onPressed: () {},
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
@@ -114,6 +115,7 @@ class BirthdayDecoration extends StatelessWidget {
 
                       );
                       const SizedBox(height: 10);
+
                     },
                   ),
 
@@ -133,7 +135,8 @@ class BirthdayDecoration extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         hintText: 'Search here...',
-        prefixIcon: const Icon(Icons.search, color: Colors.grey),
+        prefixIcon: const Icon(Icons.search, color: Colors.grey,),
+
         filled: true,
         fillColor: const Color(0xFFF0F0F0),
         contentPadding: const EdgeInsets.symmetric(vertical: 0),
