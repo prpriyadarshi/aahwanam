@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/pandit/pandit_bloc.dart';
 import '../../blocs/pandit/pandit_event.dart';
 import '../../blocs/pandit/pandit_state.dart';
+import '../../screens/dashboard/pooja_detail_page_screen.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 import '../../widgets/custom_language_dropdown.dart';
+import '../../widgets/custom_text_field.dart';
 
 class PanditTheme extends StatefulWidget {
   const PanditTheme({super.key});
@@ -101,13 +103,10 @@ class _PanditThemeState extends State<PanditTheme> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                         Text(
                           "Pooja Theme",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF575959),
-                          ),
+                          style:
+                            TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w600),
                         ),
                         CustomDropdown(
                           hintText: "Select Language",
@@ -133,124 +132,122 @@ class _PanditThemeState extends State<PanditTheme> {
                         itemBuilder: (context, index) {
                           final pooja = state.Theme[index];
 
-                          return Card(
-                            elevation: 1,
-                            color: const Color(0xFFFFEFDF),
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  /// Title and Price
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          pooja['title'] ?? '',
-                                          style: const TextStyle(
-                                            fontFamily: 'Poppins',
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16,
-                                            color: Color(0xFF575959),
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PoojaDetailPage(pooja: pooja),
+                                ),
+                              );
+                            },
+                            child: Card(
+                              elevation: 1,
+                              color: const Color(0xFFFFEFDF),
+                              margin: const EdgeInsets.symmetric(vertical: 10),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    /// Title and Price
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            pooja['title'] ?? '',
+                                            style:
+                                            TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500),
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Text(
-                                        pooja['price'] ?? '',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 15,
-                                          color: Color(0xFF1E535B),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          pooja['price'] ?? '',
+                                          style:
+                                          TextFontStyle.textFontStyle( 15, Color(0xFF575959),FontWeight.w600),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 8),
-
-                                  /// Description
-                                  Text(
-                                    pooja['description'] ?? '',
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      color: Color(0xFF757575),
+                                      ],
                                     ),
-                                  ),
+                                    const SizedBox(height: 8),
 
-                                  /// Heading and Details
-                                  if ((pooja['details_heading'] ?? '').isNotEmpty)
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 6),
-                                      child: Text(
-                                        pooja['details_heading']!,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          color: Color(0xFF575959),
-                                          fontSize: 14,
-                                        ),
-                                      ),
+                                    /// Description
+                                    Text(
+                                      pooja['description'] ?? '',
+                                      style:
+                                      TextFontStyle.textFontStyle( 14, Color(0xFF757575),FontWeight.w500),
                                     ),
 
-                                  if ((pooja['details'] ?? '').isNotEmpty)
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 2),
-                                      child: Text(
-                                        pooja['details']!,
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          color: Color(0xFF575959), // Updated as requested
-                                        ),
-                                      ),
-                                    ),
-
-                                  const SizedBox(height: 8),
-
-                                  /// Duration
-                                  Text(
-                                    "Duration - ${pooja['duration'] ?? 'N/A'}",
-                                    style: const TextStyle(fontSize: 14),
-                                  ),
-                                  const SizedBox(height: 12),
-
-                                  /// Address and Rating
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
+                                    /// Heading and Details
+                                    if ((pooja['details_heading'] ?? '').isNotEmpty)
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 6),
                                         child: Text(
-                                          pooja['address'] ?? '',
-                                          style: const TextStyle(fontSize: 12),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
+                                          pooja['details_heading']!,
+                                          style:
+                                            TextFontStyle.textFontStyle( 14, Color(0xFF575959),FontWeight.w600)
                                         ),
                                       ),
-                                      const SizedBox(width: 6),
-                                      Row(
-                                        children: [
-                                          const Icon(Icons.star, color: Colors.orange, size: 18),
-                                          const SizedBox(width: 4),
-                                          Text(
-                                            pooja['rating'] ?? '0',
-                                            style: const TextStyle(fontSize: 14),
-                                          ),
-                                        ],
+
+                                    if ((pooja['details'] ?? '').isNotEmpty)
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 2),
+                                        child: Text(
+                                          pooja['details']!,
+                                          style:
+                                            TextFontStyle.textFontStyle( 14, Color(0xFF575959),FontWeight.w500)
+                                        ),
                                       ),
-                                    ],
-                                  ),
-                                ],
+
+                                    const SizedBox(height: 8),
+
+                                    /// Duration
+                                    Text(
+                                      "Duration - ${pooja['duration'] ?? 'N/A'}",
+                                      style:
+                                        TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w500)
+                                    ),
+                                    const SizedBox(height: 12),
+
+                                    /// Address and Rating
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            pooja['address'] ?? '',
+                                            style: TextFontStyle.textFontStyle( 12, Colors.black87,FontWeight.w500),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 6),
+                                        Row(
+                                          children: [
+                                            const Icon(Icons.star, color: Colors.orange, size: 18),
+                                            const SizedBox(width: 4),
+                                            Text(
+                                              pooja['rating'] ?? '0',
+                                              style:  TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           );
                         },
                       ),
                     ),
+
                   ],
                 ),
               );
@@ -258,7 +255,8 @@ class _PanditThemeState extends State<PanditTheme> {
               return Center(
                 child: Text(
                   state.message,
-                  style: const TextStyle(color: Colors.red),
+                  style:
+                    TextFontStyle.textFontStyle( 14, Colors.red,FontWeight.w500),
                 ),
               );
             } else {

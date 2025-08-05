@@ -16,15 +16,15 @@ class PanditLoading extends PanditState {}
 
 // State when PanditState data is loaded
 class PanditLoaded extends PanditState {
-  final List<Map<String, String>> poojaTheme;
-  final List<Map<String, String>> Theme;
+  final List<Map<String, dynamic>> poojaTheme;
+  final List<Map<String, dynamic>> Theme; // ✅ Use dynamic for mixed types
 
-  const PanditLoaded(this.poojaTheme,  this.Theme);
+  const PanditLoaded(this.poojaTheme, this.Theme);
 
   @override
-  List<Object?> get props => [poojaTheme];
-
+  List<Object?> get props => [poojaTheme, Theme];
 }
+
 
 // State for errors
 class PanditLoadedError extends PanditState {
