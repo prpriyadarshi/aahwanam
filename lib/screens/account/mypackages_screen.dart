@@ -5,6 +5,7 @@ import 'package:aahwanam/screens/account/detailed_packagecart_screen.dart';
 import 'package:aahwanam/screens/dashboard/dashboard_screen.dart';
 import 'package:aahwanam/widgets/custom_image_card_widget.dart';
 import 'package:aahwanam/widgets/custom_package_card.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/account/account_bloc.dart';
@@ -37,16 +38,36 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
         final packageItems = state.packages;
         final cartdata = state.cartdata;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("My Packages"),
+        titleSpacing: 0,
+        title: Text("My Packages",
+          style: TextFontStyle.textFontStyle(
+            16,                         // Font size
+            Color(0xFF575959),          // Text color
+            FontWeight.w500,            // Font weight
+          ),),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
+        leading: IconButton(
+          padding: const EdgeInsets.only(top: 2, left: 12),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 18,
+            color: Color(0xFF575959),
+          ),
+          onPressed: () {
+            Navigator.pop(context); // ✅ Go back to previous screen
+            // Or use push to go to a specific screen:
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
+          },
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
             onPressed: () {
-              // Share functionality
+              // Implement share functionality if needed
             },
           ),
         ],

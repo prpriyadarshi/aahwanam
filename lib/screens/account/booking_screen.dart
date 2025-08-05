@@ -1,6 +1,7 @@
 import 'package:aahwanam/screens/account/detailed_all_booking_screen.dart';
 import 'package:aahwanam/screens/account/detailed_inprogress_screen.dart';
 import 'package:aahwanam/screens/dashboard/dashboard_screen.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aahwanam/blocs/account/account_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:aahwanam/blocs/account/account_state.dart';
 import '../../services/decoration/decoration_theme.dart';
 import '../../services/makeup_hair_service/MakeupDecor.dart';
 import '../../widgets/package_card.dart';
+import 'account_screen.dart';
 
 
 class BookingScreen extends StatefulWidget {
@@ -44,12 +46,35 @@ class _BookingScreenState extends State<BookingScreen> {
         // 2. Show booking info when data is loaded
         if (state is AccountLoaded) {
           return Scaffold(
+            backgroundColor: Colors.white,
             appBar: AppBar(
-              title: const Text("Bookings"),
+              titleSpacing: 0,
+              elevation: 0,
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
-              elevation: 0,
+              title:  Text("Bookings",
+                style: TextFontStyle.textFontStyle(
+                  16,                         // Font size
+                  Color(0xFF575959),          // Text color
+                  FontWeight.w500,            // Font weight
+                ),
+               ),
+              leading: IconButton(
+                padding: const EdgeInsets.only(top: 2, left: 12),
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  size: 18,
+                  color: Color(0xFF575959),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AccountScreen()),
+                  );
+                },
+              ),
             ),
+
             body: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
