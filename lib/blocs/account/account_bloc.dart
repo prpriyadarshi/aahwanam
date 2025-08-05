@@ -111,41 +111,49 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             'imagePath': 'assets/images/concepts1.png',
             'width': 100.0,
             'height': 100.0,
+            'isLiked': true,
           },
           {
             'imagePath': 'assets/images/concepts2.png',
             'width': 100.0,
             'height': 100.0,
+            'isLiked': true,
           },
           {
             'imagePath': 'assets/images/concepts3.png',
             'width': 100.0,
             'height': 100.0,
+            'isLiked': true,
           },
           {
             'imagePath': 'assets/images/concepts4.png',
             'width': 100.0,
             'height': 100.0,
+            'isLiked': true,
           },
           {
             'imagePath': 'assets/images/concepts5.png',
             'width': 100.0,
             'height': 100.0,
+            'isLiked': true,
           },
           {
             'imagePath': 'assets/images/concepts6.png',
             'width': 100.0,
             'height': 100.0,
+            'isLiked': true,
           },
           {
             'imagePath': 'assets/images/babyshootGallery3.png',
             'width': 100.0,
             'height': 100.0,
+            'isLiked': true,
           },
           {
             'imagePath': 'assets/images/concepts7.png',
             'width': 100.0,
             'height': 100.0,
+            'isLiked': true,
           },
         ];
 
