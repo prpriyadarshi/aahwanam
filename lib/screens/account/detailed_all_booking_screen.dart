@@ -3,6 +3,7 @@ import 'package:aahwanam/blocs/account/account_event.dart';
 import 'package:aahwanam/blocs/account/account_state.dart';
 import 'package:aahwanam/screens/dashboard/e_invitation_screen.dart';
 import 'package:aahwanam/services/services_screen.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -70,28 +71,17 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                           children: [
                             Text(
                               package['title'],
-                              style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF575959),
-                              ),
+                              style:TextFontStyle.textFontStyle(15,Color(0xFF575959), FontWeight.w600),
                             ),
                             const SizedBox(height: 6),
                             Text(
                               package['description'],
-                              style: const TextStyle(
-                                fontSize: 13,
-                                color: Color(0xFF757575),
-                              ),
+                              style:TextFontStyle.textFontStyle(13,Color(0xFF757575), FontWeight.w400),
                             ),
                             const SizedBox(height: 8),
                             Text(
                               "Price: ₹${package['price']}",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 13,
-                                color: Color(0xFF1E535B),
-                              ),
+                              style:TextFontStyle.textFontStyle(13,Color(0xFF1E535B), FontWeight.w600),
                             ),
                           ],
                         ),
@@ -121,10 +111,9 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Event Date",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF575959))),
+                             Text("Event Date",
+                                style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
+                             ),
                             const SizedBox(height: 6),
                             _buildInputBox("22, Feb 2025"),
                           ],
@@ -136,10 +125,9 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Event Time",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF575959))),
+                     Text("Event Time",
+                                style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
+                            ),
                             const SizedBox(height: 6),
                             _buildInputBox("11:15 PM"),
                           ],
@@ -151,10 +139,10 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                   const SizedBox(height: 16),
 
                   // Event Address
-                  const Text("Event Address",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF575959))),
+                   Text("Event Address",
+                      style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
+
+                  ),
                   const SizedBox(height: 6),
                   _buildInputBoxWithTitle("Financial District, Hyderabad",
                       "Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,"),
@@ -203,7 +191,8 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
 
             SizedBox(height: 20),
             Text("Artist assigned for you",
-                style: TextStyle(fontWeight: FontWeight.bold)),
+                style:TextFontStyle.textFontStyle(16,Color(0xFF575959), FontWeight.w500),
+            ),
 
             SizedBox(height: 10),
 
@@ -303,10 +292,8 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
         children: [
           ListTile(
             title: Text(title,
-                style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: Color(0xFF575959))),
+                style:TextFontStyle.textFontStyle(16,Color(0xFF575959), FontWeight.w500),
+                ),
             trailing: IconButton(
               icon: Icon(expanded
                   ? Icons.keyboard_arrow_up
@@ -394,19 +381,12 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
         children: [
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Colors.black87,
-            ),
+            style:TextFontStyle.textFontStyle(14,Colors.black87, FontWeight.w300),
           ),
           const SizedBox(height: 4),
           Text(
             description,
-            style: const TextStyle(
-              fontSize: 13,
-              color: Colors.grey,
-              fontWeight: FontWeight.w500,
-            ),
+            style:TextFontStyle.textFontStyle(13,Colors.grey, FontWeight.w500),
           ),
         ],
       ),
@@ -423,7 +403,9 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(value,
-          style: const TextStyle(fontSize: 14, color: Color(0xFF575959))),
+          style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
+
+      ),
     );
   }
 
@@ -472,16 +454,13 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                 Expanded(
                   child: Text(
                     title,
-                    style: const TextStyle(fontWeight: FontWeight.w500),
+                    style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
                   ),
                 ),
                 // Date aligned right
                 Text(
                   date,
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                  ),
+                  style:TextFontStyle.textFontStyle(12,Color(0xFF757575), FontWeight.w400),
                   textAlign: TextAlign.right,
                 ),
               ],

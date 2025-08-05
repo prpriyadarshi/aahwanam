@@ -2,6 +2,7 @@ import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/account/account_event.dart';
 import 'package:aahwanam/blocs/account/account_state.dart';
 import 'package:aahwanam/routes/app_routes.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +41,28 @@ class CartProceedToPayScreen extends StatelessWidget {
       create: (context) => AccountBloc()..add(LoadAccountInfo()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Book Service"),
+          titleSpacing: 0,
+          elevation: 0,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          title:  Text("Book Service",
+            style: TextFontStyle.textFontStyle(
+              16,                         // Font size
+              Color(0xFF575959),          // Text color
+              FontWeight.w500,            // Font weight
+            ),
+          ),
+          leading: IconButton(
+            padding: const EdgeInsets.only(top: 2, left: 12),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              size: 18,
+              color: Color(0xFF575959),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30.0),
@@ -132,39 +154,24 @@ class CartProceedToPayScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     booking?['title'] ?? 'No Title',
-                                    style: const TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xFF575959),
-                                    ),
+                                    style:TextFontStyle.textFontStyle(13,const Color(0xFF575959), FontWeight.w500),
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
                                     booking?['description'] ?? 'No Description',
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w300,
-                                        color: Color(0xFF757575)),
-                                  ),
+                                    style:TextFontStyle.textFontStyle(12,const Color(0xFF757575), FontWeight.w300),
+                                ),
                                   const SizedBox(height: 6),
                                   Text(
                                     '₹ ${booking?['price'] ?? '0'}${(booking?['isPerSession'] ?? false) ? ' / Session' : ''}',
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xFF1E535B),
-                                    ),
+                                    style:TextFontStyle.textFontStyle(14,const Color(0xFF1E535B), FontWeight.w600),
                                   ),
                                   const SizedBox(height: 6),
                                   Text(
                                     '${DateFormat('dd, MMM yyyy').format(selectedDateTime)} (${DateFormat.jm().format(selectedDateTime)})',
-                                    style: const TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xFF575959),
-                                    ),
+                                    style:TextFontStyle.textFontStyle(13,const Color(0xFF575959), FontWeight.w500),
                                   ),
 
                                 ],
@@ -178,11 +185,9 @@ class CartProceedToPayScreen extends StatelessWidget {
                       const SizedBox(height: 16),
 
                       /// Event Address Section
-                      const Text('Event Address*',
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFF575959))),
+                       Text('Event Address*',
+                          style:TextFontStyle.textFontStyle(14,const Color(0xFF575959), FontWeight.w500),
+                       ),
                       const SizedBox(height: 10),
                       Container(
                         padding: const EdgeInsets.all(10.0),
@@ -224,10 +229,8 @@ class CartProceedToPayScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 8),
                             Text(state.bookServiceDetails.locationDescription,
-                                style: const TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xFF757575))),
+                                style:TextFontStyle.textFontStyle(12,const Color(0xFF757575), FontWeight.w400),
+                            ),
                           ],
                         ),
                       ),
@@ -236,16 +239,13 @@ class CartProceedToPayScreen extends StatelessWidget {
 
                       /// Billing section
                       Row(
-                        children: const [
+                        children:  [
                           Expanded(child: Divider(color: Color(0xFFF1F1F1), thickness: 1)),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.0),
                             child: Text("Bill Details",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFF575959),
-                                )),
+                                style:TextFontStyle.textFontStyle(14,const Color(0xFF575959), FontWeight.w600),
+                            ),
                           ),
                           Expanded(child: Divider(color: Color(0xFFF1F1F1), thickness: 1)),
                         ],
@@ -298,11 +298,7 @@ void _showChangeAddress(BuildContext context) {
             children: [
               Text(
                 'Change Address',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF575959),
-                ),
+                style:TextFontStyle.textFontStyle(18,const Color(0xFF575959), FontWeight.w600),
               ),
               SizedBox(height: 16),
               SizedBox(
@@ -329,12 +325,7 @@ void _showChangeAddress(BuildContext context) {
               SizedBox(height: 24),
               Text(
                 'Your saved address',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF575959),
-
-                ),
+                style:TextFontStyle.textFontStyle(15,const Color(0xFF575959), FontWeight.w500),
               ),
               SizedBox(height: 16),
 
@@ -353,11 +344,6 @@ void _showChangeAddress(BuildContext context) {
                 title: 'Hitech City',
                 subtitle: 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
               ),
-              // SizedBox(height: 12),
-              // _addressTile(
-              //   title: 'Gachibowli',
-              //   subtitle: 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
-              // ),
               SizedBox(height: 20),
             ],
           ),
@@ -383,20 +369,12 @@ Widget _addressTile({required String title, required String subtitle}) {
             children: [
               Text(
                 title,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                  color: Color(0xFF575959),
-
-                ),
+                style:TextFontStyle.textFontStyle(14,const Color(0xFF575959), FontWeight.w500),
               ),
               SizedBox(height: 4),
               Text(
                 subtitle,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Color(0xFF757575),
-                ),
+                style:TextFontStyle.textFontStyle(13,const Color(0xFF757575), FontWeight.w400),
               ),
             ],
           ),
@@ -413,10 +391,7 @@ Widget _addressTile({required String title, required String subtitle}) {
           ),
           child: Text(
             'Edit',
-            style: TextStyle(
-              fontSize: 13,
-              color: Color(0xFF1E535B),
-            ),
+            style:TextFontStyle.textFontStyle(13,const Color(0xFF1E535B), FontWeight.w400),
           ),
         ),
       ],
@@ -449,11 +424,7 @@ void _showAddNewAddress(BuildContext context) {
               children: [
                 Text(
                   'Add New Address',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF575959),
-                  ),
+                  style:TextFontStyle.textFontStyle(18,const Color(0xFF575959), FontWeight.w500),
                 ),
                 SizedBox(height: 16),
                 _buildTextField(
@@ -478,11 +449,7 @@ void _showAddNewAddress(BuildContext context) {
                 SizedBox(height: 24),
                 Text(
                   'Enter your details for seamless experience',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF757575),
-                  ),
+                  style:TextFontStyle.textFontStyle(14,const Color(0xFF757575), FontWeight.w400),
                 ),
                 SizedBox(height: 16),
                 _buildTextField(
@@ -516,7 +483,8 @@ void _showAddNewAddress(BuildContext context) {
                     ),
                     child: Text(
                       'Save Address',
-                      style: TextStyle(fontSize: 16,color: Colors.white),
+                      style:TextFontStyle.textFontStyle(16,Colors.white, FontWeight.w500),
+                      // style: TextStyle(fontSize: 16,color: Colors.white),
                     ),
                   ),
                 ),
@@ -542,11 +510,7 @@ Widget _buildTextField({
     children: [
       Text(
         label,
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          color: Color(0xFF575959),
-        ),
+        style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w400),
       ),
       SizedBox(height: 6),
       TextField(
@@ -556,10 +520,7 @@ Widget _buildTextField({
             : null,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(
-            color: Color(0xFF757575), // 👈 Set hint text color
-            fontSize: 14,fontWeight: FontWeight.w300,
-          ),
+          hintStyle:TextFontStyle.textFontStyle(14,Color(0xFF757575), FontWeight.w300),
           contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
