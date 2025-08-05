@@ -54,17 +54,26 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             const SizedBox(width: 10),
-            IconButton(
-              icon: const Icon(Icons.calendar_today_outlined),
-              onPressed: onCalendarTap,
+            GestureDetector(
+              onTap: onCalendarTap,
+              child: Image.asset(
+                'assets/images/timer.png',
+                width: 28,
+                height: 24,
+              ),
             ),
-            IconButton(
-              icon: const Icon(Icons.add_shopping_cart_sharp),
-              onPressed: onCartTap,
+            GestureDetector(
+              onTap: onCartTap,
+              child: Image.asset(
+                'assets/images/mypackages.png',
+                width: 34,
+                height: 34,
+              ),
             ),
             IconButton(
               icon: const Icon(Icons.favorite, color: Colors.red),
               onPressed: onFavoriteTap,
+              iconSize: 28,
             ),
           ],
         ),

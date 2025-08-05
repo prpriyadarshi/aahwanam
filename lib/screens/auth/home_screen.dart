@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../routes/app_routes.dart'; // Make sure this contains AppRoutes.splash
+import '../../routes/app_routes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
