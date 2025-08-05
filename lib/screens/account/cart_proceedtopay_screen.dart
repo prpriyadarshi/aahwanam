@@ -41,7 +41,28 @@ class CartProceedToPayScreen extends StatelessWidget {
       create: (context) => AccountBloc()..add(LoadAccountInfo()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Book Service"),
+          titleSpacing: 0,
+          elevation: 0,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          title:  Text("Book Service",
+            style: TextFontStyle.textFontStyle(
+              16,                         // Font size
+              Color(0xFF575959),          // Text color
+              FontWeight.w500,            // Font weight
+            ),
+          ),
+          leading: IconButton(
+            padding: const EdgeInsets.only(top: 2, left: 12),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              size: 18,
+              color: Color(0xFF575959),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30.0),
