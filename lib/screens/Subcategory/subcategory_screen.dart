@@ -113,8 +113,8 @@ class SubcategoryScreen extends StatelessWidget {
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           mainAxisSpacing: 16,
-                          crossAxisSpacing: 19,
-                          childAspectRatio: 0.65,
+                          crossAxisSpacing: 14,
+                          childAspectRatio: 0.72,
                         ),
                         itemBuilder: (_, index) {
                           final item = selectedCategory!.services[index];
