@@ -8,7 +8,6 @@ import '../../blocs/decor/decor_state.dart';
 import '../../services/decoration/birthday_decoration.dart';
 import '../../services/services_screen.dart';
 import '../../widgets/custom_card_birthday.dart';
-import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 import '../../widgets/custom_image_card_widget.dart';
