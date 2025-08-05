@@ -35,6 +35,7 @@ class CustomPanditCardWidgets {
               ],
             ),
           ),
+
         const SizedBox(height: 14),
         if (showTitle) const SizedBox(height: 12), // ✅ Add space only if title is shown
         GridView.builder(

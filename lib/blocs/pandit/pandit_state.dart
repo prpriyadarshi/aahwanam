@@ -22,6 +22,7 @@ class PanditLoaded extends PanditState {
   const PanditLoaded(this.poojaTheme, this.Theme);
 
   @override
+
   List<Object?> get props => [poojaTheme, Theme];
 }
 

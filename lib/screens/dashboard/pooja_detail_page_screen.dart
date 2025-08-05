@@ -69,7 +69,6 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                 toolbarHeight: 56,
                 titleSpacing: 0,
                 leadingWidth: 0,
-
                 iconTheme: const IconThemeData(color: Colors.black),
                 title: Row(
                   children: [

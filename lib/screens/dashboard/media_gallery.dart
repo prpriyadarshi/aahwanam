@@ -23,6 +23,7 @@ class MediaGallery extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+
           children: [
             /// ✅ Title
             Text(

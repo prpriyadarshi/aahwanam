@@ -95,7 +95,9 @@ class PanditBloc extends Bloc<PanditEvent, PanditState> {
               'assets/images/pooja_gallery2.png',
               'assets/images/pooja_gallery3.png',
               'assets/images/pooja_gallery4.png',
+              'assets/images/pooja_gallery4.png',
             ],
+
             "media": [
               {'url': 'assets/images/pooja_gallery1.png', 'isVideo': true,'category':'Pooja'},
               {'url': 'assets/images/pooja_galley7.png', 'isVideo': false,'category':'Pooja'},
@@ -145,6 +147,7 @@ class PanditBloc extends Bloc<PanditEvent, PanditState> {
               'assets/images/pooja_gallery2.png',
               'assets/images/pooja_gallery3.png',
               'assets/images/pooja_gallery4.png',
+              'assets/images/pooja_gallery4.png',
             ],
             "media": [
               {'url': 'assets/images/pooja_gallery1.png', 'isVideo': true,'category':'Pooja'},
@@ -193,6 +196,7 @@ class PanditBloc extends Bloc<PanditEvent, PanditState> {
               'assets/images/pooja_gallery1.png',
               'assets/images/pooja_gallery2.png',
               'assets/images/pooja_gallery3.png',
+              'assets/images/pooja_gallery4.png',
               'assets/images/pooja_gallery4.png',
             ],
             "media": [

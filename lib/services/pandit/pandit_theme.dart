@@ -90,6 +90,7 @@ class _PanditThemeState extends State<PanditTheme> {
             ],
           ),
         ),
+
         body: BlocBuilder<PanditBloc, PanditState>(
           builder: (context, state) {
             if (state is PanditLoading) {
