@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class EventDateTimePicker extends StatefulWidget {
-  const EventDateTimePicker({Key? key, String? label}) : super(key: key);
+  final String? label;
+
+  const EventDateTimePicker({Key? key, this.label}) : super(key: key);
+
 
   @override
   _EventDateTimePickerState createState() => _EventDateTimePickerState();
 }
 
 class _EventDateTimePickerState extends State<EventDateTimePicker> {
+
   DateTime? selectedDate;
   DateTime? selectedTime; // Add this line
 
@@ -405,84 +409,61 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final bool isSmallScreen = screenWidth < 360; // Threshold for stacking
+
+    if (isSmallScreen) {
+      // Stack vertically for small screens
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildDatePicker(context),
+          const SizedBox(height: 12),
+          _buildTimePicker(context),
+        ],
+      );
+    }
+
+    // Row layout for larger screens
     return Row(
       children: [
-        // Event Date Picker
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Event Date*",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF575959),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 6),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xFFE4E4E4)),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      selectedDate != null
-                          ? DateFormat('dd, MMM yyyy').format(selectedDate!)
-                          : "Select Date",
-                      style: TextStyle(fontSize: 16, color: Color(0xFF575959)),
-                    ),
-                    Spacer(),
-                    GestureDetector(
-                      onTap: () => _showCustomDatePicker(context),
-                      child: Icon(Icons.calendar_month,
-                          size: 25, color: Color(0xFF575959)),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(width: 16),
+        Expanded(child: _buildDatePicker(context)),
+        const SizedBox(width: 12),
+        Expanded(child: _buildTimePicker(context)),
+      ],
+    );
+  }
 
-        // Event Time Picker (uses same style)
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildDatePicker(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.label == 'Pooja' ? "Date Of Birth*" : "Event Date*",
+          style: const TextStyle(fontSize: 12, color: Color(0xFF575959), fontWeight: FontWeight.w500),
+        ),
+        const SizedBox(height: 6),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+          decoration: BoxDecoration(
+            border: Border.all(color: const Color(0xFFE4E4E4)),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
             children: [
-              Text("Event Time*",
-            style: TextStyle(
-              fontSize: 12,
-              color: Color(0xFF575959),
-              fontWeight: FontWeight.w500,
-            )),
-              SizedBox(height: 6),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xFFE4E4E4)),
-                  borderRadius: BorderRadius.circular(12),
+              Expanded(
+                child: Text(
+                  selectedDate != null
+                      ? DateFormat('dd, MMM yyyy').format(selectedDate!)
+                      : "Select Date",
+                  style: const TextStyle(fontSize: 14, color: Color(0xFF575959)),
+                  overflow: TextOverflow.ellipsis,
                 ),
-                child: Row(
-                  children: [
-                    Text(
-                      selectedTime != null
-                          ? DateFormat('hh:mm a').format(selectedTime!)
-                          : "Select Time",
-                      style: TextStyle(fontSize: 16, color: Color(0xFF575959)),
-                    ),
-                    Spacer(),
-                    GestureDetector(
-                      onTap: () => _showCustomTimePicker(context),
-                      child: Icon(Icons.access_time,
-                          size: 24, color: Color(0xFF575959)),
-                    ),
-                  ],
-                ),
+              ),
+              const SizedBox(width: 8),
+              GestureDetector(
+                onTap: () => _showCustomDatePicker(context),
+                child: const Icon(Icons.calendar_month, size: 22, color: Color(0xFF575959)),
               ),
             ],
           ),
@@ -490,4 +471,44 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
       ],
     );
   }
+
+  Widget _buildTimePicker(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.label == 'Pooja' ? "Time Of Birth*" : "Event Time*",
+          style: const TextStyle(fontSize: 12, color: Color(0xFF575959), fontWeight: FontWeight.w500),
+        ),
+        const SizedBox(height: 6),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+          decoration: BoxDecoration(
+            border: Border.all(color: const Color(0xFFE4E4E4)),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  selectedTime != null
+                      ? DateFormat('hh:mm a').format(selectedTime!)
+                      : "Select Time",
+                  style: const TextStyle(fontSize: 14, color: Color(0xFF575959)),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: 8),
+              GestureDetector(
+                onTap: () => _showCustomTimePicker(context),
+                child: const Icon(Icons.access_time, size: 22, color: Color(0xFF575959)),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+
 }
