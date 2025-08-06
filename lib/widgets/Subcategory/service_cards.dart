@@ -27,6 +27,12 @@ class EventServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Define common properties for both states (Add/Increment-Decrement)
+    const double commonHorizontalPadding = 10; // Padding for 'Add' button text
+    const double commonVerticalPadding = 4; // Padding for 'Add' button text
+    final BorderRadius commonBorderRadius = BorderRadius.circular(6);
+    final Color commonTealColor = Color(0xFF1E535B); // The specific teal color from the image
+
     final Widget countWidget = count == 0
         ? GestureDetector(
       onTap: () {
@@ -34,38 +40,62 @@ class EventServiceCard extends StatelessWidget {
         onAddTap?.call();
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: const EdgeInsets.symmetric(
+            horizontal: commonHorizontalPadding,
+            vertical: commonVerticalPadding),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Colors.teal),
-          borderRadius: BorderRadius.circular(4),
+          border: Border.all(color: Color(0xFF1E535B),width: 1.5),
+          borderRadius: BorderRadius.circular(3),
         ),
         child: Text(
           "Add",
           style: TextFontStyle.textFontStyle(
-              12, const Color(0xFF1E535B), FontWeight.w500),
+              10, Color(0xFF1E535B), FontWeight.w500),
         ),
       ),
     )
         : Container(
-      color: Colors.black,
+      // This container will be the same size and shape as the "Add" button
+      decoration: BoxDecoration(
+        color:  Color(0xFF1E535B),
+        borderRadius: BorderRadius.circular(3),
+        border: Border.all(color:  Color(0xFF1E535B),width: 1),
+      ),
+      // The padding here is to control the overall size of the teal container
+      // and must be carefully balanced with the content inside.
+      // Let's rely on the content's sizing and min-width/height.
       child: Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.min, // Essential to constrain width
         children: [
-          IconButton(
-            icon: const Icon(Icons.remove, size: 20, color: Colors.white),
-            onPressed: () => onCountChanged?.call(count - 1),
-            splashRadius: 20,
+          // Remove button
+          SizedBox(
+            width: 24, // Fixed width for the button area
+            height: 24, // Fixed height for the button area
+            child: IconButton(
+              icon: const Icon(Icons.remove, size: 12, color: Colors.white), // Reduced icon size
+              onPressed: () => onCountChanged?.call(count - 1),
+              splashRadius: 12,
+              padding: EdgeInsets.zero, // Remove all internal padding
+              constraints: const BoxConstraints(), // Remove default constraints
+            ),
           ),
           Text(
             '$count',
             style: TextFontStyle.textFontStyle(
-                18, Colors.white, FontWeight.bold),
+                10, Colors.white, FontWeight.w500), // Reduced font size to fit
           ),
-          IconButton(
-            icon: const Icon(Icons.add, size: 20, color: Colors.white),
-            onPressed: () => onCountChanged?.call(count + 1),
-            splashRadius: 20,
+          // Add button
+          SizedBox(
+            width: 24, // Fixed width for the button area
+            height: 24, // Fixed height for the button area
+            child: IconButton(
+              icon: const Icon(Icons.add, size: 12, color: Colors.white), // Reduced icon size
+              onPressed: () => onCountChanged?.call(count + 1),
+              splashRadius: 14,
+              padding: EdgeInsets.zero, // Remove all internal padding
+              constraints: const BoxConstraints(), // Remove default constraints
+            ),
           ),
         ],
       ),
@@ -76,7 +106,7 @@ class EventServiceCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Color(0xFFFFEFDF),
           borderRadius: BorderRadius.circular(10.1),
           boxShadow: [
             BoxShadow(
@@ -107,13 +137,13 @@ class EventServiceCard extends StatelessWidget {
                   Text(
                     title,
                     style: TextFontStyle.textFontStyle(
-                        16, const Color(0xFF575959), FontWeight.bold),
+                        16, const Color(0xFF575959), FontWeight.w500),
                   ),
                   if (description != null && description!.isNotEmpty)
                     Text(
                       description!,
                       style: TextFontStyle.textFontStyle(
-                          13, Colors.grey[600]!, FontWeight.w400),
+                          13, Color(0xFF575959), FontWeight.w400),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -124,7 +154,7 @@ class EventServiceCard extends StatelessWidget {
                       Text(
                         price,
                         style: TextFontStyle.textFontStyle(
-                            15, Colors.teal, FontWeight.bold),
+                            15, commonTealColor, FontWeight.w500),
                       ),
                       countWidget,
                     ],
@@ -161,12 +191,12 @@ class EventServiceCard extends StatelessWidget {
           Text(
             title,
             style: TextFontStyle.textFontStyle(
-                13, const Color(0xFF575959), FontWeight.w600),
+                13, const Color(0xFF575959), FontWeight.w500),
           ),
           Text(
             price,
             style: TextFontStyle.textFontStyle(
-                13, Colors.teal, FontWeight.w600),
+                13, commonTealColor, FontWeight.w500),
           ),
         ],
       );

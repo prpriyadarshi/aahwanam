@@ -95,9 +95,9 @@ class _EventScreenState extends State<EventScreen> {
                       itemCount: state.events.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: crossAxisCount,
-                        mainAxisSpacing: 12,
-                        crossAxisSpacing: 14,
-                        childAspectRatio: 0.65,
+                        mainAxisSpacing: 4,
+                        crossAxisSpacing: 20,
+                        childAspectRatio: 0.70,
                       ),
                       itemBuilder: (context, index) {
                         final event = state.events[index];
@@ -129,9 +129,9 @@ class _EventScreenState extends State<EventScreen> {
                               Text(
                                 event['name'] ?? '',
                                 textAlign: TextAlign.center,
-                                maxLines: 1,
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style:TextFontStyle.textFontStyle(12,const Color(0xFF575959), FontWeight.w400),
+                                style:TextFontStyle.textFontStyle(12,const Color(0xFF575959), FontWeight.w500),
                                 ),
                             ],
                           ),

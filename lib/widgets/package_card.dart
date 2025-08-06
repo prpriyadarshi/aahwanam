@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PackageCard extends StatelessWidget {
+class PackageCard extends StatefulWidget {
   final String title;
   final String description;
   final String price;
@@ -31,11 +31,16 @@ class PackageCard extends StatelessWidget {
     this.showLikeIcon = false,
     this.onTap,
   }) : super(key: key);
-
   @override
+  State<PackageCard> createState() => _PackageCardState();
+}
+class _PackageCardState extends State<PackageCard> {
+  bool isLiked = true;
+
+@override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: widget.onTap,
       borderRadius: BorderRadius.circular(6),
       child: Card(
         shape: RoundedRectangleBorder(
@@ -54,28 +59,35 @@ class PackageCard extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(6),
                     child: Image.asset(
-                      imagePath,
+                      widget.imagePath,
                       height: 130,
                       width: 80,
                       fit: BoxFit.cover,
                     ),
                   ),
-                  if (showLikeIcon)
+                  if (widget.showLikeIcon)
                     Positioned(
                       top: 4,
                       right: 4,
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            isLiked = !isLiked;
+          });
+        },
                       child: Container(
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),
                         padding: const EdgeInsets.all(2),
-                        child: const Icon(
-                          Icons.favorite,
+                        child:  Icon(
+                          isLiked ? Icons.favorite : Icons.favorite_border,
                           size: 16,
-                          color: Colors.red,
+                          color: isLiked ? Colors.red : Colors.grey,
                         ),
                       ),
+                    ),
                     ),
                 ],
               ),
@@ -93,7 +105,7 @@ class PackageCard extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            title,
+                            widget.title,
                             style: const TextStyle(
                               fontFamily: 'Poppins', // Font family
                               fontSize: 14, // Size in px (Flutter uses logical pixels)
@@ -105,7 +117,7 @@ class PackageCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        if (rating != null)
+                        if (widget.rating != null)
                           Row(
                             children: [
                               const Icon(
@@ -115,7 +127,7 @@ class PackageCard extends StatelessWidget {
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                rating.toString(),
+                                widget.rating.toString(),
                                 style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
@@ -129,7 +141,7 @@ class PackageCard extends StatelessWidget {
                     const SizedBox(height: 6),
                     // Description
                     Text(
-                      description,
+                      widget.description,
                       style: const TextStyle(
                         fontFamily: 'Poppins',      // Font family
                         fontSize: 14,              // Size in px (Flutter uses logical pixels)
@@ -149,7 +161,7 @@ class PackageCard extends StatelessWidget {
                           color: Color(0xFF1E535B),
                         ),
                         Text(
-                          price,
+                          widget.price,
                           style: const TextStyle(
                             fontFamily: 'Poppins',      // Font family
                             fontSize: 12,              // Size in px (Flutter uses logical pixels)
@@ -162,10 +174,10 @@ class PackageCard extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 4),
-                    if (details != null) ...[
+                    if (widget.details != null) ...[
                       const SizedBox(height: 4),
                       Text(
-                        details!,
+                        widget.details!,
                         style: const  TextStyle(
                           fontFamily: 'Poppins',
                           // Font family
@@ -179,16 +191,16 @@ class PackageCard extends StatelessWidget {
                     ],
 
                     // Now the buttons immediately after text!
-                    if (primaryButtonText != null || secondaryButtonText != null) ...[
+                    if (widget.primaryButtonText != null || widget.secondaryButtonText != null) ...[
                       const SizedBox(height: 12),
                       Row(
                         children: [
-                          if (secondaryButtonText != null)
+                          if (widget.secondaryButtonText != null)
                             SizedBox(
                               width: 122,
                               height: 29,
                               child: OutlinedButton(
-                                onPressed: onSecondaryButtonPressed,
+                                onPressed: widget.onSecondaryButtonPressed,
                                 style: OutlinedButton.styleFrom(
                                   backgroundColor: const Color(0xFFFFFDFC), // ✅ correct bg color
                                   side: const BorderSide(
@@ -201,7 +213,7 @@ class PackageCard extends StatelessWidget {
                                   padding: EdgeInsets.zero, // ✅ remove default padding
                                 ),
                                 child: Text(
-                                  secondaryButtonText!,
+                                  widget.secondaryButtonText!,
                                   style: const TextStyle(
                                     fontFamily: "Poppins",
                                     fontWeight: FontWeight.w500,
@@ -212,15 +224,15 @@ class PackageCard extends StatelessWidget {
                               ),
                             ),
 
-                          if (secondaryButtonText != null && primaryButtonText != null)
+                          if (widget.secondaryButtonText != null && widget.primaryButtonText != null)
                             const SizedBox(width: 8),
 
-                          if (primaryButtonText != null)
+                          if (widget.primaryButtonText != null)
                             SizedBox(
                               width: 74,
                               height: 29,
                               child: ElevatedButton(
-                                onPressed: onPrimaryButtonPressed,
+                                onPressed: widget.onPrimaryButtonPressed,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF1E535B),
                                   shape: RoundedRectangleBorder(

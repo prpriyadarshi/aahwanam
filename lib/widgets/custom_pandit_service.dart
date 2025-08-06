@@ -1,23 +1,43 @@
 import 'package:flutter/material.dart';
-
 import '../services/pandit/pandit_theme.dart';
+import 'custom_text_field.dart';
 
 class CustomPanditCardWidgets {
   static Widget buildSection(
       BuildContext context, {
         required String title,
-        required List<Map<String, String>> data,
+        required List<Map<String, dynamic>> data,
         required VoidCallback onViewAll,
         required bool showViewAll,
+        bool showTitle = true, // ✅ New parameter to control title visibility
       }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 0),
+        if (showTitle) // ✅ Conditionally render title row
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: TextFontStyle.textFontStyle(16, const Color(0xFF1E535B), FontWeight.bold),
+                ),
+                if (showViewAll)
+                  GestureDetector(
+                    onTap: onViewAll,
+                    child: Text(
+                      'View All',
+                      style: TextFontStyle.textFontStyle(14, Colors.blue, FontWeight.w500),
+                    ),
+                  ),
+              ],
+            ),
+          ),
 
-        ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 14),
+        if (showTitle) const SizedBox(height: 12), // ✅ Add space only if title is shown
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -25,27 +45,26 @@ class CustomPanditCardWidgets {
             crossAxisCount: 2,
             crossAxisSpacing: 13.0,
             mainAxisSpacing: 13.0,
-            childAspectRatio: 1.05,
+            childAspectRatio: 0.8,
           ),
           itemCount: data.length,
-          padding: EdgeInsets.zero,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           itemBuilder: (context, index) {
             final item = data[index];
-            return buildCarditem(context as BuildContext, item,data);
+            return buildCarditem(context, item);
           },
-
         ),
       ],
     );
   }
-  static Widget buildCarditem(BuildContext context, Map<String, String> item, List<Map<String, String>> data) {
+
+
+  static Widget buildCarditem(BuildContext context, Map<String, dynamic> item) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => PanditTheme(),
-          ),
+          MaterialPageRoute(builder: (context) => PanditTheme()),
         );
       },
       child: Card(
@@ -56,15 +75,12 @@ class CustomPanditCardWidgets {
         ),
         margin: EdgeInsets.zero,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(6.0),
-                  ),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(6.0)),
                   child: item['image'] != null && item['image']!.startsWith('assets/')
                       ? Image.asset(
                     item['image']!,
@@ -95,7 +111,7 @@ class CustomPanditCardWidgets {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -105,27 +121,19 @@ class CustomPanditCardWidgets {
                       Expanded(
                         child: Text(
                           item['name'] ?? '',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959),
-                          ),
+                          style:
+                          TextFontStyle.textFontStyle( 12, Color(0xFF575959),FontWeight.w500),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.star,
-                              color: Color(0xFFEFAA37), size: 16),
+                          const Icon(Icons.star, color: Color(0xFFEFAA37), size: 16),
                           const SizedBox(width: 4),
                           Text(
                             item['rating'] ?? "0.0",
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xFF575959),
-                            ),
+                            style: TextFontStyle.textFontStyle( 10,  Color(0xFF575959)),
                           ),
                         ],
                       ),
@@ -134,11 +142,8 @@ class CustomPanditCardWidgets {
                   const SizedBox(height: 4.0),
                   Text(
                     item['price'] ?? '',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF1E535B),
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style:
+                      TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w600),
                   ),
                 ],
               ),
@@ -149,6 +154,3 @@ class CustomPanditCardWidgets {
     );
   }
 }
-
-
-

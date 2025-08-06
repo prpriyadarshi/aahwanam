@@ -2,6 +2,7 @@ import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/account/account_event.dart';
 import 'package:aahwanam/blocs/account/account_state.dart';
 import 'package:aahwanam/screens/account/RateServiceScreen.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,59 +28,58 @@ class _DetailedDeliveredmyPackagesScreen
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        toolbarHeight: 60,
+        titleSpacing: 0,
+        title: Text("My Packages",
+          style: TextFontStyle.textFontStyle(
+            16,                         // Font size
+            Color(0xFF575959),          // Text color
+            FontWeight.w500,            // Font weight
+          ),),
         backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         elevation: 0,
-        title: Row(
-          children: [
-            IconButton(
-              icon:
-                  const Icon(Icons.chevron_left, color: Colors.black, size: 28),
-              onPressed: () => Navigator.pop(context),
-            ),
-            const Text(
-              "My Packages",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const Spacer(),
-            IconButton(
-              icon: const Icon(Icons.share, color: Colors.black),
-              onPressed: () {},
-            ),
-          ],
+        leading: IconButton(
+          padding: const EdgeInsets.only(top: 2, left: 12),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 18,
+            color: Color(0xFF575959),
+          ),
+          onPressed: () {
+            Navigator.pop(context); // ✅ Go back to previous screen
+            // Or use push to go to a specific screen:
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
+          },
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.share),
+            onPressed: () {
+              // Implement share functionality if needed
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ListView(
           children: [
-            const Center(
+        Center(
               child: Text(
                 "Birthday Party Package",
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0XFF575959)),
+                style:TextFontStyle.textFontStyle(14,Color(0XFF575959), FontWeight.w500),
               ),
             ),
             const SizedBox(height: 16),
             ..._buildPackageItems(),
             const SizedBox(height: 24),
             Row(
-              children: const [
+              children:  [
                 Expanded(child: Divider(thickness: 1)),
                 SizedBox(width: 8),
                 Text(
                   "Bill Details",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: Color(0XFF575959)),
+                  style:TextFontStyle.textFontStyle(14,Color(0XFF575959), FontWeight.w500),
                 ),
                 SizedBox(width: 8),
                 Expanded(child: Divider(thickness: 1)),
@@ -94,12 +94,12 @@ class _DetailedDeliveredmyPackagesScreen
             const SizedBox(height: 24),
 
             Row(
-              children: const [
+              children:  [
                 Expanded(child: Divider(thickness: 1)),
                 SizedBox(width: 8),
                 Text(
                   "Rate Service",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style:TextFontStyle.textFontStyle(14,Color(0XFF575959), FontWeight.w500),
                 ),
                 SizedBox(width: 8),
                 Expanded(child: Divider(thickness: 1)),
@@ -165,21 +165,14 @@ class _DetailedDeliveredmyPackagesScreen
                 children: [
                   Text(
                     service["title"]!,
-                    style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0XFF575959)),
+                    style:TextFontStyle.textFontStyle(12,Color(0XFF575959), FontWeight.w500),
                   ),
                   Text(service["price"]!,
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Color(0XFF1E535B),
-                          fontWeight: FontWeight.w600)),
-                  const Text("Delivered on–23–03–25",
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Color(0XFF757575),
-                          fontWeight: FontWeight.w400)),
+                      style:TextFontStyle.textFontStyle(12,Color(0XFF1E535B), FontWeight.w600),
+                  ),
+                   Text("Delivered on–23–03–25",
+                      style:TextFontStyle.textFontStyle(12,Color(0XFF757575), FontWeight.w400),
+                    ),
                 ],
               ),
             ),
