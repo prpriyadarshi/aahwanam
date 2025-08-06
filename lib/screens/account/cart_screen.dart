@@ -91,7 +91,7 @@ class CartScreen extends StatelessWidget {
                               content: Text(
                                   "${booking['title']} moved to Wishlist")),
                         );
-                      },
+                      }, details: '',
                     ),
                   );
                 },
