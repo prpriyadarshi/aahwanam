@@ -26,7 +26,7 @@ class _CustomDateTimeBottomSheetState extends State<CustomDateTimeBottomSheet> {
           Center(
             child: Text(
               "Select Event Date",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
           ),
           SizedBox(height: 16),

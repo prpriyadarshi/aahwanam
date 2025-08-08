@@ -139,7 +139,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     });
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDF3EA),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
