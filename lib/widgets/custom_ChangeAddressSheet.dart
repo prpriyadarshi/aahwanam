@@ -9,6 +9,7 @@ class CustomChangeAddressSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
+
       decoration: BoxDecoration(
 
         border: Border.all(
@@ -16,13 +17,14 @@ class CustomChangeAddressSheet extends StatelessWidget {
           color: const Color(0xFFE4E4E4), // This is your border color
         ),
 
-        color: const Color(0xFFFAFAFA),
+        color: Colors.white,
 
         borderRadius: BorderRadius.circular(8.0),
       ),
 
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
+
         children: [
           Expanded(
             child: Column(
