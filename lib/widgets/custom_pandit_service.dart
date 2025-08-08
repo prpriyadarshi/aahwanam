@@ -67,90 +67,88 @@ class CustomPanditCardWidgets {
           MaterialPageRoute(builder: (context) => PanditTheme()),
         );
       },
-      child: Card(
-        elevation: 0,
-        color: const Color(0xFFFFEFDF),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6.0),
-        ),
-        margin: EdgeInsets.zero,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(6.0)),
-                  child: item['image'] != null && item['image']!.startsWith('assets/')
-                      ? Image.asset(
-                    item['image']!,
-                    height: 120,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  )
-                      : Image.network(
-                    item['image'] ?? '',
-                    height: 120,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const Positioned(
-                  top: 8,
-                  right: 8,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 10,
-                    child: Icon(
-                      Icons.favorite_border,
-                      size: 14,
-                      color: Colors.red,
+        child: Card(
+          elevation: 0,
+          
+          color: const Color(0xFFFFEFDF),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6.0),
+          ),
+          margin: EdgeInsets.all(3.0),
+
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min, // ✅ Prevent extra height
+            children: [
+              Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(6.0)),
+                    child: item['image'] != null && item['image']!.startsWith('assets/')
+                        ? Image.asset(
+                      item['image']!,
+                      height: 150, // ✅ Slightly reduced
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    )
+                        : Image.network(
+                      item['image'] ?? '',
+                      height: 150,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          item['name'] ?? '',
-                          style:
-                          TextFontStyle.textFontStyle( 12, Color(0xFF575959),FontWeight.w500),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          const Icon(Icons.star, color: Color(0xFFEFAA37), size: 16),
-                          const SizedBox(width: 4),
-                          Text(
-                            item['rating'] ?? "0.0",
-                            style: TextFontStyle.textFontStyle( 10,  Color(0xFF575959)),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4.0),
-                  Text(
-                    item['price'] ?? '',
-                    style:
-                      TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w600),
+                  const Positioned(
+                    top: 6,
+                    right: 6,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 8,
+                      child: Icon(Icons.favorite_border, size: 12, color: Colors.red),
+                    ),
                   ),
                 ],
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0), // ✅ Reduced padding
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            item['name'] ?? '',
+                            style: TextFontStyle.textFontStyle(14, Color(0xFF575959), FontWeight.w500), // ✅ Smaller font
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            const Icon(Icons.star, color: Color(0xFFEFAA37), size: 14), // ✅ Smaller
+                            const SizedBox(width: 2),
+                            Text(
+                              item['rating'] ?? "0.0",
+                              style: TextFontStyle.textFontStyle(14, Color(0xFF575959)), // ✅ Smaller font
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 2), // ✅ Smaller spacing
+                    Text(
+                      item['price'] ?? '',
+                      style: TextFontStyle.textFontStyle(14, Color(0xFF1E535B), FontWeight.w600), // ✅ Slightly smaller
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
+
     );
   }
 }
