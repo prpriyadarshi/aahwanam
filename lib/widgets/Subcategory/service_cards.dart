@@ -106,7 +106,7 @@ class EventServiceCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
-          color: Color(0xFFFFEFDF),
+          color: const Color(0xFFFFEFDF),
           borderRadius: BorderRadius.circular(10.1),
           boxShadow: [
             BoxShadow(
@@ -120,16 +120,37 @@ class EventServiceCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.asset(
-                imageUrl,
-                height: 100,
-                width: 100,
-                fit: BoxFit.cover,
-              ),
+            // Image and price stacked vertically
+            Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.asset(
+                    imageUrl,
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: 100, // Match image width
+                  child: Align(
+                    alignment: Alignment.centerLeft, // Align price to start
+                    child: Text(
+                      price,
+                      style: TextFontStyle.textFontStyle(
+                        15,
+                        commonTealColor,
+                        FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(width: 12.0),
+            // Title, description, and Add button
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,27 +158,29 @@ class EventServiceCard extends StatelessWidget {
                   Text(
                     title,
                     style: TextFontStyle.textFontStyle(
-                        16, const Color(0xFF575959), FontWeight.w500),
+                      16,
+                      const Color(0xFF575959),
+                      FontWeight.w500,
+                    ),
                   ),
                   if (description != null && description!.isNotEmpty)
-                    Text(
-                      description!,
-                      style: TextFontStyle.textFontStyle(
-                          13, Color(0xFF575959), FontWeight.w400),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  const SizedBox(height: 8.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        price,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 2.0),
+                      child: Text(
+                        description!,
                         style: TextFontStyle.textFontStyle(
-                            15, commonTealColor, FontWeight.w500),
+                          14,
+                          const Color(0xFF575959),
+                          FontWeight.w400,
+                        ),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      countWidget,
-                    ],
+                    ),
+                  const SizedBox(height: 23), // Adjust if needed
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: countWidget,
                   ),
                 ],
               ),
@@ -165,7 +188,8 @@ class EventServiceCard extends StatelessWidget {
           ],
         ),
       );
-    } else {
+    }
+    else {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
