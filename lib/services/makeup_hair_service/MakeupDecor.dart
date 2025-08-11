@@ -10,6 +10,7 @@ import '../../blocs/makeup/makeup_event.dart';
 import '../../blocs/makeup/makeup_state.dart';
 
 
+import '../../widgets/custom_text_field.dart';
 import '../decoration/DecorThemesScreen.dart';
 import '../../services/getquotesscreen.dart';
 import '../decoration/decorimagelist.dart';
@@ -194,11 +195,9 @@ class _MakeUpThemeState extends State<MakeUpTheme> with SingleTickerProviderStat
                               Expanded(
                                 child: Text(
                                   widget.makeupHair['name'] ?? '',
-                                  style: const TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF575959),
-                                  ),
+                                  style: TextFontStyle.textFontStyle(12, Color(0xFF575959), FontWeight.w500),
+
+
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -209,11 +208,9 @@ class _MakeUpThemeState extends State<MakeUpTheme> with SingleTickerProviderStat
                                   const SizedBox(width: 4),
                                   Text(
                                     widget.makeupHair['rating'] ?? '0.0',
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xFF575959),
-                                    ),
+                                    style: TextFontStyle.textFontStyle(10, Color(0xFF575959), FontWeight.w400),
+
+
                                   ),
                                 ],
                               ),
@@ -222,11 +219,9 @@ class _MakeUpThemeState extends State<MakeUpTheme> with SingleTickerProviderStat
                           const SizedBox(height: 2),
                           Text(
                             widget.makeupHair['price'] ?? '',
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF1E535B),
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: TextFontStyle.textFontStyle(12, Color(0xFF1E535B), FontWeight.w600),
+
+
                           ),
                         ],
                       ),
@@ -247,7 +242,7 @@ class _MakeUpThemeState extends State<MakeUpTheme> with SingleTickerProviderStat
                         insets: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
                       ),
                       tabs: const [
-                        Tab(text: 'Themes'),
+                        Tab(text: 'Themes',),
                         Tab(text: 'Get Quotes'),
                         Tab(text: 'Gallery'),
                         Tab(text: 'Reviews'),
@@ -278,6 +273,7 @@ class _MakeUpThemeState extends State<MakeUpTheme> with SingleTickerProviderStat
 
   Widget _buildSearchBar() {
     return TextField(
+      style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400), // smaller text
       decoration: InputDecoration(
         hintText: 'Search here...',
         prefixIcon: const Icon(Icons.search),

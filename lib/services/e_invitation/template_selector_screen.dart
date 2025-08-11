@@ -24,32 +24,59 @@ class TemplateListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Choose Template')),
+      appBar: AppBar(
+        title: const Text('Choose Template'),
+      ),
       body: GridView.builder(
-        padding: const EdgeInsets.all(8),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        padding: const EdgeInsets.all(12),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 3 / 4,
         ),
         itemCount: templates.length,
         itemBuilder: (context, index) {
           final template = templates[index];
           return GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => TemplateEditorScreen(template: template),
-              ),
-            ),
-            child: Card(
-
-                child: SvgPicture.asset(
-                  template.svgAssetPath,
-                  fit: BoxFit.cover,
-
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => TemplateEditorScreen(template: template),
                 ),
-
+              );
+            },
+            child: Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  SvgPicture.asset(
+                    template.svgAssetPath,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    color: Colors.black54,
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      template.name,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         },

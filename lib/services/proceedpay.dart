@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
+import '../widgets/custom_text_field.dart';
 import 'addcard.dart';
 import 'paymentsuccess.dart';
 
@@ -81,7 +82,11 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
       builder: (context) {
         final controller = TextEditingController();
         return AlertDialog(
-          title: const Text("Enter UPI ID"),
+          title:  Text("Enter UPI ID",            style: TextFontStyle.textFontStyle(
+            12,
+            Color(0xFF575959),
+            FontWeight.w400,
+          ),),
           content: TextField(
             controller: controller,
             decoration: const InputDecoration(hintText: "example@upi"),
@@ -89,7 +94,11 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, controller.text.trim()),
-              child: const Text("Submit"),
+              child:  Text("Submit",            style: TextFontStyle.textFontStyle(
+                12,
+                Color(0xFF575959),
+                FontWeight.w400,
+              ),),
             ),
           ],
         );
@@ -113,7 +122,13 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Payment Options", style: TextStyle(color: Colors.black)),
+        title:  Text("Payment Options",
+            style: TextFontStyle.textFontStyle(
+              18,
+              Color(0xFF575959),
+              FontWeight.bold,
+            ),
+          ),
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF1E535B)),
@@ -142,7 +157,12 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
               ),
               child: Text(
                 "Proceed to Pay ₹${widget.total?.toStringAsFixed(2) ?? '0.00'}",
-                style: const TextStyle(color: Colors.white, fontSize: 16),
+                style: TextFontStyle.textFontStyle(
+                  12,
+                  Colors.white,
+                  FontWeight.bold,
+                ),
+
               ),
 
             ),
@@ -159,11 +179,25 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
       children: [
         _upiSection(),
         const SizedBox(height: 16),
-        const Text("Cards", style: TextStyle(fontWeight: FontWeight.bold)),
+         Text("Cards",
+
+          style: TextFontStyle.textFontStyle(
+            12,
+            Color(0xFF575959),
+            FontWeight.bold,
+          ),
+
+          ),
         const SizedBox(height: 10),
         _cardSection(),
         const SizedBox(height: 24),
-        const Text("Pay On Delivery", style: TextStyle(fontWeight: FontWeight.bold)),
+         Text("Pay On Delivery",
+            style: TextFontStyle.textFontStyle(
+              12,
+              Color(0xFF575959),
+              FontWeight.bold,
+            ),
+         ),
         const SizedBox(height: 10),
         _codSection(),
       ],
@@ -181,7 +215,13 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Pay by UPI", style: TextStyle(fontWeight: FontWeight.bold)),
+           Text("Pay by UPI",
+              style: TextFontStyle.textFontStyle(
+                14,
+                Color(0xFF575959),
+                FontWeight.bold,
+              ),
+             ),
           const SizedBox(height: 10),
           _buildPaymentOptionCard(
             title: "Pay by any UPI app",
@@ -235,7 +275,13 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
                   child: const Icon(Icons.add, color: Colors.white, size: 20),
                 ),
                 const SizedBox(width: 8),
-                const Text("Add new UPI ID", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF1E535B))),
+                 Text("Add new UPI ID",
+                    style: TextFontStyle.textFontStyle(
+                      14,
+                      Color(0xFF1E535B),
+                      FontWeight.w500,
+                    ),
+                 ),
                 const Spacer(),
                 const Icon(Icons.arrow_forward_ios, size: 16, color: Color(0xFF1E535B)),
               ],
@@ -310,7 +356,13 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                Text(title,
+                    style: TextFontStyle.textFontStyle(
+                      14,
+                      Color(0xFF575959),
+                      FontWeight.w500,
+                    ),
+                ),
                 if (subtitle != null) Text(subtitle, style: const TextStyle(fontSize: 12, color: Colors.grey)),
               ],
             ),
@@ -342,7 +394,13 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
               ),
             ),
             const SizedBox(height: 6),
-            Text(label, style: const TextStyle(fontSize: 12)),
+            Text(label,
+                style: TextFontStyle.textFontStyle(
+                  12,
+                  Color(0xFF575959),
+                  FontWeight.w500,
+                ),
+              ),
           ],
         ),
       ),

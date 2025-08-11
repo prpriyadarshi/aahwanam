@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../services/e_invitation/canvas_editor.dart';
 import '../../services/e_invitation/e_invitation_template.dart';
+import '../../services/e_invitation/template1.dart';
 import '../../services/e_invitation/template_selector_screen.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_template_widget.dart';
@@ -53,7 +54,7 @@ class EInvitationScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => TemplateListScreen(
+                              builder: (_) => EditableInviteTemplate(
 
                               ),
                             ),

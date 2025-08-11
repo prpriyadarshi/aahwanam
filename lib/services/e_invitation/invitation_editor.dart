@@ -1,9 +1,9 @@
 import 'package:aahwanam/services/e_invitation/svg_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../models/svg_element.dart';
 import '../../models/template_model.dart';
+
 
 class TemplateEditorScreen extends StatefulWidget {
   final TemplateModel template;
@@ -26,11 +26,20 @@ class _TemplateEditorScreenState extends State<TemplateEditorScreen> {
   }
 
   Future<void> loadSvg() async {
-    svgContent = await loadSvgString(widget.template.svgAssetPath);
+    final content = await loadSvgString(widget.template.svgAssetPath);
+    final elements = extractTextElements(content);
 
+    setState(() {
+      svgContent = content;
+      svgTextElements = elements;
+    });
+  }
 
-
-    setState(() {});
+  void updateSvgAndRefresh() {
+    final updated = updateSvgText(svgContent, svgTextElements);
+    setState(() {
+      svgContent = updated;
+    });
   }
 
   @override
@@ -43,14 +52,7 @@ class _TemplateEditorScreenState extends State<TemplateEditorScreen> {
         children: [
           Expanded(
             flex: 2,
-
-            child: Stack(
-              children: [
-                SvgPicture.string(svgContent, fit: BoxFit.contain),
-
-
-              ],
-            ),
+            child: SvgPicture.string(svgContent, fit: BoxFit.contain),
           ),
           Expanded(
             flex: 1,
@@ -60,9 +62,8 @@ class _TemplateEditorScreenState extends State<TemplateEditorScreen> {
                 return TextField(
                   decoration: InputDecoration(labelText: e.id),
                   onChanged: (value) {
-                    setState(() {
-                      e.text = value;
-                    });
+                    e.text = value;
+                    updateSvgAndRefresh();
                   },
                   controller: TextEditingController(text: e.text),
                 );

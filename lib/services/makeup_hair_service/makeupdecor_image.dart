@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/makeup/makeup_bloc.dart';
 import '../../blocs/makeup/makeup_state.dart';
+import '../../widgets/custom_text_field.dart';
 
 
 
@@ -18,11 +19,8 @@ class MakeupHairImageList extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: Text(
             title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF1E535B),
-            ),
+            style: TextFontStyle.textFontStyle(14, const Color(0xFF1E535B), FontWeight.w600),
+
           ),
         ),
         SizedBox(

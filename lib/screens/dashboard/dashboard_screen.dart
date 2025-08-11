@@ -90,6 +90,7 @@ class DashboardContent extends StatelessWidget {
                       children: [
                         Text(
                           "Hyderabad",
+
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,

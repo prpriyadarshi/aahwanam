@@ -265,7 +265,7 @@ packages:
     source: hosted
     version: "4.7.2"
   google_fonts:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: google_fonts
       sha256: e20ff62b158b96f392bfc8afe29dee1503c94fbea2cbe8186fd59b756b8ae982
@@ -862,7 +862,7 @@ packages:
     source: hosted
     version: "1.1.0"
   xml:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: xml
       sha256: b015a8ad1c488f66851d762d3090a21c600e479dc75e68328c52774040cf9226

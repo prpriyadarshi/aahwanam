@@ -3,6 +3,7 @@ import 'package:aahwanam/blocs/chef/chef_bloc.dart';
 import 'package:aahwanam/blocs/chef/chef_event.dart';
 import 'package:aahwanam/blocs/chef/chef_state.dart';
 import 'package:aahwanam/services/chef_service/chef_service.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -151,6 +152,11 @@ class ChefScreen extends StatelessWidget {
 }
 Widget _buildSearchBar() {
   return TextField(
+    style: TextFontStyle.textFontStyle(
+      14,
+      Color(0xFF575959),
+      FontWeight.w500,
+    ),
     decoration: InputDecoration(
       hintText: 'Search here...',
       prefixIcon: const Icon(Icons.search),

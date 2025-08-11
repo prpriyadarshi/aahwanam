@@ -11,6 +11,7 @@ import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 import '../../widgets/custom_image_card_widget.dart';
+import '../../widgets/custom_text_field.dart';
 
 class MakeupScreen extends StatelessWidget {
 
@@ -184,23 +185,19 @@ class MakeupScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                             Text(
                               "Trending Looks",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF575959),
-                              ),
+                              style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w600),
+
+
                             ),
                             TextButton(
                               onPressed: () => _navigateTo(context, "Trending"),
-                              child: const Text(
+                              child:  Text(
                                 "View All",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xFF1E535B),
-                                ),
+                                style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w400),
+
+
                               ),
                             ),
                           ],
@@ -241,6 +238,8 @@ class MakeupScreen extends StatelessWidget {
 }
 Widget _buildSearchBar() {
   return TextField(
+    style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w500),
+
     decoration: InputDecoration(
       hintText: 'Search here...',
       prefixIcon: const Icon(Icons.search),

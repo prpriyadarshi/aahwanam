@@ -6,10 +6,11 @@ import '../../blocs/decor/decor_bloc.dart';
 import '../../blocs/decor/decor_event.dart';
 import '../../blocs/decor/decor_state.dart';
 
+
 import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 import 'decoration_theme.dart';
-
+import 'package:aahwanam/widgets/custom_text_field.dart';
 
 class BirthdayDecoration extends StatelessWidget {
   final Map<String, String> decorator;
@@ -133,6 +134,7 @@ class BirthdayDecoration extends StatelessWidget {
 
   Widget _buildSearchBar() {
     return TextField(
+      style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400), // smaller text
       decoration: InputDecoration(
         hintText: 'Search here...',
         prefixIcon: const Icon(Icons.search, color: Colors.grey,),

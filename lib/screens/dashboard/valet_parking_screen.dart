@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../services/valet_parking/valet_parking_service.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
+import '../../widgets/custom_text_field.dart';
 import '../../widgets/package_card.dart';
 
 class ValetParkingScreen extends StatelessWidget {
@@ -97,13 +98,10 @@ class ValetParkingScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                           Text(
                             "Packages",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF575959),
-                            ),
+                            style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w600), // smaller text
+
                           ),
 
                           GestureDetector(
@@ -113,12 +111,10 @@ class ValetParkingScreen extends StatelessWidget {
                                 MaterialPageRoute(builder: (context) => ValetParkingServiceScreen()),
                               );
                             },
-                            child: const Text(
+                            child:  Text(
                               "View All",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xFF1E535B),
-                              ),
+                              style: TextFontStyle.textFontStyle(14, const Color(0xFF1E535B), FontWeight.w400), // smaller text
+
                             ),
                           ),
 
@@ -163,6 +159,7 @@ class ValetParkingScreen extends StatelessWidget {
 }
 Widget _buildSearchBar() {
   return TextField(
+    style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400), // smaller text
     decoration: InputDecoration(
       hintText: 'Search here...',
       prefixIcon: const Icon(Icons.search),

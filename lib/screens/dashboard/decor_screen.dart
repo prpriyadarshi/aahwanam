@@ -166,14 +166,15 @@ class DecorScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               "Recommended Decorations",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF575959),
+                              style: TextFontStyle.textFontStyle(
+                                16,
+                                const Color(0xFF575959),
+                                FontWeight.w600,
                               ),
                             ),
+
 
                           ],
                         ),

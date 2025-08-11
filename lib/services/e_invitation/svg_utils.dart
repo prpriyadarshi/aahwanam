@@ -1,22 +1,28 @@
 import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart';
 
-/// Load SVG string from asset
+import '../../models/svg_element.dart';
+
+
 Future<String> loadSvgString(String assetPath) async {
   return await rootBundle.loadString(assetPath);
 }
 
-/// Replace text inside SVG by textNodeId and newText
-String replaceSvgText(String svgContent, Map<String, String> replacements) {
-  String updatedSvg = svgContent;
+List<SvgTextElement> extractTextElements(String svgContent) {
+  final regex = RegExp(r'<text[^>]*id="([^"]+)"[^>]*>(.*?)<\/text>', multiLine: true);
+  final matches = regex.allMatches(svgContent);
+  return matches.map((match) {
+    return SvgTextElement(id: match.group(1)!, text: match.group(2)!);
+  }).toList();
+}
 
-  replacements.forEach((key, value) {
-    // Simple replace: id="NAME">OldText<  → id="NAME">NewText<
-    updatedSvg = updatedSvg.replaceAllMapped(
-      RegExp(r'id="' + key + r'">([^<]*)<'),
-          (match) => 'id="$key">$value<',
-    );
-  });
-
+String updateSvgText(String originalSvg, List<SvgTextElement> elements) {
+  String updatedSvg = originalSvg;
+  for (var element in elements) {
+    final regex = RegExp('<text[^>]*id="${element.id}"[^>]*>(.*?)<\/text>');
+    updatedSvg = updatedSvg.replaceAllMapped(regex, (match) {
+      return match.group(0)!.replaceFirst(match.group(1)!, element.text);
+    });
+  }
   return updatedSvg;
 }

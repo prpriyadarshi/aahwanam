@@ -1,17 +1,10 @@
-import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 
 class SvgTextElement {
-  String id; // unique id or position index
+  final String id;
   String text;
-  double x;
-  double y;
-  TextStyle? style; // font, size, color if needed
+  TextEditingController controller;
 
-  SvgTextElement({
-    required this.id,
-    required this.text,
-    required this.x,
-    required this.y,
-     this.style,
-  });
+  SvgTextElement({required this.id, required this.text})
+      : controller = TextEditingController(text: text);
 }

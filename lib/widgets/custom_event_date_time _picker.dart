@@ -1,3 +1,4 @@
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -53,11 +54,12 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                   Center(
                     child: Text(
                       "Select Event Date",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF333333),
+                      style: TextFontStyle.textFontStyle(
+                        14,
+                        const Color(0xFF333333),
+                        FontWeight.w500 ,
                       ),
+
                     ),
                   ),
                   SizedBox(height: 14),
@@ -68,11 +70,12 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                         DateFormat('MMMM yyyy',
                                 Localizations.localeOf(context).toString())
                             .format(currentMonth),
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF333333),
+                        style:     TextFontStyle.textFontStyle(
+                          14,
+                          const Color(0xFF333333),
+                          FontWeight.w400 ,
                         ),
+
                       ),
                       Row(
                         children: [
@@ -118,11 +121,12 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                               child: Center(
                                 child: Text(
                                   day,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF666666),
+                                  style:TextFontStyle.textFontStyle(
+                                    14,
+                                    const Color(0xFF666666),
+                                    FontWeight.w500 ,
                                   ),
+
                                 ),
                               ),
                             ))
@@ -168,6 +172,7 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                             alignment: Alignment.center,
                             child: Text(
                               "${date.day}",
+
                               style: TextStyle(
                                 color: isPastDate
                                     ? Colors.grey
@@ -201,10 +206,12 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                         ),
                         child: Text(
                           "Cancel",
-                          style: TextStyle(
-                            color: Color(0xFF1E535B),
-                            fontWeight: FontWeight.bold,
+                          style:TextFontStyle.textFontStyle(
+                            14,
+                            const Color(0xFF1E535B),
+                            FontWeight.bold ,
                           ),
+                          
                         ),
                       ),
                       SizedBox(width: 12),
@@ -224,10 +231,12 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                         ),
                         child: Text(
                           "Set",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                          style: TextFontStyle.textFontStyle(
+                            12,
+                             Colors.white,
+                            FontWeight.bold ,
                           ),
+
                         ),
                       ),
                       SizedBox(
@@ -272,11 +281,12 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                 children: [
                   Text(
                     "Select Event Time",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF333333),
+                    style: TextFontStyle.textFontStyle(
+                      18,
+                      const Color(0xFF333333),
+                      FontWeight.w600 ,
                     ),
+
                   ),
                   SizedBox(height: 16),
                   Expanded(
@@ -358,10 +368,12 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                         ),
                         child: Text(
                           "Cancel",
-                          style: TextStyle(
-                            color: Color(0xFF1E535B),
-                            fontWeight: FontWeight.bold,
+                          style: TextFontStyle.textFontStyle(
+                            12,
+                            const Color(0xFF1E535B),
+                            FontWeight.bold ,
                           ),
+
                         ),
                       ),
                       SizedBox(width: 8),
@@ -414,11 +426,12 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
             children: [
               Text(
                 "Event Date*",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF575959),
-                  fontWeight: FontWeight.w500,
+                style: TextFontStyle.textFontStyle(
+                  14,
+                  const Color(0xFF575959),
+                  FontWeight.w500 ,
                 ),
+
               ),
               SizedBox(height: 6),
               Container(
@@ -433,7 +446,12 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                       selectedDate != null
                           ? DateFormat('dd, MMM yyyy').format(selectedDate!)
                           : "Select Date",
-                      style: TextStyle(fontSize: 16, color: Color(0xFF575959)),
+                      style: TextFontStyle.textFontStyle(
+                        14,
+                        const Color(0xFF575959),
+                        FontWeight.w500 ,
+                      ),
+
                     ),
                     Spacer(),
                     GestureDetector(
@@ -455,11 +473,12 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("Event Time*",
-            style: TextStyle(
-              fontSize: 12,
-              color: Color(0xFF575959),
-              fontWeight: FontWeight.w500,
-            )),
+                  style: TextFontStyle.textFontStyle(
+                    14,
+                    const Color(0xFF575959),
+                    FontWeight.w500 ,
+                  ),
+      ),
               SizedBox(height: 6),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -473,7 +492,12 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                       selectedTime != null
                           ? DateFormat('hh:mm a').format(selectedTime!)
                           : "Select Time",
-                      style: TextStyle(fontSize: 16, color: Color(0xFF575959)),
+                      style: TextFontStyle.textFontStyle(
+                        14,
+                        const Color(0xFF575959),
+                        FontWeight.w500 ,
+                      ),
+
                     ),
                     Spacer(),
                     GestureDetector(

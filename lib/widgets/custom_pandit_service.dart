@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/pandit/pandit_theme.dart';
+import 'custom_text_field.dart';
 
 class CustomPanditCardWidgets {
   static Widget buildSection(
@@ -105,11 +106,8 @@ class CustomPanditCardWidgets {
                       Expanded(
                         child: Text(
                           item['name'] ?? '',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959),
-                          ),
+    style: TextFontStyle.textFontStyle(12, Color(0xFF575959), FontWeight.w500),
+
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -121,11 +119,9 @@ class CustomPanditCardWidgets {
                           const SizedBox(width: 4),
                           Text(
                             item['rating'] ?? "0.0",
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xFF575959),
-                            ),
+    style: TextFontStyle.textFontStyle(10, Color(0xFF575959), FontWeight.w400)
+
+
                           ),
                         ],
                       ),
@@ -134,11 +130,10 @@ class CustomPanditCardWidgets {
                   const SizedBox(height: 4.0),
                   Text(
                     item['price'] ?? '',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF1E535B),
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextFontStyle.textFontStyle(12, Color(0xFF1E535B), FontWeight.w600)
+
+
+
                   ),
                 ],
               ),

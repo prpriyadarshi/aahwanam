@@ -1,6 +1,7 @@
 import 'package:aahwanam/routes/app_routes.dart';
 import 'package:aahwanam/widgets/custom_book_service.dart';
 import 'package:aahwanam/widgets/custom_event_date_time%20_picker.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +28,12 @@ class PhotographBookServiceScreen extends StatelessWidget {
       create: (context) => PhotographerBloc()..add(FetchPhotographers()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Book Service"),
+          title: const Text("Book Service",           style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF575959),
+
+          ),),
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30.0),
@@ -61,9 +67,14 @@ class PhotographBookServiceScreen extends StatelessWidget {
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5), // 👈 decreased height
                   ),
-                  child: const Text(
+                  child:  Text(
                     "Proceed to pay",
-                    style: TextStyle(color: Colors.white),
+                    style: TextFontStyle.textFontStyle(
+                      12,
+                      Colors.white,
+                      FontWeight.w600,
+                    ),
+
                   ),
                 ),
 
@@ -120,11 +131,14 @@ void _showChangeAddress(BuildContext context) {
             children: [
               Text(
                 'Change Address',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF575959),
+                style: TextFontStyle.textFontStyle(
+                  18,
+                  Colors.white,
+                  FontWeight.w600,
                 ),
+
+
+
               ),
               SizedBox(height: 16),
               SizedBox(
@@ -136,7 +150,13 @@ void _showChangeAddress(BuildContext context) {
                   icon: Icon(Icons.add, color: Color(0xFF1E535B)),
                   label: Text(
                     'Add New Address',
-                    style: TextStyle(color: Color(0xFF1E535B)),
+                    style: TextFontStyle.textFontStyle(
+                      12,
+                      Color(0xFF1E535B),
+                      FontWeight.w400,
+                    ),
+
+
                   ),
                   style: OutlinedButton.styleFrom(
                     alignment: Alignment.centerLeft,
@@ -151,12 +171,12 @@ void _showChangeAddress(BuildContext context) {
               SizedBox(height: 24),
               Text(
                 'Your saved address',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF575959),
-
+                style: TextFontStyle.textFontStyle(
+                  15,
+                  Color(0xFF575959),
+                  FontWeight.w500,
                 ),
+
               ),
               SizedBox(height: 16),
 
@@ -205,20 +225,22 @@ Widget _addressTile({required String title, required String subtitle}) {
             children: [
               Text(
                 title,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                  color: Color(0xFF575959),
-
+                style: TextFontStyle.textFontStyle(
+                  14,
+                  Color(0xFF575959),
+                  FontWeight.w500,
                 ),
+
               ),
               SizedBox(height: 4),
               Text(
                 subtitle,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Color(0xFF757575),
+                style: TextFontStyle.textFontStyle(
+                  13,
+                  Color(0xFF757575),
+                  FontWeight.w400,
                 ),
+
               ),
             ],
           ),
@@ -235,11 +257,12 @@ Widget _addressTile({required String title, required String subtitle}) {
           ),
           child: Text(
             'Edit',
-            style: TextStyle(
-              fontSize: 13,
-              color: Color(0xFF1E535B),
+            style: TextFontStyle.textFontStyle(
+              13,
+              Color(0xFF1E535B),
+              FontWeight.w500,
             ),
-          ),
+          )
         ),
       ],
     ),
@@ -271,11 +294,13 @@ void _showAddNewAddress(BuildContext context) {
               children: [
                 Text(
                   'Add New Address',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF575959),
+                  style: TextFontStyle.textFontStyle(
+                    18,
+                    Color(0xFF575959),
+                    FontWeight.w500,
                   ),
+
+
                 ),
                 SizedBox(height: 16),
                 _buildTextField(
@@ -300,11 +325,12 @@ void _showAddNewAddress(BuildContext context) {
                 SizedBox(height: 24),
                 Text(
                   'Enter your details for seamless experience',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF757575),
+                  style: TextFontStyle.textFontStyle(
+                    16,
+                    Color(0xFF757575),
+                    FontWeight.w400,
                   ),
+
                 ),
                 SizedBox(height: 16),
                 _buildTextField(
@@ -338,7 +364,12 @@ void _showAddNewAddress(BuildContext context) {
                     ),
                     child: Text(
                       'Save Address',
-                      style: TextStyle(fontSize: 16,color: Colors.white),
+                      style: TextFontStyle.textFontStyle(
+                        16,
+                         Colors.white,
+                        FontWeight.w400,
+                      ),
+
                     ),
                   ),
                 ),
@@ -364,11 +395,14 @@ Widget _buildTextField({
     children: [
       Text(
         label,
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          color: Color(0xFF575959),
+        style: TextFontStyle.textFontStyle(
+          14,
+          Color(0xFF575959),
+          FontWeight.w400,
         ),
+
+
+
       ),
       SizedBox(height: 6),
       TextField(
@@ -378,9 +412,10 @@ Widget _buildTextField({
             : null,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(
-            color: Color(0xFF757575), // 👈 Set hint text color
-            fontSize: 14,fontWeight: FontWeight.w300,
+
+          hintStyle: TextFontStyle.textFontStyle(
+       // 👈 Set hint text color
+           14,const  Color(0xFF575959),  FontWeight.w400,
           ),
           contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
           border: OutlineInputBorder(
@@ -404,19 +439,23 @@ Widget _buildChargeRow(String label, String value, {bool isBold = false, Color? 
     children: [
       Text(
         label,
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: isBold ? FontWeight.w600 : FontWeight.w400,
-          color: Color(0xFF575959),
-        ),
+
+      style: TextFontStyle.textFontStyle(
+        14,
+        const Color(0xFF575959),
+        FontWeight.w400,
+      ),
+
       ),
       Text(
         value,
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: isBold ? FontWeight.w700 : FontWeight.w400,
-          color: valueColor ?? Color(0xFF757575),
+        style: TextFontStyle.textFontStyle(
+          14,
+          const Color(0xFF757575),
+          FontWeight.w400,
         ),
+
+
       ),
     ],
   );
