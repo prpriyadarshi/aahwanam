@@ -8,6 +8,7 @@ class ReviewList extends StatelessWidget {
 
   const ReviewList({super.key, required this.reviews, required this.galleryImages});
 
+
   Widget _buildRatingRow(int stars, int count) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -133,7 +134,7 @@ class ReviewList extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height:15),
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(), // So it scrolls with the parent
