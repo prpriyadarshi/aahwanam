@@ -65,6 +65,7 @@ class PanditBloc extends Bloc<PanditEvent, PanditState> {
         final Theme = [
           {
             'title': 'Griha Pravesh Pooja (Simple)',
+            'category':'Pooja',
             'price': '₹5,000',
             'description':
             'This will be a shorter pooja performed by 1 purohit with basic rituals.',
@@ -73,10 +74,50 @@ class PanditBloc extends Bloc<PanditEvent, PanditState> {
             'Dwara Mahalaxmi Pravesh Pooja, Gau Pooja, Kitchen Pooja, Ganpati Pooja, Kalasha Pooja, Vastu Pooja.',
             'duration': '1.5 - 2 hrs',
             'rating': '4.3',
-            'address':'Price included Purohit’s dakshina, travel Expenses (within city limits)'
+            'About':'Griha pravesh pooja is performed to mark entry into a new house ensuring peace, harmony and positivity.This will be a shorter pooja performed by 1 purohit with basic rituals.',
+            'address':'Price included Purohit’s dakshina, travel Expenses (within city limits)',
+            "reviews": [
+              {
+                "rating": 4.2,
+                "comment": "Very good service",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "image": "assets/images/pooja_review_gallery.png"
+              },
+              {
+                "rating": 4.2,
+                "comment": "Very good service",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "image": "assets/images/pooja_review_gallery.png"
+              }
+            ],
+            "gallery": [
+              'assets/images/pooja_gallery1.png',
+              'assets/images/pooja_gallery2.png',
+              'assets/images/pooja_gallery3.png',
+              'assets/images/pooja_gallery4.png',
+              'assets/images/pooja_gallery4.png',
+            ],
+
+            "media": [
+              {'url': 'assets/images/pooja_gallery1.png', 'isVideo': true,'category':'Pooja'},
+              {'url': 'assets/images/pooja_galley7.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/pooja_gallery6.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/pooja_gallery2.png', 'isVideo': true,'category':'Pooja'},
+              {'url': 'assets/images/pooja_gallery8.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/pooja_galley7.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/pooja_gallery5.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/kalash_pooja.png', 'isVideo': true,'category':'Pooja'},
+              {'url': 'assets/images/havan_pooja.png', 'isVideo': true,'category':'Pooja'},
+
+
+            ],
+
+
+
           },
           {
             'title': 'Griha Pravesh Pooja (Regular)',
+            'category':'Pooja',
             'price': '₹5,000',
             'description':
             'This will be a shorter pooja performed by 1 purohit with basic rituals.',
@@ -85,10 +126,48 @@ class PanditBloc extends Bloc<PanditEvent, PanditState> {
             'Dwara Mahalaxmi Pravesh Pooja, Gau Pooja, Kitchen Pooja, Ganpati Pooja, Kalasha Pooja, Vastu Pooja.',
             'duration': '1.5 - 2 hrs',
             'rating': '4.3',
-            'address':'Price included Purohit’s dakshina, travel Expenses (within city limits)'
+            'About':'Griha pravesh pooja is performed to mark entry into a new house ensuring peace, harmony and positivity.This will be a shorter pooja performed by 1 purohit with basic rituals.',
+            'address':'Price included Purohit’s dakshina, travel Expenses (within city limits)',
+            "reviews": [
+              {
+                "rating": 4.2,
+                "comment": "Very good service",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "image": "assets/images/pooja_review_gallery.png"
+              },
+              {
+                "rating": 4.2,
+                "comment": "Very good service",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "image": "assets/images/pooja_review_gallery.png"
+              }
+            ],
+            "gallery": [
+              'assets/images/pooja_gallery1.png',
+              'assets/images/pooja_gallery2.png',
+              'assets/images/pooja_gallery3.png',
+              'assets/images/pooja_gallery4.png',
+              'assets/images/pooja_gallery4.png',
+            ],
+            "media": [
+              {'url': 'assets/images/pooja_gallery1.png', 'isVideo': true,'category':'Pooja'},
+              {'url': 'assets/images/pooja_galley7.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/pooja_gallery6.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/pooja_gallery2.png', 'isVideo': true,'category':'Pooja'},
+              {'url': 'assets/images/pooja_gallery8.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/pooja_galley7.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/pooja_gallery5.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/kalash_pooja.png', 'isVideo': true,'category':'Pooja'},
+              {'url': 'assets/images/havan_pooja.png', 'isVideo': true,'category':'Pooja'},
+
+
+            ],
+
+
           },
           {
             'title': 'Griha Pravesh Pooja (Premium)',
+            'category':'Pooja',
             'price': '₹5,000',
             'description':
             'This will be a shorter pooja performed by 1 purohit with basic rituals.',
@@ -97,7 +176,44 @@ class PanditBloc extends Bloc<PanditEvent, PanditState> {
             'Dwara Mahalaxmi Pravesh Pooja, Gau Pooja, Kitchen Pooja, Ganpati Pooja, Kalasha Pooja, Vastu Pooja.',
             'duration': '1.5 - 2 hrs',
             'rating': '4.3',
-            'address':'Price included Purohit’s dakshina, travel Expenses (within city limits)'
+            'About':'Griha pravesh pooja is performed to mark entry into a new house ensuring peace, harmony and positivity.This will be a shorter pooja performed by 1 purohit with basic rituals.',
+            'address':'Price included Purohit’s dakshina, travel Expenses (within city limits)',
+            "reviews": [
+              {
+                "rating": 4.2,
+                "comment": "Very good service",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "image": "assets/images/pooja_review_gallery.png"
+              },
+              {
+                "rating": 4.2,
+                "comment": "Very good service",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "image": "assets/images/pooja_review_gallery.png"
+              }
+            ],
+            "gallery": [
+              'assets/images/pooja_gallery1.png',
+              'assets/images/pooja_gallery2.png',
+              'assets/images/pooja_gallery3.png',
+              'assets/images/pooja_gallery4.png',
+              'assets/images/pooja_gallery4.png',
+            ],
+            "media": [
+              {'url': 'assets/images/pooja_gallery1.png', 'isVideo': true,'category':'Pooja'},
+              {'url': 'assets/images/pooja_galley7.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/pooja_gallery6.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/pooja_gallery2.png', 'isVideo': true,'category':'Pooja'},
+              {'url': 'assets/images/pooja_gallery8.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/pooja_galley7.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/pooja_gallery5.png', 'isVideo': false,'category':'Pooja'},
+              {'url': 'assets/images/kalash_pooja.png', 'isVideo': true,'category':'Pooja'},
+              {'url': 'assets/images/havan_pooja.png', 'isVideo': true,'category':'Pooja'},
+
+
+            ],
+
+
           },
         ];
 

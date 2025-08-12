@@ -1,4 +1,5 @@
 import 'package:aahwanam/widgets/booking_bottom_screen.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/account/account_bloc.dart';
@@ -31,16 +32,34 @@ class _WishlistScreenState extends State<WishlistScreen> {
           final conceptsTabImages = state.conceptsTabImages;
 
           return Scaffold(
+            backgroundColor: Colors.white,
             appBar: AppBar(
-              title: const Text("Wishlist"),
+              titleSpacing: 0,
+              title: Text("Wishlist",
+                style: TextFontStyle.textFontStyle(
+                  16,                         // Font size
+                  Color(0xFF575959),          // Text color
+                  FontWeight.w500,            // Font weight
+                ),),
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
               elevation: 0,
+              leading: IconButton(
+                padding: const EdgeInsets.only(top: 2, left: 12),
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  size: 18,
+                  color: Color(0xFF575959),
+                ),
+                onPressed: () {
+                  Navigator.pop(context); // ✅ Go back to previous screen
+                },
+              ),
               actions: [
                 IconButton(
                   icon: const Icon(Icons.share),
                   onPressed: () {
-                    // Share functionality
+                    // Implement share functionality if needed
                   },
                 ),
               ],
@@ -119,38 +138,38 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                   final item = wishlistItems[index];
                                   return Padding(
                                     padding: const EdgeInsets.only(bottom: 12),
-                                    child: PackageCard(
-                                      title: item['title'],
-                                      description: item['description'],
-                                      price: item['price'],
-                                      imagePath: item['imagePath'],
-                                      rating: item['rating'],
-                                      showLikeIcon: true,
-                                      primaryButtonText: "Book Now",
-                                      onPrimaryButtonPressed: () {
-                                        showModalBottomSheet(
-                                          context: context,
-                                          isScrollControlled: true,
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                                          ),
-                                          builder: (context) {
-                                            return BookingBottomSheet(
-                                              booking: item, // You can pass more data if needed
-                                            );
-                                          },
-                                        );
-                                      },
-                                      secondaryButtonText: "Remove",
-                                      onSecondaryButtonPressed: () {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                              content: Text(
-                                                  "${item['title']} removed from Wishlist")),
-                                        );
-                                      },
-                                    ),
+                                    // child: PackageCard(
+                                    //   title: item['title'],
+                                    //   description: item['description'],
+                                    //   price: item['price'],
+                                    //   imagePath: item['imagePath'],
+                                    //   rating: item['rating'],
+                                    //   showLikeIcon: true,
+                                    //   primaryButtonText: "Book Now",
+                                    //   onPrimaryButtonPressed: () {
+                                    //     showModalBottomSheet(
+                                    //       context: context,
+                                    //       isScrollControlled: true,
+                                    //       shape: const RoundedRectangleBorder(
+                                    //         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                    //       ),
+                                    //       builder: (context) {
+                                    //         return BookingBottomSheet(
+                                    //           booking: item, // You can pass more data if needed
+                                    //         );
+                                    //       },
+                                    //     );
+                                    //   },
+                                    //   secondaryButtonText: "Remove",
+                                    //   onSecondaryButtonPressed: () {
+                                    //     ScaffoldMessenger.of(context)
+                                    //         .showSnackBar(
+                                    //       SnackBar(
+                                    //           content: Text(
+                                    //               "${item['title']} removed from Wishlist")),
+                                    //     );
+                                    //   },
+                                    // ),
                                   );
                                 },
                               )
@@ -177,7 +196,13 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                     height: 146,
                                     // You can adjust height as necessary
                                     isAsset: true,
-                                    favoriteSelected: true,
+                                    // favoriteSelected: true,
+                                    favoriteSelected: item['isLiked'],
+                                    onFavoriteToggle: () {
+                                      setState(() {
+                                        item['isLiked'] = !item['isLiked'];
+                                      });
+                                    },
                                   );
                                 },
                               ),

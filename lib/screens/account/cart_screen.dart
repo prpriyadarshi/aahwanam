@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/account/account_bloc.dart';
 import '../../blocs/account/account_state.dart';
+import '../../widgets/custom_text_field.dart';
 import '../../widgets/package_card.dart'; // Import your PackageCard
 
 class CartScreen extends StatelessWidget {
@@ -20,11 +21,31 @@ class CartScreen extends StatelessWidget {
 
         if (state is AccountLoaded) {
           return Scaffold(
+            backgroundColor: Colors.white,
             appBar: AppBar(
-              title: const Text("Cart"),
+              titleSpacing: 0,
+              title: Text("Cart",
+                style: TextFontStyle.textFontStyle(
+                  16,                         // Font size
+                  Color(0xFF575959),          // Text color
+                  FontWeight.w500,            // Font weight
+                ),),
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
               elevation: 0,
+              leading: IconButton(
+                padding: const EdgeInsets.only(top: 2, left: 12),
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  size: 18,
+                  color: Color(0xFF575959),
+                ),
+                onPressed: () {
+                  Navigator.pop(context); // ✅ Go back to previous screen
+                  // Or use push to go to a specific screen:
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
+                },
+              ),
               actions: [
                 IconButton(
                   icon: const Icon(Icons.share),
@@ -70,7 +91,7 @@ class CartScreen extends StatelessWidget {
                               content: Text(
                                   "${booking['title']} moved to Wishlist")),
                         );
-                      },
+                      }, details: '',
                     ),
                   );
                 },

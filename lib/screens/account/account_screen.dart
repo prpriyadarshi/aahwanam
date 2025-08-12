@@ -43,10 +43,21 @@ class _AccountScreenState extends State<AccountScreen> {
       create: (_) => AccountBloc()..add(LoadAccountInfo()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Account Information'),
-          // leading: const BackButton(),
+          titleSpacing: 0,
+          title: Text('Account Information',
+            style: TextFontStyle.textFontStyle(
+              16,                         // Font size
+              Color(0xFF575959),          // Text color
+              FontWeight.w500,            // Font weight
+            ),
+          ),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            padding: const EdgeInsets.only(top: 2, left: 12),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              size: 18,
+              color: Color(0xFF575959),
+            ),
             onPressed: () {
               Navigator.push(
                 context,
@@ -54,6 +65,7 @@ class _AccountScreenState extends State<AccountScreen> {
               );
             },
           ),
+
         ),
         body: BlocBuilder<AccountBloc, AccountState>(
           builder: (context, state) {
@@ -138,7 +150,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           14, Color(0xFF575959), FontWeight.w500),
                   ),
                   CustomTile(
-                    imagePath: 'assets/images/Vector.png',
+                    imagePath: 'assets/images/profileimage.png',
                     title: 'Profile',
                     bgColor: Color(0xFFE3FDEE),
                     onTap: () {
@@ -156,7 +168,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     },
                   ),
                   CustomTile(
-                      imagePath: 'assets/images/bookings.png',
+                      imagePath: 'assets/images/booking1.png',
                       title: 'Bookings',
                       bgColor: Color(0xFFDFE3FF),
                       onTap: () {
@@ -173,7 +185,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         );
                       }),
                   CustomTile(
-                      imagePath: 'assets/images/cart.png',
+                      imagePath: 'assets/images/cart1.png',
                       title: 'Cart',
                       bgColor: Color(0xFFDFF4FF),
                       onTap: () {
@@ -190,7 +202,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         );
                       }),
                   CustomTile(
-                      imagePath: 'assets/images/wishlist.png',
+                      imagePath: 'assets/images/wishlist1.png',
                       title: 'Wishlist',
                       bgColor: Color(0xFFFFECEC),
                       onTap: () {
@@ -207,7 +219,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         );
                       }),
                   CustomTile(
-                      imagePath: 'assets/images/mypackages.png',
+                      imagePath: 'assets/images/mypackages1.png',
                       title: 'My Packages',
                       bgColor: Color(0xFFE9FFE2),
                       onTap: () {
@@ -225,15 +237,18 @@ class _AccountScreenState extends State<AccountScreen> {
                       }),
                   const SizedBox(height: 10),
                   Text("Other",
-                      style: TextStyle(fontWeight: FontWeight.bold)
-                  ),
+            style: TextFontStyle.textFontStyle(
+            14,                         // Font size
+            Color(0xFF575959),          // Text color
+            FontWeight.w500,            // Font weight
+            ),                  ),
                   CustomTile(
-                      imagePath: 'assets/images/budget planner.png',
+                      imagePath: 'assets/images/budget planner1.png',
                       title: 'Budget Planner',
                       bgColor: Color(0xFFFFF4DF),
                       onTap: () {}),
                   CustomTile(
-                      imagePath: 'assets/images/refer people.png',
+                      imagePath: 'assets/images/refer people1.png',
                       title: 'Refer People',
                       bgColor: Color(0xFFFFE8FB),
                       onTap: () {}),
@@ -257,8 +272,13 @@ class _AccountScreenState extends State<AccountScreen> {
                         ),
                         backgroundColor: Colors.transparent,
                       ),
-                      child: const Text("Logout",
-                          style: TextStyle(color: Color(0xFF1E535B))),
+                      child: Text("Logout",
+                          style: TextFontStyle.textFontStyle(
+                            14,                         // Font size
+                            Color(0xFF1E535B),          // Text color
+                            FontWeight.w500,            // Font weight
+                          ),
+                          ),
                     ),
                   )
                 ],
