@@ -1,3 +1,4 @@
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,11 +17,9 @@ class DecorImageList extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: Text(
             title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF1E535B),
-            ),
+            style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w600), // smaller text
+
+
           ),
         ),
         SizedBox(

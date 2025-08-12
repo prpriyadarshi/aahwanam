@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import '../../blocs/decor/decor_bloc.dart';
 import '../../blocs/decor/decor_event.dart';
 import '../../blocs/decor/decor_state.dart';
@@ -12,6 +12,7 @@ import '../../services/decoration/DecorThemesScreen.dart';
 import '../../services/getquotesscreen.dart';
 import '../../services/decoration/decorimagelist.dart';
 import '../../services/reviewsscreen.dart';
+
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 
 class DecorationTheme extends StatefulWidget {
@@ -158,8 +159,7 @@ class _DecorationThemeState extends State<DecorationTheme>
                   ratingData = state.ratingData;
                 }
 
-                return Expanded(
-                  child: Column(
+                return Column(
                     children: [
                       // Decorator top card
                       Container(
@@ -199,11 +199,12 @@ class _DecorationThemeState extends State<DecorationTheme>
                                 Expanded(
                                   child: Text(
                                     widget.decorator['name'] ?? '',
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xFF575959),
+                                    style: TextFontStyle.textFontStyle(
+                                      12,
+                                      const Color(0xFF575959),
+                                      FontWeight.w500,
                                     ),
+
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -214,11 +215,12 @@ class _DecorationThemeState extends State<DecorationTheme>
                                     const SizedBox(width: 4),
                                     Text(
                                       widget.decorator['rating'] ?? '0.0',
-                                      style: const TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xFF575959),
+                                      style: TextFontStyle.textFontStyle(
+                                        10,
+                                        const Color(0xFF575959),
+                                        FontWeight.w400,
                                       ),
+
                                     ),
                                   ],
                                 ),
@@ -227,11 +229,12 @@ class _DecorationThemeState extends State<DecorationTheme>
                             const SizedBox(height: 2),
                             Text(
                               widget.decorator['price'] ?? '',
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Color(0xFF1E535B),
-                                fontWeight: FontWeight.w600,
+                              style: TextFontStyle.textFontStyle(
+                                12,
+                                const Color(0xFF1E535B),
+                                FontWeight.w600,
                               ),
+
                             ),
                           ],
                         ),
@@ -243,14 +246,28 @@ class _DecorationThemeState extends State<DecorationTheme>
                         indicatorSize: TabBarIndicatorSize.label,
                         labelPadding: const EdgeInsets.symmetric(horizontal: 8),
                         dividerColor: Colors.transparent,
+
+                        // Selected tab color & style
                         labelColor: const Color(0xFF1E535B),
-                        unselectedLabelColor: Colors.black54,
-                        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                        unselectedLabelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                        labelStyle: TextFontStyle.textFontStyle(
+                          14,
+                          const Color(0xFF1E535B),
+                          FontWeight.w500,
+                        ),
+
+                        // Unselected tab color & style
+                        unselectedLabelColor: const Color(0xFF575959),
+                        unselectedLabelStyle: TextFontStyle.textFontStyle(
+                          14,
+                          const Color(0xFF575959),
+                          FontWeight.w400,
+                        ),
+
                         indicator: const UnderlineTabIndicator(
                           borderSide: BorderSide(width: 2, color: Color(0xFF1E535B)),
                           insets: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
                         ),
+
                         tabs: const [
                           Tab(text: 'Themes'),
                           Tab(text: 'Get Quotes'),
@@ -258,6 +275,7 @@ class _DecorationThemeState extends State<DecorationTheme>
                           Tab(text: 'Reviews'),
                         ],
                       ),
+
 
                       // Tab Views
                       Expanded(
@@ -273,8 +291,8 @@ class _DecorationThemeState extends State<DecorationTheme>
                         ),
                       ),
                     ],
-                  ),
-                );
+                  );
+
               },
             ),
           );
@@ -285,6 +303,7 @@ class _DecorationThemeState extends State<DecorationTheme>
 
   Widget _buildSearchBar() {
     return TextField(
+      style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400), // smaller text
       decoration: InputDecoration(
         hintText: 'Search here...',
         prefixIcon: const Icon(Icons.search),

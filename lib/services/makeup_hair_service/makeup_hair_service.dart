@@ -10,6 +10,7 @@ import '../../blocs/makeup/makeup_state.dart';
 import '../../widgets/custom_card_makup.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 import '../../services/makeup_hair_service/MakeupDecor.dart';
+import '../../widgets/custom_text_field.dart';
 
 class MakeupHairService extends StatelessWidget {
   final Map<String, String> makeupAndHairArtist;
@@ -123,6 +124,7 @@ class MakeupHairService extends StatelessWidget {
 
   Widget _buildSearchBar() {
     return TextField(
+      style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400), // smaller text
       decoration: InputDecoration(
         hintText: 'Search here...',
         prefixIcon: const Icon(Icons.search, color: Colors.grey),

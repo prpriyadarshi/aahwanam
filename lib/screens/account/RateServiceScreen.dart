@@ -2,8 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../widgets/custom_text_field.dart';
-
 class RateServiceScreen extends StatefulWidget {
   const RateServiceScreen({super.key});
 
@@ -28,47 +26,28 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        titleSpacing: 0,
-        title: Text("Rate Service",
-          style: TextFontStyle.textFontStyle(
-            16,                         // Font size
-            Color(0xFF575959),          // Text color
-            FontWeight.w500,            // Font weight
-          ),),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0,
+        title: const Text('Rate Service'),
         leading: IconButton(
-          padding: const EdgeInsets.only(top: 2, left: 12),
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 18,
-            color: Color(0xFF575959),
-          ),
-          onPressed: () {
-            Navigator.pop(context); // ✅ Go back to previous screen
-            // Or use push to go to a specific screen:
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
-          },
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.share),
-            onPressed: () {
-              // Implement share functionality if needed
-            },
-          ),
-        ],
+        actions: [IconButton(icon: const Icon(Icons.share), onPressed: () {})],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: ListView(
           children: [
-             Text(
+            const Text(
               'Rating',
-              style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+                color: Color(0xFF575959),
+                height: 1.0,
+                letterSpacing: 0,
+              ),
             ),
             const SizedBox(height: 12),
             Row(
@@ -86,16 +65,30 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
               ),
             ),
             const SizedBox(height: 24),
-             Text(
+            const Text(
               'Write Review',
-              style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+                color: Color(0xFF575959),
+                height: 1.0,
+                letterSpacing: 0,
+              ),
             ),
             const SizedBox(height: 12),
-             TextField(
+            const TextField(
               maxLines: 1,
               decoration: InputDecoration(
                 hintText: 'Very good service',
-                hintStyle:TextFontStyle.textFontStyle(12,Color(0xFF575959), FontWeight.w500),
+                hintStyle: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 12,
+                  color: Color(0xFF575959),
+                  height: 1.0,
+                  letterSpacing: 0,
+                ),
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 border: OutlineInputBorder(
@@ -104,12 +97,19 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
               ),
             ),
             const SizedBox(height: 12),
-            TextField(
+            const TextField(
               maxLines: 5,
               decoration: InputDecoration(
                 hintText:
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                hintStyle:TextFontStyle.textFontStyle(12,Color(0xFF575959), FontWeight.w500),
+                hintStyle: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 12,
+                  color: Color(0xFF575959),
+                  height: 1.0,
+                  letterSpacing: 0,
+                ),
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 border: OutlineInputBorder(
@@ -118,9 +118,16 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
               ),
             ),
             const SizedBox(height: 16),
-             Text(
+            const Text(
               "Add photos",
-              style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+                color: Color(0xFF575959),
+                height: 1.0,
+                letterSpacing: 0,
+              ),
             ),
             const SizedBox(height: 8),
             SingleChildScrollView(
@@ -154,9 +161,14 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
                       side: const BorderSide(width: 1),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Submit",
-                    style:TextFontStyle.textFontStyle(14,Colors.white, FontWeight.w500),
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

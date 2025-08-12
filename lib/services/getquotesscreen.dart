@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -54,15 +55,17 @@ class _GetquotescreenState extends State<Getquotescreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.only(left: 20, top: 10),
                     child: Text(
                       "Add Your Decoration Inspirations",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF575959),
+                      style: TextFontStyle.textFontStyle(
+                        12,
+                        const Color(0xFF575959),
+                        FontWeight.w500,
                       ),
+
+
                     ),
                   ),
                   SizedBox(
@@ -116,18 +119,19 @@ class _GetquotescreenState extends State<Getquotescreen> {
                       ),
                     ),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.only(left: 20, top: 15),
                     child: Text(
                       "Add your thoughts",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF575959),
+                      style: TextFontStyle.textFontStyle(
+                        12,
+                        const Color(0xFF575959),
+                        FontWeight.w500,
                       ),
+
                     ),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.only(left: 20, top: 15),
                     child: SizedBox(
                       width: 350,
@@ -141,22 +145,27 @@ class _GetquotescreenState extends State<Getquotescreen> {
                           padding: EdgeInsets.all(8.0),
                           child: Text(
                             "Want a vibrant birthday theme filled with colors and flowers, as shown in picture.",
-                            style: TextStyle(
-                                fontSize: 12, color: Color(0xFF575959)),
+                            style: TextFontStyle.textFontStyle(
+                              12,
+                              const Color(0xFF575959),
+                              FontWeight.w500,
+                            ),
+
                           ),
                         ),
                       ),
                     ),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.only(left: 20, top: 15),
                     child: Text(
                       "Choose budget range",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF575959),
+                      style: TextFontStyle.textFontStyle(
+                        12,
+                        const Color(0xFF575959),
+                        FontWeight.w500,
                       ),
+
                     ),
                   ),
                   StatefulBuilder(
@@ -192,15 +201,16 @@ class _GetquotescreenState extends State<Getquotescreen> {
                       ],
                     ),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.only(left: 20, top: 15),
                     child: Text(
                       "Connect with us",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF575959),
+                      style: TextFontStyle.textFontStyle(
+                        12,
+                        const Color(0xFF575959),
+                        FontWeight.w500,
                       ),
+
                     ),
                   ),
                   Container(
@@ -215,7 +225,7 @@ class _GetquotescreenState extends State<Getquotescreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Row(
+                         Row(
                           children: [
                             CircleAvatar(
                               radius: 16,
@@ -225,11 +235,12 @@ class _GetquotescreenState extends State<Getquotescreen> {
                             SizedBox(width: 8),
                             Text(
                               'John Doe',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF1E535B),
-                                fontWeight: FontWeight.w500,
+                              style: TextFontStyle.textFontStyle(
+                                14,
+                                const Color(0xFF1E535B),
+                                FontWeight.w500,
                               ),
+
                             ),
                           ],
                         ),
@@ -283,13 +294,18 @@ class _GetquotescreenState extends State<Getquotescreen> {
                               borderRadius: BorderRadius.circular(30),
                             ),
                           ),
-                          child: const Text('Hire Decorator',
-                              style: TextStyle(color: Colors.white)),
+                          child:  Text('Hire Decorator',
+                              style: TextFontStyle.textFontStyle(
+                            14,
+                             Colors.white,
+                            FontWeight.w500,
+                          ),
+
                         ),
                       ),
                     ),
                   ),
-                ],
+                  )],
               ),
             ),
           );

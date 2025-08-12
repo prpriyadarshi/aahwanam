@@ -4,6 +4,8 @@ import 'package:aahwanam/models/book_service_details.dart';
 import 'package:aahwanam/widgets/custom_event_date_time%20_picker.dart';
 import 'package:flutter/material.dart';
 
+import 'custom_text_field.dart';
+
 class CustomBookService extends StatelessWidget {
   final BookServiceDetails data;
   final VoidCallback onChangeAddress;
@@ -20,12 +22,14 @@ class CustomBookService extends StatelessWidget {
         Expanded(child: Divider(color: Color(0xFFF1F1F1), thickness: 1)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(label,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF575959),
-              )),
+          child: Text(
+            label,
+            style: TextFontStyle.textFontStyle(
+              14,
+              const Color(0xFF575959),
+              FontWeight.w600,
+            ),
+          ),
         ),
         Expanded(child: Divider(color: Color(0xFFF1F1F1), thickness: 1)),
       ],
@@ -37,11 +41,14 @@ class CustomBookService extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label,
-            style: TextStyle(
-                fontSize: 13,
-                fontWeight: isBold ? FontWeight.w600 : FontWeight.w400,
-                color: Color(0xFF575959))),
+        Text(
+          label,
+          style: TextFontStyle.textFontStyle(
+            13,
+            const Color(0xFF575959),
+            FontWeight.w400,
+          ),
+        ),
         Text(
           "₹ $value",
           style: TextStyle(
@@ -86,27 +93,32 @@ class CustomBookService extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(data.title,
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959),
-                          )),
+                      Text(
+                        data.title,
+                        style: TextFontStyle.textFontStyle(
+                          13,
+                          Color(0xFF575959),
+                          FontWeight.w500,
+                        ),
+                      ),
                       SizedBox(height: 4),
-                      Text(data.description,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w300,
-                              color: Color(0xFF757575))),
+                      Text(
+                        data.description,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextFontStyle.textFontStyle(
+                          12,
+                          Color(0xFF757575),
+                          FontWeight.w300,
+                        ),
+                      ),
                       SizedBox(height: 6),
                       Text(
                         '₹ ${data.price}${data.isPerSession ? ' / Session' : ''}',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF1E535B),
+                        style: TextFontStyle.textFontStyle(
+                          14,
+                          Color(0xFF1E535B),
+                          FontWeight.w600,
                         ),
                       ),
                     ],
@@ -129,13 +141,12 @@ class CustomBookService extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        data.label1!,
-                        style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959)),
-                      ),
+                      Text(data.label1!,
+                          style: TextFontStyle.textFontStyle(
+                            12,
+                            Color(0xFF575959),
+                            FontWeight.w500,
+                          )),
                       const SizedBox(height: 8),
                       TextFormField(
                         initialValue: data.initialValue1 ?? '',
@@ -143,10 +154,10 @@ class CustomBookService extends StatelessWidget {
                             Color(0xFF1E535B), // Set your desired cursor color
                         decoration: InputDecoration(
                           hintText: 'Enter ${data.label1}',
-                          hintStyle: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF757575),
+                          hintStyle: TextFontStyle.textFontStyle(
+                            12,
+                            Color(0xFF757575),
+                            FontWeight.w500,
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -175,10 +186,11 @@ class CustomBookService extends StatelessWidget {
                     children: [
                       Text(
                         data.label2!,
-                        style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959)),
+                        style: TextFontStyle.textFontStyle(
+                          12,
+                          Color(0xFF575959),
+                          FontWeight.w500,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       TextFormField(
@@ -187,10 +199,10 @@ class CustomBookService extends StatelessWidget {
                             Color(0xFF1E535B), // Set your desired cursor color
                         decoration: InputDecoration(
                           hintText: 'Enter ${data.label2}',
-                          hintStyle: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF757575),
+                          hintStyle: TextFontStyle.textFontStyle(
+                            12,
+                            Color(0xFF757575),
+                            FontWeight.w500,
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -222,12 +234,15 @@ class CustomBookService extends StatelessWidget {
           /// Event Address Section
           // Address Section
           Align(
-            alignment: Alignment.centerLeft,
-              child: const Text('Event Address*',
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF575959)))),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Event Address*',
+                style: TextFontStyle.textFontStyle(
+                  14,
+                  const Color(0xFF575959),
+                  FontWeight.w500,
+                ),
+              )),
           const SizedBox(height: 10),
           Container(
             padding: const EdgeInsets.all(10.0),
@@ -261,9 +276,14 @@ class CustomBookService extends StatelessWidget {
                         padding: const EdgeInsets.all(6),
                         minimumSize: const Size(0, 0),
                       ),
-                      child: const Text("Change",
-                          style: TextStyle(
-                              fontSize: 10, fontWeight: FontWeight.w500)),
+                      child: Text(
+                        "Change",
+                        style: TextFontStyle.textFontStyle(
+                          10,
+                          Color(0xFF575959),
+                          FontWeight.w500,
+                        ),
+                      ),
                     ),
                   ],
                 ),

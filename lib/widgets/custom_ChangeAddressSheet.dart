@@ -9,7 +9,6 @@ class CustomChangeAddressSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
-
       decoration: BoxDecoration(
 
         border: Border.all(
@@ -17,21 +16,20 @@ class CustomChangeAddressSheet extends StatelessWidget {
           color: const Color(0xFFE4E4E4), // This is your border color
         ),
 
-        color: Colors.white,
+        color: const Color(0xFFFAFAFA),
 
         borderRadius: BorderRadius.circular(8.0),
       ),
 
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Financial District',
+                 'Financial District',
                   style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400),
                 ),
                 const SizedBox(height: 4),
@@ -42,23 +40,20 @@ class CustomChangeAddressSheet extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 2),
-          Transform.translate(
-            offset: const Offset(0, -16),
-            child: OutlinedButton(
-              onPressed: () => _showChangeAddress(context),
-              style: OutlinedButton.styleFrom(
-                minimumSize: const Size(20, 24),
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                side: const BorderSide(color: Color(0xFF1E535B)),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-              ),
-              child: Text(
-                'Change',
-                style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w400),
-              ),
+          const SizedBox(width: 8),
+          OutlinedButton(
+            onPressed: () => _showChangeAddress(context),
+            style: OutlinedButton.styleFrom(
+              minimumSize: const Size(45, 30),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+              side: const BorderSide(color: Color(0xFF1E535B)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
             ),
-          )
+            child: Text(
+              'Change',
+              style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w400),
+            ),
+          ),
         ],
       ),
     );

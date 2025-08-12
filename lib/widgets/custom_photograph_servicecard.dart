@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../models/gallery_section.dart';
+import 'custom_text_field.dart';
 
 
 class CustomServiceCard extends StatelessWidget {
@@ -102,16 +103,19 @@ class CustomServiceCard extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                              Text(name, style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w500)),
                               SizedBox(height: 4),
-                              Text( "${price}" , style: TextStyle(fontSize: 14, color: Color(0xFF1E535B), fontWeight: FontWeight.w600)),
+                              Text( "${price}" ,
+                                  style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w600)
+                              )
                             ],
                           ),
                           Row(
                             children: [
                               Icon(Icons.star, color: Colors.amber, size: 20),
                               SizedBox(width: 4),
-                              Text("${rating}" , style: TextStyle(fontSize: 16)),
+                              Text("${rating}"
+                                  , style: TextStyle(fontSize: 16)),
                             ],
                           ),
                         ],
@@ -133,9 +137,12 @@ class CustomServiceCard extends StatelessWidget {
                 dividerHeight: 0,
                 indicatorColor: Color(0xFF575959),
                 tabs: [
-                  Tab(child: Align(child: Text("All Details"), alignment: Alignment.center)),
-                  Tab(child: Align(child: Text("Gallery"), alignment: Alignment.center)),
-                  Tab(child: Align(child: Text("Reviews"), alignment: Alignment.center)),
+                  Tab(child: Align(alignment: Alignment.center, child: Text("All Details", style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500), // smaller text
+                  ))),
+                  Tab(child: Align(alignment: Alignment.center, child: Text("Gallery", style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500), // smaller text
+                  ))),
+                  Tab(child: Align(alignment: Alignment.center, child: Text("Reviews", style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500), // smaller text
+                  ))),
                 ],
               ),
             ),
@@ -224,11 +231,9 @@ void _showChangeAddress(BuildContext context) {
             children: [
               Text(
                 'Change Address',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF575959),
-                ),
+                style: TextFontStyle.textFontStyle(18, const Color(0xFF575959), FontWeight.w600), // smaller text
+
+
               ),
               SizedBox(height: 16),
               SizedBox(
@@ -240,7 +245,9 @@ void _showChangeAddress(BuildContext context) {
                   icon: Icon(Icons.add, color: Color(0xFF1E535B)),
                   label: Text(
                     'Add New Address',
-                    style: TextStyle(color: Color(0xFF1E535B)),
+                    style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w500), // smaller text
+
+
                   ),
                   style: OutlinedButton.styleFrom(
                     alignment: Alignment.centerLeft,
@@ -255,6 +262,7 @@ void _showChangeAddress(BuildContext context) {
               SizedBox(height: 24),
               Text(
                 'Your saved address',
+
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,

@@ -79,7 +79,7 @@ class AppPages {
       AppRoutes.bookPhotographService: PhotographBookServiceScreen(),
       AppRoutes.entertainmentSubServices: EntertainmentAllServicesSubList(),
       AppRoutes.entertainmentBookServiceScreen: EntertainmentBookServiceScreen(),
-      // AppRoutes.login: LoginScreen(),
+      AppRoutes.login: LoginScreen(),
       AppRoutes.services: ServicesScreen(),
       AppRoutes.concepts: ConceptsScreen(),
       AppRoutes.event:EventScreen(),

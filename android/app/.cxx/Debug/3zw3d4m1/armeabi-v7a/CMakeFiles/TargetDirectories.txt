@@ -1,2 +1,0 @@
-C:/Users/PranitaPriyadarshi/StudioProjects/aahwanam/android/app/.cxx/Debug/3zw3d4m1/armeabi-v7a/CMakeFiles/edit_cache.dir
-C:/Users/PranitaPriyadarshi/StudioProjects/aahwanam/android/app/.cxx/Debug/3zw3d4m1/armeabi-v7a/CMakeFiles/rebuild_cache.dir

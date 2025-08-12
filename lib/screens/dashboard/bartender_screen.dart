@@ -1,4 +1,3 @@
-
 import 'package:aahwanam/blocs/bartender/bartender_bloc.dart';
 import 'package:aahwanam/blocs/bartender/bartender_event.dart';
 import 'package:aahwanam/blocs/bartender/bartender_state.dart';
@@ -54,38 +53,38 @@ class BartenderScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
 
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: state.Packages.length,
-                    itemBuilder: (context, index) {
-                      final package = state.Packages[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PackageDetailScreen(package: package),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.Packages.length,
+                        itemBuilder: (context, index) {
+                          final package = state.Packages[index];
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PackageDetailScreen(package: package),
+                                  ),
+                                );
+                              },
+                              child: PackageCard(
+                                title: package['title'],
+                                description: package['description'],
+                                price: package['price'],
+                                details: package['details'],
+                                imagePath: package['imagePath'],
+                                rating: package['rating'],
                               ),
-                            );
-                          },
-                          child: PackageCard(
-                            title: package['title'],
-                            description: package['description'],
-                            price: package['price'],
-                            details: package['details'],
-                            imagePath: package['imagePath'],
-                            rating: package['rating'],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                            ),
+                          );
+                        },
+                      ),
 
 
-                  ],
+                    ],
                   ),
                 ),
               );

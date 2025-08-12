@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:aahwanam/widgets/custom_text_field.dart';
+
 class CustomCircleWidget extends StatelessWidget {
   final String heading;
   final List<Map<String, String>> categories;
@@ -27,25 +29,28 @@ class CustomCircleWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+
                Text(
                heading ,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF575959),
-                ),
+                 style: TextFontStyle.textFontStyle(
+                   16,
+                   const Color(0xFF575959),
+                   FontWeight.w500,
+                 ),
+
               ),
               if(showViewAll && onViewAll != null)
               TextButton(
                 onPressed: onViewAll,
-                child: const Text(
+                child: Text(
                   'View All',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF1E535B),
+                  style: TextFontStyle.textFontStyle(
+                    12,
+                    const Color(0xFF1E535B),
+                    FontWeight.w400,
                   ),
                 ),
+
               ),
             ],
           ),
@@ -112,11 +117,12 @@ class CategoryItem extends StatelessWidget {
           Text(
             category['name']!,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: Color(0xFF575959),
+            style: TextFontStyle.textFontStyle(
+              12,
+              const Color(0xFF575959),
+              FontWeight.w400,
             ),
+
           ),
         ],
       ),
