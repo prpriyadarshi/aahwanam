@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../blocs/favorite/favorite_bloc.dart';
+import '../blocs/favorite/favorite_event.dart';
+import '../blocs/favorite/favorite_state.dart';
 import '../services/pandit/pandit_theme.dart';
 import 'custom_text_field.dart';
 
@@ -60,95 +64,117 @@ class CustomPanditCardWidgets {
 
 
   static Widget buildCarditem(BuildContext context, Map<String, dynamic> item) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => PanditTheme()),
-        );
-      },
-        child: Card(
-          elevation: 0,
-          
-          color: const Color(0xFFFFEFDF),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6.0),
-          ),
-          margin: EdgeInsets.all(3.0),
-
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min, // ✅ Prevent extra height
-            children: [
-              Stack(
+    return BlocProvider(
+      create: (_) => FavoriteBloc(),
+      child: Builder(
+        builder: (context) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PanditTheme()),
+              );
+            },
+            child: Card(
+              elevation: 0,
+              color: const Color(0xFFFFEFDF),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+              margin: const EdgeInsets.all(3.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(6.0)),
-                    child: item['image'] != null && item['image']!.startsWith('assets/')
-                        ? Image.asset(
-                      item['image']!,
-                      height: 150, // ✅ Slightly reduced
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    )
-                        : Image.network(
-                      item['image'] ?? '',
-                      height: 150,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+                  Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: const BorderRadius.vertical(top: Radius.circular(6.0)),
+                        child: item['image'] != null && item['image']!.startsWith('assets/')
+                            ? Image.asset(
+                          item['image']!,
+                          height: 130,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        )
+                            : Image.network(
+                          item['image'] ?? '',
+                          height: 130,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+
+                      // 🔁 BLoC Favorite Icon
+                      Positioned(
+                        top: 6,
+                        right: 6,
+                        child: BlocBuilder<FavoriteBloc, FavoriteState>(
+                          builder: (context, state) {
+                            return GestureDetector(
+                              onTap: () => context.read<FavoriteBloc>().add(ToggleFavorite()),
+                              child: CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: 8,
+                                child: Icon(
+                                  state.isFavorite ? Icons.favorite : Icons.favorite_border,
+                                  size: 12,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                  const Positioned(
-                    top: 6,
-                    right: 6,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 8,
-                      child: Icon(Icons.favorite_border, size: 12, color: Colors.red),
+
+                  // 🔤 Info Section
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                item['name'] ?? '',
+                                style: TextFontStyle.textFontStyle(
+                                    12, const Color(0xFF575959), FontWeight.w500),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                const Icon(Icons.star, color: Color(0xFFEFAA37), size: 14),
+                                const SizedBox(width: 2),
+                                Text(
+                                  item['rating'] ?? "0.0",
+                                  style: TextFontStyle.textFontStyle(12, const Color(0xFF575959)),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          item['price'] ?? '',
+                          style: TextFontStyle.textFontStyle(
+                              12, const Color(0xFF1E535B), FontWeight.w600),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0), // ✅ Reduced padding
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            item['name'] ?? '',
-                            style: TextFontStyle.textFontStyle(14, Color(0xFF575959), FontWeight.w500), // ✅ Smaller font
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            const Icon(Icons.star, color: Color(0xFFEFAA37), size: 14), // ✅ Smaller
-                            const SizedBox(width: 2),
-                            Text(
-                              item['rating'] ?? "0.0",
-                              style: TextFontStyle.textFontStyle(14, Color(0xFF575959)), // ✅ Smaller font
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2), // ✅ Smaller spacing
-                    Text(
-                      item['price'] ?? '',
-                      style: TextFontStyle.textFontStyle(14, Color(0xFF1E535B), FontWeight.w600), // ✅ Slightly smaller
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-
+            ),
+          );
+        },
+      ),
     );
   }
+
 }
