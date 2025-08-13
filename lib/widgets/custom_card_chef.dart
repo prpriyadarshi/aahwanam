@@ -1,3 +1,4 @@
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 import '../services/chef_service/chef_decoration.dart';
@@ -21,22 +22,24 @@ class CustomCardChefWidgets {
             children: [
               Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF575959),
+                style: TextFontStyle.textFontStyle(
+                  16,
+                  Color(0xFF575959),
+                  FontWeight.w600,
                 ),
+
               ),
               if (showViewAll)
                 TextButton(
                   onPressed: onViewAll,
-                  child: const Text(
+                  child:  Text(
                     "View All",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF1E535B),
+                    style: TextFontStyle.textFontStyle(
+                      12,
+                      Color(0xFF575959),
+                      FontWeight.w400,
                     ),
+
                   ),
                 ),
             ],
@@ -130,11 +133,12 @@ class CustomCardChefWidgets {
                       Expanded(
                         child: Text(
                           item['name'] ?? '',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959),
+                          style: TextFontStyle.textFontStyle(
+                            12,
+                            Color(0xFF575959),
+                            FontWeight.w500,
                           ),
+
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -145,11 +149,12 @@ class CustomCardChefWidgets {
                           const SizedBox(width: 4),
                           Text(
                             item['rating'] ?? "0.0",
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xFF575959),
+                            style: TextFontStyle.textFontStyle(
+                              10,
+                              Color(0xFF575959),
+                              FontWeight.w400,
                             ),
+
                           ),
                         ],
                       ),
@@ -158,11 +163,12 @@ class CustomCardChefWidgets {
                   const SizedBox(height: 4.0),
                   Text(
                     item['price'] ?? '',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF1E535B),
-                      fontWeight: FontWeight.w600,
+                    style: TextFontStyle.textFontStyle(
+                      12,
+                      Color(0xFF1E535B),
+                      FontWeight.w600,
                     ),
+
                   ),
                 ],
               ),

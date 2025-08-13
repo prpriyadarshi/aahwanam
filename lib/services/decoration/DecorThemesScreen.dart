@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import '../../widgets/custom_buildDecor_horizontalList.dart';
 
 class ThemesScreen extends StatelessWidget {
@@ -22,21 +23,30 @@ class ThemesScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
+           Padding(
             padding: EdgeInsets.only(left: 20, top: 10),
             child: Text(
               "Birthday Decoration",
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF575959)),
+              style: TextFontStyle.textFontStyle(
+                12,
+                const Color(0xFF575959),
+                FontWeight.w500,
+              ),
             ),
+
           ),
           ...splitList(birthdayItems, 4)
               .map((chunk) => CustomBuildDecorHorizontalList.build(title: "", items: chunk))
               .toList(),
-          const Padding(
+           Padding(
             padding: EdgeInsets.only(left: 20, top: 10),
             child: Text(
               "Birthday Decoration for Kids",
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF575959)),
+              style: TextFontStyle.textFontStyle(
+                12,
+                const Color(0xFF575959),
+                FontWeight.w500,
+              ),
             ),
           ),
           ...splitList(birthdayItems, 4)

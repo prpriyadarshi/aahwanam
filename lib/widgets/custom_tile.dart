@@ -1,4 +1,3 @@
-import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class CustomTile extends StatelessWidget{
@@ -22,15 +21,10 @@ class CustomTile extends StatelessWidget{
       child: ListTile(
         leading: Image.asset(
           imagePath,
-          width: 20,
-          height: 20,
+          width: 24,
+          height: 24,
           fit: BoxFit.contain,),
-        title: Text(title,
-          style: TextFontStyle.textFontStyle(
-            14,                      // font size
-            Color(0xFF575959),       // color
-            FontWeight.w400,         // weight
-          ),),
+        title: Text(title),
         trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         onTap: onTap,
       ),

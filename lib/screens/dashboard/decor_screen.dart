@@ -8,10 +8,10 @@ import '../../blocs/decor/decor_state.dart';
 import '../../services/decoration/birthday_decoration.dart';
 import '../../services/services_screen.dart';
 import '../../widgets/custom_card_birthday.dart';
-import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 import '../../widgets/custom_image_card_widget.dart';
+import '../../widgets/custom_text_field.dart';
 
 class DecorScreen extends StatelessWidget {
   @override
@@ -166,14 +166,15 @@ class DecorScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               "Recommended Decorations",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF575959),
+                              style: TextFontStyle.textFontStyle(
+                                16,
+                                const Color(0xFF575959),
+                                FontWeight.w600,
                               ),
                             ),
+
 
                           ],
                         ),
@@ -216,7 +217,7 @@ Widget _buildSearchBar() {
     height: 40, // decreased height\
     width: 220,
     child: TextField(
-      style: TextStyle(fontSize: 14), // smaller text
+      style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400), // smaller text
       decoration: InputDecoration(
         hintText: 'Search here...',
         prefixIcon: const Icon(Icons.search, size: 20),

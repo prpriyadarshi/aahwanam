@@ -30,9 +30,7 @@ class PackageDetailScreen extends StatelessWidget {
           if (state.loading) {
             return const Center(child: CircularProgressIndicator());
           }
-          print('pranita $state');
           return DefaultTabController(
-
             length: 3,
             child: Scaffold(
               appBar: AppBar(
@@ -134,7 +132,13 @@ class PackageDetailScreen extends StatelessWidget {
                 TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w400)),
 
           )).toList()),
-
+          // const SizedBox(height: 20),
+          // const Divider(),
+          // const SizedBox(height: 10),
+          // const Text(
+          //   "Details & Requirements",
+          //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, fontFamily: 'Poppins'),
+          // ),
          Column(
           children: [
             const SizedBox(height: 30), // Push it down

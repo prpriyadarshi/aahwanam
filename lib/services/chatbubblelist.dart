@@ -25,6 +25,8 @@ class _ChatbubblelistState extends State<Chatbubblelist> {
           alignment: Alignment.centerRight,
           child: ChatBubble(
             text: "I want to know about decoration themes.",
+
+
             isMe: true,
           ),
         ),
