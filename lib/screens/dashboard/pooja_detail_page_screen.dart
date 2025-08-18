@@ -12,7 +12,7 @@ import 'media_gallery.dart';
 class PoojaDetailPage extends StatefulWidget {
   final Map<String, dynamic> pooja;
 
-  const PoojaDetailPage({Key? key, required this.pooja}) : super(key: key);
+    const PoojaDetailPage({Key? key, required this.pooja}) : super(key: key);
 
   @override
   State<PoojaDetailPage> createState() => _PoojaDetailPageState();
