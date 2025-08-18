@@ -2,6 +2,7 @@ import 'package:aahwanam/services/mehandi_service/mehandi.dart';
 import 'package:flutter/material.dart';
 
 import '../services/mehandi_service/mehnditheme.dart';
+import 'custom_text_field.dart';
 
 
 class CustomCardMehndiWidgets {
@@ -22,22 +23,18 @@ class CustomCardMehndiWidgets {
             children: [
               Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF575959),
-                ),
+                style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w600), // smaller text
+
+
               ),
               if (showViewAll)
                 TextButton(
                   onPressed: onViewAll,
-                  child: const Text(
+                  child:  Text(
                     "View All",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF1E535B),
-                    ),
+                    style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w400), // smaller text
+
+
                   ),
                 ),
             ],
@@ -146,11 +143,9 @@ class CustomCardMehndiWidgets {
                           const SizedBox(width: 4),
                           Text(
                             item['rating'] ?? "0.0",
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xFF575959),
-                            ),
+                            style: TextFontStyle.textFontStyle(10, const Color(0xFF575959), FontWeight.w400), // smaller text
+
+
                           ),
                         ],
                       ),
@@ -159,11 +154,9 @@ class CustomCardMehndiWidgets {
                   const SizedBox(height: 4.0),
                   Text(
                     item['price'] ?? '',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF1E535B),
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w600), // smaller text
+
+
                   ),
                 ],
               ),

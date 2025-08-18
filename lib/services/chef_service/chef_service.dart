@@ -12,6 +12,7 @@ import '../../blocs/chef/chef_event.dart';
 import '../../widgets/custom_card_chef.dart';
 import '../../widgets/custom_card_makup.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
+import '../../widgets/custom_text_field.dart';
 
 class ChefService extends StatelessWidget {
   final Map<String, String> chefs;
@@ -125,6 +126,12 @@ class ChefService extends StatelessWidget {
 
   Widget _buildSearchBar() {
     return TextField(
+      style: TextFontStyle.textFontStyle(
+        14,
+        Color(0xFF575959),
+        FontWeight.w500,
+      ),
+
       decoration: InputDecoration(
         hintText: 'Search here...',
         prefixIcon: const Icon(Icons.search, color: Colors.grey),

@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Aahwanam App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Poppins',
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: AppPages.onGenerateRoute,

@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import 'custom_text_field.dart' show TextFontStyle;
+
 class CustomDateTimeBottomSheet extends StatefulWidget {
   final void Function(DateTime fullDateTime) onConfirm;
 
@@ -26,7 +28,12 @@ class _CustomDateTimeBottomSheetState extends State<CustomDateTimeBottomSheet> {
           Center(
             child: Text(
               "Select Event Date",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              style: TextFontStyle.textFontStyle(
+                16,
+                const Color(0xFF575959),
+                FontWeight.w600,
+              ),
+
             ),
           ),
           SizedBox(height: 16),
@@ -41,11 +48,12 @@ class _CustomDateTimeBottomSheetState extends State<CustomDateTimeBottomSheet> {
                     Text(
                       DateFormat.yMMMM()
                           .format(selectedDate), // Example: June 2025
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF004d40),
+                      style: TextFontStyle.textFontStyle(
+                        16,
+                        const Color(0xFF575959),
+                        FontWeight.w500,
                       ),
+
                     ),
                     Row(
                       children: [
@@ -110,7 +118,11 @@ class _CustomDateTimeBottomSheetState extends State<CustomDateTimeBottomSheet> {
           Center(
             child: Text(
               "Select Event Time",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                   style: TextFontStyle.textFontStyle(
+    16,
+    const Color(0xFF575959),
+    FontWeight.w500,
+    ),
             ),
           ),
           SizedBox(height: 20),
@@ -147,7 +159,7 @@ class _CustomDateTimeBottomSheetState extends State<CustomDateTimeBottomSheet> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -160,7 +172,13 @@ class _CustomDateTimeBottomSheetState extends State<CustomDateTimeBottomSheet> {
                   ),
                 ),
                 child:
-                    Text("Cancel", style: TextStyle(color: Color(0xFF1E535B))),
+                    Text("Cancel",
+                      style: TextFontStyle.textFontStyle(
+                      12,
+                      const Color(0xFF575959),
+                      FontWeight.w500,
+                    ),
+                        ),
               ),
               SizedBox(width: 12),
               ElevatedButton(
@@ -181,7 +199,11 @@ class _CustomDateTimeBottomSheetState extends State<CustomDateTimeBottomSheet> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: Text("Set", style: TextStyle(color: Colors.white)),
+                child: Text("Set",         style: TextFontStyle.textFontStyle(
+                  12,
+                   Colors.white,
+                  FontWeight.w500,
+                ),),
               ),
             ],
           ),

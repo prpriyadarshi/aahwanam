@@ -108,17 +108,17 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                     print('Checking out with quantity: $_currentQuantity');
                   },
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFF1E535B),
-                    side: const BorderSide(color: Color(0xFF1E535B)),
+                    foregroundColor: const Color(0xFF233B32),
+                    side: const BorderSide(color: Color(0xFF233B32)),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   child: Text(
                     'Check Out',
                     style: TextFontStyle.textFontStyle(
-                        14, const Color(0xFF1E535B), FontWeight.w500),
+                        14, const Color(0xFF233B32), FontWeight.bold),
                   ),
                 ),
               ),
@@ -130,17 +130,17 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E535B),
+                    backgroundColor: const Color(0xFF233B32),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   child: Text(
                     'Add other services',
                     style: TextFontStyle.textFontStyle(
-                        14, Color(0xFFFFFFFF), FontWeight.w500),
+                        14, Colors.white, FontWeight.bold),
                   ),
                 ),
               ),

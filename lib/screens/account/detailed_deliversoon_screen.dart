@@ -4,7 +4,6 @@ import 'package:aahwanam/blocs/account/account_state.dart';
 import 'package:aahwanam/screens/account/RateServiceScreen.dart';
 import 'package:aahwanam/services/chatscreen.dart';
 import 'package:aahwanam/services/connectingscreen.dart';
-import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,58 +28,60 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        titleSpacing: 0,
-        title: Text("My Packages",
-          style: TextFontStyle.textFontStyle(
-            16,                         // Font size
-            Color(0xFF575959),          // Text color
-            FontWeight.w500,            // Font weight
-          ),),
+        automaticallyImplyLeading: false,
+        toolbarHeight: 60,
         backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
         elevation: 0,
-        leading: IconButton(
-          padding: const EdgeInsets.only(top: 2, left: 12),
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 18,
-            color: Color(0xFF575959),
-          ),
-          onPressed: () {
-            Navigator.pop(context); // ✅ Go back to previous screen
-            // Or use push to go to a specific screen:
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
-          },
+        title: Row(
+          children: [
+            IconButton(
+              icon:
+                  const Icon(Icons.chevron_left, color: Colors.black, size: 28),
+              onPressed: () => Navigator.pop(context),
+            ),
+            const Text(
+              "My Packages",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const Spacer(),
+            IconButton(
+              icon: const Icon(Icons.share, color: Colors.black),
+              onPressed: () {},
+            ),
+          ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.share),
-            onPressed: () {
-              // Implement share functionality if needed
-            },
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ListView(
           children: [
-             Center(
+            const Center(
               child: Text(
                 "Anniversary Package",
-                style:TextFontStyle.textFontStyle(14,Color(0XFF575959), FontWeight.w500),
-
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0XFF575959)),
               ),
             ),
             const SizedBox(height: 16),
             ..._buildPackageItems(),
             // const SizedBox(height: 5),
 
-             Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 12, left: 8),
               child: Text(
                 "Connect with us",
-                style:TextFontStyle.textFontStyle(12,Color(0XFF575959), FontWeight.w500),
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF575959),
+                  fontFamily: 'Poppins',
+                ),
               ),
             ),
             Container(
@@ -101,17 +102,27 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
                     ),
                   ),
                   const SizedBox(width: 12),
-                   Column(
+                  const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Janey Cooper",
-                        style:TextFontStyle.textFontStyle(12,Color(0XFF575959), FontWeight.w500),
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF575959),
+                          fontFamily: 'Poppins',
+                        ),
                       ),
                       Text(
                         "Support Team",
-                        style:TextFontStyle.textFontStyle(10,Color(0XFF575959), FontWeight.w300),
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xFF575959),
+                          fontFamily: 'Poppins',
+                        ),
                       ),
                     ],
                   ),
@@ -158,12 +169,15 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
 
             SizedBox(height: 20),
             Row(
-              children:  [
+              children: const [
                 Expanded(child: Divider(thickness: 1)),
                 SizedBox(width: 8),
                 Text(
                   "Bill Details",
-                  style:TextFontStyle.textFontStyle(14,Color(0XFF575959), FontWeight.w500),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: Color(0XFF575959)),
                 ),
                 SizedBox(width: 8),
                 Expanded(child: Divider(thickness: 1)),
@@ -232,14 +246,21 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
                 children: [
                   Text(
                     service["title"]!,
-                    style:TextFontStyle.textFontStyle(12,Color(0XFF575959), FontWeight.w500),
+                    style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0XFF575959)),
                   ),
                   Text(service["price"]!,
-                      style:TextFontStyle.textFontStyle(12,Color(0XFF1E535B), FontWeight.w600),
-                  ),
-                 Text("Delivered on–23–03–25",
-                      style:TextFontStyle.textFontStyle(12,Color(0XFF757575), FontWeight.w400),
-                 ),
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0XFF1E535B),
+                          fontWeight: FontWeight.w600)),
+                  const Text("Delivered on–23–03–25",
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0XFF757575),
+                          fontWeight: FontWeight.w400)),
                 ],
               ),
             ),

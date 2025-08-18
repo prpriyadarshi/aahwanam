@@ -454,13 +454,16 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                 Expanded(
                   child: Text(
                     title,
-                    style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
+                    style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
                 ),
                 // Date aligned right
                 Text(
                   date,
-                  style:TextFontStyle.textFontStyle(12,Color(0xFF757575), FontWeight.w400),
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                  ),
                   textAlign: TextAlign.right,
                 ),
               ],

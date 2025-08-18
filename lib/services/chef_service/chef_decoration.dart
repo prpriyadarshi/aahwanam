@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:aahwanam/services/makeup_hair_service/makeupdecor_image.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -179,11 +180,12 @@ class _ChefDecorationState extends State<ChefDecoration> with SingleTickerProvid
                               Expanded(
                                 child: Text(
                                   widget.chefs['name'] ?? '',
-                                  style: const TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF575959),
+                                  style: TextFontStyle.textFontStyle(
+                                    12,
+                                    Color(0xFF575959),
+                                    FontWeight.w500,
                                   ),
+
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -194,11 +196,12 @@ class _ChefDecorationState extends State<ChefDecoration> with SingleTickerProvid
                                   const SizedBox(width: 4),
                                   Text(
                                     widget.chefs['rating'] ?? '0.0',
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xFF575959),
+                                    style: TextFontStyle.textFontStyle(
+                                      10,
+                                      Color(0xFF575959),
+                                      FontWeight.w400,
                                     ),
+
                                   ),
                                 ],
                               ),
@@ -206,12 +209,16 @@ class _ChefDecorationState extends State<ChefDecoration> with SingleTickerProvid
                           ),
                           const SizedBox(height: 2),
                           Text(
+
                             widget.chefs['price'] ?? '',
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF1E535B),
-                              fontWeight: FontWeight.w600,
+
+
+                            style: TextFontStyle.textFontStyle(
+                              12,
+                              Color(0xFF1E535B),
+                              FontWeight.w600,
                             ),
+
                           ),
                         ],
                       ),
@@ -223,14 +230,28 @@ class _ChefDecorationState extends State<ChefDecoration> with SingleTickerProvid
                       indicatorSize: TabBarIndicatorSize.label,
                       labelPadding: const EdgeInsets.symmetric(horizontal: 8),
                       dividerColor: Colors.transparent,
+
+                      // Selected tab color & style
                       labelColor: const Color(0xFF1E535B),
-                      unselectedLabelColor: Colors.black54,
-                      labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                      unselectedLabelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                      labelStyle: TextFontStyle.textFontStyle(
+                        14,
+                        const Color(0xFF1E535B),
+                        FontWeight.w500,
+                      ),
+
+                      // Unselected tab color & style
+                      unselectedLabelColor: const Color(0xFF575959),
+                      unselectedLabelStyle: TextFontStyle.textFontStyle(
+                        14,
+                        const Color(0xFF575959),
+                        FontWeight.w400,
+                      ),
+
                       indicator: const UnderlineTabIndicator(
                         borderSide: BorderSide(width: 2, color: Color(0xFF1E535B)),
                         insets: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
                       ),
+
                       tabs: const [
                         Tab(text: 'All Details'),
                         Tab(text: 'Menu'),
@@ -263,6 +284,12 @@ class _ChefDecorationState extends State<ChefDecoration> with SingleTickerProvid
 
   Widget _buildSearchBar() {
     return TextField(
+      style:  TextFontStyle.textFontStyle(
+        14,
+        Color(0xFF575959),
+        FontWeight.w500,
+      ),
+
       decoration: InputDecoration(
         hintText: 'Search here...',
         prefixIcon: const Icon(Icons.search),

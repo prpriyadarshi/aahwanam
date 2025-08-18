@@ -2,6 +2,8 @@ import 'package:aahwanam/models/service_details.dart';
 import 'package:aahwanam/widgets/custom_event_date_time%20_picker.dart';
 import 'package:flutter/material.dart';
 
+import 'custom_text_field.dart';
+
 class ServiceOverviewTab extends StatelessWidget {
   final String heading;
   final String packagePrice;
@@ -11,7 +13,7 @@ class ServiceOverviewTab extends StatelessWidget {
   final String eventTitle;
   final String address;
   final String addressDescription;
-    final VoidCallback onChangeAddress;
+  final VoidCallback onChangeAddress;
   final String? label1;
   final String? label2;
   final String? initialValue1;
@@ -32,7 +34,6 @@ class ServiceOverviewTab extends StatelessWidget {
     this.label2,
     this.initialValue1,
     this.initialValue2,
-
   }) : super(key: key);
 
   @override
@@ -46,31 +47,74 @@ class ServiceOverviewTab extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(heading, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF575959))),
-              Text(packagePrice, style: const TextStyle(fontSize: 14, color: Color(0xFF1E535B), fontWeight: FontWeight.w600)),
+              Text(
+                heading,
+                style: TextFontStyle.textFontStyle(
+                  14,
+                  const Color(0xFF575959),
+                  FontWeight.w500,
+                ),
+              ),
+              Text(
+                packagePrice,
+                style: TextFontStyle.textFontStyle(
+                  14,
+                  const Color(0xFF1E535B),
+                  FontWeight.w600,
+                ),
+              ),
             ],
           ),
 
           const SizedBox(height: 10),
-          Text(description, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xFF757575))),
+          Text(
+            description,
+            style: TextFontStyle.textFontStyle(
+              12,
+              const Color(0xFF575959),
+              FontWeight.w500,
+            ),
+          ),
 
           const SizedBox(height: 10),
-          Text(subHeading, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF575959))),
+          Text(
+            subHeading,
+            style: TextFontStyle.textFontStyle(
+              14,
+              const Color(0xFF575959),
+              FontWeight.w600,
+            ),
+          ),
           const SizedBox(height: 8),
-          Text(subHeadingDetails, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xFF757575))),
+          Text(
+            subHeadingDetails,
+            style: TextFontStyle.textFontStyle(
+              12,
+              const Color(0xFF757575),
+              FontWeight.w500,
+            ),
+          ),
 
-
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
 
           // Event Details Centered Title
           Row(
             children: [
-              const Expanded(child: Divider(color: Color(0xFFE4E4E4), thickness: 0.5)),
+              const Expanded(
+                  child: Divider(color: Color(0xFFE4E4E4), thickness: 0.5)),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text(eventTitle, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF575959))),
+                child: Text(
+                  eventTitle,
+                  style: TextFontStyle.textFontStyle(
+                    16,
+                    const Color(0xFF575959),
+                    FontWeight.w600,
+                  ),
+                ),
               ),
-              const Expanded(child: Divider(color: Color(0xFFE4E4E4), thickness: 0.5)),
+              const Expanded(
+                  child: Divider(color: Color(0xFFE4E4E4), thickness: 0.5)),
             ],
           ),
 
@@ -88,29 +132,40 @@ class ServiceOverviewTab extends StatelessWidget {
                     children: [
                       Text(
                         label1!,
-                        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF575959)),
+                      style:   TextFontStyle.textFontStyle(
+                          12,
+                          const Color(0xFF575959),
+                          FontWeight.w500,
+                        ),
+
                       ),
                       const SizedBox(height: 8),
                       TextFormField(
                         initialValue: initialValue1 ?? '',
-                        cursorColor: Color(0xFF1E535B), // Set your desired cursor color
+                        cursorColor:
+                            Color(0xFF1E535B), // Set your desired cursor color
                         decoration: InputDecoration(
                           hintText: 'Enter $label1',
-                          hintStyle: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF757575),
+                          hintStyle: TextFontStyle.textFontStyle(
+                            12,
+                            const Color(0xFF757575),
+                            FontWeight.w500,
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(color: Color(0xFFE4E4E4)), // Border color when NOT focused
+                            borderSide: BorderSide(
+                                color: Color(
+                                    0xFFE4E4E4)), // Border color when NOT focused
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF1E535B), width: 1.5), // Custom focus color
+                            borderSide: BorderSide(
+                                color: Color(0xFF1E535B),
+                                width: 1.5), // Custom focus color
                             borderRadius: BorderRadius.circular(12),
                           ),
                           isDense: true,
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 12),
                         ),
                       ),
                     ],
@@ -123,30 +178,39 @@ class ServiceOverviewTab extends StatelessWidget {
                     children: [
                       Text(
                         label2!,
-                        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF575959)),
+                        style:   TextFontStyle.textFontStyle(
+                          12,
+                          const Color(0xFF575959),
+                          FontWeight.w500,
+                        ),
                       ),
                       const SizedBox(height: 8),
-
                       TextFormField(
                         initialValue: initialValue2 ?? '',
-                        cursorColor: Color(0xFF1E535B), // Set your desired cursor color
+                        cursorColor:
+                            Color(0xFF1E535B), // Set your desired cursor color
                         decoration: InputDecoration(
                           hintText: 'Enter $label2',
-                          hintStyle: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF757575),
+                          hintStyle: TextFontStyle.textFontStyle(
+                            12,
+                            const Color(0xFF757575),
+                            FontWeight.w500,
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(color: Color(0xFFE4E4E4)), // Border color when NOT focused
+                            borderSide: BorderSide(
+                                color: Color(
+                                    0xFFE4E4E4)), // Border color when NOT focused
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF1E535B), width: 1.5), // Custom focus color
+                            borderSide: BorderSide(
+                                color: Color(0xFF1E535B),
+                                width: 1.5), // Custom focus color
                             borderRadius: BorderRadius.circular(12),
                           ),
                           isDense: true,
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 12),
                         ),
                       ),
                     ],
@@ -167,12 +231,16 @@ class ServiceOverviewTab extends StatelessWidget {
                     children: [
                       Text(
                         label1!,
-                        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF575959)),
+                        style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF575959)),
                       ),
                       const SizedBox(height: 8),
                       TextFormField(
                         initialValue: initialValue1 ?? '',
-                        cursorColor: Color(0xFF1E535B), // Set your desired cursor color
+                        cursorColor:
+                            Color(0xFF1E535B), // Set your desired cursor color
                         decoration: InputDecoration(
                           hintText: 'Enter $label1',
                           hintStyle: TextStyle(
@@ -182,14 +250,19 @@ class ServiceOverviewTab extends StatelessWidget {
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(color: Color(0xFFE4E4E4)), // Border color when NOT focused
+                            borderSide: BorderSide(
+                                color: Color(
+                                    0xFFE4E4E4)), // Border color when NOT focused
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF1E535B), width: 1.5), // Custom focus color
+                            borderSide: BorderSide(
+                                color: Color(0xFF1E535B),
+                                width: 1.5), // Custom focus color
                             borderRadius: BorderRadius.circular(12),
                           ),
                           isDense: true,
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 12),
                         ),
                       ),
                     ],
@@ -202,30 +275,39 @@ class ServiceOverviewTab extends StatelessWidget {
                     children: [
                       Text(
                         label2!,
-                        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF575959)),
+                        style: TextFontStyle.textFontStyle(
+                          12,
+                          const Color(0xFF575959),
+                          FontWeight.w500,
+                        ),
                       ),
                       const SizedBox(height: 8),
-
                       TextFormField(
                         initialValue: initialValue2 ?? '',
-                        cursorColor: Color(0xFF1E535B), // Set your desired cursor color
+                        cursorColor:
+                            Color(0xFF1E535B), // Set your desired cursor color
                         decoration: InputDecoration(
                           hintText: 'Enter $label2',
-                          hintStyle: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF757575),
+                          hintStyle: TextFontStyle.textFontStyle(
+                            12,
+                            const Color(0xFF757575),
+                            FontWeight.w500,
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(color: Color(0xFFE4E4E4)), // Border color when NOT focused
+                            borderSide: BorderSide(
+                                color: Color(
+                                    0xFFE4E4E4)), // Border color when NOT focused
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF1E535B), width: 1.5), // Custom focus color
+                            borderSide: BorderSide(
+                                color: Color(0xFF1E535B),
+                                width: 1.5), // Custom focus color
                             borderRadius: BorderRadius.circular(12),
                           ),
                           isDense: true,
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 12),
                         ),
                       ),
                     ],
@@ -241,20 +323,20 @@ class ServiceOverviewTab extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "No. Of Vehicle *",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF575959),
+                     Text(
+                      "No. Of Vehicles *",
+                style: TextFontStyle.textFontStyle(
+                        12,
+                        const Color(0xFF575959),
+                        FontWeight.w500,
                       ),
+
                     ),
                     const SizedBox(height: 8),
                     TextFormField(
                       initialValue: initialValue1 ?? '',
                       cursorColor: Color(0xFF1E535B),
                       decoration: InputDecoration(
-
                         hintStyle: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -262,14 +344,17 @@ class ServiceOverviewTab extends StatelessWidget {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Color(0xFFE4E4E4)),
+                          borderSide:
+                              const BorderSide(color: Color(0xFFE4E4E4)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Color(0xFF1E535B), width: 1.5),
+                          borderSide: const BorderSide(
+                              color: Color(0xFF1E535B), width: 1.5),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         isDense: true,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 12),
                       ),
                     ),
                   ],
@@ -280,20 +365,21 @@ class ServiceOverviewTab extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                     Text(
                       "No. Of Associates",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF575959),
+                      style: TextFontStyle.textFontStyle(
+                        12,
+                        const Color(0xFF575959),
+                        FontWeight.w500,
                       ),
+
+
                     ),
                     const SizedBox(height: 8),
                     TextFormField(
                       initialValue: initialValue2 ?? '',
                       cursorColor: Color(0xFF1E535B),
                       decoration: InputDecoration(
-
                         hintStyle: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -301,14 +387,17 @@ class ServiceOverviewTab extends StatelessWidget {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Color(0xFFE4E4E4)),
+                          borderSide:
+                              const BorderSide(color: Color(0xFFE4E4E4)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Color(0xFF1E535B), width: 1.5),
+                          borderSide: const BorderSide(
+                              color: Color(0xFF1E535B), width: 1.5),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         isDense: true,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 12),
                       ),
                     ),
                   ],
@@ -316,9 +405,14 @@ class ServiceOverviewTab extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 18),
           // Address Section
-          const Text('Event Address*', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF575959))),
+          const Text('Event Address*',
+
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF575959))),
           const SizedBox(height: 10),
           Container(
             padding: const EdgeInsets.all(8.0),
@@ -332,7 +426,13 @@ class ServiceOverviewTab extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Text(address, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF575959))),
+                      child: Text(address,
+                          style: TextFontStyle.textFontStyle(
+                            14,
+                            const Color(0xFF575959),
+                            FontWeight.w500,
+                          ),
+                         ),
                     ),
                     const SizedBox(width: 10),
                     ElevatedButton(
@@ -342,17 +442,30 @@ class ServiceOverviewTab extends StatelessWidget {
                         backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0),
-                          side: const BorderSide(color: Color(0xFF1E535B), width: 1),
+                          side: const BorderSide(
+                              color: Color(0xFF1E535B), width: 1),
                         ),
                         padding: const EdgeInsets.all(6),
                         minimumSize: const Size(0, 0),
                       ),
-                      child: const Text("Change", style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500)),
+                      child:  Text("Change",
+                          style: TextFontStyle.textFontStyle(
+                            10,
+                            const Color(0xFF575959),
+                            FontWeight.w500,
+                          ),
+                      )
                     ),
                   ],
                 ),
                 const SizedBox(height: 8),
-                Text(addressDescription, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xFF757575))),
+                Text(addressDescription,
+                    style: TextFontStyle.textFontStyle(
+                      12,
+                      const Color(0xFF757575),
+                      FontWeight.w400,
+                    ),
+                   ),
               ],
             ),
           )

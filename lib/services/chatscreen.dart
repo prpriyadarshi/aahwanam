@@ -1,4 +1,5 @@
 import 'package:aahwanam/services/chatbubblelist.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -35,27 +36,27 @@ class _ChatscreenState extends State<Chatscreen> {
               radius: 18,
             ),
             const SizedBox(width: 8),
-            const Column(
+             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'John Doe',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF575959),
-                    fontFamily: 'Poppins',
+                  style: TextFontStyle.textFontStyle(
+                    12,
+                    Color(0xFF575959),
+                    FontWeight.w500,
                   ),
+
                 ),
                 SizedBox(height: 5),
                 Text(
                   'Support team',
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xFF575959),
-                    fontFamily: 'Poppins',
+                  style: TextFontStyle.textFontStyle(
+                    10,
+                    Color(0xFF575959),
+                    FontWeight.w300,
                   ),
+
                 ),
               ],
             ),
@@ -109,9 +110,17 @@ class _ChatscreenState extends State<Chatscreen> {
                       color: Color(0xFFF8F8F8),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const TextField(
+                    child:  TextField(
+                      style: TextFontStyle.textFontStyle(
+                        12,
+                        Color(0xFF575959),
+                        FontWeight.w500,
+                      ),
                       decoration: InputDecoration(
+
                         hintText: 'Type a message...',
+
+
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(vertical: 10), // <-- add this
                       ),

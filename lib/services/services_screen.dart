@@ -1,6 +1,8 @@
 import 'package:aahwanam/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../widgets/custom_text_field.dart';
 // Cubit for managing navigation
 class ServiceCubit extends Cubit<String?> {
   ServiceCubit() : super(null);
@@ -37,7 +39,12 @@ class ServicesScreen extends StatelessWidget {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: const Text("Services"),
+            title:  Text("Services",
+              style: TextFontStyle.textFontStyle(
+             20,
+              Color(0xFF575959),
+              FontWeight.w500,
+            ),),
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
             elevation: 0,
@@ -49,13 +56,14 @@ class ServicesScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                 Text(
                   "Services",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF575959),
+                  style: TextFontStyle.textFontStyle(
+                    18,
+                    Color(0xFF575959),
+                    FontWeight.w600,
                   ),
+
                 ),
                 const SizedBox(height: 16),
                 Expanded(
@@ -106,11 +114,12 @@ class ServicesScreen extends StatelessWidget {
                                 Text(
                                   service["title"]!,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: MediaQuery.of(context).size.width * 0.03, // Responsive font size
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF575959),
+                                  style: TextFontStyle.textFontStyle(
+                                    MediaQuery.of(context).size.width * 0.03,
+                                    Color(0xFF575959),
+                                    FontWeight.w500,
                                   ),
+
                                 ),
                               ],
                             ),
