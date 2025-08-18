@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'custom_text_field.dart';
+
 class ServiceBottomButtons extends StatelessWidget {
   final VoidCallback onAddToCart;
   final VoidCallback onBookService;
@@ -42,7 +44,9 @@ class ServiceBottomButtons extends StatelessWidget {
                 ),
                 padding: EdgeInsets.symmetric(vertical: 14),
               ),
-              child: Text("Book Service", style: TextStyle(color: Colors.white)),
+              child: Text("Book Service",
+    style: TextFontStyle.textFontStyle(14,  Colors.white, FontWeight.w600)
+                ),
             ),
           ),
         ],

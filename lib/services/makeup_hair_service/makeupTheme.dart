@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../widgets/custom_buildDecor_horizontalList.dart';
+import '../../widgets/custom_text_field.dart';
 
 class MakeUpThemesScreen extends StatelessWidget {
   final Map<String, String> makeupHair;
@@ -30,15 +31,12 @@ class MakeUpThemesScreen extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
+               Padding(
                 padding: EdgeInsets.only(left: 20, top: 10),
                 child: Text(
                   "Bridal Makeup",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF575959),
-                  ),
+                  style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500),
+
                 ),
               ),
               // First Row
@@ -47,15 +45,12 @@ class MakeUpThemesScreen extends StatelessWidget {
                 items: splitList(makeupItems, 4).isNotEmpty ? splitList(makeupItems, 4)[0] : [],
               ),
 
-              const Padding(
+               Padding(
                 padding: EdgeInsets.only(left: 20, top: 10),
                 child: Text(
                   "Natural Makeup",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF575959),
-                  ),
+                  style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500),
+
                 ),
               ),
               // Second Row (if exists)
@@ -67,11 +62,12 @@ class MakeUpThemesScreen extends StatelessWidget {
             ],
           ),
 
-          const Padding(
+           Padding(
             padding: EdgeInsets.only(left: 20, top: 10),
             child: Text(
               "HD Makeup",
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF575959)),
+              style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400), // smaller text
+
             ),
           ),
           ...splitList(makeupItems, 4)

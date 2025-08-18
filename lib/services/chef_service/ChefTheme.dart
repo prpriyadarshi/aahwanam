@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/custom_text_field.dart';
+
 class ChefDetailsScreen extends StatelessWidget {
   const ChefDetailsScreen({super.key});
 
@@ -19,50 +21,113 @@ class ChefDetailsScreen extends StatelessWidget {
             // About Chef Section
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text("About Chef", style: TextStyle(fontWeight: FontWeight.bold)),
+              children:  [
+                Text("About Chef",
+                  style: TextFontStyle.textFontStyle(
+                      14,
+                      const Color(0xFF575959),
+                      FontWeight.w600,
+                    ),
+                ),
                 Text(
                   "5 Yrs of Experience",
-                  style: TextStyle( color:  Color(0xFF1E535B),fontWeight: FontWeight.bold),
+
+                  style: TextFontStyle.textFontStyle(
+                    12,
+                    const Color(0xFF1E535B),
+                    FontWeight.bold,
+                  ),
+
                 ),
               ],
             ),
             const SizedBox(height: 8),
-            const Text(
+             Text(
               "Lorem ipsum dolor sit amet, dolor consectetur dolor adipiscing elit, "
                   "those who simply would like a trained bartender to pour beer and wine.",
-              style: TextStyle(fontSize: 14),
+
+              style: TextFontStyle.textFontStyle(
+                14,
+                const Color(0xFF575959),
+                FontWeight.w500,
+              ),
             ),
             const SizedBox(height: 16),
 
-            const Text("Chef Speciality :", style: TextStyle(fontWeight: FontWeight.bold)),
+             Text("Chef Speciality :",
+              style: TextFontStyle.textFontStyle(
+                14,
+                const Color(0xFF575959),
+                FontWeight.bold,
+              ),),
             const SizedBox(height: 4),
-            const Padding(
+             Padding(
               padding: EdgeInsets.only(left: 8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("• Indian"),
-                  Text("• Chinese"),
-                  Text("• Italian"),
-                  Text("• Fine Dinning"),
-                  Text("• Meal Preprations"),
+                  Text("• Indian",      style: TextFontStyle.textFontStyle(
+                    14,
+                    const Color(0xFF575959),
+                    FontWeight.w500,
+                  ),),
+                  Text("• Chinese", style: TextFontStyle.textFontStyle(
+                    14,
+                    const Color(0xFF575959),
+                    FontWeight.w500,
+                  ),),
+                  Text("• Italian", style: TextFontStyle.textFontStyle(
+                    14,
+                    const Color(0xFF575959),
+                    FontWeight.w500,
+                  ),),
+                  Text("• Fine Dinning", style: TextFontStyle.textFontStyle(
+                    14,
+                    const Color(0xFF575959),
+                    FontWeight.w500,
+                  ),),
+                  Text("• Meal Preprations", style: TextFontStyle.textFontStyle(
+                    14,
+                    const Color(0xFF575959),
+                    FontWeight.w500,
+                  ),),
                 ],
               ),
             ),
             const SizedBox(height: 16),
 
-            const Text("Included in this Package are:", style: TextStyle(fontWeight: FontWeight.bold)),
+             Text("Included in this Package are:",
+              style: TextFontStyle.textFontStyle(
+                14,
+                const Color(0xFF575959),
+                FontWeight.bold,
+              ),),
             const SizedBox(height: 4),
-            const Padding(
+             Padding(
               padding: EdgeInsets.only(left: 8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("• Professional Chef who can create number of any kind of food."),
-                  Text("• Responsibility for preparing food from the item given by customer."),
-                  Text("• Maintaining a clean and order environment."),
-                  Text("• Introduce and serve the dishes."),
+                  Text("• Professional Chef who can create number of any kind of food.", style: TextFontStyle.textFontStyle(
+                    14,
+                    const Color(0xFF575959),
+                    FontWeight.w500,
+                  ),),
+                  Text("• Responsibility for preparing food from the item given by customer.", style: TextFontStyle.textFontStyle(
+                    14,
+                    const Color(0xFF575959),
+                    FontWeight.w500,
+                  ),),
+                  Text("• Maintaining a clean and order environment.", style: TextFontStyle.textFontStyle(
+                    14,
+                    const Color(0xFF575959),
+                    FontWeight.w500,
+                  ),),
+                  Text("• Introduce and serve the dishes.", style: TextFontStyle.textFontStyle(
+                    12,
+                    const Color(0xFF575959),
+                    FontWeight.w500,
+                  ),),
                 ],
               ),
             ),
@@ -84,8 +149,12 @@ class ChefDetailsScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: const Text(
-                    "Next",
+                  child:  Text(
+                    "Next", style: TextFontStyle.textFontStyle(
+                    14,
+                     Colors.white,
+                    FontWeight.w500,
+                  ),
 
                   ),
                 ),

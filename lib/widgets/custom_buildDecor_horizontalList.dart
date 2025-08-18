@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../screens/dashboard/photograph_book_service_screen.dart';
 import 'custom_addcounter_button.dart';
+import 'custom_text_field.dart';
 
 class CustomBuildDecorHorizontalList {
   final birthdayItems = [
@@ -53,11 +54,9 @@ class CustomBuildDecorHorizontalList {
             alignment: Alignment.centerLeft,
             child: Text(
               title,
-              style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF575959),
-              ),
+              style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w500), // smaller text
+
+
             ),
           ),
         ),
@@ -118,11 +117,9 @@ class CustomBuildDecorHorizontalList {
                         children: [
                           Text(
                             price,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFF575959),
-                            ),
+                            style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500), // smaller text
+
+
                           ),
                           CustomAddCounterButton(
                             imagePath: image,

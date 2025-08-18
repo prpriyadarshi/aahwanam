@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../screens/dashboard/photograph_book_service_screen.dart';
-
+import 'package:aahwanam/widgets/custom_text_field.dart';
 class CustomAddCounterButton extends StatefulWidget {
 
   final String imagePath;
@@ -42,6 +42,7 @@ class _CustomAddCounterButtonState extends State<CustomAddCounterButton> {
               children: [
                 Expanded(
                   child: OutlinedButton(
+
                     style: ElevatedButton.styleFrom(
 
                       shape: RoundedRectangleBorder(
@@ -52,7 +53,11 @@ class _CustomAddCounterButtonState extends State<CustomAddCounterButton> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('Add to Cart'),
+                    child:  Text('Add to Cart', style: TextFontStyle.textFontStyle(
+                      11,
+                      const Color(0xFF1E535B),
+                      FontWeight.w500,
+                    ),),
                   ),
                 ),
                 const SizedBox(width: 10), // spacing between buttons
@@ -78,13 +83,15 @@ class _CustomAddCounterButtonState extends State<CustomAddCounterButton> {
                         ),
                       );
                     },
-                    child: const Text(
+                    child:  Text(
                       "Book Service",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 12,
+                      style: TextFontStyle.textFontStyle(
+                        11,
+                         Colors.white,
+                        FontWeight.w500,
                       ),
+
+
                     ),
                   ),
                 ),
@@ -145,6 +152,7 @@ class _CustomAddCounterButtonState extends State<CustomAddCounterButton> {
                 const SizedBox(width: 6),
                 Text(
                   '$count',
+
                   style: const TextStyle(
                     fontSize: 11,
                     color: Colors.white,

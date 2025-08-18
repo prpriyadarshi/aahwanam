@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/chef/chef_bloc.dart';
 import '../../blocs/chef/chef_state.dart';
 import '../../widgets/custom_addcounter_button.dart';
+import '../../widgets/custom_text_field.dart';
 
 class ChefMenuScreen extends StatelessWidget {
   const ChefMenuScreen({super.key});
@@ -29,11 +30,13 @@ class ChefMenuScreen extends StatelessWidget {
                   children: [
                     Text(
                       "Appetizers (${menuItems.length.toString().padLeft(2, '0')})",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
+                      style:  TextFontStyle.textFontStyle(
+                        12,
+                        Color(0xFF575959),
+                        FontWeight.w500,
                       ),
+
+
                     ),
                     const Icon(Icons.keyboard_arrow_up_rounded),
                   ],
@@ -106,11 +109,13 @@ class ChefMenuScreen extends StatelessWidget {
                                         child: Text(
                                           name,
                                           textAlign: TextAlign.start,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14,
-                                            fontFamily: 'Poppins',
+                                          style:  TextFontStyle.textFontStyle(
+                                            12,
+                                            Color(0xFF575959),
+                                            FontWeight.w500,
                                           ),
+
+
                                         ),
                                       ),
                                       Container(
@@ -133,11 +138,13 @@ class ChefMenuScreen extends StatelessWidget {
                                   // Description
                                   Text(
                                     description,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black54,
-                                      fontFamily: 'Poppins',
+                                    style:  TextFontStyle.textFontStyle(
+                                      12,
+                                      Color(0xFF575959),
+                                      FontWeight.w500,
                                     ),
+
+
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -149,12 +156,13 @@ class ChefMenuScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         price,
-                                        style: const TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                          color: Color(0xFF575959),
-                                          fontFamily: 'Poppins',
+                                        style:  TextFontStyle.textFontStyle(
+                                          14,
+                                          Color(0xFF575959),
+                                          FontWeight.w500,
                                         ),
+
+
                                       ),
                                       CustomAddCounterButton(
                                         imagePath: image,

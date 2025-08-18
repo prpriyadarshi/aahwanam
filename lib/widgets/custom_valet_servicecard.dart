@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import '../models/gallery_section.dart';
 import '../screens/dashboard/photograph_book_service_screen.dart';
 import 'custom_date_time_bottom_sheet.dart';
+import 'custom_text_field.dart';
 
 
 class CustomValetServiceCard extends StatelessWidget {
@@ -158,10 +159,25 @@ class CustomValetServiceCard extends StatelessWidget {
                       unselectedLabelColor: const Color(0xFF757575),
                       dividerHeight: 0,
                       indicatorColor: const Color(0xFF575959),
-                      tabs: const [
-                        Tab(child: Align(child: Text("All Details"))),
-                        Tab(child: Align(child: Text("Gallery"))),
-                        Tab(child: Align(child: Text("Reviews"))),
+                      tabs:  [
+                        Tab(child: Align(child: Text("All Details",
+                          style: TextFontStyle.textFontStyle(
+                          14,
+                          const Color(0xFF1E535B),
+                          FontWeight.w400,
+                        ),))),
+                        Tab(child: Align(child: Text("Gallery",
+                          style: TextFontStyle.textFontStyle(
+                          14,
+                          const Color(0xFF1E535B),
+                          FontWeight.w400,
+                        ),))),
+                        Tab(child: Align(child: Text("Reviews",
+                          style: TextFontStyle.textFontStyle(
+                          14,
+                          const Color(0xFF1E535B),
+                          FontWeight.w400,
+                        ),))),
                       ],
                     ),
 
@@ -234,13 +250,15 @@ class CustomValetServiceCard extends StatelessWidget {
                   onPressed: () {
                     // Add to cart logic
                   },
-                  child: const Text(
+                  child:  Text(
                     'Add to Cart',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF1E535B), // Match border color
+                    style: TextFontStyle.textFontStyle(
+                      12,
+                      const Color(0xFF1E535B),
+                      FontWeight.w400,
                     ),
+
+
                   ),
                 ),
                 ElevatedButton(
@@ -263,13 +281,14 @@ class CustomValetServiceCard extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text(
+                  child:  Text(
                     "Book Service",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
+                    style: TextFontStyle.textFontStyle(
+                      12,
+                       Colors.white,
+                      FontWeight.w400,
                     ),
+
                   ),
                 ),
               ],

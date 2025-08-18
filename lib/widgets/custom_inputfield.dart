@@ -1,4 +1,3 @@
-import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class CustomInputField extends StatelessWidget {
@@ -21,11 +20,7 @@ class CustomInputField extends StatelessWidget {
         children: [
           Text(
             labelText,
-            style: TextFontStyle.textFontStyle(
-              14,                      // font size
-              Color(0xFF575959),       // color
-              FontWeight.w500,         // weigh// optional if you're not using GoogleFonts
-            ),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 6),
           SizedBox(
