@@ -40,18 +40,26 @@ class PackageDetailScreen extends StatelessWidget {
                 iconTheme: const IconThemeData(color: Colors.black),
                 titleTextStyle: TextFontStyle.textFontStyle( 18, Colors.black),
                 bottom: TabBar(
-                  indicatorColor: Colors.teal,
+                  indicatorColor: Colors.teal, // underline stays
+                  dividerColor: Colors.transparent, // 🚀 removes the extra bottom line
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey,
-                  labelStyle: TextFontStyle.textFontStyle( 18, Color(0xFF575959),FontWeight.w500),
+                  labelStyle: TextFontStyle.textFontStyle(
+                    18,
+                    Color(0xFF575959),
+                    FontWeight.w500,
+                  ),
                   tabs: [
                     Tab(text: "All Details"),
                     Tab(text: "Gallery"),
                     Tab(text: "Review"),
                   ],
                 ),
+
+
+
               ),
-              body: TabBarView(
+                    body: TabBarView(
                 children: [
                   // ✅ Ensure these widgets are not wrapped in Scaffold or another DefaultTabController
                   _buildDetailsTab(state),

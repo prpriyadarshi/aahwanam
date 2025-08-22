@@ -89,19 +89,19 @@ class CustomCardMakeUpWidgets {
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
+                    borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(6.0),
                   ),
-                  child: item['image']!.startsWith('assets/')
+                     child: item['image']!.startsWith('assets/')
                       ? Image.asset(
-                    item['image']!,
-                    height: 120,
+                      item['image']!,
+                    height: 110,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   )
                       : Image.network(
                     item['image']!,
-                    height: 120,
+                    height: 110,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
