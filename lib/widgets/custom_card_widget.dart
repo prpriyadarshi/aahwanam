@@ -85,7 +85,7 @@ class CustomCardWidgets {
                 child: item['image']!.startsWith('assets/')
                     ? Image.asset(
                   item['image']!,
-                  height: 120,
+                  height: 105,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 )
