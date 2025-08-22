@@ -12,7 +12,7 @@ import 'media_gallery.dart';
 class PoojaDetailPage extends StatefulWidget {
   final Map<String, dynamic> pooja;
 
-   const PoojaDetailPage({Key? key, required this.pooja}) : super(key: key);
+  const PoojaDetailPage({Key? key, required this.pooja}) : super(key: key);
 
   @override
   State<PoojaDetailPage> createState() => _PoojaDetailPageState();
@@ -69,6 +69,7 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                 toolbarHeight: 56,
                 titleSpacing: 0,
                 leadingWidth: 0,
+
                 iconTheme: const IconThemeData(color: Colors.black),
                 title: Row(
                   children: [
@@ -137,70 +138,70 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                     children: [
 
                       /// Your Container ABOVE Tabs
-                  Transform.translate(
-                  offset: const Offset(0, -10), // Negative Y value moves upward
-                  child: Container(
-                    margin: const EdgeInsets.all(12),
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFFF7F2),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Column(
+                      Transform.translate(
+                        offset: const Offset(0, -10), // Negative Y value moves upward
+                        child: Container(
+                          margin: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFF7F2),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                widget.pooja["title"],
-                                style: TextFontStyle.textFontStyle(
-                                  16,
-                                  Colors.black87,
-                                  FontWeight.bold,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      widget.pooja["title"],
+                                      style: TextFontStyle.textFontStyle(
+                                        16,
+                                        Colors.black87,
+                                        FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      widget.pooja["description"],
+                                      style: TextFontStyle.textFontStyle(
+                                        14,
+                                        Colors.grey.shade700,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              const SizedBox(height: 6),
-                              Text(
-                                widget.pooja["description"],
-                                style: TextFontStyle.textFontStyle(
-                                  14,
-                                  Colors.grey.shade700,
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    " ${widget.pooja["price"]}",
+                                    style: TextFontStyle.textFontStyle(
+                                      16,
+                                      const Color(0xFF184A45),
+                                      FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 26),
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.star, color: Colors.orange, size: 16),
+                                      const SizedBox(width: 4),
+                                      Text("${widget.pooja["rating"]}", style: TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w500)),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ],
                           ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              " ${widget.pooja["price"]}",
-                              style: TextFontStyle.textFontStyle(
-                                16,
-                                const Color(0xFF184A45),
-                                FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 26),
-                            Row(
-                              children: [
-                                const Icon(Icons.star, color: Colors.orange, size: 16),
-                                const SizedBox(width: 4),
-                                Text("${widget.pooja["rating"]}", style: TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w500)),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
 
 
-                /// TabBar BELOW container
+                      /// TabBar BELOW container
                       TabBar(
                         indicatorColor: Colors.teal,
                         labelColor: Colors.black,
@@ -222,13 +223,13 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
 
           body: TabBarView(
             children: [
-               _buildDetailsTab(widget.pooja), // ✅ Your details tab
+              _buildDetailsTab(widget.pooja), // ✅ Your details tab
               MediaGallery(media: List<Map<String, dynamic>>.from(widget.pooja["media"] ?? [])),
 
               ReviewList(
-                  reviews: widget.pooja["reviews"] ?? [],
-                  galleryImages: widget.pooja["gallery"] ?? [],
-                ),
+                reviews: widget.pooja["reviews"] ?? [],
+                galleryImages: widget.pooja["gallery"] ?? [],
+              ),
             ],
           ),
         ),
@@ -310,7 +311,7 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
               const SizedBox(height: 6),
 
               /// Split the string by comma and trim spaces
-             Padding(
+              Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
                   "${pooja['details']},",
@@ -318,8 +319,8 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                       16, const Color(0xFF575959), FontWeight.w400),
                 ),
               ),
-           ],
-              const SizedBox(height: 20),
+            ],
+            const SizedBox(height: 20),
 
 
 
@@ -359,8 +360,8 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child:  Text(
-                    "Don't know the date? Find perfect Muhurat",
-                    style:
+                      "Don't know the date? Find perfect Muhurat",
+                      style:
                       TextFontStyle.textFontStyle( 16, Color(0xFF757575))
                   ),
                 ),
@@ -384,8 +385,8 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                     ),
 
                     child: Text(
-                      "Find My Muhurat",
-                      style:
+                        "Find My Muhurat",
+                        style:
                         TextFontStyle.textFontStyle( 16, Color(0xFF184A45),FontWeight.w500)
                     ),
                   ),
@@ -425,9 +426,9 @@ class MuhuratPopup extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             /// ✅ Title
-             Text(
-              "Assistance for Muhurat",
-              style:
+            Text(
+                "Assistance for Muhurat",
+                style:
                 TextFontStyle.textFontStyle( 18, Color(0xFF575959),FontWeight.w600)
             ),
             const SizedBox(height: 20), // ✅ Space after title
@@ -467,8 +468,8 @@ class MuhuratPopup extends StatelessWidget {
                   elevation: 0, // ✅ Flat look
                 ),
                 child: Text(
-                  "Get Muhurat",
-                  style:
+                    "Get Muhurat",
+                    style:
                     TextFontStyle.textFontStyle( 14, Colors.white,FontWeight.w500)
                 ),
               ),
@@ -486,8 +487,8 @@ class MuhuratPopup extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
-          style:
+            label,
+            style:
             TextFontStyle.textFontStyle( 13, Color(0xFF575959),FontWeight.w500)
         ),
         const SizedBox(height: 6),
@@ -504,7 +505,7 @@ class MuhuratPopup extends StatelessWidget {
             child: Text(
               placeholder,
               style:
-                TextFontStyle.textFontStyle( 14, Color(0xFFB4B4B4)),
+              TextFontStyle.textFontStyle( 14, Color(0xFFB4B4B4)),
             ),
           ),
         ),
@@ -512,4 +513,3 @@ class MuhuratPopup extends StatelessWidget {
     );
   }
 }
-
