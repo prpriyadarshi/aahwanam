@@ -59,7 +59,7 @@ class PackageDetailScreen extends StatelessWidget {
 
 
               ),
-              body: TabBarView(
+                body: TabBarView(
                 children: [
                   // ✅ Ensure these widgets are not wrapped in Scaffold or another DefaultTabController
                   _buildDetailsTab(state),

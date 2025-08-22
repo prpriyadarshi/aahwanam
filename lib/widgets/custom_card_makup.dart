@@ -94,7 +94,7 @@ class CustomCardMakeUpWidgets {
                   ),
                   child: item['image']!.startsWith('assets/')
                       ? Image.asset(
-                    item['image']!,
+                      item['image']!,
                     height: 110,
                     width: double.infinity,
                     fit: BoxFit.cover,

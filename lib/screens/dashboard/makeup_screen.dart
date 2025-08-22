@@ -160,7 +160,7 @@ class MakeupScreen extends StatelessWidget {
                       // Decorators Section
                       CustomCardMakeUpWidgets.buildSection(
                         context,
-                        title: "Makeup & Hair Artists",
+                          title: "Makeup & Hair Artists",
                         data: state.makeupAndHairArtists,
                         showViewAll: true,
 
