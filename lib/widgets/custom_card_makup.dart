@@ -89,7 +89,7 @@ class CustomCardMakeUpWidgets {
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
+                    borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(6.0),
                   ),
                      child: item['image']!.startsWith('assets/')
