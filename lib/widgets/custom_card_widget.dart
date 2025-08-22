@@ -83,11 +83,11 @@ class CustomCardWidgets {
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(6.0),
                 ),
-                child: item['image']!.startsWith('assets/')
+                  child: item['image']!.startsWith('assets/')
                     ? Image.asset(
                   item['image']!,
-                  height: 120,
-                  width: double.infinity,
+                  height: 105,
+                     width: double.infinity,
                   fit: BoxFit.cover,
                 )
                     : Image.network(

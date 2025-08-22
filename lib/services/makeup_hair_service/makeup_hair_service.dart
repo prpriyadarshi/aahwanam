@@ -29,7 +29,7 @@ class MakeupHairService extends StatelessWidget {
         leadingWidth: 0,
         title: Row(
           children: [
-            IconButton(
+                IconButton(
               icon: const Icon(Icons.arrow_back_ios_new, size: 24, color: Color(0xFF1E535B)),
               onPressed: () {
                 Navigator.pop(context);
