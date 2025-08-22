@@ -156,7 +156,7 @@ class MakeupScreen extends StatelessWidget {
                       ),
 
 
-                      const SizedBox(height: 2),
+                         const SizedBox(height: 2),
                       // Decorators Section
                       CustomCardMakeUpWidgets.buildSection(
                         context,

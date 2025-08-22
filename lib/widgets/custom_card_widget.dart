@@ -86,7 +86,7 @@ class CustomCardWidgets {
                     ? Image.asset(
                   item['image']!,
                   height: 105,
-                  width: double.infinity,
+                     width: double.infinity,
                   fit: BoxFit.cover,
                 )
                     : Image.network(
