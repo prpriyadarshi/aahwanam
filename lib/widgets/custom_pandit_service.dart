@@ -95,7 +95,7 @@ class CustomPanditCardWidgets {
                         borderRadius: const BorderRadius.vertical(top: Radius.circular(6.0)),
                         child: item['image'] != null && item['image']!.startsWith('assets/')
                             ? Image.asset(
-                          item['image']!,
+                           item['image']!,
                           height: screenHeight * 0.14, // 🔹 responsive height
                           width: double.infinity,
                           fit: BoxFit.cover,

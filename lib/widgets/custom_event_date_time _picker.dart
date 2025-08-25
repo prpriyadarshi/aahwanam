@@ -454,7 +454,7 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                   overflow: TextOverflow.ellipsis, // ✅ handles long text
                   style: TextFontStyle.textFontStyle(
                     12,
-                    const Color(0xFF575959),
+                      const Color(0xFF575959),
                     FontWeight.w500,
                   ),
                 ),
