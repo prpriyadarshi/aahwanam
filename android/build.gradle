@@ -5,7 +5,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.2.1' // ✅ Upgrade AGP
+        classpath 'com.android.tools.build:gradle:8.5.2'
+        // ✅ Upgrade AGP
     }
 
 
