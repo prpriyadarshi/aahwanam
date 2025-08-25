@@ -76,7 +76,7 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
               children: List.generate(
                 5,
                     (index) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: Icon(
                     index < 4 ? Icons.star : Icons.star_border,
                     color: Colors.orange,

@@ -1,6 +1,7 @@
 import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/account/account_event.dart';
 import 'package:aahwanam/blocs/account/account_state.dart';
+import 'package:aahwanam/screens/account/booking_screen.dart';
 import 'package:aahwanam/screens/dashboard/e_invitation_screen.dart';
 import 'package:aahwanam/services/services_screen.dart';
 import 'package:aahwanam/widgets/custom_text_field.dart';
@@ -30,7 +31,31 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
     final package = widget.package;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Booking Details')),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        titleSpacing: 0,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        title:  Text("Bookings",
+          style: TextFontStyle.textFontStyle(
+            16,                         // Font size
+            Color(0xFF575959),          // Text color
+            FontWeight.w500,            // Font weight
+          ),
+        ),
+        leading: IconButton(
+          padding: const EdgeInsets.only(top: 2, left: 12),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 18,
+            color: Color(0xFF575959),
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -212,8 +237,10 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                     AssetImage('assets/images/profile_pic.png'),
                   ),
                 ),
-                title: Text("Janey Cooper"),
-                subtitle: Text("Support Team"),
+                title: Text("Janey Cooper",
+                  style:TextFontStyle.textFontStyle(12,Color(0xFF575959), FontWeight.w500),),
+                subtitle: Text("Support Team",
+                  style:TextFontStyle.textFontStyle(10,Color(0xFF575959), FontWeight.w300),),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -252,7 +279,9 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: const Text("Send Invitation"),
+                child:  Text("Send Invitation",
+                  style: TextFontStyle.textFontStyle(14, Color(0xFF1E535B), FontWeight.w500),
+                ),
               ),
             ),
             const SizedBox(width: 12),
@@ -272,7 +301,9 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: const Text("Other Services"),
+                child: Text("Other Services",
+                  style: TextFontStyle.textFontStyle(14, Color(0xFFFFFFFF), FontWeight.w500),
+                ),
               ),
             ),
           ],
@@ -288,6 +319,7 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
     required Widget child,
   }) {
     return Card(
+      color: const Color(0xFFFFFFFF),
       child: Column(
         children: [
           ListTile(
@@ -358,10 +390,10 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
         children: [
           Text(label,
               style: TextStyle(
-                  fontWeight: valueWeight, color: valueColor, fontSize: 14)),
+                  fontWeight: valueWeight, color: valueColor, fontSize: 14, fontFamily: 'Poppins')),
           Text(value,
               style: TextStyle(
-                  fontWeight: valueWeight, color: valueColor, fontSize: 14)),
+                  fontWeight: valueWeight, color: valueColor, fontSize: 14, fontFamily: 'Poppins')),
         ],
       ),
     );
@@ -372,7 +404,6 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F5F5),
         border: Border.all(color: Colors.grey.shade300),
         borderRadius: BorderRadius.circular(8),
       ),
@@ -398,7 +429,6 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F5F5),
         border: Border.all(color: Colors.grey.shade300),
         borderRadius: BorderRadius.circular(8),
       ),

@@ -278,7 +278,7 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
                 Text(
                   label,
                   style: TextStyle(
-                    fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+                    fontFamily: 'Poppins',fontWeight: bold ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),
                 if (showInfo) ...[
@@ -291,7 +291,7 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
           Text(
             value,
             style: TextStyle(
-              fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+              fontFamily: 'Poppins',fontWeight: bold ? FontWeight.bold : FontWeight.normal,
             ),
           )
         ],

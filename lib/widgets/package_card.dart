@@ -108,6 +108,14 @@ class _PackageCardState extends State<PackageCard> {
                           child: Text(
                             widget.title,
                             style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w500), // smaller text
+                            // style: const TextStyle(
+                            //   fontFamily: 'Poppins', // Font family
+                            //   fontSize: 14, // Size in px (Flutter uses logical pixels)
+                            //   fontWeight: FontWeight.w500, // Equivalent to weight 500 (Medium)
+                            //   // height: 1.0, // Line height = 100% (1.0 means 100%)
+                            //   letterSpacing: 0.0, // 0% letter spacing
+                            //   color: Color(0xFF575959), // Text color
+                            // ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
