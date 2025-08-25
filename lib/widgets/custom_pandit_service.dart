@@ -176,7 +176,7 @@ class CustomPanditCardWidgets {
                           item['price'] ?? '',
                           style: TextFontStyle.textFontStyle(
                             screenWidth * 0.034,
-                            const Color(0xFF1E535B),
+                             const Color(0xFF1E535B),
                             FontWeight.w600,
                           ),
                         ),

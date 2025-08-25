@@ -176,7 +176,7 @@ class ReviewList extends StatelessWidget {
                       Row(
                         children: [
                           CircleAvatar(
-                            radius: 18,
+                             radius: 18,
                             backgroundImage: AssetImage(review['image']),
                           ),
                         ],
