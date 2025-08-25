@@ -101,7 +101,7 @@ class CustomPanditCardWidgets {
                           fit: BoxFit.cover,
                         )
                             : Image.network(
-                          item['image'] ?? '',
+                            item['image'] ?? '',
                           height: screenHeight * 0.14, // 🔹 responsive height
                           width: double.infinity,
                           fit: BoxFit.cover,

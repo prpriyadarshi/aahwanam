@@ -459,7 +459,7 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                   ),
                 ),
               ),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.02), // ✅ spacing
+                SizedBox(width: MediaQuery.of(context).size.width * 0.02), // ✅ spacing
               GestureDetector(
                 onTap: () => _showCustomDatePicker(context),
                 child: Icon(
