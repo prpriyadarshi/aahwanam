@@ -420,98 +420,118 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
     return Row(
       children: [
         // Event Date Picker
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Event Date*",
-                style: TextFontStyle.textFontStyle(
-                  14,
-                  const Color(0xFF575959),
-                  FontWeight.w500 ,
-                ),
-
-              ),
-              SizedBox(height: 6),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xFFE4E4E4)),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      selectedDate != null
-                          ? DateFormat('dd, MMM yyyy').format(selectedDate!)
-                          : "Select Date",
-                      style: TextFontStyle.textFontStyle(
-                        14,
-                        const Color(0xFF575959),
-                        FontWeight.w500 ,
-                      ),
-
-                    ),
-                    Spacer(),
-                    GestureDetector(
-                      onTap: () => _showCustomDatePicker(context),
-                      child: Icon(Icons.calendar_month,
-                          size: 25, color: Color(0xFF575959)),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+    Expanded(
+    child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Event Date*",
+          style: TextFontStyle.textFontStyle(
+            MediaQuery.of(context).size.width * 0.035, // responsive font size
+            const Color(0xFF575959),
+            FontWeight.w500,
           ),
         ),
-        SizedBox(width: 16),
-
-        // Event Time Picker (uses same style)
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.008, // responsive spacing
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.04,
+            vertical: MediaQuery.of(context).size.height * 0.015,
+          ),
+          decoration: BoxDecoration(
+            border: Border.all(color: const Color(0xFFE4E4E4)),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
             children: [
-              Text("Event Time*",
+              Flexible( // ✅ prevents overflow
+                child: Text(
+                  selectedDate != null
+                      ? DateFormat('dd, MMM yyyy').format(selectedDate!)
+                      : "Select Date",
+                  overflow: TextOverflow.ellipsis, // ✅ handles long text
                   style: TextFontStyle.textFontStyle(
-                    14,
+                    12,
                     const Color(0xFF575959),
-                    FontWeight.w500 ,
+                    FontWeight.w500,
                   ),
-      ),
-              SizedBox(height: 6),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xFFE4E4E4)),
-                  borderRadius: BorderRadius.circular(12),
                 ),
-                child: Row(
-                  children: [
-                    Text(
-                      selectedTime != null
-                          ? DateFormat('hh:mm a').format(selectedTime!)
-                          : "Select Time",
-                      style: TextFontStyle.textFontStyle(
-                        14,
-                        const Color(0xFF575959),
-                        FontWeight.w500 ,
-                      ),
-
-                    ),
-                    Spacer(),
-                    GestureDetector(
-                      onTap: () => _showCustomTimePicker(context),
-                      child: Icon(Icons.access_time,
-                          size: 24, color: Color(0xFF575959)),
-                    ),
-                  ],
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02), // ✅ spacing
+              GestureDetector(
+                onTap: () => _showCustomDatePicker(context),
+                child: Icon(
+                  Icons.calendar_month,
+                  size: MediaQuery.of(context).size.width * 0.04,
+                  color: const Color(0xFF575959),
                 ),
               ),
             ],
           ),
         ),
       ],
+    ),
+    ),
+
+
+    SizedBox(width: 16),
+
+        // Event Time Picker (uses same style)
+    Expanded(
+    child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+    Text(
+    "Event Time*",
+    style: TextFontStyle.textFontStyle(
+    14,
+    const Color(0xFF575959),
+    FontWeight.w500,
+    ),
+    ),
+    SizedBox(height: 6),
+    Container(
+    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+    decoration: BoxDecoration(
+    border: Border.all(color: Color(0xFFE4E4E4)),
+    borderRadius: BorderRadius.circular(12),
+    ),
+    child: Row(
+    children: [
+    /// Use Flexible instead of fixed width
+    Flexible(
+    child: Text(
+    selectedTime != null
+    ? DateFormat('hh:mm a').format(selectedTime!)
+        : "Select Time",
+    overflow: TextOverflow.ellipsis, // will truncate if long
+    style: TextFontStyle.textFontStyle(
+    12,
+    const Color(0xFF575959),
+    FontWeight.w500,
+    ),
+    ),
+    ),
+    SizedBox(width: 8), // add small gap
+    GestureDetector(
+    onTap: () => _showCustomTimePicker(context),
+    child: Icon(
+    Icons.access_time,
+    size: 20,
+    color: Color(0xFF575959),
+    ),
+    ),
+    ],
+    ),
+    ),
+    ],
+    ),
+    ),
+
+
+    ],
     );
   }
 }

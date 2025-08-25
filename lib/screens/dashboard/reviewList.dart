@@ -46,7 +46,7 @@ class ReviewList extends StatelessWidget {
           Container(
             width: double.infinity,
 
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(8),
