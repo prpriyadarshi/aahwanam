@@ -62,19 +62,19 @@ class _PanditScreenState extends State<PanditScreen> {
                       ),
                       builder: (context) => CustomDateTimeBottomSheet(
                         onConfirm: (DateTime fullDateTime) {
-                             print("Selected DateTime: $fullDateTime");
+                          print("Selected DateTime: $fullDateTime");
                         },
                       ),
                     );
                   },
-                   child: Stack(
+                  child: Stack(
                     alignment: Alignment.center,
                     children: const [
                       Icon(Icons.calendar_today, size: 20, color: Color(0xFF004d40)),
                       Positioned(
                         bottom: 0,
                         right: 0,
-                         child: Icon(Icons.access_time, size: 10, color: Color(0xFF004d40)),
+                        child: Icon(Icons.access_time, size: 10, color: Color(0xFF004d40)),
                       ),
                     ],
                   ),
@@ -111,7 +111,7 @@ class _PanditScreenState extends State<PanditScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                           Text(
+                          Text(
                             "Pooja Theme",
                             style:  TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w600),
                           ),
@@ -134,24 +134,24 @@ class _PanditScreenState extends State<PanditScreen> {
                       ),
 
                       // Decorators Section
-                  CustomPanditCardWidgets.buildSection(
-                    context,
-                    title: "Pooja Themes",
-                    data: state.poojaTheme, // ✅ Works now
-                    showViewAll: true,
-                    onViewAll: () {
-                      if (state.poojaTheme.isNotEmpty) {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => PanditTheme()));
-                      }
-                    },
-                    showTitle: false,
-                  ),
+                      CustomPanditCardWidgets.buildSection(
+                        context,
+                        title: "Pooja Themes",
+                        data: state.poojaTheme, // ✅ Works now
+                        showViewAll: true,
+                        onViewAll: () {
+                          if (state.poojaTheme.isNotEmpty) {
+                            Navigator.push(context, MaterialPageRoute(builder: (_) => PanditTheme()));
+                          }
+                        },
+                        showTitle: false,
+                      ),
 
 
 
 
 
-                  ],
+                    ],
                   ),
                 ),
               );
