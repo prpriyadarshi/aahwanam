@@ -81,21 +81,21 @@ class PanditBloc extends Bloc<PanditEvent, PanditState> {
                 "rating": 4.2,
                 "comment": "Very good service",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                "image": "assets/images/pooja_review_gallery.png"
+                "image": "assets/images/pooja_gallery1.png"
               },
               {
                 "rating": 4.2,
                 "comment": "Very good service",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                "image": "assets/images/pooja_review_gallery.png"
+                "image": "assets/images/pooja_gallery1.png"
               }
             ],
             "gallery": [
               'assets/images/pooja_gallery1.png',
               'assets/images/pooja_gallery2.png',
               'assets/images/pooja_gallery3.png',
-              'assets/images/pooja_gallery4.png',
-              'assets/images/pooja_gallery4.png',
+              'assets/images/pooja_gallery5.png',
+              'assets/images/pooja_gallery5.png',
             ],
 
             "media": [
@@ -133,21 +133,21 @@ class PanditBloc extends Bloc<PanditEvent, PanditState> {
                 "rating": 4.2,
                 "comment": "Very good service",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                "image": "assets/images/pooja_review_gallery.png"
+                "image": "assets/images/pooja_gallery1.png"
               },
               {
                 "rating": 4.2,
                 "comment": "Very good service",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                "image": "assets/images/pooja_review_gallery.png"
+                "image": "assets/images/pooja_gallery1.png"
               }
             ],
             "gallery": [
               'assets/images/pooja_gallery1.png',
               'assets/images/pooja_gallery2.png',
               'assets/images/pooja_gallery3.png',
-              'assets/images/pooja_gallery4.png',
-              'assets/images/pooja_gallery4.png',
+              'assets/images/pooja_gallery5.png',
+              'assets/images/pooja_gallery5.png',
             ],
             "media": [
               {'url': 'assets/images/pooja_gallery1.png', 'isVideo': true,'category':'Pooja'},
@@ -183,21 +183,21 @@ class PanditBloc extends Bloc<PanditEvent, PanditState> {
                 "rating": 4.2,
                 "comment": "Very good service",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                "image": "assets/images/pooja_review_gallery.png"
+                "image": "assets/images/pooja_gallery1.png"
               },
               {
                 "rating": 4.2,
                 "comment": "Very good service",
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                "image": "assets/images/pooja_review_gallery.png"
+                "image": "assets/images/pooja_gallery1.png"
               }
             ],
             "gallery": [
               'assets/images/pooja_gallery1.png',
               'assets/images/pooja_gallery2.png',
               'assets/images/pooja_gallery3.png',
-              'assets/images/pooja_gallery4.png',
-              'assets/images/pooja_gallery4.png',
+              'assets/images/pooja_gallery5.png',
+              'assets/images/pooja_gallery5.png',
             ],
             "media": [
               {'url': 'assets/images/pooja_gallery1.png', 'isVideo': true,'category':'Pooja'},
