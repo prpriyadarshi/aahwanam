@@ -74,7 +74,7 @@ class _PanditScreenState extends State<PanditScreen> {
                       Positioned(
                         bottom: 0,
                         right: 0,
-                        child: Icon(Icons.access_time, size: 10, color: Color(0xFF004d40)),
+                         child: Icon(Icons.access_time, size: 10, color: Color(0xFF004d40)),
                       ),
                     ],
                   ),

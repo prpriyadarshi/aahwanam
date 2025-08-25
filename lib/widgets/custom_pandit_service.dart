@@ -110,7 +110,7 @@ class CustomPanditCardWidgets {
 
                       // 🔁 BLoC Favorite Icon
                       Positioned(
-                        top: screenHeight * 0.008,
+                         top: screenHeight * 0.008,
                         right: screenWidth * 0.02,
                         child: BlocBuilder<FavoriteBloc, FavoriteState>(
                           builder: (context, state) {

@@ -58,7 +58,7 @@ class ReviewList extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Text("Rating & Reviews",
+                      Text("Rating & Reviews",
                       style: TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500)),
                     const SizedBox(height: 12),
                     _buildRatingRow(5, 80),
