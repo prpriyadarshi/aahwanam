@@ -44,7 +44,7 @@ class ReviewList extends StatelessWidget {
         children: [
           // ✅ Rating Summary Section
           Container(
-             width: double.infinity,
+            width: double.infinity,
 
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
