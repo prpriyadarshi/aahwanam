@@ -61,7 +61,7 @@ class ReviewList extends StatelessWidget {
                       Text("Rating & Reviews",
                       style: TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500)),
                     const SizedBox(height: 12),
-                    _buildRatingRow(5, 80),
+                     _buildRatingRow(5, 80),
                     _buildRatingRow(4, 60),
                     _buildRatingRow(3, 30),
                     _buildRatingRow(2, 20),

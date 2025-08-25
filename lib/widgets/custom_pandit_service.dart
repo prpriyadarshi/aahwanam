@@ -95,13 +95,12 @@ class CustomPanditCardWidgets {
                         borderRadius: const BorderRadius.vertical(top: Radius.circular(6.0)),
                         child: item['image'] != null && item['image']!.startsWith('assets/')
                             ? Image.asset(
-                           item['image']!,
+                            item['image']!,
                           height: screenHeight * 0.14, // 🔹 responsive height
                           width: double.infinity,
                           fit: BoxFit.cover,
-                        )
-                            : Image.network(
-                            item['image'] ?? '',
+                        ) : Image.network(
+                             item['image'] ?? '',
                           height: screenHeight * 0.14, // 🔹 responsive height
                           width: double.infinity,
                           fit: BoxFit.cover,
@@ -110,7 +109,7 @@ class CustomPanditCardWidgets {
 
                       // 🔁 BLoC Favorite Icon
                       Positioned(
-                         top: screenHeight * 0.008,
+                        top: screenHeight * 0.008,
                         right: screenWidth * 0.02,
                         child: BlocBuilder<FavoriteBloc, FavoriteState>(
                           builder: (context, state) {
@@ -120,7 +119,7 @@ class CustomPanditCardWidgets {
                                 backgroundColor: Colors.white,
                                 radius: screenWidth * 0.025,
                                 child: Icon(
-                                  state.isFavorite ? Icons.favorite : Icons.favorite_border,
+                                   state.isFavorite ? Icons.favorite : Icons.favorite_border,
                                   size: screenWidth * 0.035,
                                   color: Colors.red,
                                 ),
