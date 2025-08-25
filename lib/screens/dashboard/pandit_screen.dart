@@ -67,7 +67,7 @@ class _PanditScreenState extends State<PanditScreen> {
                       ),
                     );
                   },
-                  child: Stack(
+                   child: Stack(
                     alignment: Alignment.center,
                     children: const [
                       Icon(Icons.calendar_today, size: 20, color: Color(0xFF004d40)),
