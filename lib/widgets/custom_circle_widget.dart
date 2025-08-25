@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'package:aahwanam/widgets/custom_text_field.dart';
 
 class CustomCircleWidget extends StatelessWidget {
   final String heading;
   final List<Map<String, String>> categories;
   final void Function(String categoryName) onCategoryTap;
-  final bool showViewAll; // Add a flag to control "View All" visibility
+  final bool showViewAll;
   final VoidCallback? onViewAll;
 
   const CustomCircleWidget({
@@ -20,42 +19,45 @@ class CustomCircleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Responsive font sizes based on screen width
+    final headingFontSize = screenWidth * 0.045; // ~16 on 360px
+    final viewAllFontSize = screenWidth * 0.035; // ~12 on 360px
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Section Header
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
+          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-
-               Text(
-               heading ,
-                 style: TextFontStyle.textFontStyle(
-                   16,
-                   const Color(0xFF575959),
-                   FontWeight.w500,
-                 ),
-
+              Text(
+                heading,
+                style: TextFontStyle.textFontStyle(
+                  headingFontSize,
+                  const Color(0xFF575959),
+                  FontWeight.w500,
+                ),
               ),
-              if(showViewAll && onViewAll != null)
-              TextButton(
-                onPressed: onViewAll,
-                child: Text(
-                  'View All',
-                  style: TextFontStyle.textFontStyle(
-                    12,
-                    const Color(0xFF1E535B),
-                    FontWeight.w400,
+              if (showViewAll && onViewAll != null)
+                TextButton(
+                  onPressed: onViewAll,
+                  child: Text(
+                    'View All',
+                    style: TextFontStyle.textFontStyle(
+                      viewAllFontSize,
+                      const Color(0xFF1E535B),
+                      FontWeight.w400,
+                    ),
                   ),
                 ),
-
-              ),
             ],
           ),
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: screenWidth * 0.025),
         // Grid View
         SizedBox(
           child: GridView.builder(
@@ -71,9 +73,7 @@ class CustomCircleWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               final category = categories[index];
               return GestureDetector(
-                onTap: (){
-
-                },
+                onTap: () {},
                 child: CategoryItem(
                   category: category,
                   onTap: () {
@@ -90,7 +90,6 @@ class CustomCircleWidget extends StatelessWidget {
   }
 }
 
-
 class CategoryItem extends StatelessWidget {
   final Map<String, String> category;
   final VoidCallback onTap;
@@ -103,26 +102,32 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Responsive sizes for small and large devices
+    final avatarRadius = screenWidth * 0.09; // ~32 on 360px width
+    final textFontSize = screenWidth * 0.03; // ~12 on 360px width
+    final verticalSpacing = screenWidth * 0.015;
+
     return GestureDetector(
       onTap: onTap,
       child: Column(
         children: [
           CircleAvatar(
-            radius: 40,
+            radius: avatarRadius,
             backgroundImage: category['image']!.startsWith('assets/')
                 ? AssetImage(category['image']!) as ImageProvider
                 : NetworkImage(category['image']!),
           ),
-          const SizedBox(height: 5),
+          SizedBox(height: verticalSpacing),
           Text(
             category['name']!,
             textAlign: TextAlign.center,
             style: TextFontStyle.textFontStyle(
-              12,
+              textFontSize,
               const Color(0xFF575959),
               FontWeight.w400,
             ),
-
           ),
         ],
       ),

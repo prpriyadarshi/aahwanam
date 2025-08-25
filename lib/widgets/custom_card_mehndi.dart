@@ -1,9 +1,7 @@
 import 'package:aahwanam/services/mehandi_service/mehandi.dart';
 import 'package:flutter/material.dart';
-
 import '../services/mehandi_service/mehnditheme.dart';
 import 'custom_text_field.dart';
-
 
 class CustomCardMehndiWidgets {
   static Widget buildSection(
@@ -13,6 +11,21 @@ class CustomCardMehndiWidgets {
         required VoidCallback onViewAll,
         required bool showViewAll,
       }) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    final titleFontSize = screenWidth < 350
+        ? 14.0
+        : screenWidth < 400
+        ? 15.0
+        : 16.0;
+    final viewAllFontSize = screenWidth < 350
+        ? 10.0
+        : screenWidth < 400
+        ? 11.0
+        : 12.0;
+
+    final childAspectRatio = screenWidth < 350 ? 0.9 : 1.05;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -23,18 +36,22 @@ class CustomCardMehndiWidgets {
             children: [
               Text(
                 title,
-                style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w600), // smaller text
-
-
+                style: TextFontStyle.textFontStyle(
+                  titleFontSize,
+                  const Color(0xFF575959),
+                  FontWeight.w600,
+                ),
               ),
               if (showViewAll)
                 TextButton(
                   onPressed: onViewAll,
-                  child:  Text(
+                  child: Text(
                     "View All",
-                    style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w400), // smaller text
-
-
+                    style: TextFontStyle.textFontStyle(
+                      viewAllFontSize,
+                      const Color(0xFF1E535B),
+                      FontWeight.w400,
+                    ),
                   ),
                 ),
             ],
@@ -44,30 +61,48 @@ class CustomCardMehndiWidgets {
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: screenWidth > 600 ? 3 : 2,
             crossAxisSpacing: 13.0,
             mainAxisSpacing: 13.0,
-            childAspectRatio: 1.05,
+            childAspectRatio: childAspectRatio,
           ),
           itemCount: data.length,
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
             final item = data[index];
-            return buildCardmehndi(context, item, data); // ✅ fixed: removed cast
+            return buildCardmehndi(context, item, screenWidth);
           },
         ),
       ],
     );
   }
 
-  static Widget buildCardmehndi(BuildContext context, Map<String, String> item, List<Map<String, String>> mehndiArtist) {
+  static Widget buildCardmehndi(
+      BuildContext context, Map<String, String> item, double screenWidth) {
+    final imageHeight = screenWidth < 350 ? 100.0 : 120.0;
+    final nameFontSize = screenWidth < 350
+        ? 10.0
+        : screenWidth < 400
+        ? 11.0
+        : 12.0;
+    final priceFontSize = screenWidth < 350
+        ? 8.0
+        : screenWidth < 400
+        ? 9.0
+        : 12.0;
+    final ratingFontSize = screenWidth < 350
+        ? 8.0
+        : screenWidth < 400
+        ? 9.0
+        : 10.0;
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MehndiTheme(mehndi: item,),
+            builder: (context) => MehndiTheme(mehndi: item),
           ),
         );
       },
@@ -91,13 +126,13 @@ class CustomCardMehndiWidgets {
                   child: item['image']!.startsWith('assets/')
                       ? Image.asset(
                     item['image']!,
-                    height: 120,
+                    height: imageHeight,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   )
                       : Image.network(
                     item['image']!,
-                    height: 120,
+                    height: imageHeight,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
@@ -117,48 +152,56 @@ class CustomCardMehndiWidgets {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          item['name'] ?? '',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959),
+            Flexible(
+              child: Padding(
+                padding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            item['name'] ?? '',
+                            style: TextFontStyle.textFontStyle(
+                              nameFontSize,
+                              const Color(0xFF575959),
+                              FontWeight.w500,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
                         ),
+                        Row(
+                          children: [
+                            const Icon(Icons.star,
+                                color: Color(0xFFEFAA37), size: 16),
+                            const SizedBox(width: 4),
+                            Text(
+                              item['rating'] ?? "0.0",
+                              style: TextFontStyle.textFontStyle(
+                                ratingFontSize,
+                                const Color(0xFF575959),
+                                FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4.0),
+                    Text(
+                      item['price'] ?? '',
+                      style: TextFontStyle.textFontStyle(
+                        priceFontSize,
+                        const Color(0xFF1E535B),
+                        FontWeight.w600,
                       ),
-                      Row(
-                        children: [
-                          const Icon(Icons.star, color: Color(0xFFEFAA37), size: 16),
-                          const SizedBox(width: 4),
-                          Text(
-                            item['rating'] ?? "0.0",
-                            style: TextFontStyle.textFontStyle(10, const Color(0xFF575959), FontWeight.w400), // smaller text
-
-
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4.0),
-                  Text(
-                    item['price'] ?? '',
-                    style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w600), // smaller text
-
-
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
