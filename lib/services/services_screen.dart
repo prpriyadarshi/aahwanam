@@ -24,7 +24,7 @@ class ServicesScreen extends StatelessWidget {
     {"image": "assets/images/DJ (1).png", "title": "Entertainment", "route":  AppRoutes.entertainment},
     {"image": "assets/images/Mehndi (1).png", "title": "Mehndi", "route":  AppRoutes.mehndi},
     {"image": "assets/images/Photography1.png", "title": "Photography", "route":  AppRoutes.photographer},
-    {"image": "assets/images/Invitation.png", "title": "Einvitation", "route":  AppRoutes.einvitation},
+    {"image": "assets/images/Invitation.png", "title": "E-Invitation", "route":  AppRoutes.einvitation},
   ];
 
   @override

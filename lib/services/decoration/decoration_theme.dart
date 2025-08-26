@@ -181,13 +181,13 @@ class _DecorationThemeState extends State<DecorationTheme>
                                 child: widget.decorator['image']!.startsWith('assets/')
                                     ? Image.asset(
                                   widget.decorator['image']!,
-                                  height: 96,
-                                  width: 350,
+                                  height: 90,
+                                  width: 320,
                                   fit: BoxFit.cover,
                                 )
                                     : Image.network(
                                   widget.decorator['image']!,
-                                  height: 96,
+                                  height: 90,
                                   width: 308,
                                   fit: BoxFit.cover,
                                 ),
@@ -217,6 +217,7 @@ class _DecorationThemeState extends State<DecorationTheme>
                                       widget.decorator['rating'] ?? '0.0',
                                       style: TextFontStyle.textFontStyle(
                                         10,
+
                                         const Color(0xFF575959),
                                         FontWeight.w400,
                                       ),

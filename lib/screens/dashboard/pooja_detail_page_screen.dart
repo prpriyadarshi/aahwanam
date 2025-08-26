@@ -203,17 +203,22 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
 
                       /// TabBar BELOW container
                       TabBar(
-                        indicatorColor: Colors.teal,
+                        indicatorColor: Colors.teal, // underline stays
+                        dividerColor: Colors.transparent, // 🚀 removes the extra bottom line
                         labelColor: Colors.black,
                         unselectedLabelColor: Colors.grey,
                         labelStyle: TextFontStyle.textFontStyle(
-                            18, const Color(0xFF575959), FontWeight.w500),
-                        tabs: const [
+                          18,
+                          Color(0xFF575959),
+                          FontWeight.w500,
+                        ),
+                        tabs: [
                           Tab(text: "All Details"),
                           Tab(text: "Gallery"),
                           Tab(text: "Review"),
                         ],
                       ),
+
                     ],
                   ),
                 ),
