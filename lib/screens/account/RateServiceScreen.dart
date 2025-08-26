@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../widgets/custom_text_field.dart';
+
 class RateServiceScreen extends StatefulWidget {
   const RateServiceScreen({super.key});
 
@@ -26,36 +28,55 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Rate Service'),
+        titleSpacing: 0,
+        title: Text("Rate Service",
+          style: TextFontStyle.textFontStyle(
+            16,                         // Font size
+            Color(0xFF575959),          // Text color
+            FontWeight.w500,            // Font weight
+          ),),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
+          padding: const EdgeInsets.only(top: 2, left: 12),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 18,
+            color: Color(0xFF575959),
+          ),
+          onPressed: () {
+            Navigator.pop(context); // ✅ Go back to previous screen
+            // Or use push to go to a specific screen:
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
+          },
         ),
-        actions: [IconButton(icon: const Icon(Icons.share), onPressed: () {})],
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.share),
+            onPressed: () {
+              // Implement share functionality if needed
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: ListView(
           children: [
-            const Text(
+            Text(
               'Rating',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: Color(0xFF575959),
-                height: 1.0,
-                letterSpacing: 0,
-              ),
+              style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
             ),
             const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 5,
-                (index) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                    (index) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: Icon(
                     index < 4 ? Icons.star : Icons.star_border,
                     color: Colors.orange,
@@ -65,69 +86,41 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            const Text(
+            Text(
               'Write Review',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: Color(0xFF575959),
-                height: 1.0,
-                letterSpacing: 0,
-              ),
+              style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
             ),
             const SizedBox(height: 12),
-            const TextField(
+            TextField(
               maxLines: 1,
               decoration: InputDecoration(
                 hintText: 'Very good service',
-                hintStyle: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12,
-                  color: Color(0xFF575959),
-                  height: 1.0,
-                  letterSpacing: 0,
-                ),
+                hintStyle:TextFontStyle.textFontStyle(12,Color(0xFF575959), FontWeight.w500),
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 ),
               ),
             ),
             const SizedBox(height: 12),
-            const TextField(
+            TextField(
               maxLines: 5,
               decoration: InputDecoration(
                 hintText:
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                hintStyle: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12,
-                  color: Color(0xFF575959),
-                  height: 1.0,
-                  letterSpacing: 0,
-                ),
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                hintStyle:TextFontStyle.textFontStyle(12,Color(0xFF575959), FontWeight.w500),
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 ),
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               "Add photos",
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: Color(0xFF575959),
-                height: 1.0,
-                letterSpacing: 0,
-              ),
+              style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
             ),
             const SizedBox(height: 8),
             SingleChildScrollView(
@@ -135,9 +128,9 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
               child: Row(
                 children: [
                   ...selectedImages.map((imgFile) => Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: _buildImageBox(null, file: imgFile),
-                      )),
+                    padding: const EdgeInsets.only(right: 10),
+                    child: _buildImageBox(null, file: imgFile),
+                  )),
                   GestureDetector(
                     onTap: _pickImage,
                     child: _buildImageBox(null),
@@ -161,14 +154,9 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
                       side: const BorderSide(width: 1),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     "Submit",
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
+                    style:TextFontStyle.textFontStyle(14,Colors.white, FontWeight.w500),
                   ),
                 ),
               ),
@@ -192,15 +180,15 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
       ),
       child: file != null
           ? ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: Image.file(file, fit: BoxFit.cover),
-            )
+        borderRadius: BorderRadius.circular(6),
+        child: Image.file(file, fit: BoxFit.cover),
+      )
           : assetPath != null
-              ? ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: Image.asset(assetPath, fit: BoxFit.cover),
-                )
-              : const Center(child: Icon(Icons.add, color: Colors.black)),
+          ? ClipRRect(
+        borderRadius: BorderRadius.circular(6),
+        child: Image.asset(assetPath, fit: BoxFit.cover),
+      )
+          : const Center(child: Icon(Icons.add, color: Colors.black)),
     );
   }
 }
