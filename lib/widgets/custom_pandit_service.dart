@@ -32,7 +32,7 @@ class CustomPanditCardWidgets {
                   GestureDetector(
                     onTap: onViewAll,
                     child: Text(
-                      'View All',
+                      'Views All',
                       style: TextFontStyle.textFontStyle(14, Colors.blue, FontWeight.w500),
                     ),
                   ),
@@ -64,6 +64,9 @@ class CustomPanditCardWidgets {
 
 
   static Widget buildCarditem(BuildContext context, Map<String, dynamic> item) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return BlocProvider(
       create: (_) => FavoriteBloc(),
       child: Builder(
@@ -93,13 +96,13 @@ class CustomPanditCardWidgets {
                         child: item['image'] != null && item['image']!.startsWith('assets/')
                             ? Image.asset(
                           item['image']!,
-                          height: 130,
+                          height: screenHeight * 0.14, // 🔹 responsive height
                           width: double.infinity,
                           fit: BoxFit.cover,
                         )
                             : Image.network(
                           item['image'] ?? '',
-                          height: 130,
+                          height: screenHeight * 0.14, // 🔹 responsive height
                           width: double.infinity,
                           fit: BoxFit.cover,
                         ),
@@ -107,18 +110,18 @@ class CustomPanditCardWidgets {
 
                       // 🔁 BLoC Favorite Icon
                       Positioned(
-                        top: 6,
-                        right: 6,
+                        top: screenHeight * 0.008,
+                        right: screenWidth * 0.02,
                         child: BlocBuilder<FavoriteBloc, FavoriteState>(
                           builder: (context, state) {
                             return GestureDetector(
                               onTap: () => context.read<FavoriteBloc>().add(ToggleFavorite()),
                               child: CircleAvatar(
                                 backgroundColor: Colors.white,
-                                radius: 8,
+                                radius: screenWidth * 0.025,
                                 child: Icon(
                                   state.isFavorite ? Icons.favorite : Icons.favorite_border,
-                                  size: 12,
+                                  size: screenWidth * 0.035,
                                   color: Colors.red,
                                 ),
                               ),
@@ -131,7 +134,10 @@ class CustomPanditCardWidgets {
 
                   // 🔤 Info Section
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: screenWidth * 0.025,
+                      vertical: screenHeight * 0.018,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -142,28 +148,37 @@ class CustomPanditCardWidgets {
                               child: Text(
                                 item['name'] ?? '',
                                 style: TextFontStyle.textFontStyle(
-                                    12, const Color(0xFF575959), FontWeight.w500),
+                                  screenWidth * 0.032, // 🔹 responsive font
+                                  const Color(0xFF575959),
+                                  FontWeight.w500,
+                                ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             Row(
                               children: [
-                                const Icon(Icons.star, color: Color(0xFFEFAA37), size: 14),
-                                const SizedBox(width: 2),
+                                Icon(Icons.star, color: const Color(0xFFEFAA37), size: screenWidth * 0.035),
+                                SizedBox(width: screenWidth * 0.01),
                                 Text(
                                   item['rating'] ?? "0.0",
-                                  style: TextFontStyle.textFontStyle(12, const Color(0xFF575959)),
+                                  style: TextFontStyle.textFontStyle(
+                                    screenWidth * 0.032,
+                                    const Color(0xFF575959),
+                                  ),
                                 ),
                               ],
                             ),
                           ],
                         ),
-                        const SizedBox(height: 2),
+                        SizedBox(height: screenHeight * 0.004),
                         Text(
                           item['price'] ?? '',
                           style: TextFontStyle.textFontStyle(
-                              12, const Color(0xFF1E535B), FontWeight.w600),
+                            screenWidth * 0.034,
+                              const Color(0xFF1E535B),
+                            FontWeight.w600,
+                          ),
                         ),
                       ],
                     ),
