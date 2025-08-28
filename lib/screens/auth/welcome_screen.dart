@@ -8,7 +8,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0XFFFFF6ED),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -21,17 +21,17 @@ class WelcomeScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const SizedBox(height: 80), // Top space
+                        const SizedBox(height: 174), // Top space
 
                         Column(
                           children: [
                             Image.asset(
                               'assets/images/Welcome.png',
-                              height: 315,
-                              width: 315,
+                              height: 313,
+                              width: 313,
                               fit: BoxFit.contain,
                             ),
-                            const SizedBox(height: 16),
+                            // const SizedBox(height: 10),
                             const Text(
                               "Let’s make your day special!",
                               style: TextStyle(
@@ -43,7 +43,7 @@ class WelcomeScreen extends StatelessWidget {
                           ],
                         ),
 
-                        const SizedBox(height: 40), // Space between content and buttons
+                        const SizedBox(height: 151), // Space between content and buttons
 
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -52,9 +52,9 @@ class WelcomeScreen extends StatelessWidget {
                               text: "Sign in",
                               onPressed: () => Navigator.pushNamed(context, '/sign-in'),
                               backgroundColor: const Color(0xFF1E535B),
-                              borderColor: Colors.transparent,
-                              textColor: Colors.white,
-                              height: 50,
+                              borderColor: Color(0XFF1E535B),
+                              textColor: Color(0XFFFFFFFF),
+                              height: 50 ,
                               width: double.infinity,
                             ),
                             const SizedBox(height: 12),
