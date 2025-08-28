@@ -169,7 +169,7 @@ class _PanditScreenState extends State<PanditScreen> {
 Widget _buildSearchBar() {
   return TextField(
     decoration: InputDecoration(
-        hintText: 'Search heree...',
+        hintText: 'Search here...',
       prefixIcon: const Icon(Icons.search),
       filled: true,
       fillColor: const Color(0xFFF8F8F8),
