@@ -1,8 +1,7 @@
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
-import 'custom_text_field.dart';
-
-class PackageCard extends StatelessWidget {
+class PackageCard extends StatefulWidget {
   final String title;
   final String description;
   final String price;
@@ -16,6 +15,7 @@ class PackageCard extends StatelessWidget {
   final VoidCallback? onPrimaryButtonPressed;
   final VoidCallback? onSecondaryButtonPressed;
   final VoidCallback? onTap;
+
 
   const PackageCard({
     Key? key,
@@ -32,11 +32,16 @@ class PackageCard extends StatelessWidget {
     this.showLikeIcon = false,
     this.onTap,
   }) : super(key: key);
+  @override
+  State<PackageCard> createState() => _PackageCardState();
+}
+class _PackageCardState extends State<PackageCard> {
+  bool isLiked = true;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: widget.onTap,
       borderRadius: BorderRadius.circular(6),
       child: Card(
         shape: RoundedRectangleBorder(
@@ -46,8 +51,7 @@ class PackageCard extends StatelessWidget {
         color: const Color(0xFFFFEFDF),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Row(
-            // <-- Changed: Top Row only (Image + Details + Buttons)
+          child: Row( // <-- Changed: Top Row only (Image + Details + Buttons)
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Image Section
@@ -56,26 +60,33 @@ class PackageCard extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(6),
                     child: Image.asset(
-                      imagePath,
+                      widget.imagePath,
                       height: 130,
                       width: 80,
                       fit: BoxFit.cover,
                     ),
                   ),
-                  if (showLikeIcon)
+                  if (widget.showLikeIcon)
                     Positioned(
                       top: 4,
                       right: 4,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                        padding: const EdgeInsets.all(2),
-                        child: const Icon(
-                          Icons.favorite,
-                          size: 16,
-                          color: Colors.red,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isLiked = !isLiked;
+                          });
+                        },
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                          ),
+                          padding: const EdgeInsets.all(2),
+                          child:  Icon(
+                            isLiked ? Icons.favorite : Icons.favorite_border,
+                            size: 16,
+                            color: isLiked ? Colors.red : Colors.grey,
+                          ),
                         ),
                       ),
                     ),
@@ -95,13 +106,20 @@ class PackageCard extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            title,
+                            widget.title,
                             style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w500), // smaller text
-
+                            // style: const TextStyle(
+                            //   fontFamily: 'Poppins', // Font family
+                            //   fontSize: 14, // Size in px (Flutter uses logical pixels)
+                            //   fontWeight: FontWeight.w500, // Equivalent to weight 500 (Medium)
+                            //   // height: 1.0, // Line height = 100% (1.0 means 100%)
+                            //   letterSpacing: 0.0, // 0% letter spacing
+                            //   color: Color(0xFF575959), // Text color
+                            // ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        if (rating != null)
+                        if (widget.rating != null)
                           Row(
                             children: [
                               const Icon(
@@ -111,9 +129,8 @@ class PackageCard extends StatelessWidget {
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                rating.toString(),
+                                widget.rating.toString(),
                                 style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500),
-
                               ),
                             ],
                           ),
@@ -122,10 +139,8 @@ class PackageCard extends StatelessWidget {
                     const SizedBox(height: 6),
                     // Description
                     Text(
-                      description,
+                      widget.description,
                       style: TextFontStyle.textFontStyle(12, const Color(0xFF757575), FontWeight.w500),
-
-
                     ),
                     const SizedBox(height: 8),
                     // Price and Details
@@ -137,39 +152,33 @@ class PackageCard extends StatelessWidget {
                           color: Color(0xFF1E535B),
                         ),
                         Text(
-                          price,
+                          widget.price,
                           style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w600),
-
-
                         ),
                       ],
                     ),
                     const SizedBox(height: 4),
-                    if (details != null) ...[
+                    if (widget.details != null) ...[
                       const SizedBox(height: 4),
                       Text(
-                        details!,
+                        widget.details!,
                         style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500),
-
-
                       ),
                     ],
 
                     // Now the buttons immediately after text!
-                    if (primaryButtonText != null ||
-                        secondaryButtonText != null) ...[
+                    if (widget.primaryButtonText != null || widget.secondaryButtonText != null) ...[
                       const SizedBox(height: 12),
                       Row(
                         children: [
-                          if (secondaryButtonText != null)
+                          if (widget.secondaryButtonText != null)
                             SizedBox(
                               width: 122,
                               height: 29,
                               child: OutlinedButton(
-                                onPressed: onSecondaryButtonPressed,
+                                onPressed: widget.onSecondaryButtonPressed,
                                 style: OutlinedButton.styleFrom(
-                                  backgroundColor: const Color(
-                                      0xFFFFFDFC), // ✅ correct bg color
+                                  backgroundColor: const Color(0xFFFFFDFC), // ✅ correct bg color
                                   side: const BorderSide(
                                     color: Color(0xFF1E535B),
                                     width: 1,
@@ -177,27 +186,24 @@ class PackageCard extends StatelessWidget {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(9),
                                   ),
-                                  padding: EdgeInsets
-                                      .zero, // ✅ remove default padding
+                                  padding: EdgeInsets.zero, // ✅ remove default padding
                                 ),
                                 child: Text(
-                                  secondaryButtonText!,
+                                  widget.secondaryButtonText!,
                                   style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w500),
-
-
-
                                 ),
                               ),
                             ),
-                          if (secondaryButtonText != null &&
-                              primaryButtonText != null)
+
+                          if (widget.secondaryButtonText != null && widget.primaryButtonText != null)
                             const SizedBox(width: 8),
-                          if (primaryButtonText != null)
+
+                          if (widget.primaryButtonText != null)
                             SizedBox(
                               width: 74,
                               height: 29,
                               child: ElevatedButton(
-                                onPressed: onPrimaryButtonPressed,
+                                onPressed: widget.onPrimaryButtonPressed,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF1E535B),
                                   shape: RoundedRectangleBorder(
@@ -208,8 +214,6 @@ class PackageCard extends StatelessWidget {
                                 child:  Text(
                                   "Book Now",
                                   style: TextFontStyle.textFontStyle(12,  Colors.white, FontWeight.w500),
-
-
                                 ),
                               ),
                             ),
@@ -223,6 +227,9 @@ class PackageCard extends StatelessWidget {
           ),
         ),
       ),
+
     );
+
   }
+
 }

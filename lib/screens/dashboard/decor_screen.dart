@@ -54,46 +54,48 @@ class DecorScreen extends StatelessWidget {
                 child: SizedBox(height: 40, child: _buildSearchBar()),
               ),
             ),
-            Row(
-              children: [
-                const SizedBox(width: 10),
-                GestureDetector(
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                      ),
-                      builder: (context) => CustomDateTimeBottomSheet(
-                        onConfirm: (DateTime fullDateTime) {
-                          print("Selected DateTime: $fullDateTime");
-                        },
-                      ),
-                    );
-                  },
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: const [
-                      Icon(Icons.calendar_today, size: 20, color: Color(0xFF004d40)),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Icon(Icons.access_time, size: 10, color: Color(0xFF004d40)),
-                      ),
-                    ],
+            Expanded(
+              child: Row(
+                children: [
+                  const SizedBox(width: 10),
+                  GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                        ),
+                        builder: (context) => CustomDateTimeBottomSheet(
+                          onConfirm: (DateTime fullDateTime) {
+                            print("Selected DateTime: $fullDateTime");
+                          },
+                        ),
+                      );
+                    },
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: const [
+                        Icon(Icons.calendar_today, size: 20, color: Color(0xFF004d40)),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Icon(Icons.access_time, size: 10, color: Color(0xFF004d40)),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                Image.asset('assets/images/cart.png', width: 24, height: 24),
-                const SizedBox(width: 10),
-                IconButton(
-                  icon: const Icon(Icons.favorite, color: Colors.red),
-                  onPressed: () {},
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                ),
-              ],
+                  const SizedBox(width: 10),
+                  Image.asset('assets/images/cart.png', width: 24, height: 24),
+                  const SizedBox(width: 10),
+                  IconButton(
+                    icon: const Icon(Icons.favorite, color: Colors.red),
+                    onPressed: () {},
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

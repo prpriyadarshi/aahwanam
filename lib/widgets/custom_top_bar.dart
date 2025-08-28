@@ -58,7 +58,7 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
               onTap: onCalendarTap,
               child: Image.asset(
                 'assets/images/timer.png',
-                width: 28,
+                width: 20,
                 height: 24,
               ),
             ),
