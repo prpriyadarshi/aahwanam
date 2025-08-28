@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'Subcategory/category_tile.dart';
-
 
 class CustomCardWidgets {
   static Widget buildSection(
@@ -15,7 +13,7 @@ class CustomCardWidgets {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 0),
+          padding: const EdgeInsets.symmetric(horizontal: 2.0, ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -49,29 +47,29 @@ class CustomCardWidgets {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 13.0,
-            mainAxisSpacing: 13.0,
+            crossAxisSpacing: 12.0,
+            mainAxisSpacing: 8.0,
             childAspectRatio: 1.05,
           ),
           itemCount: data.length,
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
             final item = data[index];
-            return buildCarditem(item);
+             return buildCarditem(context,item);
           },
 
         ),
       ],
     );
   }
-  static Widget buildCarditem(Map<String, String> item) {
+  static Widget buildCarditem(BuildContext context,Map<String, String> item) {
     return Card(
       elevation: 0,
       color: const Color(0xFFFFEFDF),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(6.0),
       ),
-      margin: EdgeInsets.zero,
+      margin: EdgeInsets.only(bottom: 25),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,8 +83,8 @@ class CustomCardWidgets {
                 child: item['image']!.startsWith('assets/')
                     ? Image.asset(
                   item['image']!,
-                  height: 120,
-                  width: double.infinity,
+                  height:  MediaQuery.of(context).size.height*84/812,
+                  width: MediaQuery.of(context).size.width*170/375,
                   fit: BoxFit.cover,
                 )
                     : Image.network(
@@ -159,6 +157,4 @@ class CustomCardWidgets {
       ),
     );
   }
-
-
 }
