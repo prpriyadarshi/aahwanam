@@ -32,7 +32,7 @@ class CustomPanditCardWidgets {
                   GestureDetector(
                     onTap: onViewAll,
                     child: Text(
-                      'View All',
+                      'Views All',
                       style: TextFontStyle.textFontStyle(14, Colors.blue, FontWeight.w500),
                     ),
                   ),

@@ -81,7 +81,7 @@ class ReviewList extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          "Rate Service",
+                          "Rates Service",
                           style:
                           TextFontStyle.textFontStyle( 14,Color(0xFF1E535B),FontWeight.w500),
                         ),
