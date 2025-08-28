@@ -79,10 +79,10 @@ class DashboardContent extends StatelessWidget {
                   child: Image.asset(
                     'assets/images/location.png',
                     width: 24,
-                    height: 24,
+                    height: 25,
                   ),
                 ),
-                SizedBox(width: 10),
+                SizedBox(width: 9),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -90,7 +90,6 @@ class DashboardContent extends StatelessWidget {
                       children: [
                         Text(
                           "Hyderabad",
-
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -121,10 +120,10 @@ class DashboardContent extends StatelessWidget {
                   child: Image.asset(
                     'assets/images/cart.png',
                     width: 24,
-                    height: 24,
+                    height: 18,
                   ),
                 ),
-                SizedBox(width: 10,),
+                SizedBox(width: 6),
                 IconButton(
                   onPressed: () {},
                   icon: Icon(
@@ -158,7 +157,7 @@ class DashboardContent extends StatelessWidget {
               );
             } else if (state is DashboardLoaded) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 5.0),
+                padding: const EdgeInsets.symmetric(horizontal: 11.0,vertical: 5.0),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
