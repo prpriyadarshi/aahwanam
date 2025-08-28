@@ -58,7 +58,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   Color(0xFF575959),          // Text color
                   FontWeight.w500,            // Font weight
                 ),
-               ),
+              ),
               leading: IconButton(
                 padding: const EdgeInsets.only(top: 2, left: 12),
                 icon: const Icon(
@@ -104,7 +104,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                   color: Color(0xFF1E535B), width: 1),
                             ),
                           ),
-                          child: const Text("All Bookings"),
+                          child: const Text("All Bookings",),
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -118,7 +118,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           style: OutlinedButton.styleFrom(
                             foregroundColor: isAllBookingsSelected
                                 ? Color(
-                                    0xFF1E535B) // Text color when not selected
+                                0xFF1E535B) // Text color when not selected
                                 : Colors.white,
                             // Text color when selected
                             backgroundColor: isAllBookingsSelected
