@@ -519,7 +519,7 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
                       onTap: () => _showCustomTimePicker(context),
                       child: Icon(
                         Icons.access_time,
-                         size: 20,
+                          size: 20,
                         color: Color(0xFF575959),
                       ),
                     ),
