@@ -102,37 +102,47 @@ class EventServiceCard extends StatelessWidget {
         ),
       );
     } else {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: Image.asset(
-                  imageUrl,
-                  height: 160,
-                  width: 140,
-                  fit: BoxFit.cover,
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 6.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: Image.asset(
+                    imageUrl,
+                    height: 160,
+                    width: 140,
+                    fit: BoxFit.cover,
+                  ),
                 ),
+                Positioned(
+                  right: 6,
+                  top: 6,
+                  child: countWidget,
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Flexible(
+              child: Text(
+                title,
+                style: TextFontStyle.textFontStyle(13, const Color(0xFF575959), FontWeight.w500),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
-              Positioned(
-                right: 6,
-                top: 6,
-                child: countWidget,
+            ),
+            Flexible(
+              child: Text(
+                price,
+                style: TextFontStyle.textFontStyle(13, commonTealColor, FontWeight.w500),
+                overflow: TextOverflow.ellipsis,
               ),
-            ],
-          ),
-          // const SizedBox(height: 5),
-          Text(
-            title,
-            style: TextFontStyle.textFontStyle(13, const Color(0xFF575959), FontWeight.w500),
-          ),
-          Text(
-            price,
-            style: TextFontStyle.textFontStyle(13, commonTealColor, FontWeight.w500),
-          ),
-        ],
+            ),
+          ],
+        ),
       );
     }
   }
