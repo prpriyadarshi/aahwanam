@@ -111,7 +111,7 @@ class _PanditScreenState extends State<PanditScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                           Text(
+                          Text(
                             "Pooja Theme",
                             style:  TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w600),
                           ),
@@ -134,24 +134,24 @@ class _PanditScreenState extends State<PanditScreen> {
                       ),
 
                       // Decorators Section
-                  CustomPanditCardWidgets.buildSection(
-                    context,
-                    title: "Pooja Themes123",
-                    data: state.poojaTheme, // ✅ Works now
-                    showViewAll: true,
-                    onViewAll: () {
-                      if (state.poojaTheme.isNotEmpty) {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => PanditTheme()));
-                      }
-                    },
-                    showTitle: false,
-                  ),
+                      CustomPanditCardWidgets.buildSection(
+                        context,
+                        title: "Pooja Themes",
+                        data: state.poojaTheme, // ✅ Works now
+                        showViewAll: true,
+                        onViewAll: () {
+                          if (state.poojaTheme.isNotEmpty) {
+                            Navigator.push(context, MaterialPageRoute(builder: (_) => PanditTheme()));
+                          }
+                        },
+                        showTitle: false,
+                      ),
 
 
 
 
 
-                  ],
+                    ],
                   ),
                 ),
               );
@@ -169,7 +169,7 @@ class _PanditScreenState extends State<PanditScreen> {
 Widget _buildSearchBar() {
   return TextField(
     decoration: InputDecoration(
-      hintText: 'Search here...',
+        hintText: 'Search here...',
       prefixIcon: const Icon(Icons.search),
       filled: true,
       fillColor: const Color(0xFFF8F8F8),
