@@ -116,7 +116,7 @@ class PanditBloc extends Bloc<PanditEvent, PanditState> {
 
           },
           {
-            'title': 'Grihaa Pravesh Pooja (Regular)',
+            'title': 'Griha Pravesh Pooja (Regular)',
             'category':'Pooja',
             'price': '₹5,000',
             'description':

@@ -12,14 +12,15 @@ class PhotoGallery extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.only(top: 5, left: 21, right: 16, bottom: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
             _buildCategorySection(context, "Kitty Party"),
-            const SizedBox(height: 24),
+            const SizedBox(height: 10),
             _buildCategorySection(context, "Get Together"),
-            const SizedBox(height: 24),
+            const SizedBox(height: 10),
             _buildCategorySection(context, "Birthday Party"),
           ],
         ),
