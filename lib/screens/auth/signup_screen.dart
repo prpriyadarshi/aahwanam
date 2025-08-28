@@ -158,7 +158,7 @@ class _SignupScreenState extends State<SignupScreen> {
           obscureText: obscure,
           cursorColor: const Color(0xFF575959),
           decoration: InputDecoration(
-            hintText: "Enter $cleanHint",  // ✅ cleaned hint
+            hintText: "Enter $cleanHint",  //  cleaned hint
             hintStyle: const TextStyle(
               fontSize: 14,
               color: Color(0xFF575959),
@@ -201,7 +201,7 @@ class _SignupScreenState extends State<SignupScreen> {
           obscureText: _obscurePassword,
           cursorColor: const Color(0xFF575959),
           decoration: InputDecoration(
-            hintText: "Enter $cleanHint", // ✅ cleaned version
+            hintText: "Enter $cleanHint", // cleaned version
             hintStyle: const TextStyle(
               fontSize: 14,
               color: Color(0xFF575959),
