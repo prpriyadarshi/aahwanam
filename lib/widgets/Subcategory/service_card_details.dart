@@ -4,6 +4,7 @@ import '../custom_ChangeAddressSheet.dart';
 
 import '../custom_event_date_time_picker.dart';
 import '../custom_text_field.dart';
+import 'customAddbutton.dart';
 
 class PackageDetails extends StatelessWidget {
   final EventDetails eventpackagedetails;
@@ -62,44 +63,50 @@ class PackageDetails extends StatelessWidget {
                             children: [
                               Text(
                                 eventpackagedetails.title ?? 'Service Package',
-                                style: TextFontStyle.textFontStyle(
-                                    14, const Color(0xFF575959), FontWeight.w400),
+                                style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               Text(
                                 eventpackagedetails.eventPrice ?? "",
-                                style: TextFontStyle.textFontStyle(
-                                    14, const Color(0xFF575959), FontWeight.w700),
+                                style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w700),
                               ),
                             ],
                           ),
                         ),
-                        _buildQuantityCounter(),
+                        // Use the new reusable button
+                        CustomAddButton(
+                          count: quantity,
+                          onAddPressed: () {
+                            // This part is for the "Add" button, which we'll handle by calling onQuantityChanged with 1
+                            onQuantityChanged?.call(1);
+                          },
+                          onCountChanged: (newCount) {
+                            onQuantityChanged?.call(newCount);
+                          },
+                        ),
                       ],
                     ),
                   ],
                 ),
               ),
             ),
+            // ... rest of the code
             const SizedBox(height: 16),
             Text(
               'Description',
-              style: TextFontStyle.textFontStyle(
-                  16, const Color(0xFF575959), FontWeight.w700),
+              style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w700),
             ),
             const SizedBox(height: 8),
             Text(
               eventpackagedetails.description ?? "",
-              style: TextFontStyle.textFontStyle(
-                  14, const Color(0xFF575959), FontWeight.w400),
+              style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400),
             ),
             const SizedBox(height: 16),
             if (showIncludedPackages) ...[
               Text(
                 'Included in this Package are',
-                style: TextFontStyle.textFontStyle(
-                    16, const Color(0xFF575959), FontWeight.w700),
+                style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w700),
               ),
               const SizedBox(height: 8),
               ...(eventpackagedetails.packagesIncluded ?? []).map((point) {
@@ -110,14 +117,12 @@ class PackageDetails extends StatelessWidget {
                     children: [
                       Text(
                         "• ",
-                        style: TextFontStyle.textFontStyle(
-                            14, const Color(0xFF757575), FontWeight.w400),
+                        style: TextFontStyle.textFontStyle(14, const Color(0xFF757575), FontWeight.w400),
                       ),
                       Expanded(
                         child: Text(
                           point,
-                          style: TextFontStyle.textFontStyle(
-                              14, const Color(0xFF757575), FontWeight.w400),
+                          style: TextFontStyle.textFontStyle(14, const Color(0xFF757575), FontWeight.w400),
                         ),
                       ),
                     ],
@@ -128,30 +133,26 @@ class PackageDetails extends StatelessWidget {
             ],
             Text(
               'Event Details',
-              style: TextFontStyle.textFontStyle(
-                  16, const Color(0xFF575959), FontWeight.w700),
+              style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w700),
             ),
             const SizedBox(height: 12),
             const EventDateTimePicker(),
             const SizedBox(height: 16),
             Text(
               'Event Address',
-              style: TextFontStyle.textFontStyle(
-                  16, const Color(0xFF575959), FontWeight.w700),
+              style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w700),
             ),
             const SizedBox(height: 8),
             const CustomChangeAddressSheet(),
             const SizedBox(height: 16),
             Text(
               'Previous Work',
-              style: TextFontStyle.textFontStyle(
-                  16, const Color(0xFF575959), FontWeight.w700),
+              style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w700),
             ),
             const SizedBox(height: 8),
             Text(
               eventpackagedetails.title ?? 'Our Work',
-              style: TextFontStyle.textFontStyle(
-                  14, const Color(0xFF575959), FontWeight.w600),
+              style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w600),
             ),
             const SizedBox(height: 8),
             _buildPreviousWorkList(),
@@ -162,44 +163,7 @@ class PackageDetails extends StatelessWidget {
     );
   }
 
-  Widget _buildQuantityCounter() {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFFF4F4F4),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.remove, size: 20, color: Color(0xFF575959)),
-            onPressed: () {
-              if (quantity > 0) {
-                onQuantityChanged?.call(quantity - 1);
-              }
-            },
-            splashRadius: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              '$quantity',
-              style: TextFontStyle.textFontStyle(
-                  16, const Color(0xFF575959), FontWeight.bold),
-            ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.add, size: 20, color: Color(0xFF575959)),
-            onPressed: () {
-              onQuantityChanged?.call(quantity + 1);
-            },
-            splashRadius: 20,
-          ),
-        ],
-      ),
-    );
-  }
+  // The _buildQuantityCounter() method is no longer needed and can be deleted.
 
   Widget _buildPreviousWorkList() {
     return SizedBox(
