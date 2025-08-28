@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CustomTile extends StatelessWidget{
+import 'Subcategory/category_tile.dart';
+import 'custom_text_field.dart';
+
+class CustomTile extends StatelessWidget {
   final String imagePath;
   final String title;
   final Color bgColor;
@@ -23,12 +26,19 @@ class CustomTile extends StatelessWidget{
           imagePath,
           width: 24,
           height: 24,
-          fit: BoxFit.contain,),
-        title: Text(title),
+          fit: BoxFit.contain,
+        ),
+        title: Text(
+          title,
+          style: TextFontStyle.textFontStyle(
+            16, // Font size
+            const Color(0xFF575959),
+            FontWeight.w500,
+          ),
+        ),
         trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         onTap: onTap,
       ),
     );
   }
-
 }

@@ -96,9 +96,13 @@ class CartProceedToPayScreen extends StatelessWidget {
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5), // 👈 decreased height
                   ),
-                  child: const Text(
+                  child:  Text(
                     "Proceed to pay",
-                    style: TextStyle(color: Colors.white),
+                    style: TextFontStyle.textFontStyle(
+                      12,                         // Font size
+                      Color(0xFFFFFDFC),          // Text color
+                      FontWeight.w500,            // Font weight
+                    ),
                   ),
                 ),
 
@@ -122,146 +126,153 @@ class CartProceedToPayScreen extends StatelessWidget {
               final totalAmountStr = '₹${totalAmountNum.toStringAsFixed(2)}';
 
               return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      /// Package card (image + title + price)
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        margin: const EdgeInsets.symmetric(vertical: 8),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFFFF2E4),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.asset(
-                                booking?['imagePath'] ?? 'assets/images/Choreographers.png',
-                                height: 110,
-                                width: 90,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    booking?['title'] ?? 'No Title',
-                                    style:TextFontStyle.textFontStyle(13,const Color(0xFF575959), FontWeight.w500),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    booking?['description'] ?? 'No Description',
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style:TextFontStyle.textFontStyle(12,const Color(0xFF757575), FontWeight.w300),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        /// Package card (image + title + price)
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.symmetric(vertical: 8),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFF2E4),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.asset(
+                                  booking?['imagePath'] ?? 'assets/images/Choreographers.png',
+                                  height: 110,
+                                  width: 90,
+                                  fit: BoxFit.cover,
                                 ),
-                                  const SizedBox(height: 6),
-                                  Text(
-                                    '₹ ${booking?['price'] ?? '0'}${(booking?['isPerSession'] ?? false) ? ' / Session' : ''}',
-                                    style:TextFontStyle.textFontStyle(14,const Color(0xFF1E535B), FontWeight.w600),
-                                  ),
-                                  const SizedBox(height: 6),
-                                  Text(
-                                    '${DateFormat('dd, MMM yyyy').format(selectedDateTime)} (${DateFormat.jm().format(selectedDateTime)})',
-                                    style:TextFontStyle.textFontStyle(13,const Color(0xFF575959), FontWeight.w500),
-                                  ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      booking?['title'] ?? 'No Title',
+                                      style:TextFontStyle.textFontStyle(13,const Color(0xFF575959), FontWeight.w500),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      booking?['description'] ?? 'No Description',
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style:TextFontStyle.textFontStyle(12,const Color(0xFF757575), FontWeight.w300),
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      '₹ ${booking?['price'] ?? '0'}${(booking?['isPerSession'] ?? false) ? ' / Session' : ''}',
+                                      style:TextFontStyle.textFontStyle(14,const Color(0xFF1E535B), FontWeight.w600),
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      '${DateFormat('dd, MMM yyyy').format(selectedDateTime)} (${DateFormat.jm().format(selectedDateTime)})',
+                                      style:TextFontStyle.textFontStyle(13,const Color(0xFF575959), FontWeight.w500),
+                                    ),
 
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+
+                        const SizedBox(height: 16),
+
+                        /// Event Address Section
+                        Text('Event Address*',
+                          style:TextFontStyle.textFontStyle(14,const Color(0xFF575959), FontWeight.w500),
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          padding: const EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: const Color(0xFFE4E4E4)),
+                            borderRadius: BorderRadius.circular(9),
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(state.bookServiceDetails.locationTitle,
+                                      style: TextFontStyle.textFontStyle(
+                                        14,                         // Font size
+                                        Color(0xFF575959),          // Text color
+                                        FontWeight.w500,            // Font weight
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  ElevatedButton(
+                                    onPressed: () => _showChangeAddress(context),
+                                    style: ElevatedButton.styleFrom(
+                                      foregroundColor: const Color(0xFF1E535B),
+                                      backgroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                        side: const BorderSide(
+                                            color: Color(0xFF1E535B), width: 1),
+                                      ),
+                                      padding: const EdgeInsets.all(6),
+                                      minimumSize: const Size(0, 0),
+                                    ),
+                                    child:  Text("Change",
+                                      style: TextFontStyle.textFontStyle(
+                                        10,                         // Font size
+                                        Color(0xFF1E535B),          // Text color
+                                        FontWeight.w500,            // Font weight
+                                      ),
+
+                                    ),
+                                  ),
                                 ],
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-
-                      const SizedBox(height: 16),
-
-                      /// Event Address Section
-                       Text('Event Address*',
-                          style:TextFontStyle.textFontStyle(14,const Color(0xFF575959), FontWeight.w500),
-                       ),
-                      const SizedBox(height: 10),
-                      Container(
-                        padding: const EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: const Color(0xFFE4E4E4)),
-                          borderRadius: BorderRadius.circular(9),
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(state.bookServiceDetails.locationTitle,
-                                      style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: Color(0xFF575959))),
-                                ),
-                                const SizedBox(width: 10),
-                                ElevatedButton(
-                                  onPressed: () => _showChangeAddress(context),
-                                  style: ElevatedButton.styleFrom(
-                                    foregroundColor: const Color(0xFF1E535B),
-                                    backgroundColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      side: const BorderSide(
-                                          color: Color(0xFF1E535B), width: 1),
-                                    ),
-                                    padding: const EdgeInsets.all(6),
-                                    minimumSize: const Size(0, 0),
-                                  ),
-                                  child: const Text("Change",
-                                      style: TextStyle(
-                                          fontSize: 10, fontWeight: FontWeight.w500)),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Text(state.bookServiceDetails.locationDescription,
+                              const SizedBox(height: 8),
+                              Text(state.bookServiceDetails.locationDescription,
                                 style:TextFontStyle.textFontStyle(12,const Color(0xFF757575), FontWeight.w400),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        /// Billing section
+                        Row(
+                          children:  [
+                            Expanded(child: Divider(color: Color(0xFFF1F1F1), thickness: 1)),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text("Bill Details",
+                                style:TextFontStyle.textFontStyle(14,const Color(0xFF575959), FontWeight.w600),
+                              ),
                             ),
+                            Expanded(child: Divider(color: Color(0xFFF1F1F1), thickness: 1)),
                           ],
                         ),
-                      ),
+                        const SizedBox(height: 16),
+                        _buildChargeRow('Service Charges', booking?['price']),
+                        const SizedBox(height: 8),
+                        _buildChargeRow('Platform Fee', state.bookServiceDetails.platformFee),
+                        const SizedBox(height: 8),
+                        _buildChargeRow('Transport Fee', state.bookServiceDetails.transportFee, valueColor: Color(0xFF1E535B)),
+                        const SizedBox(height: 8),
+                        _buildChargeRow('Total', totalAmountStr, isBold: true),
 
-                      const SizedBox(height: 16),
-
-                      /// Billing section
-                      Row(
-                        children:  [
-                          Expanded(child: Divider(color: Color(0xFFF1F1F1), thickness: 1)),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text("Bill Details",
-                                style:TextFontStyle.textFontStyle(14,const Color(0xFF575959), FontWeight.w600),
-                            ),
-                          ),
-                          Expanded(child: Divider(color: Color(0xFFF1F1F1), thickness: 1)),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      _buildChargeRow('Service Charges', booking?['price']),
-                      const SizedBox(height: 8),
-                      _buildChargeRow('Platform Fee', state.bookServiceDetails.platformFee),
-                      const SizedBox(height: 8),
-                      _buildChargeRow('Transport Fee', state.bookServiceDetails.transportFee, valueColor: Color(0xFF1E535B)),
-                      const SizedBox(height: 8),
-                      _buildChargeRow('Total', totalAmountStr, isBold: true),
-
-                    ],
-                  ),
-                )
+                      ],
+                    ),
+                  )
 
               );
 
@@ -547,6 +558,7 @@ Widget _buildChargeRow(String label, String value, {bool isBold = false, Color? 
           fontSize: 14,
           fontWeight: isBold ? FontWeight.w600 : FontWeight.w400,
           color: Color(0xFF575959),
+          fontFamily: 'Poppins',
         ),
       ),
       Text(
@@ -555,6 +567,7 @@ Widget _buildChargeRow(String label, String value, {bool isBold = false, Color? 
           fontSize: 14,
           fontWeight: isBold ? FontWeight.w700 : FontWeight.w400,
           color: valueColor ?? Color(0xFF757575),
+          fontFamily: 'Poppins',
         ),
       ),
     ],

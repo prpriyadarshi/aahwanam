@@ -1,3 +1,5 @@
+import 'package:aahwanam/screens/account/account_screen.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aahwanam/blocs/account/account_bloc.dart';
@@ -39,6 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // 1. If data is loading, show a loading indicator
         if (state is AccountLoading) {
           return const Scaffold(
+
             body: Center(child: CircularProgressIndicator()), // Loading state
           );
         }
@@ -51,12 +54,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _emailController.text = state.email;
 
           return Scaffold(
+            backgroundColor: Colors.white,
             appBar: AppBar(
+              titleSpacing: 0,
               elevation: 0,
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
-              title: const Text("Profile"),
-              leading: const BackButton(),
+              title: const Text("Profile",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF575959), // optional if you're not using GoogleFonts
+                ),),
+              leading: IconButton(
+                padding: const EdgeInsets.only(top: 2, left: 12),
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  size: 18,
+                  color: Color(0xFF575959),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AccountScreen()),
+                  );
+                },
+              ),
             ),
             body: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -72,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           backgroundImage: _profileImage != null
                               ? FileImage(_profileImage!)
                               : const AssetImage('assets/images/profile.png')
-                                  as ImageProvider,
+                          as ImageProvider,
                         ),
                         Positioned(
                           bottom: 0,
@@ -94,12 +117,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  const Text(
+                  Text(
                     "Profile Details",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: Color(0xFF575959)),
+                    style:TextFontStyle.textFontStyle(16,Color(0xFF575959), FontWeight.w500),
                   ),
                   const SizedBox(height: 16),
 
@@ -150,11 +170,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.pop(context);
 
                         context.read<AccountBloc>().add(UpdateAccountInfo(
-                              firstName: _firstNameController.text,
-                              lastName: _lastNameController.text,
-                              phone: _phoneController.text,
-                              email: _emailController.text,
-                            ));
+                          firstName: _firstNameController.text,
+                          lastName: _lastNameController.text,
+                          phone: _phoneController.text,
+                          email: _emailController.text,
+                        ));
 
                       },
                       style: ElevatedButton.styleFrom(
@@ -164,10 +184,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         padding: const EdgeInsets.symmetric(vertical: 14),
                       ),
-                      child: const Text(
+                      child: Text(
                         "Submit",
-                        style:
-                            TextStyle(color: Colors.white), // White text color
+                        style:TextFontStyle.textFontStyle(14,Colors.white, FontWeight.w500), // White text color
                       ),
                     ),
                   ),
@@ -182,21 +201,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onTap: () {
                       // Call delete account event or dialog
                     },
-                    child: const Text(
+                    child: Text(
                       "Delete Account",
-                      style: TextStyle(
-                          color: Color(0xFFD75252),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14),
+                      style:TextFontStyle.textFontStyle(14,Color(0xFFD75252), FontWeight.w500),
                     ),
                   ),
                   const SizedBox(height: 5),
-                  const Text(
+                  Text(
                     "Deleting your account will remove all the orders and history of your account.",
-                    style: TextStyle(
-                        color: Color(0xFF757575),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14),
+                    style:TextFontStyle.textFontStyle(14,Color(0xFF757575), FontWeight.w400),
                   ),
                 ],
               ),

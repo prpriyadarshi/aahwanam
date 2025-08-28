@@ -1,4 +1,5 @@
 import 'package:aahwanam/services/proceedpay.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class DetailedPackageCartScreen extends StatefulWidget {
@@ -41,7 +42,7 @@ class _DetailedPackageCartScreenState extends State<DetailedPackageCartScreen> {
 
   int get total {
     int serviceTotal =
-        services.fold<int>(0, (int sum, Map<String, dynamic> item) {
+    services.fold<int>(0, (int sum, Map<String, dynamic> item) {
       int price = int.parse(item["price"].replaceAll(RegExp(r'[^0-9]'), ''));
       int quantity = item["quantity"] as int;
       return sum + (price * quantity);
@@ -63,37 +64,62 @@ class _DetailedPackageCartScreenState extends State<DetailedPackageCartScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        titleSpacing: 0,
+        title: Text("My Packages",
+          style: TextFontStyle.textFontStyle(
+            16,                         // Font size
+            Color(0xFF575959),          // Text color
+            FontWeight.w500,            // Font weight
+          ),),
         backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.chevron_left, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text(
-          "Package Cart",
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
+          padding: const EdgeInsets.only(top: 2, left: 12),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 18,
+            color: Color(0xFF575959),
           ),
+          onPressed: () {
+            Navigator.pop(context); // ✅ Go back to previous screen
+            // Or use push to go to a specific screen:
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
+          },
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.share, color: Colors.black),
-            onPressed: () {},
+            icon: const Icon(Icons.share),
+            onPressed: () {
+              // Implement share functionality if needed
+            },
           ),
         ],
       ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   elevation: 0,
+      //   leading: IconButton(
+      //     icon: const Icon(Icons.chevron_left, color: Colors.black),
+      //     onPressed: () => Navigator.pop(context),
+      //   ),
+      //   title: Text(
+      //     "Package Cart",
+      //     style:TextFontStyle.textFontStyle(18,Colors.black, FontWeight.w600),
+      //   ),
+      //   actions: [
+      //     IconButton(
+      //       icon: const Icon(Icons.share, color: Colors.black),
+      //       onPressed: () {},
+      //     ),
+      //   ],
+      // ),
       body: Column(
         children: [
           const SizedBox(height: 8),
-          const Text(
+          Text(
             "Birthday Party Package",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Color(0XFF575959),
-            ),
+            style:TextFontStyle.textFontStyle(14,Color(0XFF575959), FontWeight.w500),
           ),
           const SizedBox(height: 8),
 
@@ -132,23 +158,12 @@ class _DetailedPackageCartScreenState extends State<DetailedPackageCartScreen> {
                             children: [
                               Text(
                                 service["title"],
-                                style: const TextStyle(
-                                    fontFamily: "Poppins",
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    height: 1.0,
-                                    // ✅ line-height: 100%
-                                    color: Color(0xFF575959)),
+                                style:TextFontStyle.textFontStyle(12,Color(0XFF575959), FontWeight.w500),
                               ),
                               const SizedBox(height: 2),
                               Text(
                                 service["price"],
-                                style: const TextStyle(
-                                  fontFamily: "Poppins",
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFF1E535B),
-                                ),
+                                style:TextFontStyle.textFontStyle(12,Color(0xFF1E535B), FontWeight.w600),
                               ),
                             ],
                           ),
@@ -180,11 +195,7 @@ class _DetailedPackageCartScreenState extends State<DetailedPackageCartScreen> {
                               const SizedBox(width: 4),
                               Text(
                                 (service["quantity"] as int).toString(),
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white, // 👈 text color per spec
-                                  fontSize: 12,
-                                ),
+                                style:TextFontStyle.textFontStyle(12,Colors.white, FontWeight.w500),
                               ),
                               const SizedBox(width: 4),
                               GestureDetector(
@@ -205,21 +216,12 @@ class _DetailedPackageCartScreenState extends State<DetailedPackageCartScreen> {
                 const SizedBox(height: 16),
 
                 /// ✅ Bill Details immediately after services
-                Row(children: const [
+                Row(children:  [
                   Expanded(child: Divider(thickness: 1)),
                   SizedBox(width: 6),
                   Text(
                     "Bill Details",
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w500,
-                      // Medium
-                      fontSize: 14,
-                      height: 1.0,
-                      // line-height: 100%
-                      letterSpacing: 0,
-                      color: Color(0xFF575959),
-                    ),
+                    style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
                   ),
                   SizedBox(width: 6),
                   Expanded(child: Divider(thickness: 1)),
@@ -258,13 +260,9 @@ class _DetailedPackageCartScreenState extends State<DetailedPackageCartScreen> {
                       ),
                     );
                   },
-                  child: const Text(
+                  child: Text(
                     "Proceed to pay",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style:TextFontStyle.textFontStyle(14,Colors.white, FontWeight.w500),
                   ),
                 ),
               ),
@@ -289,10 +287,8 @@ class _DetailedPackageCartScreenState extends State<DetailedPackageCartScreen> {
                   style: TextStyle(
                     fontFamily: "Poppins",
                     fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
-                    // ✅ Total bold, others normal
                     fontSize: 12,
                     height: 2.0,
-                    // ✅ line-height: 100%
                     letterSpacing: 0,
                     color: const Color(0xFF757575),
                   ),

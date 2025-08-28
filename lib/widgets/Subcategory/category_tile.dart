@@ -1,14 +1,10 @@
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class TextFontStyle {
-  static TextStyle textFontStyle(double fontSize, Color color, FontWeight weight) {
-    return TextStyle(fontSize: fontSize, color: color, fontWeight: weight);
-  }
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
