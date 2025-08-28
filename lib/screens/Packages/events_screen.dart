@@ -97,7 +97,7 @@ class _EventScreenState extends State<EventScreen> {
                         crossAxisCount: crossAxisCount,
                         mainAxisSpacing: 4,
                         crossAxisSpacing: 20,
-                        childAspectRatio: 0.70,
+                        childAspectRatio: 0.65,
                       ),
                       itemBuilder: (context, index) {
                         final event = state.events[index];
@@ -118,21 +118,23 @@ class _EventScreenState extends State<EventScreen> {
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.asset(
                                   event['image'] ?? '',
-                                  width: 80,
-                                  height: 80,
+                                  width: MediaQuery.of(context).size.width * 80 / 375,
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) =>
                                   const Icon(Icons.image_not_supported),
                                 ),
                               ),
                               const SizedBox(height: 8),
-                              Text(
-                                event['name'] ?? '',
-                                textAlign: TextAlign.center,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style:TextFontStyle.textFontStyle(12,const Color(0xFF575959), FontWeight.w500),
+                              Flexible(
+                                child: Text(
+                                  event['name'] ?? '',
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextFontStyle.textFontStyle(
+                                      12, const Color(0xFF575959), FontWeight.w500),
                                 ),
+                              ),
                             ],
                           ),
                         );

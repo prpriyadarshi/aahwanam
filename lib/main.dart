@@ -5,10 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aahwanam/blocs/Packages/events_bloc.dart';
 
+import 'blocs/account/account_bloc.dart';
+import 'blocs/account/account_event.dart';
+
 void main() {
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider(create: (_) => AccountBloc()..add(LoadAccountInfo())),
         BlocProvider(create: (context) => EventBloc()), // Existing EventBloc
         BlocProvider(create: (context) => BookingCubit(basePrice: 0, barTablePrice: 0)), // ✅ Add BookingCubit
       ],
