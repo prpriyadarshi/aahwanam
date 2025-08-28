@@ -20,7 +20,7 @@ class _SignInScreenState extends State<SignInScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFFDF3EA), // Cream background
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +55,7 @@ class _SignInScreenState extends State<SignInScreen> {
               TextFormField(
                 controller: phoneController,
                 keyboardType: TextInputType.phone,
-                cursorColor: Color(0xFF575959),
+                cursorColor: const Color(0xFF575959),
                 style: const TextStyle(color: Color(0xFF575959)),
                 decoration: InputDecoration(
                   hintText: "Enter Phone Number",
@@ -87,7 +87,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 height: 50,
                 width: double.infinity,
               ),
-              const SizedBox(height: 32),
+              const Spacer(), // pushes sign-up row to bottom
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -98,7 +98,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       fontSize: 14,
                     ),
                   ),
-                  const SizedBox(height: 950),
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, AppRoutes.signUp),
                     child: const Text(
@@ -112,6 +111,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ],
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

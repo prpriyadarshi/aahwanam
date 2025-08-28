@@ -195,14 +195,19 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         ),
                         const SizedBox(height: 18),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(otpFields.length, (index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 6),
-                              child: otpFields[index],
+                            return Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 4),
+                                child: AspectRatio(
+                                  aspectRatio: 1, // makes each OTP box square
+                                  child: otpFields[index],
+                                ),
+                              ),
                             );
                           }),
                         ),
+
                         const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
