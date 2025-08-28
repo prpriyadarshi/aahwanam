@@ -1,17 +1,15 @@
-// Updated SubcategoryScreen with dynamic navigation
-
-import 'package:aahwanam/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:collection/collection.dart';
 import '../../blocs/Subcategory/subcategory bloc.dart';
 import '../../blocs/Subcategory/subcategory event.dart';
 import '../../blocs/Subcategory/subcategory state.dart';
 import '../../models/subcategory_model.dart';
+import '../../widgets/Subcategory/add_to_cart_bottom_bar.dart';
 import '../../widgets/Subcategory/service_cards.dart';
 import '../../widgets/custom_category_menu.dart';
 import '../../widgets/custom_top_bar.dart';
 import '../Packages/event_details_screen.dart';
-
 class SubcategoryScreen extends StatelessWidget {
   const SubcategoryScreen({super.key});
 
@@ -38,9 +36,6 @@ class SubcategoryScreen extends StatelessWidget {
               final List<CategoryModel> allCategories = state.categories;
               final List<CategoryModel> filteredCategories = _getCategoriesForEvent(eventName, allCategories);
 
-              print("check allCategories list length------------${allCategories.length}");
-              print("check filtered list length------------${filteredCategories.length}");
-
               final selectedCategory = filteredCategories.isNotEmpty
                   ? filteredCategories.firstWhere(
                     (cat) => cat.name == allCategories[state.selectedIndex].name,
@@ -48,9 +43,6 @@ class SubcategoryScreen extends StatelessWidget {
               )
                   : null;
 
-              print("check selectedCategory -----------${selectedCategory?.name}");
-
-              // Determine if the current category should use list layout
               final bool useListLayout = selectedCategory?.name == 'Entertainment' ||
                   selectedCategory?.name == 'Valet Parking' ||
                   selectedCategory?.name == 'Pandit' ||
@@ -58,94 +50,127 @@ class SubcategoryScreen extends StatelessWidget {
                   selectedCategory?.name == 'Photography' ||
                   selectedCategory?.name == 'Chef';
 
-              return Row(
-                children: [
-                  // Vertical category list
-                  VerticalCategoryMenu(
-                    categories: filteredCategories,
-                    selectedIndex: filteredCategories.indexWhere(
-                          (cat) => cat.name == selectedCategory?.name,
-                    ),
-                    onCategorySelected: (filteredIndex) {
-                      final selected = filteredCategories[filteredIndex];
-                      final originalIndex = allCategories.indexWhere((c) => c.name == selected.name);
-                      bloc.add(SelectCategory(originalIndex));
-                    },
-                  ),
+              final String? selectedServiceId = state.serviceCounts.keys.firstWhereOrNull(
+                    (id) => (state.serviceCounts[id] ?? 0) > 0,
+              );
 
-                  // Dynamic Service Display
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: useListLayout
-                          ? ListView.builder(
-                        itemCount: selectedCategory?.services.length ?? 0,
-                        itemBuilder: (_, index) {
-                          final item = selectedCategory!.services[index];
-                          return EventServiceCard(
-                            title: item.title,
-                            imageUrl: item.imageUrl,
-                            price: item.price,
-                            description: item.description,
-                            isListLayout: useListLayout,
-                            count: state.serviceCounts[item.id] ?? 0, // Use item.id
-                            onCountChanged: (newCount) {
-                              print("Count changed for ${item.title} (ID: ${item.id}): $newCount");
-                              context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, newCount));
-                            },
-                            onAddTap: () {
-                              // Navigate to EventDetailsScreen with specific service data
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => EventDetailsScreen(
-                                    serviceId: item.id, // Pass the service ID
-                                    showIncludedPackages: true,
-                                  ),
-                                ),
-                              );
-                            }, uniqueKey: '',
-                          );
-                        },
-                      )
-                          : GridView.builder(
-                        itemCount: selectedCategory?.services.length ?? 0,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 16,
-                          crossAxisSpacing: 14,
-                          childAspectRatio: 0.72,
+              final ServiceItem? selectedService = selectedCategory?.services.firstWhereOrNull(
+                    (service) => service.id == selectedServiceId,
+              );
+
+              return Stack(
+                children: [
+                  Row(
+                    children: [
+                      VerticalCategoryMenu(
+                        categories: filteredCategories,
+                        selectedIndex: filteredCategories.indexWhere(
+                              (cat) => cat.name == selectedCategory?.name,
                         ),
-                        itemBuilder: (_, index) {
-                          final item = selectedCategory!.services[index];
-                          return EventServiceCard(
-                            title: item.title,
-                            imageUrl: item.imageUrl,
-                            price: item.price,
-                            description: item.description,
-                            isListLayout: useListLayout,
-                            count: state.serviceCounts[item.id] ?? 0, // Use item.id
-                            onCountChanged: (newCount) {
-                              print("Count changed for ${item.title} (ID: ${item.id}): $newCount");
-                              context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, newCount));
-                            },
-                            onAddTap: () {
-                              // Navigate to EventDetailsScreen with specific service data
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => EventDetailsScreen(
-                                    serviceId: item.id, // Pass the service ID
-                                    showIncludedPackages: false, // For grid layout, don't show packages by default
-                                  ),
-                                ),
-                              );
-                            }, uniqueKey: '',
-                          );
+                        onCategorySelected: (filteredIndex) {
+                          final selected = filteredCategories[filteredIndex];
+                          final originalIndex = allCategories.indexWhere((c) => c.name == selected.name);
+                          bloc.add(SelectCategory(originalIndex));
                         },
                       ),
-                    ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: useListLayout
+                              ? ListView.builder(
+                            itemCount: selectedCategory?.services.length ?? 0,
+                            itemBuilder: (_, index) {
+                              final item = selectedCategory!.services[index];
+                              return EventServiceCard(
+                                title: item.title,
+                                imageUrl: item.imageUrl,
+                                price: item.price,
+                                description: item.description,
+                                isListLayout: useListLayout,
+                                count: state.serviceCounts[item.id] ?? 0,
+                                onCountChanged: (newCount) {
+                                  context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, newCount));
+                                },
+                                onAddTap: (uniqueKey) {
+                                  // Check if the service has not been added before
+                                  if ((state.serviceCounts[item.id] ?? 0) == 0) {
+                                    // Navigate to EventDetailsScreen
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => EventDetailsScreen(
+                                          serviceId: item.id,
+                                          showIncludedPackages: useListLayout,
+                                        ),
+                                      ),
+                                    );
+                                    // Update count to 1 after navigating
+                                    context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, 1));
+                                  } else {
+                                    // Just update the count without navigating
+                                    context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, (state.serviceCounts[item.id] ?? 0) + 1));
+                                  }
+                                },
+                                uniqueKey: item.id,
+                              );
+                            },
+                          )
+                              : GridView.builder(
+                            itemCount: selectedCategory?.services.length ?? 0,
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 16,
+                              crossAxisSpacing: 14,
+                              childAspectRatio: 0.72,
+                            ),
+                            itemBuilder: (_, index) {
+                              final item = selectedCategory!.services[index];
+                              return EventServiceCard(
+                                title: item.title,
+                                imageUrl: item.imageUrl,
+                                price: item.price,
+                                description: item.description,
+                                isListLayout: useListLayout,
+                                count: state.serviceCounts[item.id] ?? 0,
+                                onCountChanged: (newCount) {
+                                  context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, newCount));
+                                },
+                                onAddTap: (uniqueKey) {
+                                  if ((state.serviceCounts[item.id] ?? 0) == 0) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => EventDetailsScreen(
+                                          serviceId: item.id,
+                                          showIncludedPackages: useListLayout,
+                                        ),
+                                      ),
+                                    );
+                                    context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, 1));
+                                  } else {
+                                    context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, (state.serviceCounts[item.id] ?? 0) + 1));
+                                  }
+                                },
+                                uniqueKey: item.id,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
+                  if (selectedService != null)
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: AddToCartBottomBar(
+                        imageUrl: selectedService.imageUrl,
+                        price: selectedService.price,
+                        itemCount: state.serviceCounts[selectedServiceId!] ?? 0,
+                        onGoToCartTap: () {},
+                      ),
+                    ),
                 ],
               );
             },
@@ -155,7 +180,6 @@ class SubcategoryScreen extends StatelessWidget {
     );
   }
 
-  /// Helper function to filter categories per event
   List<CategoryModel> _getCategoriesForEvent(String event, List<CategoryModel> all) {
     switch (event) {
       case 'Birthday':

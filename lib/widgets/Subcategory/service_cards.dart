@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../custom_text_field.dart'; // Ensure this import is correct
+import '../custom_text_field.dart';
+import 'customAddbutton.dart';
 
 class EventServiceCard extends StatelessWidget {
   final String title;
@@ -8,8 +9,8 @@ class EventServiceCard extends StatelessWidget {
   final String? description;
   final bool isListLayout;
   final int count;
+  final ValueChanged<String>? onAddTap;
   final ValueChanged<int>? onCountChanged;
-  final VoidCallback? onAddTap;
   final String uniqueKey;
 
   const EventServiceCard({
@@ -27,78 +28,16 @@ class EventServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Define common properties for both states (Add/Increment-Decrement)
-    const double commonHorizontalPadding = 10; // Padding for 'Add' button text
-    const double commonVerticalPadding = 4; // Padding for 'Add' button text
-    final BorderRadius commonBorderRadius = BorderRadius.circular(6);
-    final Color commonTealColor = Color(0xFF1E535B); // The specific teal color from the image
+    const Color commonTealColor = Color(0xFF1E535B);
 
-    final Widget countWidget = count == 0
-        ? GestureDetector(
-      onTap: () {
-        onCountChanged?.call(1);
-        onAddTap?.call();
+    final Widget countWidget = CustomAddButton(
+      count: count,
+      onAddPressed: () {
+        onAddTap?.call(uniqueKey);
       },
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-            horizontal: commonHorizontalPadding,
-            vertical: commonVerticalPadding),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Color(0xFF1E535B),width: 1.5),
-          borderRadius: BorderRadius.circular(3),
-        ),
-        child: Text(
-          "Add",
-          style: TextFontStyle.textFontStyle(
-              10, Color(0xFF1E535B), FontWeight.w500),
-        ),
-      ),
-    )
-        : Container(
-      // This container will be the same size and shape as the "Add" button
-      decoration: BoxDecoration(
-        color:  Color(0xFF1E535B),
-        borderRadius: BorderRadius.circular(3),
-        border: Border.all(color:  Color(0xFF1E535B),width: 1),
-      ),
-      // The padding here is to control the overall size of the teal container
-      // and must be carefully balanced with the content inside.
-      // Let's rely on the content's sizing and min-width/height.
-      child: Row(
-        mainAxisSize: MainAxisSize.min, // Essential to constrain width
-        children: [
-          // Remove button
-          SizedBox(
-            width: 24, // Fixed width for the button area
-            height: 24, // Fixed height for the button area
-            child: IconButton(
-              icon: const Icon(Icons.remove, size: 12, color: Colors.white), // Reduced icon size
-              onPressed: () => onCountChanged?.call(count - 1),
-              splashRadius: 12,
-              padding: EdgeInsets.zero, // Remove all internal padding
-              constraints: const BoxConstraints(), // Remove default constraints
-            ),
-          ),
-          Text(
-            '$count',
-            style: TextFontStyle.textFontStyle(
-                10, Colors.white, FontWeight.w500), // Reduced font size to fit
-          ),
-          // Add button
-          SizedBox(
-            width: 24, // Fixed width for the button area
-            height: 24, // Fixed height for the button area
-            child: IconButton(
-              icon: const Icon(Icons.add, size: 12, color: Colors.white), // Reduced icon size
-              onPressed: () => onCountChanged?.call(count + 1),
-              splashRadius: 14,
-              padding: EdgeInsets.zero, // Remove all internal padding
-              constraints: const BoxConstraints(), // Remove default constraints
-            ),
-          ),
-        ],
-      ),
+      onCountChanged: (newCount) {
+        onCountChanged?.call(newCount);
+      },
     );
 
     if (isListLayout) {
@@ -106,7 +45,7 @@ class EventServiceCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
-          color: Color(0xFFFFEFDF),
+          color: const Color(0xFFFFEFDF),
           borderRadius: BorderRadius.circular(10.1),
           boxShadow: [
             BoxShadow(
@@ -136,14 +75,12 @@ class EventServiceCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextFontStyle.textFontStyle(
-                        16, const Color(0xFF575959), FontWeight.w500),
+                    style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w500),
                   ),
                   if (description != null && description!.isNotEmpty)
                     Text(
                       description!,
-                      style: TextFontStyle.textFontStyle(
-                          13, Color(0xFF575959), FontWeight.w400),
+                      style: TextFontStyle.textFontStyle(13, const Color(0xFF575959), FontWeight.w400),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -153,8 +90,7 @@ class EventServiceCard extends StatelessWidget {
                     children: [
                       Text(
                         price,
-                        style: TextFontStyle.textFontStyle(
-                            15, commonTealColor, FontWeight.w500),
+                        style: TextFontStyle.textFontStyle(15, commonTealColor, FontWeight.w500),
                       ),
                       countWidget,
                     ],
@@ -187,16 +123,14 @@ class EventServiceCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 5),
+          // const SizedBox(height: 5),
           Text(
             title,
-            style: TextFontStyle.textFontStyle(
-                13, const Color(0xFF575959), FontWeight.w500),
+            style: TextFontStyle.textFontStyle(13, const Color(0xFF575959), FontWeight.w500),
           ),
           Text(
             price,
-            style: TextFontStyle.textFontStyle(
-                13, commonTealColor, FontWeight.w500),
+            style: TextFontStyle.textFontStyle(13, commonTealColor, FontWeight.w500),
           ),
         ],
       );
