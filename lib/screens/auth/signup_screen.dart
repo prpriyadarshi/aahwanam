@@ -24,9 +24,9 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
+      backgroundColor: const Color(0XFFFFF6ED),
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,14 +67,13 @@ class _SignupScreenState extends State<SignupScreen> {
                 textColor: Colors.white,
                 height: 50,
                 onPressed: () {
-                  //context.read<AuthBloc>().add(
-                    Navigator.pushNamed(context, AppRoutes.dashboard);
-                    SignUpUser(
-                      firstNameController.text,
-                      lastNameController.text,
-                      emailController.text,
-                      phoneController.text,
-                      passwordController.text,
+                  Navigator.pushNamed(context, AppRoutes.dashboard);
+                  SignUpUser(
+                    firstNameController.text,
+                    lastNameController.text,
+                    emailController.text,
+                    phoneController.text,
+                    passwordController.text,
                   );
                 },
               ),
@@ -108,7 +107,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ],
               ),
 
-              const SizedBox(height: 170),
+              const Spacer(), // pushes content up so bottom row stays at bottom
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -138,8 +137,10 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
+
   Widget _labeledField(String label, TextEditingController controller,
       {bool obscure = false}) {
+    final String cleanHint = label.replaceAll("*", "").trim();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -157,7 +158,7 @@ class _SignupScreenState extends State<SignupScreen> {
           obscureText: obscure,
           cursorColor: const Color(0xFF575959),
           decoration: InputDecoration(
-            hintText: "Enter $label",
+            hintText: "Enter $cleanHint",  // ✅ cleaned hint
             hintStyle: const TextStyle(
               fontSize: 14,
               color: Color(0xFF575959),
@@ -166,7 +167,7 @@ class _SignupScreenState extends State<SignupScreen> {
             contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             filled: true,
-            fillColor: Colors.white,
+            fillColor: const Color(0xFFFFF6ED), // same as background
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
@@ -182,6 +183,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Widget _passwordField(String label, TextEditingController controller) {
+    final String cleanHint = label.replaceAll("*", "").trim();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -199,7 +201,7 @@ class _SignupScreenState extends State<SignupScreen> {
           obscureText: _obscurePassword,
           cursorColor: const Color(0xFF575959),
           decoration: InputDecoration(
-            hintText: "Enter Password",
+            hintText: "Enter $cleanHint", // ✅ cleaned version
             hintStyle: const TextStyle(
               fontSize: 14,
               color: Color(0xFF575959),
@@ -207,8 +209,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            filled: true,
-            fillColor: Colors.white,
+            filled: true, fillColor: const Color(0xFFFFF6ED), // same as background
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
