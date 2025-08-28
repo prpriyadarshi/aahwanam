@@ -1,8 +1,10 @@
 import 'package:aahwanam/screens/account/cart_screen.dart';
+import 'package:aahwanam/screens/account/mypackages_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/account/account_bloc.dart';
+import '../../screens/Packages/mypackage_cart.dart';
 
 class AddToCartBottomBar extends StatelessWidget {
   final String imageUrl;
@@ -80,7 +82,7 @@ class AddToCartBottomBar extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const CartScreen(),
+                    builder: (context) => const MyPackageCart(),
                   ),
                 );
               },
