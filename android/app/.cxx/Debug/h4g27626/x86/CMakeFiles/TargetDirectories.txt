@@ -1,2 +1,0 @@
-C:/Users/ArchanaA/AndroidStudioProjects/aahwanam/android/app/.cxx/Debug/h4g27626/x86/CMakeFiles/edit_cache.dir
-C:/Users/ArchanaA/AndroidStudioProjects/aahwanam/android/app/.cxx/Debug/h4g27626/x86/CMakeFiles/rebuild_cache.dir
