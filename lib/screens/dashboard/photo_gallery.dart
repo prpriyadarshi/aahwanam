@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../widgets/custom_text_field.dart';
 
 class PhotoGallery extends StatelessWidget {
@@ -16,11 +15,10 @@ class PhotoGallery extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             _buildCategorySection(context, "Kitty Party"),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             _buildCategorySection(context, "Get Together"),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             _buildCategorySection(context, "Birthday Party"),
           ],
         ),
@@ -38,22 +36,21 @@ class PhotoGallery extends StatelessWidget {
       children: [
         Text(
           categoryTitle,
-          style: TextFontStyle.textFontStyle( 16, Colors.black87,FontWeight.w600),
+          style: TextFontStyle.textFontStyle(12,  Color(0xFF575959), FontWeight.w500),
         ),
         const SizedBox(height: 12),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-            childAspectRatio: 1.0,
+
+        // 👇 Horizontal scroll instead of grid
+        SizedBox(
+          height: 120,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: categoryImages.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 10),
+            itemBuilder: (context, index) {
+              return _buildImageCard(context, categoryImages[index], index, categoryImages);
+            },
           ),
-          itemCount: categoryImages.length,
-          itemBuilder: (context, index) {
-            return _buildImageCard(context, categoryImages[index], index, categoryImages);
-          },
         ),
       ],
     );
@@ -64,7 +61,12 @@ class PhotoGallery extends StatelessWidget {
       onTap: () => _openImageViewer(context, index, allImages),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: Image.asset(imageUrl, fit: BoxFit.cover),
+        child: Image.asset(
+          imageUrl,
+          fit: BoxFit.cover,
+          width: 105, // fixed width so images look aligned
+          height: 105,
+        ),
       ),
     );
   }
@@ -73,19 +75,14 @@ class PhotoGallery extends StatelessWidget {
   List<String> getImagesByCategory(String category) {
     final categoryData = photoGallery.firstWhere(
           (item) => item['category'] == category,
-      orElse: () => <String, Object>{}, // ✅ Match expected type
+      orElse: () => <String, Object>{},
     );
 
     if (categoryData.isNotEmpty && categoryData['images'] != null) {
       return List<String>.from(categoryData['images'] as List);
     }
-
     return [];
   }
-
-
-
-
 
   void _openImageViewer(BuildContext context, int index, List<String> images) {
     Navigator.of(context).push(MaterialPageRoute(
@@ -124,8 +121,9 @@ class _FullScreenImageViewerState extends State<_FullScreenImageViewer> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text('${currentIndex + 1} / ${widget.images.length}', style:
-            TextFontStyle.textFontStyle( 14, Colors.white)
+        title: Text(
+          '${currentIndex + 1} / ${widget.images.length}',
+          style: TextFontStyle.textFontStyle(14, Colors.white),
         ),
       ),
       body: PageView.builder(
