@@ -49,6 +49,7 @@ class BartenderBloc extends Bloc<BartenderEvent, BartenderState> {
                 "images": [
                   "assets/images/KittyParty4.png",
                   "assets/images/Kitty-party2.png",
+                  "assets/images/Kitty-party1.png",
                   "assets/images/Kitty-party1.png"
                 ],
               },
@@ -58,7 +59,9 @@ class BartenderBloc extends Bloc<BartenderEvent, BartenderState> {
                 "images": [
                   "assets/images/Get-Together1.png",
                   "assets/images/Get-Together2.png",
-                  "assets/images/Get-Together3.png"
+                  "assets/images/Get-Together3.png",
+                  "assets/images/Kitty-party1.png",
+
                 ]
               },
               {
@@ -66,7 +69,8 @@ class BartenderBloc extends Bloc<BartenderEvent, BartenderState> {
                 "images": [
                   "assets/images/Get-Together1.png",
                   "assets/images/Birthday-Party1.png",
-                  "assets/images/Get-Together2.png"
+                  "assets/images/Get-Together2.png",
+                  "assets/images/Kitty-party1.png",
                 ]
 
               }
