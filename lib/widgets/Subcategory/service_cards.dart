@@ -113,7 +113,7 @@ class EventServiceCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(6),
                   child: Image.asset(
                     imageUrl,
-                    height: 160,
+                    height: 140,
                     width: 140,
                     fit: BoxFit.cover,
                   ),
