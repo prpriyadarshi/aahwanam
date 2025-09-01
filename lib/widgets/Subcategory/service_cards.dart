@@ -131,7 +131,7 @@ class EventServiceCard extends StatelessWidget {
                 title,
                 style: TextFontStyle.textFontStyle(13, const Color(0xFF575959), FontWeight.w500),
                 overflow: TextOverflow.ellipsis,
-                maxLines: 2,
+                maxLines: 1,
               ),
             ),
             Flexible(
