@@ -22,21 +22,23 @@ class CustomTile extends StatelessWidget {
     return Card(
       color: bgColor,
       child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0), // shrink inside padding
+        dense: true, // reduces overall height
         leading: Image.asset(
           imagePath,
-          width: 24,
-          height: 24,
+          width: 22, // slightly smaller icon
+          height: 20,
           fit: BoxFit.contain,
         ),
         title: Text(
           title,
           style: TextFontStyle.textFontStyle(
-            16, // Font size
+            14, // slightly smaller font
             const Color(0xFF575959),
             FontWeight.w500,
           ),
         ),
-        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+        trailing: const Icon(Icons.arrow_forward_ios, size: 14),
         onTap: onTap,
       ),
     );
