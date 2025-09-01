@@ -2,6 +2,7 @@ import 'package:aahwanam/blocs/Packages/events_bloc.dart';
 import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/concepts/concepts_bloc.dart';
 import 'package:aahwanam/blocs/eInvitation/eInvitation_bloc.dart';
+import 'package:aahwanam/screens/Packages/mypackage_cart.dart';
 import 'package:aahwanam/screens/account/account_screen.dart';
 import 'package:aahwanam/screens/dashboard/entertainment_book_service_screen.dart';
 import 'package:aahwanam/screens/dashboard/photograph_book_service_screen.dart';
@@ -85,6 +86,7 @@ class AppPages {
       AppRoutes.event:EventScreen(),
       AppRoutes.Subcategory: SubcategoryScreen(),
       AppRoutes.EventDetail: EventDetailsScreen(serviceId: '',),
+      AppRoutes.packagecartadded: MyPackageCart(),
 
     };
 

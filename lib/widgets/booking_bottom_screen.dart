@@ -1,6 +1,7 @@
 
 import 'package:aahwanam/screens/account/cart_proceedtopay_screen.dart';
 import 'package:aahwanam/widgets/custom_date_time_bottom_sheet.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -117,10 +118,10 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
                           onTap: isPastDate
                               ? null
                               : () {
-                                  modalSetState(() {
-                                    selectedDate = date;
-                                  });
-                                },
+                            modalSetState(() {
+                              selectedDate = date;
+                            });
+                          },
                           child: Container(
                             decoration: BoxDecoration(
                               color: isSelected ? Color(0xFF1E535B) : null,
@@ -132,8 +133,8 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
                                   color: isPastDate
                                       ? Colors.grey
                                       : isSelected
-                                          ? Colors.white
-                                          : Colors.black,
+                                      ? Colors.white
+                                      : Colors.black,
                                 )),
                           ),
                         );
@@ -232,7 +233,7 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
                               setModalState(() => selectedHour = index);
                             },
                             children: List.generate(12,
-                                (index) => Center(child: Text("${index + 1}"))),
+                                    (index) => Center(child: Text("${index + 1}"))),
                           ),
                         ),
                         Text(":", style: TextStyle(fontSize: 24)),
@@ -246,7 +247,7 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
                             },
                             children: List.generate(
                                 60,
-                                (index) => Center(
+                                    (index) => Center(
                                     child: Text(
                                         index.toString().padLeft(2, '0')))),
                           ),
@@ -341,26 +342,19 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Center(
+            Center(
               child: Text(
                 "Booking Details",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF575959),
-                ),
+                style:TextFontStyle.textFontStyle(18,Color(0xFF575959), FontWeight.w500),
+
               ),
             ),
             const SizedBox(height: 24),
 
             /// Booking Date
-            const Text(
+            Text(
               "Booking Date*",
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF575959),
-              ),
+              style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
             ),
             const SizedBox(height: 8),
             TextField(
@@ -387,22 +381,19 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
                   borderSide: BorderSide(color: Color(0xFF1E535B), width: 1.0),
                 ),
                 suffixIcon:
-                    const Icon(Icons.calendar_today, color: Color(0xFF575959)),
+                const Icon(Icons.calendar_today, color: Color(0xFF575959)),
                 contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               ),
             ),
 
             const SizedBox(height: 16),
 
             /// Booking Time
-            const Text(
+            Text(
               "Booking Time*",
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF575959),
-              ),
+              style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
+
             ),
             const SizedBox(height: 8),
             TextField(
@@ -429,9 +420,9 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
                   borderSide: BorderSide(color: Color(0xFF1E535B), width: 1.0),
                 ),
                 suffixIcon:
-                    const Icon(Icons.access_time, color: Color(0xFF575959)),
+                const Icon(Icons.access_time, color: Color(0xFF575959)),
                 contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               ),
             ),
 
@@ -449,18 +440,14 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.all(8),
                       side:
-                          const BorderSide(color: Color(0xFF1E535B), width: 1),
+                      const BorderSide(color: Color(0xFF1E535B), width: 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       "Cancel",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF1E535B),
-                      ),
+                      style:TextFontStyle.textFontStyle(12,Color(0xFF1E535B), FontWeight.w500),
                     ),
                   ),
                 ),
@@ -489,13 +476,9 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       "Set",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
-                      ),
+                      style:TextFontStyle.textFontStyle(12,Colors.white, FontWeight.w500),
                     ),
                   ),
                 ),

@@ -1,6 +1,5 @@
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
-
-import 'custom_text_field.dart';
 
 class CustomCartCard extends StatefulWidget  {
   final String title;
@@ -72,19 +71,14 @@ class _CustomCartCardState extends State<CustomCartCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text( widget.title,
-                        style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500), // smaller text
-
-
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 12, color: Color(0xFF575959),)
                     ),
                     const SizedBox(height: 4),
-                    Text( widget.description,
-                        style: TextFontStyle.textFontStyle(12, const Color(0xFF757575), FontWeight.w300), // smaller text
-
-                      ),
+                    Text( widget.description, style: const TextStyle( fontWeight: FontWeight.w300, fontSize: 12, color: Color(0xFF757575),)),
                     const SizedBox(height: 4),
                     Text('₹${ widget.price}',
-                        style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w600),
-                      ),
+                        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: Color(0xFF1E535B),)),
                   ],
                 ),
               ),
@@ -146,8 +140,10 @@ class _CustomCartCardState extends State<CustomCartCard> {
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('Event Details'),
+                children: [
+                  Text('Event Details',
+                    style: TextFontStyle.textFontStyle(12, Color(0xFF575959), FontWeight.w500),
+                  ),
                   Icon(Icons.chevron_right),
                 ],
               ),

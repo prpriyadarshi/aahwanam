@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'Subcategory/category_tile.dart';
+import 'custom_text_field.dart';
 
 class CustomCardWidgets {
   static Widget buildSection(
@@ -11,13 +13,20 @@ class CustomCardWidgets {
       }) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    final titleFontSize =
-    screenWidth < 350 ? 14.0 : screenWidth < 400 ? 15.0 : 16.0;
-    final viewAllFontSize =
-    screenWidth < 350 ? 10.0 : screenWidth < 400 ? 11.0 : 12.0;
+    // Responsive font sizes
+    final titleFontSize = screenWidth < 350
+        ? 14.0
+        : screenWidth < 400
+        ? 15.0
+        : 16.0;
+    final viewAllFontSize = screenWidth < 350
+        ? 10.0
+        : screenWidth < 400
+        ? 11.0
+        : 12.0;
 
-    final childAspectRatio =
-    screenWidth < 350 ? 0.88 : screenWidth < 400 ? 0.94 : 1.0;
+    // Adjust childAspectRatio for very small screens
+    final childAspectRatio = screenWidth < 350 ? 0.9 : 1.05;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +50,7 @@ class CustomCardWidgets {
                   child: Text(
                     "View All",
                     style: TextFontStyle.textFontStyle(
-                      viewAllFontSize,
+                      12,
                       const Color(0xFF1E535B),
                       FontWeight.w400,
                     ),
@@ -64,20 +73,31 @@ class CustomCardWidgets {
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
             final item = data[index];
-            return buildCardItem(item, screenWidth);
+            return buildCarditem(item, screenWidth);
           },
         ),
       ],
     );
   }
 
-  static Widget buildCardItem(Map<String, String> item, double screenWidth) {
-    final nameFontSize =
-    screenWidth < 350 ? 10.0 : screenWidth < 400 ? 11.0 : 12.0;
-    final priceFontSize =
-    screenWidth < 350 ? 9.0 : screenWidth < 400 ? 10.0 : 12.0;
-    final ratingFontSize =
-    screenWidth < 350 ? 8.0 : screenWidth < 400 ? 9.0 : 10.0;
+  static Widget buildCarditem(Map<String, String> item, double screenWidth) {
+    // Small-device adjustments
+    final imageHeight = screenWidth < 350 ? 100.0 : 105.0;
+    final nameFontSize = screenWidth < 350
+        ? 10.0
+        : screenWidth < 400
+        ? 11.0
+        : 12.0;
+    final priceFontSize = screenWidth < 350
+        ? 8.0
+        : screenWidth < 400
+        ? 9.0
+        : 12.0;
+    final ratingFontSize = screenWidth < 350
+        ? 8.0
+        : screenWidth < 400
+        ? 9.0
+        : 10.0;
 
     return Card(
       elevation: 0,
@@ -87,74 +107,94 @@ class CustomCardWidgets {
       ),
       margin: EdgeInsets.zero,
       child: Column(
-        mainAxisSize: MainAxisSize.min, // Prevent extra height
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(6.0)),
-            child: AspectRatio(
-              aspectRatio: 16 / 10,
-              child: item['image']!.startsWith('assets/')
-                  ? Image.asset(
-                item['image']!,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              )
-                  : Image.network(
-                item['image']!,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        item['name'] ?? '',
-                        style: TextFontStyle.textFontStyle(
-                          nameFontSize,
-                          const Color(0xFF575959),
-                          FontWeight.w500,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        const Icon(Icons.star,
-                            color: Color(0xFFEFAA37), size: 14),
-                        const SizedBox(width: 3),
-                        Text(
-                          item['rating'] ?? "0.0",
-                          style: TextFontStyle.textFontStyle(
-                            ratingFontSize,
-                            const Color(0xFF575959),
-                            FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(6.0),
                 ),
-                const SizedBox(height: 2), // Minimized spacing
-                Text(
-                  item['price'] ?? '',
-                  style: TextFontStyle.textFontStyle(
-                    priceFontSize,
-                    const Color(0xFF1E535B),
-                    FontWeight.w600,
+                child: item['image']!.startsWith('assets/')
+                    ? Image.asset(
+                  item['image']!,
+                  height: imageHeight,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                )
+                    : Image.network(
+                  item['image']!,
+                  height: imageHeight,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const Positioned(
+                top: 8,
+                right: 8,
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 10,
+                  child: Icon(
+                    Icons.favorite_border,
+                    size: 14,
+                    color: Colors.red,
                   ),
                 ),
-              ],
+              ),
+            ],
+          ),
+          Flexible(
+            child: Padding(
+              padding:
+              const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          item['name'] ?? '',
+                          style: TextFontStyle.textFontStyle(
+                            nameFontSize,
+                            const Color(0xFF575959),
+                            FontWeight.w500,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          const Icon(Icons.star,
+                              color: Color(0xFFEFAA37), size: 16),
+                          const SizedBox(width: 4),
+                          Text(
+                            item['rating'] ?? "0.0",
+                            style: TextFontStyle.textFontStyle(
+                              ratingFontSize,
+                              const Color(0xFF575959),
+                              FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4.0),
+                  Text(
+                    item['price'] ?? '',
+                    style: TextFontStyle.textFontStyle(
+                      priceFontSize,
+                      const Color(0xFF1E535B),
+                      FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

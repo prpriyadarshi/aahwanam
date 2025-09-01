@@ -1,6 +1,6 @@
 import 'package:aahwanam/screens/dashboard/photo_gallery.dart';
 import 'package:aahwanam/screens/dashboard/reviewList.dart';
-import 'package:aahwanam/widgets/custom_event_date_time%20_picker.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +13,7 @@ import '../../widgets/book_service_screen.dart';
 import '../../widgets/custom_ChangeAddressSheet.dart';
 import '../../widgets/custom_bottom_sheet.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
+import '../../widgets/custom_event_date_time_picker.dart';
 import '../../widgets/custom_inputfield.dart';
 import '../../widgets/custom_text_field.dart';
 
@@ -34,11 +35,77 @@ class PackageDetailScreen extends StatelessWidget {
             length: 3,
             child: Scaffold(
               appBar: AppBar(
-                title: Text(state.package?['title'] ?? ''),
-                backgroundColor: Colors.white,
                 elevation: 0,
-                iconTheme: const IconThemeData(color: Colors.black),
-                titleTextStyle: TextFontStyle.textFontStyle( 18, Colors.black),
+                scrolledUnderElevation: 0,
+                automaticallyImplyLeading: false,
+                toolbarHeight: 56,
+                titleSpacing: 0,
+                leadingWidth: 0,
+                backgroundColor: Colors.white,
+                title: Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back_ios_new,
+                          size: 24, color: Color(0xFF1E535B)),
+                      onPressed: () => Navigator.pop(context),
+                      padding: const EdgeInsets.only(left: 8),
+                      splashRadius: 20,
+                      constraints: const BoxConstraints(),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: SizedBox(
+                          height: 40,
+                          child: _buildSearchBar(), // 🔍 your search bar widget
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        const SizedBox(width: 10),
+                        GestureDetector(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                              ),
+                              builder: (context) => CustomDateTimeBottomSheet(
+                                onConfirm: (DateTime fullDateTime) {
+                                  print("Selected DateTime: $fullDateTime");
+                                },
+                              ),
+                            );
+                          },
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: const [
+                              Icon(Icons.calendar_today,
+                                  size: 20, color: Color(0xFF004d40)),
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                child: Icon(Icons.access_time,
+                                    size: 10, color: Color(0xFF004d40)),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Image.asset('assets/images/cart.png', width: 24, height: 24),
+                        const SizedBox(width: 10),
+                        IconButton(
+                          icon: const Icon(Icons.favorite, color: Colors.red),
+                          onPressed: () {},
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
                 bottom: TabBar(
                   indicatorColor: Colors.teal, // underline stays
                   dividerColor: Colors.transparent, // 🚀 removes the extra bottom line
@@ -46,26 +113,22 @@ class PackageDetailScreen extends StatelessWidget {
                   unselectedLabelColor: Colors.grey,
                   labelStyle: TextFontStyle.textFontStyle(
                     18,
-                    Color(0xFF575959),
+                    const Color(0xFF575959),
                     FontWeight.w500,
                   ),
-                  tabs: [
+                  tabs: const [
                     Tab(text: "All Details"),
                     Tab(text: "Gallery"),
                     Tab(text: "Review"),
                   ],
                 ),
-
-
-
               ),
-                    body: TabBarView(
+              body: TabBarView(
                 children: [
-                  // ✅ Ensure these widgets are not wrapped in Scaffold or another DefaultTabController
                   _buildDetailsTab(state),
                   PhotoGallery(photoGallery: package["photo_gallery"]),
-
-                  ReviewList(reviews: package["reviews"], galleryImages: state.gallery),
+                  ReviewList(
+                      reviews: package["reviews"], galleryImages: state.gallery),
                 ],
               ),
               bottomNavigationBar: BottomActionBar(
@@ -73,17 +136,16 @@ class PackageDetailScreen extends StatelessWidget {
                   // Handle add to cart
                 },
                 onBookService: (BuildContext context) {
-                  // Handle booking
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BookServiceScreen(package: package)),
+                    MaterialPageRoute(
+                        builder: (context) => BookServiceScreen(package: package)),
                   );
                 },
               ),
-
             ),
-
           );
+
 
 
         },
@@ -97,7 +159,7 @@ class PackageDetailScreen extends StatelessWidget {
       color: Colors.white,
     child: SingleChildScrollView(
 
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
+      padding: const EdgeInsets.fromLTRB(19, 16, 16, 80),
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,4 +273,19 @@ class PackageDetailScreen extends StatelessWidget {
     ),
     );
   }
+}
+
+Widget _buildSearchBar() {
+  return TextField(
+    decoration: InputDecoration(
+      hintText: 'Search here...',
+      prefixIcon: const Icon(Icons.search),
+      filled: true,
+      fillColor: const Color(0xFFF8F8F8),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide.none,
+      ),
+    ),
+  );
 }
