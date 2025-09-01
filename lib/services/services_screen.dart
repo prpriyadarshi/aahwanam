@@ -2,6 +2,7 @@ import 'package:aahwanam/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../widgets/custom_date_time_bottom_sheet.dart';
 import '../widgets/custom_text_field.dart';
 // Cubit for managing navigation
 class ServiceCubit extends Cubit<String?> {
@@ -39,20 +40,51 @@ class ServicesScreen extends StatelessWidget {
         },
         child: Scaffold(
           appBar: AppBar(
-            title:  Text("Services",
-              style: TextFontStyle.textFontStyle(
-             20,
-              Color(0xFF575959),
-              FontWeight.w500,
-            ),),
             backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
             elevation: 0,
+            automaticallyImplyLeading: false,
+            titleSpacing: 0,
+            leadingWidth: 0,
+            title: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back_ios_new,
+                      size: 24, color: Color(0xFF1E535B)),
+                  onPressed: () => Navigator.pop(context),
+                  padding: const EdgeInsets.only(left: 8),
+                  splashRadius: 20,
+                  constraints: const BoxConstraints(),
+                ),
+
+                Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: SizedBox(
+                      height: 40,
+                      width:220,
+
+
+                      child: _buildSearchBar(),
+                    ),
+                  ),
+
+
+
+                const SizedBox(width: 5),
+                Image.asset('assets/images/cart.png', width: 24, height: 24),
+                const SizedBox(width: 5),
+                IconButton(
+                  icon: const Icon(Icons.favorite, color: Colors.red),
+                  onPressed: () {},
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                ),
+              ],
+            ),
           ),
 
           backgroundColor: Colors.white,
           body: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -65,7 +97,7 @@ class ServicesScreen extends StatelessWidget {
                   ),
 
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 7),
                 Expanded(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
@@ -77,8 +109,8 @@ class ServicesScreen extends StatelessWidget {
                         itemCount: services.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 5,
+                          crossAxisSpacing: 0,
+                          mainAxisSpacing: 0,
                           childAspectRatio:0.7,
                         ),
                         itemBuilder: (context, index) {
@@ -115,7 +147,7 @@ class ServicesScreen extends StatelessWidget {
                                   service["title"]!,
                                   textAlign: TextAlign.center,
                                   style: TextFontStyle.textFontStyle(
-                                    MediaQuery.of(context).size.width * 0.03,
+                                    MediaQuery.of(context).size.width * 0.034,
                                     Color(0xFF575959),
                                     FontWeight.w500,
                                   ),
@@ -126,12 +158,30 @@ class ServicesScreen extends StatelessWidget {
                           );
                         },
                       );
+
+
                     },
                   ),
-                ),
+                                ),
               ],
             ),
+
           ),
+        ),
+      ),
+    );
+  }
+  Widget _buildSearchBar() {
+    return TextField(
+      style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400), // smaller text
+      decoration: InputDecoration(
+        hintText: 'Search here...',
+        prefixIcon: const Icon(Icons.search),
+        filled: true,
+        fillColor: const Color(0xFFF8F8F8),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
         ),
       ),
     );
