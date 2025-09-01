@@ -72,7 +72,8 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
 
   void _handleExternalWallet(ExternalWalletResponse response) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("External Wallet Selected: ${response.walletName}")),
+      SnackBar(
+          content: Text("External Wallet Selected: ${response.walletName}")),
     );
   }
 
@@ -82,7 +83,7 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
       builder: (context) {
         final controller = TextEditingController();
         return AlertDialog(
-          title:  Text("Enter UPI ID",            style: TextFontStyle.textFontStyle(
+          title: Text("Enter UPI ID", style: TextFontStyle.textFontStyle(
             12,
             Color(0xFF575959),
             FontWeight.w400,
@@ -94,7 +95,7 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, controller.text.trim()),
-              child:  Text("Submit",            style: TextFontStyle.textFontStyle(
+              child: Text("Submit", style: TextFontStyle.textFontStyle(
                 12,
                 Color(0xFF575959),
                 FontWeight.w400,
@@ -122,13 +123,13 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text("Payment Options",
-            style: TextFontStyle.textFontStyle(
-              18,
-              Color(0xFF575959),
-              FontWeight.bold,
-            ),
+        title: Text("Payment Options",
+          style: TextFontStyle.textFontStyle(
+            18,
+            Color(0xFF575959),
+            FontWeight.bold,
           ),
+        ),
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF1E535B)),
@@ -137,6 +138,7 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
         ),
       ),
       bottomNavigationBar: Container(
+        margin: const EdgeInsets.only(bottom: 10), // ✅ Move button slightly up
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: SizedBox(
           width: 170,
@@ -145,15 +147,17 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
             child: ElevatedButton(
               onPressed: () {
                 if (selectedPaymentMethod == 'upi' && !useDefaultUpi) {
-                  _showUpiInputDialog(); // Ask for UPI ID
+                  _showUpiInputDialog();
                 } else {
-                  _launchRazorpay(); // Default UPI app flow
+                  _launchRazorpay();
                 }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF1E535B),
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12, horizontal: 16),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
               ),
               child: Text(
                 "Proceed to Pay ₹${widget.total?.toStringAsFixed(2) ?? '0.00'}",
@@ -162,14 +166,14 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
                   Colors.white,
                   FontWeight.bold,
                 ),
-
               ),
-
             ),
           ),
         ),
       ),
+
       body: _buildBody(),
+
     );
   }
 
@@ -179,7 +183,7 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
       children: [
         _upiSection(),
         const SizedBox(height: 16),
-         Text("Cards",
+        Text("Cards",
 
           style: TextFontStyle.textFontStyle(
             12,
@@ -187,17 +191,17 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
             FontWeight.bold,
           ),
 
-          ),
+        ),
         const SizedBox(height: 10),
         _cardSection(),
         const SizedBox(height: 24),
-         Text("Pay On Delivery",
-            style: TextFontStyle.textFontStyle(
-              12,
-              Color(0xFF575959),
-              FontWeight.bold,
-            ),
-         ),
+        Text("Pay On Delivery",
+          style: TextFontStyle.textFontStyle(
+            12,
+            Color(0xFF575959),
+            FontWeight.bold,
+          ),
+        ),
         const SizedBox(height: 10),
         _codSection(),
       ],
@@ -205,96 +209,110 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
   }
 
   Widget _upiSection() {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF8F8F8),
-        border: Border.all(color: const Color(0xFFE2E2E2)),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-           Text("Pay by UPI",
-              style: TextFontStyle.textFontStyle(
-                14,
-                Color(0xFF575959),
-                FontWeight.bold,
-              ),
-             ),
-          const SizedBox(height: 10),
-          _buildPaymentOptionCard(
-            title: "Pay by any UPI app",
-            subtitle: "Use any UPI app on your phone to pay",
-            leadingIcon: Icons.account_balance_wallet_outlined,
-            selected: selectedPaymentMethod == "upi" && useDefaultUpi,
-            onTap: () {
-              setState(() {
-                selectedPaymentMethod = "upi";
-                useDefaultUpi = true;
-              });
-            },
-            showArrow: false,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Pay by UPI",
+          style: TextFontStyle.textFontStyle(
+            14,
+            const Color(0xFF575959),
+            FontWeight.w600,
           ),
-          const SizedBox(height: 8),
-          const Divider(color: Color(0xFFF1F1F1)),
-          const SizedBox(height: 8),
-          Row(
+        ),
+        const SizedBox(height: 8),
+        Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF8F8F8),
+            border: Border.all(color: const Color(0xFFE2E2E2)),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildMiniUpiIcon("assets/images/paytm.jpg", "Paytm", () {
-                setState(() {
-                  selectedPaymentMethod = "upi";
-                  useDefaultUpi = true;
-                });
-                _launchRazorpay();
-              }),
-              const SizedBox(width: 12),
-              _buildMiniUpiIcon("assets/images/phonepay.jpg", "PhonePe", () {
-                setState(() {
-                  selectedPaymentMethod = "upi";
-                  useDefaultUpi = true;
-                });
-                _launchRazorpay();
-              }),
+              _buildPaymentOptionCard(
+                title: "Pay by any UPI app",
+                subtitle: "Use any UPI app on your phone to pay",
+                leadingIcon: Icons.account_balance_wallet_outlined,
+                selected: selectedPaymentMethod == "upi" && useDefaultUpi,
+                onTap: () {
+                  setState(() {
+                    selectedPaymentMethod = "upi";
+                    useDefaultUpi = true;
+                  });
+                },
+                showArrow: false,
+              ),
+
+              const SizedBox(height: 8),
+              const Divider(color: Color(0xFFF1F1F1)),
+              const SizedBox(height: 8),
+              Row(
+
+                children: [
+                  _buildMiniUpiIcon("assets/images/paytm.jpg", "Paytm", () {
+                    setState(() {
+                      selectedPaymentMethod = "upi";
+                      useDefaultUpi = true;
+                    });
+                    _launchRazorpay();
+                  }),
+                  const SizedBox(width: 40),
+                  _buildMiniUpiIcon(
+                      "assets/images/phonepay.jpg", "PhonePe", () {
+                    setState(() {
+                      selectedPaymentMethod = "upi";
+                      useDefaultUpi = true;
+                    });
+                    _launchRazorpay();
+                  }),
+                ],
+              ),
+
+              const SizedBox(height: 8),
+              const Divider(color: Color(0xFFF1F1F1)),
+              const SizedBox(height: 8),
+              GestureDetector(
+                onTap: _showUpiInputDialog,
+                child: Row(
+                  children: [
+                    Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1E535B),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: const Icon(
+                          Icons.add, color: Colors.white, size: 20),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      "Add new UPI ID",
+                      style: TextFontStyle.textFontStyle(
+                        14,
+                        const Color(0xFF1E535B),
+                        FontWeight.w500,
+                      ),
+                    ),
+                    const Spacer(),
+                    const Icon(Icons.arrow_forward_ios,
+                        size: 16, color: Color(0xFF1E535B)),
+                  ],
+                ),
+              ),
             ],
           ),
-          const SizedBox(height: 8),
-          const Divider(color: Color(0xFFF1F1F1)),
-          const SizedBox(height: 8),
-          GestureDetector(
-            onTap: _showUpiInputDialog,
-            child: Row(
-              children: [
-                Container(
-                  width: 24,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1E535B),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: const Icon(Icons.add, color: Colors.white, size: 20),
-                ),
-                const SizedBox(width: 8),
-                 Text("Add new UPI ID",
-                    style: TextFontStyle.textFontStyle(
-                      14,
-                      Color(0xFF1E535B),
-                      FontWeight.w500,
-                    ),
-                 ),
-                const Spacer(),
-                const Icon(Icons.arrow_forward_ios, size: 16, color: Color(0xFF1E535B)),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
+
   Widget _cardSection() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Reduced padding
       decoration: BoxDecoration(
         color: const Color(0xFFF8F8F8),
         border: Border.all(color: const Color(0xFFE2E2E2)),
@@ -319,7 +337,7 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
 
   Widget _codSection() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Reduced padding
       decoration: BoxDecoration(
         color: const Color(0xFFF8F8F8),
         border: Border.all(color: const Color(0xFFE2E2E2)),
@@ -338,6 +356,7 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
     );
   }
 
+
   Widget _buildPaymentOptionCard({
     required String title,
     String? subtitle,
@@ -348,61 +367,106 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
   }) {
     return GestureDetector(
       onTap: onTap,
-      child: Row(
-        children: [
-          Icon(leadingIcon, color: const Color(0xFF1E535B)),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
+      child: Container(
+        width: double.infinity,
+        // ✅ Full width
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        // ✅ Better touch area
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // ✅ Distribute space
+          children: [
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title,
-                    style: TextFontStyle.textFontStyle(
-                      14,
-                      Color(0xFF575959),
-                      FontWeight.w500,
+                Icon(leadingIcon, color: const Color(0xFF1E535B)),
+                const SizedBox(width: 12),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.55, // ✅ Prevent overflow
+                      child: Text(
+                        title,
+                        style: TextFontStyle.textFontStyle(
+                          14,
+                          const Color(0xFF575959),
+                          FontWeight.w500,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
+                    if (subtitle != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: SizedBox(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width * 0.55,
+                          child: Text(
+                            subtitle,
+                            style: const TextStyle(fontSize: 12,
+                                color: Colors.grey),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
-                if (subtitle != null) Text(subtitle, style: const TextStyle(fontSize: 12, color: Colors.grey)),
               ],
             ),
-          ),
-          const Spacer(),
-          if (showArrow) const Icon(Icons.arrow_forward_ios, size: 16, color: Color(0xFF1E535B)),
-          if (selected) const Icon(Icons.check_circle, color: Color(0xFF1E535B)),
-        ],
+            Row(
+              children: [
+                if (showArrow)
+                  const Icon(Icons.arrow_forward_ios, size: 16,
+                      color: Color(0xFF1E535B)),
+                if (selected)
+                  const Icon(Icons.check_circle, color: Color(0xFF1E535B)),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildMiniUpiIcon(String imagePath, String label, VoidCallback onTap) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Column(
-          children: [
-            Container(
-              height: 48,
-              width: 48,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: const Color(0xFFE0E0E0)),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(imagePath, fit: BoxFit.cover),
-              ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start, // Align text to left
+        children: [
+          Container(
+            height: 48,
+            width: 48,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: const Color(0xFFE0E0E0)),
             ),
-            const SizedBox(height: 6),
-            Text(label,
-                style: TextFontStyle.textFontStyle(
-                  12,
-                  Color(0xFF575959),
-                  FontWeight.w500,
-                ),
-              ),
-          ],
-        ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(imagePath, fit: BoxFit.cover),
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            label,
+            textAlign: TextAlign.start,
+            style: TextFontStyle.textFontStyle(
+              12,
+              const Color(0xFF575959),
+              FontWeight.w500,
+            ),
+          ),
+        ],
       ),
     );
   }

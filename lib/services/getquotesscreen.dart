@@ -170,23 +170,43 @@ class _GetquotescreenState extends State<Getquotescreen> {
                   ),
                   StatefulBuilder(
                     builder: (context, setState) {
-                      return RangeSlider(
-                        values: currentRange,
-                        min: 1000,
-                        max: 50000,
-                        divisions: 49,
-                        activeColor: const Color(0xFF1E535B),
-                        inactiveColor: const Color(0xFFE0E0E0),
-                        labels: RangeLabels(
-                          '₹${currentRange.start.toInt()}',
-                          '₹${currentRange.end.toInt()}',
+                      return SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          trackHeight: 1.5,
+                          activeTrackColor: const Color(0xFF1E535B),
+                          inactiveTrackColor: Colors.grey.shade300,
+                          thumbColor: const Color(0xFF1E535B),
+                          overlayColor: Colors.transparent,
+                          valueIndicatorColor: const Color(0xFF1E535B),
+                          valueIndicatorTextStyle: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          showValueIndicator: ShowValueIndicator.always,
                         ),
-                        onChanged: (values) {
-                          setState(() => currentRange = values);
-                        },
+                        child: RangeSlider(
+                          values: currentRange,
+                          min: 1000,
+                          max: 50000,
+                          // Remove divisions to remove dots
+                          labels: RangeLabels(
+                            '₹${currentRange.start.toInt()}',
+                            '₹${currentRange.end.toInt()}',
+                          ),
+                          onChanged: (values) {
+                            setState(() => currentRange = values);
+                          },
+                        ),
                       );
                     },
                   ),
+
+
+
+
+
+
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
@@ -282,7 +302,7 @@ class _GetquotescreenState extends State<Getquotescreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Center(
                       child: SizedBox(
-                        width: 300,
+                        width: 250,
                         height: 48,
                         child: ElevatedButton(
                           onPressed: () {

@@ -78,16 +78,19 @@ class CustomBookService extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                  borderRadius:
-                      BorderRadius.circular(8), // Subtle rounded corners
-                  child: Image.asset(
-                    data.imagePath ?? 'assets/images/Choreographers.png',
-                    height: 90,
-                    width: 90, // Make it square-ish or slightly rectangular
-                    fit: BoxFit.cover,
-                  ),
+
+
+                Image.asset(
+                  data.imagePath ?? 'assets/images/photographer.png',
+                  height: 100,
+                  width: 90,
+
+                  fit: BoxFit.cover,
                 ),
+
+
+
+
                 SizedBox(width: 12),
                 Expanded(
                   child: Column(

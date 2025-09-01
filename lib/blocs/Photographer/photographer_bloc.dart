@@ -241,7 +241,7 @@ class PhotographerBloc extends Bloc<PhotographerEvent, PhotographerState> {
 
         final bookServiceDetails = BookServiceDetails(
             title: 'Silver Package by Photo Studio',
-            imagePath: 'assets/images/photographer.png',
+            imagePath: 'assets/images/Photography event.png',
             description: 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
             price: '8,000 ',
             locationTitle: 'Financial District',
