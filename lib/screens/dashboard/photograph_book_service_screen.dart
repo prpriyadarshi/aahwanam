@@ -28,76 +28,63 @@ class PhotographBookServiceScreen extends StatelessWidget {
       create: (context) => PhotographerBloc()..add(FetchPhotographers()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Book Service",           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: Color(0xFF575959),
-
-          ),),
+          title: const Text(
+            "Book Service",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF575959),
+            ),
+          ),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          iconTheme: const IconThemeData(color: Color(0xFF575959)),
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center, // or .center if you prefer
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.bookPhotographService);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PaymentOptionsScreen(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF1E535B),
+                  backgroundColor: const Color(0xFF1E535B),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 50,), // controls content padding
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PaymentOptionsScreen(),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E535B),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5), // 👈 decreased height
-                  ),
-                  child:  Text(
-                    "Proceed to pay",
-                    style: TextFontStyle.textFontStyle(
-                      12,
-                      Colors.white,
-                      FontWeight.w600,
-                    ),
-
+                child: const Text(
+                  "Proceed to pay",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
                   ),
                 ),
-
-
               ),
             ],
           ),
         ),
-
         backgroundColor: Colors.white,
         body: BlocBuilder<PhotographerBloc, PhotographerState>(
           builder: (context, state) {
             if (state is PhotographerLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is PhotographerLoaded) {
-
               return SingleChildScrollView(
                 child: CustomBookService(
                   data: state.bookServiceDetails,
                   onChangeAddress: () => _showChangeAddress(context),
                 ),
               );
-
             } else if (state is PhotographerError) {
               return Center(child: Text(state.message));
             }
@@ -107,6 +94,7 @@ class PhotographBookServiceScreen extends StatelessWidget {
       ),
     );
   }
+
 }
 
 
@@ -140,6 +128,14 @@ void _showChangeAddress(BuildContext context) {
 
 
               ),
+
+          Text(
+            'Change Address',
+            style: TextFontStyle.textFontStyle(
+              16,
+              Color(0xFF575959),
+              FontWeight.w600,
+            )),
               SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
@@ -389,6 +385,7 @@ Widget _buildTextField({
   required String label,
   TextInputType keyboardType = TextInputType.text,
   bool isNumberField = false,
+  double width = 360, // Default reduced width
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -397,34 +394,34 @@ Widget _buildTextField({
         label,
         style: TextFontStyle.textFontStyle(
           14,
-          Color(0xFF575959),
+          const Color(0xFF575959),
           FontWeight.w400,
         ),
-
-
-
       ),
-      SizedBox(height: 6),
-      TextField(
-        keyboardType: keyboardType,
-        inputFormatters: isNumberField
-            ? [FilteringTextInputFormatter.digitsOnly] // 👈 Allow only numbers
-            : null,
-        decoration: InputDecoration(
-          hintText: hintText,
-
-          hintStyle: TextFontStyle.textFontStyle(
-       // 👈 Set hint text color
-           14,const  Color(0xFF575959),  FontWeight.w400,
-          ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Colors.grey.shade300),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Colors.grey.shade300),
+      const SizedBox(height: 6),
+      SizedBox(
+        width: width, // 👈 Apply reduced width here
+        child: TextField(
+          keyboardType: keyboardType,
+          inputFormatters: isNumberField
+              ? [FilteringTextInputFormatter.digitsOnly] // 👈 Allow only numbers
+              : null,
+          decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: TextFontStyle.textFontStyle(
+              14,
+              const Color(0xFF575959),
+              FontWeight.w400,
+            ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.grey.shade300),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.grey.shade300),
+            ),
           ),
         ),
       ),

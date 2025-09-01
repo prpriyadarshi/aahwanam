@@ -98,30 +98,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           as ImageProvider,
                         ),
                         Positioned(
-                          bottom: 0,
-                          right: 0,
+                          bottom: 2,
+                          right: 2,
                           child: GestureDetector(
                             onTap: _pickProfileImage,
                             child: Container(
-                              padding: const EdgeInsets.all(4),
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
+                              padding: const EdgeInsets.all(2), // Border thickness
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color(0xFF1E535B) ,      // top-left color
+                                    Colors.pinkAccent,  // bottom-right color
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
                               ),
-                              child: const Icon(Icons.edit,
-                                  size: 18, color: Colors.black),
+                              child: Container(
+                                padding: const EdgeInsets.all(3), // Inner circle padding
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.edit,
+                                  size: 10,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 18),
                   Text(
                     "Profile Details",
-                    style:TextFontStyle.textFontStyle(16,Color(0xFF575959), FontWeight.w500),
+                    style:TextFontStyle.textFontStyle(18,Color(0xFF575959), FontWeight.w500),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 6),
 
                   // Reusable InputFields widgets
                   Row(
@@ -133,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           keyboardType: TextInputType.text,
                         ),
                       ),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 8),
                       // Add spacing between the two fields
                       Expanded(
                         child: CustomInputField(
@@ -144,14 +161,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 2),
 
                   CustomInputField(
                     controller: _phoneController,
                     labelText: "Phone Number *",
                     keyboardType: TextInputType.phone,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 2),
 
                   CustomInputField(
                     controller: _emailController,
@@ -159,7 +176,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     keyboardType: TextInputType.emailAddress,
                   ),
 
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 40),
 
                   // Submit button with white text color and rounded corners
                   SizedBox(
@@ -190,11 +207,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 40),
 
                   // Divider for separation
                   const Divider(thickness: 1, color: Color(0xFFE4E4E4)),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
 
                   // Delete Account Section
                   GestureDetector(
