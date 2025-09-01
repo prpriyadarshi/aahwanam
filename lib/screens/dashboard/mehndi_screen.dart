@@ -11,6 +11,7 @@ import '../../services/mehandi_service/mehandi.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_date_time_bottom_sheet.dart';
 import '../../widgets/custom_image_card_widget.dart';
+import '../../widgets/custom_text_field.dart';
 
 class MehndiScreen extends StatelessWidget {
   @override
@@ -28,18 +29,20 @@ class MehndiScreen extends StatelessWidget {
         title: Row(
           children: [
             IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, size: 24, color: Color(0xFF1E535B)),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              padding: const EdgeInsets.only(left: 8),
+              icon: const Icon(Icons.arrow_back_ios_new,
+                  size: 24, color: Color(0xFF1E535B)),
+              onPressed: () => Navigator.pop(context),
+              padding: const EdgeInsets.only(left: 4),
               splashRadius: 20,
               constraints: const BoxConstraints(),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: SizedBox(height: 40, child: _buildSearchBar()),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: SizedBox(
+                height: 40,
+                width:190,
+                child: _buildSearchBar(),
               ),
             ),
             Row(
@@ -198,15 +201,33 @@ class MehndiScreen extends StatelessWidget {
 
 }
 Widget _buildSearchBar() {
-  return TextField(
-    decoration: InputDecoration(
-      hintText: 'Search here...',
-      prefixIcon: const Icon(Icons.search),
-      filled: true,
-      fillColor: const Color(0xFFF8F8F8),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide.none,
+  return SizedBox(
+    height: 40,
+    width: 200,
+    child: TextField(
+      style: TextFontStyle.textFontStyle(
+        14,
+        const Color(0xFF575959),
+        FontWeight.w400,
+      ),
+      decoration: InputDecoration(
+        hintText: 'Search here...',
+        // Padding applied only to the left of the icon
+        prefixIcon: Padding(
+          padding: const EdgeInsets.only(left: 10), // 5 px from left edge
+          child: const Icon(Icons.search, size: 20, color: Color(0xFF575959)),
+        ),
+        prefixIconConstraints: const BoxConstraints(
+          minWidth: 25,
+          minHeight: 20,
+        ),
+        filled: true,
+        fillColor: const Color(0xFFF8F8F8),
+        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0), // text padding
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
       ),
     ),
   );
