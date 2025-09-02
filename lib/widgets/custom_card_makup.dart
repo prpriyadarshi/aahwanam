@@ -17,7 +17,7 @@ class CustomCardMakeUpWidgets {
     final viewAllFontSize = screenWidth < 350 ? 10.0 : screenWidth < 400 ? 11.0 : 12.0;
 
     // Adjust childAspectRatio for very small screens
-    final childAspectRatio = screenWidth < 350 ? 0.9 : 1.05;
+    final childAspectRatio = screenWidth < 350 ? 0.65 : 0.92;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,43 +70,75 @@ class CustomCardMakeUpWidgets {
       ],
     );
   }
-
-  static Widget buildCardmakeUp(BuildContext context, Map<String, String> item, double screenWidth) {
-    final imageHeight = screenWidth < 350 ? 100.0 : 110.0;
-    final nameFontSize = screenWidth < 350 ? 10.0 : screenWidth < 400 ? 11.0 : 12.0;
-    final priceFontSize = screenWidth < 350 ? 8.0 : screenWidth < 400 ? 9.0 : 12.0;
-    final ratingFontSize = screenWidth < 350 ? 8.0 : screenWidth < 400 ? 9.0 : 10.0;
-
+  static Widget buildCardmakeUp(
+      BuildContext context, Map<String, String> item, double screenWidth) {
+    // Small-device adjustments
+    final imageHeight = screenWidth < 350 ? 90.0 : 120.0;
+    final nameFontSize = screenWidth < 350
+        ? 10.0
+        : screenWidth < 400
+        ? 12.0
+        : 12.0;
+    final priceFontSize = screenWidth < 350
+        ? 10.0
+        : screenWidth < 400
+        ? 12.0
+        : 10.0;
+    final ratingFontSize = screenWidth < 350
+        ? 8.0
+        : screenWidth < 400
+        ? 8.0
+        : 10.0;
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MakeUpTheme(makeupHair: item)),
+
+            MaterialPageRoute(builder: (context) => MakeUpTheme(makeupHair: item)),
+
         );
       },
       child: Card(
         elevation: 0,
         color: const Color(0xFFFFEFDF),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6.0),
+        ),
         margin: EdgeInsets.zero,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image
+            // Image Section
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(6.0)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(6.0),
+              ),
               child: item['image']!.startsWith('assets/')
-                  ? Image.asset(item['image']!, height: imageHeight, width: double.infinity, fit: BoxFit.cover)
-                  : Image.network(item['image']!, height: imageHeight, width: double.infinity, fit: BoxFit.cover),
+                  ? Image.asset(
+                item['image']!,
+                height: imageHeight,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              )
+                  : Image.network(
+                item['image']!,
+                height: imageHeight,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
+
             // Text Section
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0), // minimal padding
+              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                         child: Text(
@@ -116,13 +148,15 @@ class CustomCardMakeUpWidgets {
                             const Color(0xFF575959),
                             FontWeight.w500,
                           ),
+
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.star, color: Color(0xFFEFAA37), size: 14),
+                          const Icon(Icons.star,
+                              color: Color(0xFFEFAA37), size: 14),
                           const SizedBox(width: 2),
                           Text(
                             item['rating'] ?? "0.0",
@@ -131,11 +165,13 @@ class CustomCardMakeUpWidgets {
                               const Color(0xFF575959),
                               FontWeight.w400,
                             ),
+
                           ),
                         ],
                       ),
                     ],
                   ),
+                  const SizedBox(height: 2.0),
                   Text(
                     item['price'] ?? '',
                     style: TextFontStyle.textFontStyle(
@@ -143,6 +179,7 @@ class CustomCardMakeUpWidgets {
                       const Color(0xFF1E535B),
                       FontWeight.w600,
                     ),
+
                   ),
                 ],
               ),
@@ -153,3 +190,6 @@ class CustomCardMakeUpWidgets {
     );
   }
 }
+
+
+
