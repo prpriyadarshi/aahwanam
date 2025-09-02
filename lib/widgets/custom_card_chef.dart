@@ -24,7 +24,7 @@ class CustomCardChefWidgets {
         ? 11.0
         : 12.0;
 
-    final childAspectRatio = screenWidth < 350 ? 0.9 : 1.05;
+    final childAspectRatio = screenWidth < 350 ? 0.65 : 0.92;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,21 +80,21 @@ class CustomCardChefWidgets {
 
   static Widget buildCardchef(
       BuildContext context, Map<String, String> item, double screenWidth) {
-    final imageHeight = screenWidth < 350 ? 100.0 : 120.0;
+    final imageHeight = screenWidth < 350 ? 90.0 : 120.0;
     final nameFontSize = screenWidth < 350
         ? 10.0
         : screenWidth < 400
-        ? 11.0
+        ? 12.0
         : 12.0;
     final priceFontSize = screenWidth < 350
-        ? 8.0
+        ? 10.0
         : screenWidth < 400
-        ? 9.0
-        : 12.0;
+        ? 12.0
+        : 10.0;
     final ratingFontSize = screenWidth < 350
         ? 8.0
         : screenWidth < 400
-        ? 9.0
+        ? 8.0
         : 10.0;
 
     return GestureDetector(
@@ -153,7 +153,7 @@ class CustomCardChefWidgets {
             ),
             // ✅ Removed vertical padding and SizedBox completely
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

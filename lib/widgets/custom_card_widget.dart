@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'Subcategory/category_tile.dart';
 import 'custom_text_field.dart';
 
+import '../screens/dashboard/photostudio_details_screen.dart';
+import '../services/decoration/decoration_theme.dart';
+
 class CustomCardWidgets {
   static Widget buildSection(
       BuildContext context, {
@@ -14,7 +17,7 @@ class CustomCardWidgets {
 
     // Responsive font sizes
     final titleFontSize = screenWidth < 350
-        ? 14.0
+        ? 12.0
         : screenWidth < 400
         ? 15.0
         : 16.0;
@@ -24,8 +27,8 @@ class CustomCardWidgets {
         ? 11.0
         : 12.0;
 
-    // Adjust childAspectRatio for very small screens
-    final childAspectRatio = screenWidth < 350 ? 0.9 : 1.05;
+    // Adjust childAspectRatio for very small screens to avoid overflow
+    final childAspectRatio = screenWidth < 350 ? 0.65 : 0.92;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +47,7 @@ class CustomCardWidgets {
                   onPressed: onViewAll,
                   child: Text(
                     "View All",
-    style:TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w500),
+                    style:TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w500),
                   ),
                 ),
             ],
@@ -64,87 +67,83 @@ class CustomCardWidgets {
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
             final item = data[index];
-            return buildCarditem(item, screenWidth);
+            return buildCardItem(context, item, screenWidth);  // Fixed: added context parameter and corrected case
           },
         ),
       ],
     );
   }
 
-  static Widget buildCarditem(Map<String, String> item, double screenWidth) {
+  static Widget buildCardItem(
+      BuildContext context, Map<String, String> item, double screenWidth) {
     // Small-device adjustments
-    final imageHeight = screenWidth < 350 ? 100.0 : 105.0;
+    final imageHeight = screenWidth < 350 ? 90.0 : 120.0;
     final nameFontSize = screenWidth < 350
         ? 10.0
         : screenWidth < 400
-        ? 11.0
+        ? 12.0
         : 12.0;
     final priceFontSize = screenWidth < 350
-        ? 8.0
+        ? 10.0
         : screenWidth < 400
-        ? 9.0
-        : 12.0;
+        ? 12.0
+        : 10.0;
     final ratingFontSize = screenWidth < 350
-        ? 8.0
+        ? 10.0
         : screenWidth < 400
-        ? 9.0
+        ? 8.0
         : 10.0;
 
-    return Card(
-      elevation: 0,
-      color: const Color(0xFFFFEFDF),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6.0),
-      ),
-      margin: EdgeInsets.zero,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(6.0),
-                ),
-                child: item['image']!.startsWith('assets/')
-                    ? Image.asset(
-                  item['image']!,
-                  height: imageHeight,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                )
-                    : Image.network(
-                  item['image']!,
-                  height: imageHeight,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const Positioned(
-                top: 8,
-                right: 8,
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 10,
-                  child: Icon(
-                    Icons.favorite_border,
-                    size: 14,
-                    color: Colors.red,
-                  ),
-                ),
-              ),
-            ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PhotostudioDetailsScreen(),
           ),
-          Flexible(
-            child: Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+        );
+      },
+      child: Card(
+        elevation: 0,
+        color: const Color(0xFFFFEFDF),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6.0),
+        ),
+        margin: EdgeInsets.zero,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image Section
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(6.0),
+              ),
+              child: item['image']!.startsWith('assets/')
+                  ? Image.asset(
+                item['image']!,
+                height: imageHeight,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              )
+                  : Image.network(
+                item['image']!,
+                height: imageHeight,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            // Text Section
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                         child: Text(
@@ -177,8 +176,8 @@ class CustomCardWidgets {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
