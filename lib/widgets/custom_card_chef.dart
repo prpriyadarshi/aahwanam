@@ -1,6 +1,5 @@
 import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
-
 import '../services/chef_service/chef_decoration.dart';
 import '../services/makeup_hair_service/MakeupDecor.dart';
 
@@ -14,7 +13,6 @@ class CustomCardChefWidgets {
       }) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    // Responsive font sizes
     final titleFontSize = screenWidth < 350
         ? 14.0
         : screenWidth < 400
@@ -26,7 +24,6 @@ class CustomCardChefWidgets {
         ? 11.0
         : 12.0;
 
-    // Adjust childAspectRatio for very small screens
     final childAspectRatio = screenWidth < 350 ? 0.9 : 1.05;
 
     return Column(
@@ -83,7 +80,6 @@ class CustomCardChefWidgets {
 
   static Widget buildCardchef(
       BuildContext context, Map<String, String> item, double screenWidth) {
-    // Small-device adjustments
     final imageHeight = screenWidth < 350 ? 100.0 : 120.0;
     final nameFontSize = screenWidth < 350
         ? 10.0
@@ -118,7 +114,6 @@ class CustomCardChefWidgets {
         ),
         margin: EdgeInsets.zero,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
@@ -156,57 +151,54 @@ class CustomCardChefWidgets {
                 ),
               ],
             ),
-            // Wrap text Column in Flexible to avoid overflow
-            Flexible(
-              child: Padding(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            item['name'] ?? '',
-                            style: TextFontStyle.textFontStyle(
-                              nameFontSize,
-                              const Color(0xFF575959),
-                              FontWeight.w500,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+            // ✅ Removed vertical padding and SizedBox completely
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          item['name'] ?? '',
+                          style: TextFontStyle.textFontStyle(
+                            nameFontSize,
+                            const Color(0xFF575959),
+                            FontWeight.w500,
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        Row(
-                          children: [
-                            const Icon(Icons.star,
-                                color: Color(0xFFEFAA37), size: 16),
-                            const SizedBox(width: 4),
-                            Text(
-                              item['rating'] ?? "0.0",
-                              style: TextFontStyle.textFontStyle(
-                                ratingFontSize,
-                                const Color(0xFF575959),
-                                FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 4.0),
-                    Text(
-                      item['price'] ?? '',
-                      style: TextFontStyle.textFontStyle(
-                        priceFontSize,
-                        const Color(0xFF1E535B),
-                        FontWeight.w600,
                       ),
+                      Row(
+                        children: [
+                          const Icon(Icons.star,
+                              color: Color(0xFFEFAA37), size: 16),
+                          const SizedBox(width: 4),
+                          Text(
+                            item['rating'] ?? "0.0",
+                            style: TextFontStyle.textFontStyle(
+                              ratingFontSize,
+                              const Color(0xFF575959),
+                              FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  // ✅ Removed SizedBox(height: 4.0)
+                  Text(
+                    item['price'] ?? '',
+                    style: TextFontStyle.textFontStyle(
+                      priceFontSize,
+                      const Color(0xFF1E535B),
+                      FontWeight.w600,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

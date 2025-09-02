@@ -26,18 +26,20 @@ class MehndiService extends StatelessWidget {
         title: Row(
           children: [
             IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, size: 24, color: Color(0xFF1E535B)),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              padding: const EdgeInsets.only(left: 8),
+              icon: const Icon(Icons.arrow_back_ios_new,
+                  size: 24, color: Color(0xFF1E535B)),
+              onPressed: () => Navigator.pop(context),
+              padding: const EdgeInsets.only(left: 4),
               splashRadius: 20,
               constraints: const BoxConstraints(),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: SizedBox(height: 40, child: _buildSearchBar()),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: SizedBox(
+                height: 40,
+                width:190,
+                child: _buildSearchBar(),
               ),
             ),
             const SizedBox(width: 10),

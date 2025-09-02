@@ -10,10 +10,7 @@ import '../screens/dashboard/photograph_book_service_screen.dart';
 import 'custom_date_time_bottom_sheet.dart';
 import 'custom_text_field.dart';
 
-
 class CustomValetServiceCard extends StatelessWidget {
-
-
   final String heading;
   final String packagePrice;
   final String description;
@@ -35,13 +32,8 @@ class CustomValetServiceCard extends StatelessWidget {
   final String? price;
   final int? count;
 
-
-
-
-  CustomValetServiceCard ({
+  CustomValetServiceCard({
     Key? key,
-
-
     required this.description,
     required this.address,
     required this.addressDescription,
@@ -59,91 +51,89 @@ class CustomValetServiceCard extends StatelessWidget {
     this.label2,
     this.initialValue1,
     this.initialValue2,
-     this.imagePath,
-     this.price,
+    this.imagePath,
+    this.price,
     this.count,
-
   }) : super(key: key);
 
   @override
-
   Widget build(BuildContext context) {
-
-    return Scaffold( // ✅ Fixed invalid return
-        appBar: AppBar(
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          scrolledUnderElevation: 0,
-          toolbarHeight: 56,
-          titleSpacing: 0,
-          leadingWidth: 0,
-          title: Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new, size: 24, color: Color(0xFF1E535B)),
-                onPressed: () => Navigator.pop(context),
-                padding: const EdgeInsets.only(left: 8),
-                splashRadius: 20,
-                constraints: const BoxConstraints(),
+    return Scaffold(
+      // ✅ Fixed invalid return
+      appBar: AppBar(
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        scrolledUnderElevation: 0,
+        toolbarHeight: 56,
+        titleSpacing: 0,
+        leadingWidth: 0,
+        title: Row(
+          children: [
+            IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new,
+                  size: 24, color: Color(0xFF1E535B)),
+              onPressed: () => Navigator.pop(context),
+              padding: const EdgeInsets.only(left: 8),
+              splashRadius: 20,
+              constraints: const BoxConstraints(),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: SizedBox(height: 40, child: _buildSearchBar()),
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: SizedBox(height: 40, child: _buildSearchBar()),
+            ),
+            Row(
+              children: [
+                const SizedBox(width: 10),
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(24)),
+                      ),
+                      builder: (context) => CustomDateTimeBottomSheet(
+                        onConfirm: (DateTime fullDateTime) {
+                          print("Selected DateTime: $fullDateTime");
+                        },
+                      ),
+                    );
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: const [
+                      Icon(Icons.calendar_today,
+                          size: 20, color: Color(0xFF004d40)),
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Icon(Icons.access_time,
+                            size: 10, color: Color(0xFF004d40)),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Row(
-                children: [
-                  const SizedBox(width: 10),
-                  GestureDetector(
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                        ),
-                        builder: (context) => CustomDateTimeBottomSheet(
-                          onConfirm: (DateTime fullDateTime) {
-                            print("Selected DateTime: $fullDateTime");
-                          },
-                        ),
-                      );
-                    },
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: const [
-                        Icon(Icons.calendar_today, size: 20, color: Color(0xFF004d40)),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Icon(Icons.access_time, size: 10, color: Color(0xFF004d40)),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Image.asset('assets/images/cart.png', width: 24, height: 24),
-                  const SizedBox(width: 10),
-                  IconButton(
-                    icon: const Icon(Icons.favorite, color: Colors.red),
-                    onPressed: () {},
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(),
-                  ),
-                ],
-              ),
-            ],
-          ),
-
+                const SizedBox(width: 10),
+                Image.asset('assets/images/cart.png', width: 24, height: 24),
+                const SizedBox(width: 10),
+                IconButton(
+                  icon: const Icon(Icons.favorite, color: Colors.red),
+                  onPressed: () {},
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                ),
+              ],
+            ),
+          ],
         ),
-
-
+      ),
 
       body: Column(
         children: [
           // Buttons Row
-
 
           // Tabs
           Expanded(
@@ -159,28 +149,39 @@ class CustomValetServiceCard extends StatelessWidget {
                       unselectedLabelColor: const Color(0xFF757575),
                       dividerHeight: 0,
                       indicatorColor: const Color(0xFF575959),
-                      tabs:  [
-                        Tab(child: Align(child: Text("All Details",
+                      tabs: [
+                        Tab(
+                            child: Align(
+                                child: Text(
+                          "All Details",
                           style: TextFontStyle.textFontStyle(
-                          14,
-                          const Color(0xFF1E535B),
-                          FontWeight.w400,
-                        ),))),
-                        Tab(child: Align(child: Text("Gallery",
+                            14,
+                            const Color(0xFF1E535B),
+                            FontWeight.w400,
+                          ),
+                        ))),
+                        Tab(
+                            child: Align(
+                                child: Text(
+                          "Gallery",
                           style: TextFontStyle.textFontStyle(
-                          14,
-                          const Color(0xFF1E535B),
-                          FontWeight.w400,
-                        ),))),
-                        Tab(child: Align(child: Text("Reviews",
+                            14,
+                            const Color(0xFF1E535B),
+                            FontWeight.w400,
+                          ),
+                        ))),
+                        Tab(
+                            child: Align(
+                                child: Text(
+                          "Reviews",
                           style: TextFontStyle.textFontStyle(
-                          14,
-                          const Color(0xFF1E535B),
-                          FontWeight.w400,
-                        ),))),
+                            14,
+                            const Color(0xFF1E535B),
+                            FontWeight.w400,
+                          ),
+                        ))),
                       ],
                     ),
-
                     Expanded(
                       child: TabBarView(
                         children: [
@@ -234,73 +235,73 @@ class CustomValetServiceCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                OutlinedButton(
-
-                  style: OutlinedButton.styleFrom(
-
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 48),
-                    minimumSize: const Size(10, 48), // Customize width & height
-                    side: const BorderSide(color: Color(0xFF1E535B)), // Optional: border color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                  ),
-                  onPressed: () {
-                    // Add to cart logic
-                  },
-                  child:  Text(
-                    'Add to Cart',
-                    style: TextFontStyle.textFontStyle(
-                      12,
-                      const Color(0xFF1E535B),
-                      FontWeight.w400,
-                    ),
-
-
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E535B),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 48),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PhotographBookServiceScreen(
-                          imagePath: imagePath,
-                          price: price,
-                          count: count,
+                Expanded(
+                  child: SizedBox(
+                    height: 48, // Equal height for both buttons
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Color(0xFF1E535B)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
                         ),
                       ),
-                    );
-                  },
-                  child:  Text(
-                    "Book Service",
-                    style: TextFontStyle.textFontStyle(
-                      12,
-                       Colors.white,
-                      FontWeight.w400,
+                      onPressed: () {
+                        // Add to cart logic
+                      },
+                      child: Text(
+                        'Add to Cart',
+                        style: TextFontStyle.textFontStyle(
+                          12,
+                          const Color(0xFF1E535B),
+                          FontWeight.w400,
+                        ),
+                      ),
                     ),
-
+                  ),
+                ),
+                const SizedBox(width: 12), // Space between buttons
+                Expanded(
+                  child: SizedBox(
+                    height: 48, // Equal height
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1E535B),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PhotographBookServiceScreen(
+                              imagePath: imagePath,
+                              price: price,
+                              count: count,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Book Service",
+                        style: TextFontStyle.textFontStyle(
+                          12,
+                          Colors.white,
+                          FontWeight.w400,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
-          )
-
+          ),
         ],
       ),
     );
   }
 }
-
 
 void _showChangeAddress(BuildContext context) {
   showModalBottomSheet(
@@ -311,13 +312,15 @@ void _showChangeAddress(BuildContext context) {
     ),
     builder: (context) {
       return Container(
-        height: MediaQuery.of(context).size.height * 0.5, // 👈 fixed height (60% of screen)
+        height: MediaQuery.of(context).size.height *
+            0.5, // 👈 fixed height (60% of screen)
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
         ),
-        child: SingleChildScrollView(  // 👈 scrolling inside content
+        child: SingleChildScrollView(
+          // 👈 scrolling inside content
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -358,7 +361,6 @@ void _showChangeAddress(BuildContext context) {
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFF575959),
-
                 ),
               ),
               SizedBox(height: 16),
@@ -366,17 +368,20 @@ void _showChangeAddress(BuildContext context) {
               /// Address Tiles
               _addressTile(
                 title: 'Financial District',
-                subtitle: 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+                subtitle:
+                    'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
               ),
               SizedBox(height: 12),
               _addressTile(
                 title: 'Madhapur',
-                subtitle: 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+                subtitle:
+                    'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
               ),
               SizedBox(height: 12),
               _addressTile(
                 title: 'Hitech City',
-                subtitle: 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
+                subtitle:
+                    'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
               ),
               // SizedBox(height: 12),
               // _addressTile(
@@ -384,9 +389,7 @@ void _showChangeAddress(BuildContext context) {
               //   subtitle: 'Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,',
               // ),
               SizedBox(height: 20),
-
             ],
-
           ),
         ),
       );
@@ -414,7 +417,6 @@ Widget _addressTile({required String title, required String subtitle}) {
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
                   color: Color(0xFF575959),
-
                 ),
               ),
               SizedBox(height: 4),
@@ -450,7 +452,6 @@ Widget _addressTile({required String title, required String subtitle}) {
     ),
   );
 }
-
 
 void _showAddNewAddress(BuildContext context) {
   showModalBottomSheet(
@@ -531,19 +532,19 @@ void _showAddNewAddress(BuildContext context) {
                       Future.delayed(Duration(milliseconds: 20), () {
                         Navigator.pop(context); // Close Change Address
                       });
-
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF1E535B),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 14), // 👈 Padding
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 14), // 👈 Padding
                       minimumSize: Size(0, 0), // 👈 Not forcing full width
                     ),
                     child: Text(
                       'Save Address',
-                      style: TextStyle(fontSize: 16,color: Colors.white),
+                      style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                   ),
                 ),
@@ -556,6 +557,7 @@ void _showAddNewAddress(BuildContext context) {
     },
   );
 }
+
 Widget _buildSearchBar() {
   return TextField(
     decoration: InputDecoration(
@@ -570,6 +572,7 @@ Widget _buildSearchBar() {
     ),
   );
 }
+
 /// Common textfield builder
 Widget _buildTextField({
   required String hintText,

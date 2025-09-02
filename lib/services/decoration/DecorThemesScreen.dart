@@ -23,34 +23,50 @@ class ThemesScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Padding(
-            padding: EdgeInsets.only(left: 20, top: 10),
+          // First Title
+          const Padding(
+            padding: EdgeInsets.only(left: 25, top: 0, bottom: 10),
             child: Text(
               "Birthday Decoration",
-              style: TextFontStyle.textFontStyle(
-                12,
-                const Color(0xFF575959),
-                FontWeight.w500,
+              style: TextStyle(
+                fontSize: 12,
+                color: Color(0xFF575959),
+                fontWeight: FontWeight.w500,
               ),
             ),
-
           ),
+
+          // First Horizontal List
           ...splitList(birthdayItems, 4)
-              .map((chunk) => CustomBuildDecorHorizontalList.build(title: "", items: chunk))
+              .map(
+                (chunk) => Padding(
+              padding: const EdgeInsets.only(top: 0), // No extra gap
+              child: CustomBuildDecorHorizontalList.build(title: "", items: chunk),
+            ),
+          )
               .toList(),
-           Padding(
-            padding: EdgeInsets.only(left: 20, top: 10),
+
+          // Second Title
+          const Padding(
+            padding: EdgeInsets.only(left: 25, top: 5, bottom: 10), // Reduced gap
             child: Text(
               "Birthday Decoration for Kids",
-              style: TextFontStyle.textFontStyle(
-                12,
-                const Color(0xFF575959),
-                FontWeight.w500,
+              style: TextStyle(
+                fontSize: 12,
+                color: Color(0xFF575959),
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
+
+          // Second Horizontal List
           ...splitList(birthdayItems, 4)
-              .map((chunk) => CustomBuildDecorHorizontalList.build(title: "", items: chunk))
+              .map(
+                (chunk) => Padding(
+              padding: const EdgeInsets.only(top: 0), // No extra gap
+              child: CustomBuildDecorHorizontalList.build(title: "", items: chunk),
+            ),
+          )
               .toList(),
         ],
       ),

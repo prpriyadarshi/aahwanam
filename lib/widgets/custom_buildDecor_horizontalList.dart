@@ -48,19 +48,20 @@ class CustomBuildDecorHorizontalList {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              title,
-              style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w500), // smaller text
-
-
+        // Show title only if it's not empty
+        if (title.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(left: 20, bottom: 6), // Minimal bottom space
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                title,
+                style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w500),
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 10),
+
+        // Horizontal List
         SizedBox(
           height: 142,
           child: ListView.builder(
@@ -74,7 +75,7 @@ class CustomBuildDecorHorizontalList {
 
               return Container(
                 width: 98,
-                margin: const EdgeInsets.only(right: 8),
+                margin: const EdgeInsets.only(left: 8), // Removed extra top margin
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -109,36 +110,30 @@ class CustomBuildDecorHorizontalList {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            price,
-                            style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500), // smaller text
-
-
-                          ),
-                          CustomAddCounterButton(
-                            imagePath: image,
-                            price: price,
-                            onAdd: (count) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PhotographBookServiceScreen(
-                                    imagePath: image,
-                                    price: price,
-                                    count: count,
-                                  ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          price,
+                          style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500),
+                        ),
+                        CustomAddCounterButton(
+                          imagePath: image,
+                          price: price,
+                          onAdd: (count) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PhotographBookServiceScreen(
+                                  imagePath: image,
+                                  price: price,
+                                  count: count,
                                 ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
