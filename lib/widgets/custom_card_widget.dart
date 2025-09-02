@@ -31,28 +31,20 @@ class CustomCardWidgets {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 0),
+          padding: const EdgeInsets.symmetric(horizontal: 2.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 title,
-                style: TextStyle(
-                  fontSize: titleFontSize,
-                  fontWeight: FontWeight.w600,
-                  color: const Color(0xFF575959),
-                ),
+                style:TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500),
               ),
               if (showViewAll)
                 TextButton(
                   onPressed: onViewAll,
                   child: Text(
                     "View All",
-                    style: TextFontStyle.textFontStyle(
-                      12,
-                      const Color(0xFF1E535B),
-                      FontWeight.w400,
-                    ),
+    style:TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w500),
                   ),
                 ),
             ],
@@ -157,11 +149,7 @@ class CustomCardWidgets {
                       Expanded(
                         child: Text(
                           item['name'] ?? '',
-                          style: TextFontStyle.textFontStyle(
-                            nameFontSize,
-                            const Color(0xFF575959),
-                            FontWeight.w500,
-                          ),
+                          style:TextFontStyle.textFontStyle( 12, Color(0xFF575959),FontWeight.w500),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -169,15 +157,12 @@ class CustomCardWidgets {
                       Row(
                         children: [
                           const Icon(Icons.star,
-                              color: Color(0xFFEFAA37), size: 16),
+                              color: Color(0xFFEFAA37), size: 14),
                           const SizedBox(width: 4),
                           Text(
                             item['rating'] ?? "0.0",
-                            style: TextFontStyle.textFontStyle(
-                              ratingFontSize,
-                              const Color(0xFF575959),
-                              FontWeight.w400,
-                            ),
+                            style:TextFontStyle.textFontStyle( 10, Color(0xFF575959),FontWeight.w500),
+
                           ),
                         ],
                       ),
@@ -186,11 +171,8 @@ class CustomCardWidgets {
                   const SizedBox(height: 4.0),
                   Text(
                     item['price'] ?? '',
-                    style: TextFontStyle.textFontStyle(
-                      priceFontSize,
-                      const Color(0xFF1E535B),
-                      FontWeight.w600,
-                    ),
+                    style:TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w500),
+
                   ),
                 ],
               ),
