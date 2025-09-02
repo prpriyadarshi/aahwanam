@@ -51,7 +51,7 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
               foregroundColor: Colors.black,
               elevation: 0,
               leading: IconButton(
-                padding: const EdgeInsets.only(top: 2, left: 12),
+                padding: const EdgeInsets.only(top: 2, left: 10),
                 icon: const Icon(
                   Icons.arrow_back_ios,
                   size: 18,
@@ -76,7 +76,7 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
               children: [
                 // Toggle Buttons
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.fromLTRB(30, 10, 26, 14),
                   child: Row(
                     children: [
                       Expanded(
@@ -97,7 +97,7 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                           child: const Text("Booked Packages"),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 14),
                       Expanded(
                         child: OutlinedButton(
                           onPressed: () {
@@ -132,7 +132,7 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                       itemBuilder: (context, index) {
                         final package = packageItems[index];
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
+                          padding: const EdgeInsets.only(bottom: 0),
                           child: CustomPackageCard(
                             title: package['title'],
                             servicesIncluded: package['servicesIncluded'],

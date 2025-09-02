@@ -41,7 +41,9 @@ class _AccountScreenState extends State<AccountScreen> {
     return BlocProvider(
       create: (_) => AccountBloc()..add(LoadAccountInfo()),
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          backgroundColor: Colors.white,
           titleSpacing: 0,
           title: Text('Account Information',
             style: TextFontStyle.textFontStyle(
@@ -51,7 +53,7 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
           ),
           leading: IconButton(
-            padding: const EdgeInsets.only(top: 2, left: 12),
+            padding: const EdgeInsets.only(top: 2, left: 10),
             icon: const Icon(
               Icons.arrow_back_ios,
               size: 18,
@@ -64,7 +66,6 @@ class _AccountScreenState extends State<AccountScreen> {
               );
             },
           ),
-
         ),
         body: BlocBuilder<AccountBloc, AccountState>(
           builder: (context, state) {
@@ -72,52 +73,65 @@ class _AccountScreenState extends State<AccountScreen> {
               return const Center(child: CircularProgressIndicator());
             } else if (state is AccountLoaded) {
               return ListView(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
                 children: [
                   Card(
                     color: const Color(0xFF1E535B),
                     shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.circular(16), // ✅ border-radius: 16px
+                          BorderRadius.circular(14), // ✅ border-radius: 16px
                     ),
                     child: SizedBox(
                       width: 328, // ✅ fixed width
-                      height: 83, // ✅ fixed height
+                      height: 85, // ✅ fixed height
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 16),
+                            horizontal: 14, vertical: 12),
                         child: Row(
                           children: [
                             // ✅ Profile Image with edit icon
                             Stack(
                               children: [
                                 CircleAvatar(
-                                  radius: 25.5, // ✅ diameter ~51px
+                                  radius: 30, // ✅ diameter ~51px
                                   backgroundImage: AssetImage(state.profileUrl),
                                 ),
                                 Positioned(
-                                  bottom: 0,
-                                  right: 0,
+                                  bottom: -0.8,
+                                  right: 6,
                                   child: GestureDetector(
                                     onTap: _pickProfileImage,
-                                    // Implement method
                                     child: Container(
-                                      padding: const EdgeInsets.all(4),
-                                      decoration: const BoxDecoration(
-                                        color: Colors.white,
+                                      padding: const EdgeInsets.all(2), // Border thickness
+                                      decoration: BoxDecoration(
                                         shape: BoxShape.circle,
+                                        gradient: const LinearGradient(
+                                          colors: [
+                                            Color(0xFF1E535B) ,      // top-left color
+                                            Colors.pinkAccent,  // bottom-right color
+                                          ],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                        ),
                                       ),
-                                      child: const Icon(
-                                        Icons.edit,
-                                        size: 14,
-                                        color: Colors.black,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(3), // Inner circle padding
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: const Icon(
+                                          Icons.edit,
+                                          size: 7,
+                                          color: Colors.black,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                            const SizedBox(width: 12),
+                            const SizedBox(width: 8),
 
                             // ✅ Texts: Name & Email
                             Column(
@@ -234,8 +248,8 @@ class _AccountScreenState extends State<AccountScreen> {
                           ),
                         );
                       }),
-                  const SizedBox(height: 10),
-                  Text("Other",
+                  const SizedBox(height: 12),
+                  Text("Others",
             style: TextFontStyle.textFontStyle(
             14,                         // Font size
             Color(0xFF575959),          // Text color
@@ -255,7 +269,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   Container(
                     width: 328,
                     height: 40,
-                    margin: const EdgeInsets.only(left: 10, top: 16),
+                    margin: const EdgeInsets.only(left: 10, top: 10),
                     // Optional: Matches your `left` and `top`
                     child: OutlinedButton(
                       onPressed: () {

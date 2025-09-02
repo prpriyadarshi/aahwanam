@@ -1,3 +1,4 @@
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../blocs/auth/auth_bloc.dart';
@@ -26,30 +27,19 @@ class _SignInScreenState extends State<SignInScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              const Text(
+               Text(
                 "Verify your phone number",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF575959),
-                ),
+                style: TextFontStyle.textFontStyle(18, const Color(0xFF575959), FontWeight.w600),
               ),
-              const SizedBox(height: 8),
-              const Text(
+              const SizedBox(height: 4),
+                Text(
                 "We will send you a confirmation code",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Color(0xFF6B6B6B),
-                ),
+                style: TextFontStyle.textFontStyle(12, const Color(0xFF757575), FontWeight.w400),
               ),
-              const SizedBox(height: 32),
-              const Text(
+              const SizedBox(height: 18),
+               Text(
                 "Phone Number *",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF575959),
-                ),
+                style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w500),
               ),
               const SizedBox(height: 8),
               TextFormField(
@@ -59,19 +49,19 @@ class _SignInScreenState extends State<SignInScreen> {
                 style: const TextStyle(color: Color(0xFF575959)),
                 decoration: InputDecoration(
                   hintText: "Enter Phone Number",
-                  hintStyle: TextStyle(color: Colors.grey[500]),
+                  hintStyle: TextFontStyle.textFontStyle(14, const Color(0xFF757575), FontWeight.w400),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Color(0xFF575959)),
+                    borderSide: const BorderSide(color: Color(0xFFE4E4E4)),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Color(0xFF575959)),
+                    borderSide: const BorderSide(color: Color(0xFFE4E4E4)),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Color(0xFF575959), width: 1),
+                    borderSide: const BorderSide(color: Color(0xFF575959), width: 1.5),
                   ),
                 ),
               ),
@@ -84,34 +74,27 @@ class _SignInScreenState extends State<SignInScreen> {
                 backgroundColor: const Color(0xFF1E535B),
                 borderColor: Colors.transparent,
                 textColor: Colors.white,
-                height: 50,
+                height: MediaQuery.of(context).size.height*43/812,
                 width: double.infinity,
               ),
               const Spacer(), // pushes sign-up row to bottom
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "Don't have an account? ",
-                    style: TextStyle(
-                      color: Color(0xFF6B6B6B),
-                      fontSize: 14,
-                    ),
+                    style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w400),
                   ),
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, AppRoutes.signUp),
-                    child: const Text(
+                    child:  Text(
                       "Sign up",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xFF1E535B),
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextFontStyle.textFontStyle(16, const Color(0xFF1E535B), FontWeight.w400),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 18),
             ],
           ),
         ),

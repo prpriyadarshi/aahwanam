@@ -1,3 +1,4 @@
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_action_button.dart';
 import '../../../routes/app_routes.dart';
@@ -8,75 +9,63 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFFFF6ED),
+      backgroundColor: const Color(0XFFFFF6ED),
       body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: IntrinsicHeight(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const SizedBox(height: 174), // Top space
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            children: [
+              const SizedBox(height: 174), // Top space
 
-                        Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/Welcome.png',
-                              height: 313,
-                              width: 313,
-                              fit: BoxFit.contain,
-                            ),
-                            // const SizedBox(height: 10),
-                            const Text(
-                              "Let’s make your day special!",
-                              style: TextStyle(
-                                fontSize: 22  ,
-                                color: Color(0xFF575959),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-
-                        const SizedBox(height: 151), // Space between content and buttons
-
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            CustomActionButton(
-                              text: "Sign in",
-                              onPressed: () => Navigator.pushNamed(context, '/sign-in'),
-                              backgroundColor: const Color(0xFF1E535B),
-                              borderColor: Color(0XFF1E535B),
-                              textColor: Color(0XFFFFFFFF),
-                              height: 50 ,
-                              width: double.infinity,
-                            ),
-                            const SizedBox(height: 12),
-                            CustomActionButton(
-                              text: "Sign up",
-                              onPressed: () => Navigator.pushNamed(context, AppRoutes.signUp),
-                              backgroundColor: Colors.white,
-                              borderColor: const Color(0xFF1E535B),
-                              textColor: const Color(0xFF575959),
-                              height: 50,
-                              width: double.infinity,
-                            ),
-                            const SizedBox(height: 32), // Bottom space
-                          ],
-                        ),
-                      ],
-                    ),
+              // Middle content
+              Column(
+                children: [
+                  Image.asset(
+                    'assets/images/Welcome.png',
+                    height: 313,
+                    width: 313,
+                    fit: BoxFit.contain,
                   ),
-                ),
+                   Text(
+                    "Let’s make your day special!",
+                    style: TextFontStyle.textFontStyle(20, const Color(0xFF575959), FontWeight.w500),
+                     textAlign: TextAlign.center,
+                  ),
+                ],
               ),
-            );
-          },
+
+              const Spacer(), // pushes buttons to bottom
+
+              // Buttons
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  CustomActionButton(
+                    text: "Sign in",
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.signIn),
+                    backgroundColor: const Color(0xFF1E535B),
+                    borderColor: const Color(0XFF1E535B),
+                    textColor: const Color(0XFFFFFFFF),
+                    height: MediaQuery.of(context).size.height*43/812,
+                    width: double.infinity,
+                  ),
+                  const SizedBox(height: 12),
+                  CustomActionButton(
+                    text: "Sign up",
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.signUp),
+                    backgroundColor: Colors.white,
+                    borderColor: const Color(0xFF1E535B),
+                    textColor: const Color(0xFF575959),
+                    height: MediaQuery.of(context).size.height*43/812,
+                    width: double.infinity,
+                  ),
+                  const SizedBox(height: 40), // Bottom space
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
