@@ -309,14 +309,13 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
     );
   }
 
-
   Widget _cardSection() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Reduced padding
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12), // Reduced padding
       decoration: BoxDecoration(
         color: const Color(0xFFF8F8F8),
         border: Border.all(color: const Color(0xFFE2E2E2)),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12), // Slightly smaller radius
       ),
       child: _buildPaymentOptionCard(
         title: "Debit / Credit Cards",
@@ -337,11 +336,11 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
 
   Widget _codSection() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Reduced padding
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12), // Reduced padding
       decoration: BoxDecoration(
         color: const Color(0xFFF8F8F8),
         border: Border.all(color: const Color(0xFFE2E2E2)),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: _buildPaymentOptionCard(
         title: "Cash On Delivery",
@@ -355,6 +354,7 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
       ),
     );
   }
+
 
 
   Widget _buildPaymentOptionCard({
