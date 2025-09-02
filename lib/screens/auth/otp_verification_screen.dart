@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:aahwanam/routes/app_routes.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -152,45 +153,29 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 20),
-                        const Text(
+                        const SizedBox(height: 30),
+                         Text(
                           "OTP Verification",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF575959),
-                          ),
+                          style: TextFontStyle.textFontStyle(18, const Color(0xFF575959), FontWeight.w600),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 4),
                         RichText(
-                          text: const TextSpan(
+                          text:  TextSpan(
                             text: "Enter the code from sms we have sent to\n",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xFF757575),
-                            ),
+                            style: TextFontStyle.textFontStyle(12, const Color(0xFF757575), FontWeight.w400),
                             children: [
                               TextSpan(
                                 text: "9837401241",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFF757575),
-                                ),
+                                style: TextFontStyle.textFontStyle(12, const Color(0xFF757575), FontWeight.w400),
                               )
                             ],
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 18),
                         Center(
                           child: Text(
                             _formatDuration(_remainingTime),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color: Color(0xFF1E535B),
-                            ),
+                            style: TextFontStyle.textFontStyle(14, const Color(0xFF1E535B), FontWeight.w500),
                           ),
                         ),
                         const SizedBox(height: 18),
@@ -208,72 +193,58 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           }),
                         ),
 
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 18),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
+                             Text(
                               "Didn’t get OTP? ",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Color(0xFF575959),
-                              ),
+                              style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w400),
                             ),
                             GestureDetector(
                               onTap: () {
                                 // Add resend OTP logic here
                               },
-                              child: const Text(
+                              child:  Text(
                                 "Resend OTP",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  color: Color(0xFF1E535B),
-                                ),
+                                style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w400),
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 40),
                         CustomActionButton(
                           text: "Submit",
                           onPressed: isOtpComplete ? _submitOtp : null,
                           backgroundColor: const Color(0xFF1E535B),
                           borderColor: Colors.transparent,
                           textColor: Colors.white,
-                          height: 50,
+                          height: MediaQuery.of(context).size.height*43/812,
                           width: double.infinity,
                         ),
-                        const SizedBox(height: 480),
+                        const Spacer(), // pushes sign-up row to bottom
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
+                          padding: const EdgeInsets.only(bottom: 30),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text(
+                              Text(
                                 "Don’t have an account? ",
-                                style: TextStyle(
-                                  color: Color(0xFF6B6B6B),
-                                  fontSize: 14,
-                                ),
+                                style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w400),
                               ),
                               GestureDetector(
                                 onTap: () {
                                   Navigator.pushNamed(context, AppRoutes.signUp);
                                 },
-                                child: const Text(
+                                child: Text(
                                   "Sign up",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xFF1E535B),
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: TextFontStyle.textFontStyle(16, const Color(0xFF1E535B), FontWeight.w400),
                                 ),
                               ),
                             ],
                           ),
                         ),
+                        const SizedBox(height: 18),
                       ],
                     ),
                   ),

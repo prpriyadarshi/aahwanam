@@ -1,3 +1,4 @@
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_action_button.dart';
 import '../../../routes/app_routes.dart';
@@ -25,13 +26,10 @@ class WelcomeScreen extends StatelessWidget {
                     width: 313,
                     fit: BoxFit.contain,
                   ),
-                  const Text(
+                   Text(
                     "Let’s make your day special!",
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Color(0xFF575959),
-                    ),
-                    textAlign: TextAlign.center,
+                    style: TextFontStyle.textFontStyle(20, const Color(0xFF575959), FontWeight.w500),
+                     textAlign: TextAlign.center,
                   ),
                 ],
               ),
@@ -49,7 +47,7 @@ class WelcomeScreen extends StatelessWidget {
                     backgroundColor: const Color(0xFF1E535B),
                     borderColor: const Color(0XFF1E535B),
                     textColor: const Color(0XFFFFFFFF),
-                    height: 50,
+                    height: MediaQuery.of(context).size.height*43/812,
                     width: double.infinity,
                   ),
                   const SizedBox(height: 12),
@@ -60,10 +58,10 @@ class WelcomeScreen extends StatelessWidget {
                     backgroundColor: Colors.white,
                     borderColor: const Color(0xFF1E535B),
                     textColor: const Color(0xFF575959),
-                    height: 50,
+                    height: MediaQuery.of(context).size.height*43/812,
                     width: double.infinity,
                   ),
-                  const SizedBox(height: 32), // Bottom space
+                  const SizedBox(height: 40), // Bottom space
                 ],
               ),
             ],
