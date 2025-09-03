@@ -1,3 +1,4 @@
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../blocs/auth/auth_bloc.dart';
@@ -31,23 +32,19 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 40),
-              const Text(
+              const SizedBox(height: 30),
+               Text(
                 "Sign in to continue",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF575959),
-                ),
+                style: TextFontStyle.textFontStyle(18, const Color(0xFF575959), FontWeight.w600),
               ),
-              const SizedBox(height: 22),
+              const SizedBox(height: 18),
 
               Row(
                 children: [
                   Expanded(
                     child: _labeledField("First Name *", firstNameController),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: _labeledField("Last Name", lastNameController),
                   ),
@@ -59,13 +56,13 @@ class _SignupScreenState extends State<SignupScreen> {
               _labeledField("Email Address *", emailController),
               const SizedBox(height: 16),
               _passwordField("Password *", passwordController),
-              const SizedBox(height: 32),
+              const SizedBox(height: 40),
 
               CustomActionButton(
                 text: "Sign up",
                 backgroundColor: const Color(0xFF1E535B),
                 textColor: Colors.white,
-                height: 50,
+                height: MediaQuery.of(context).size.height*43/812,
                 onPressed: () {
                   Navigator.pushNamed(context, AppRoutes.dashboard);
                   SignUpUser(
@@ -94,15 +91,15 @@ class _SignupScreenState extends State<SignupScreen> {
                 ],
               ),
 
-              const SizedBox(height: 26),
+              const SizedBox(height: 25),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _buildSocialIcon("assets/images/Apple.png"),
-                  const SizedBox(width: 20),
+                  const SizedBox(width: 39),
                   _buildSocialIcon("assets/images/Facebook.png"),
-                  const SizedBox(width: 20),
+                  const SizedBox(width: 39),
                   _buildSocialIcon("assets/images/Google.png"),
                 ],
               ),
@@ -112,24 +109,20 @@ class _SignupScreenState extends State<SignupScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                   Text(
                     "Already have an account? ",
-                    style: TextStyle(fontSize: 16, color: Color(0xFF575959)),
+                    style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w400),
                   ),
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, AppRoutes.signIn),
-                    child: const Text(
+                    child:  Text(
                       "Sign in",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF1E535B),
-                      ),
+                      style: TextFontStyle.textFontStyle(16, const Color(0xFF1E535B), FontWeight.w400),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 18),
             ],
           ),
         ),
@@ -146,11 +139,7 @@ class _SignupScreenState extends State<SignupScreen> {
       children: [
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: Color(0xFF575959),
-          ),
+          style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w500),
         ),
         const SizedBox(height: 8),
         TextFormField(
@@ -159,11 +148,7 @@ class _SignupScreenState extends State<SignupScreen> {
           cursorColor: const Color(0xFF575959),
           decoration: InputDecoration(
             hintText: "Enter $cleanHint",  //  cleaned hint
-            hintStyle: const TextStyle(
-              fontSize: 14,
-              color: Color(0xFF575959),
-              fontWeight: FontWeight.w400,
-            ),
+            hintStyle: TextFontStyle.textFontStyle(14, const Color(0xFF757575), FontWeight.w400),
             contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             filled: true,
@@ -189,11 +174,7 @@ class _SignupScreenState extends State<SignupScreen> {
       children: [
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: Color(0xFF575959),
-          ),
+          style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w500),
         ),
         const SizedBox(height: 8),
         TextFormField(
@@ -202,11 +183,7 @@ class _SignupScreenState extends State<SignupScreen> {
           cursorColor: const Color(0xFF575959),
           decoration: InputDecoration(
             hintText: "Enter $cleanHint", // cleaned version
-            hintStyle: const TextStyle(
-              fontSize: 14,
-              color: Color(0xFF575959),
-              fontWeight: FontWeight.w400,
-            ),
+            hintStyle: TextFontStyle.textFontStyle(14, const Color(0xFF757575), FontWeight.w400),
             contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             filled: true, fillColor: const Color(0xFFFFF6ED), // same as background
