@@ -24,6 +24,7 @@ class BlogDetailsScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
+
         actions: [
           IconButton(icon: const Icon(Icons.share), onPressed: () {}),
           // IconButton(icon: const Icon(Icons.favorite_border), onPressed: () {}),
@@ -38,6 +39,7 @@ class BlogDetailsScreen extends StatelessWidget {
               Text(description,
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.w400,color: Color.fromRGBO(87, 89, 89, 1))),
+
               const SizedBox(height: 10),
               Stack(
                 children: [

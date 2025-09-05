@@ -24,7 +24,7 @@ class _HorizBlogCardState extends State<HorizBlogCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height: 235,
       width: 230,
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
