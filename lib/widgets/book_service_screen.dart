@@ -1,5 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:share_plus/share_plus.dart';
 
 
 
@@ -82,7 +88,7 @@ class BookServiceScreen extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.share, color: Colors.black),
-              onPressed: () {},
+              onPressed: _shareBookingDetailsPdf,
             )
           ],
         ),
@@ -168,6 +174,8 @@ class BookServiceScreen extends StatelessWidget {
               const SizedBox(height: 12),
 
               EventDateTimePicker(),
+
+
               const SizedBox(height: 12),
 
               Row(
@@ -376,6 +384,126 @@ class BookServiceScreen extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Future<void> _shareBookingDetailsPdf() async {
+    try {
+      // 1. Create a new PDF document
+      final pdf = pw.Document();
+
+      // Load Unicode fonts (Roboto supports ₹)
+
+      // 2. Add booking details to the PDF
+      pdf.addPage(
+        pw.Page(
+          build: (pw.Context context) {
+            return pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                pw.Text(
+                  "Book Service",
+                  style: pw.TextStyle(
+                    fontWeight: pw.FontWeight.normal,
+                    fontSize: 20,
+                  ),
+                ),
+                pw.SizedBox(height: 10),
+
+                pw.Text(
+                  "Event & Service Details",
+                  style: pw.TextStyle(
+                    fontWeight: pw.FontWeight.normal,
+                    fontSize: 16,
+                  ),
+                ),
+                pw.SizedBox(height: 5),
+
+                pw.Text("Event Date: 12 Sept 2025", style: pw.TextStyle(fontWeight: pw.FontWeight.normal)),
+                pw.Text("Event Time: 07:30 PM", style: pw.TextStyle(fontWeight: pw.FontWeight.normal)),
+                pw.Text("No. of Guests: 50", style: pw.TextStyle(fontWeight: pw.FontWeight.normal)),
+                pw.Text("No. of Bartenders: 2", style: pw.TextStyle(fontWeight: pw.FontWeight.normal)),
+                pw.SizedBox(height: 10),
+
+                pw.Text(
+                  "Event Address:",
+                  style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                ),
+                pw.Text("Financial District, Hyderabad",
+                    style: pw.TextStyle(       fontWeight: pw.FontWeight.normal,
+                    )),
+                pw.SizedBox(height: 20),
+
+                pw.Text(
+                  "Bill Details",
+                  style: pw.TextStyle(
+                    fontWeight: pw.FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                pw.Divider(),
+
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text("Package service charges", style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                    pw.Text("Rs.2000", style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  ],
+                ),
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text("Portable bar table", style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                    pw.Text("Rs.3000", style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  ],
+                ),
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text("Platform Fee", style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                    pw.Text("Rs.100", style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  ],
+                ),
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text("Transport Fee", style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                    pw.Text("FREE", style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  ],
+                ),
+                pw.Divider(),
+
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text(
+                      "Total",
+                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                    ),
+                    pw.Text(
+                      "Rs.5100",
+                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+        ),
+      );
+
+      // 3. Save PDF to temporary storage
+      final dir = await getTemporaryDirectory();
+      final file = File("${dir.path}/booking_details.pdf");
+      await file.writeAsBytes(await pdf.save());
+
+      // 4. Share the PDF
+      await Share.shareXFiles(
+        [XFile(file.path)],
+        text: "Here are your booking details!",
+      );
+    } catch (e) {
+      print("Error creating PDF: $e");
+    }
   }
 
 

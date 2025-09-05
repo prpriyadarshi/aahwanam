@@ -39,7 +39,7 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
         foregroundColor: Colors.black,
         title:  Text("Bookings",
           style: TextFontStyle.textFontStyle(
-            16,                         // Font size
+            18,                         // Font size
             Color(0xFF575959),          // Text color
             FontWeight.w500,            // Font weight
           ),
@@ -57,7 +57,7 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -117,7 +117,7 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
               ),
             ),
 
-            SizedBox(height: 20),
+            SizedBox(height: 10),
 
             // Accordion: Event Details
             _buildAccordion(
@@ -161,7 +161,7 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                     ],
                   ),
 
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 14),
 
                   // Event Address
                   Text("Event Address",
@@ -172,11 +172,11 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                   _buildInputBoxWithTitle("Financial District, Hyderabad",
                       "Lorem ipsum dolor sit amet, dolor consectetur adipiscing elit,"),
 
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),
-            SizedBox(height: 18),
+            SizedBox(height: 10),
 
             // Accordion: Bill Details
             _buildAccordion(
@@ -195,7 +195,7 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 18),
+            SizedBox(height: 10),
             // Accordion: Booking Status
             _buildAccordion(
               title: "Booking Status",
@@ -252,12 +252,12 @@ class _DetailedAllBookingScreenState extends State<DetailedAllBookingScreen> {
               ),
             ),
 
-            SizedBox(height: 20),
+            SizedBox(height: 10),
           ],
         ),
       ),
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
         color: Colors.white,
         child: Row(
           children: [

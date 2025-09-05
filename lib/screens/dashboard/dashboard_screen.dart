@@ -14,6 +14,7 @@ import '../../widgets/custom_bottom_nav.dart';
 import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_image_card_widget.dart';
+import '../../widgets/custom_text_field.dart';
 import '../account/account_screen.dart';
 
 
@@ -68,81 +69,56 @@ class DashboardContent extends StatelessWidget {
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    print("Location icon pressed");
-                  },
-                  child: Image.asset(
-                    'assets/images/location.png',
-                    width: 24,
-                    height: 25,
-                  ),
-                ),
-                SizedBox(width: 9),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Hyderabad",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "Financial District, Kapil Hub",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF757575),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            GestureDetector(
+              onTap: () {
+                print("Location icon pressed");
+              },
+              child: Image.asset(
+                'assets/images/location.png',
+                width: 24,
+                height: 25,
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            const SizedBox(width: 9),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    print("cart icon pressed");
-                  },
-                  child: Image.asset(
-                    'assets/images/cart.png',
-                    width: 24,
-                    height: 18,
-                  ),
+                Text(
+                  "Hyderabad",
+                  style: TextFontStyle.textFontStyle(14, Color(0xFF575959), FontWeight.w500),
                 ),
-                SizedBox(width: 6),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.notifications,
-                    color: Color(0xFF004d40),
-                  ),
+                Text(
+                  "Financial District, Kapil Hub",
+                  style: TextFontStyle.textFontStyle(12, Color(0xFF575959), FontWeight.w500),
                 ),
               ],
             ),
           ],
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              print("Cart pressed");
+            },
+            icon: Image.asset(
+              'assets/images/cart.png',
+              width: 22,
+              height: 22,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.favorite, color: Colors.red, size: 24),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.notifications, color: Color(0xFF004d40), size: 24),
+          ),
+          const SizedBox(width: 1), // little margin from screen edge
+        ],
       ),
+
       backgroundColor: Colors.white,
       body: BlocProvider(
         create: (context) => DashboardBloc()..add(LoadDashboardData()),
@@ -157,7 +133,7 @@ class DashboardContent extends StatelessWidget {
               );
             } else if (state is DashboardLoaded) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 11.0,vertical: 5.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -223,26 +199,23 @@ class DashboardContent extends StatelessWidget {
                         onViewAll: () => _navigateTo(context, "Mehndi Artists"),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0, right: 8.0, bottom: 8.0),
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 3.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                             Text(
                               "Trending",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF575959),
-                              ),
+                              style:TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500),
+
                             ),
-                            TextButton(
-                              onPressed: () => _navigateTo(context, "Trending"),
-                              child: const Text(
-                                "View All",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xFF1E535B),
+                            Padding(
+                              padding: const EdgeInsets.only(left:12.0),
+                              child: TextButton(
+                                onPressed: () => _navigateTo(context, "Trending"),
+                                child:  Text(
+                                  "View All",
+                                  style:TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w500),
+
                                 ),
                               ),
                             ),
@@ -289,15 +262,21 @@ class DashboardContent extends StatelessWidget {
 }
 
 Widget _buildSearchBar() {
-  return TextField(
-    decoration: InputDecoration(
-      hintText: 'Search here...',
-      prefixIcon: const Icon(Icons.search),
-      filled: true,
-      fillColor: const Color(0xFFF8F8F8),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide.none,
+  return Container(
+    margin: EdgeInsets.only(bottom: 10),
+    child: TextField(
+      style:TextFontStyle.textFontStyle( 14, Color(0xFF575959),FontWeight.w500),
+
+      decoration: InputDecoration(
+        hintText: 'Search here...',
+        prefixIcon: const Icon(Icons.search),
+        filled: true,
+        fillColor: const Color(0xFFF8F8F8),
+        contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12), // Reduced padding
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
       ),
     ),
   );
