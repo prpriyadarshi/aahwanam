@@ -29,7 +29,7 @@ class _HorizBlogCardState extends State<HorizBlogCard> {
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Colors.white,
+         color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade200,

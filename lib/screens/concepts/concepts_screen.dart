@@ -184,7 +184,7 @@ class _ConceptsScreenState extends State<ConceptsScreen>
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => BlogDetailsScreen(
+                                     builder: (_) => BlogDetailsScreen(
                                       description: blog['description'] ?? '',
                                       imageUrl: blog['imageUrl'] ?? '',
                                       date: blog['date'] ?? '',

@@ -19,7 +19,7 @@ class BlogDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Blog'),
+         title: const Text('Blog'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -82,7 +82,7 @@ class BlogDetailsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+               const SizedBox(height: 16),
               Text(
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
                 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\n'
