@@ -6,8 +6,6 @@ import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../widgets/package_card.dart';
-
 class DetailedDeliveredmyPackagesScreen extends StatefulWidget {
   final Map<String, dynamic> package;
 
@@ -25,97 +23,93 @@ class _DetailedDeliveredmyPackagesScreen
     extends State<DetailedDeliveredmyPackagesScreen> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isTablet = screenWidth > 600;
+
+    // Dynamic sizes
+    double fontSmall = isTablet ? 16 : 12;
+    double fontMedium = isTablet ? 18 : 14;
+    double fontLarge = isTablet ? 20 : 16;
+    double imageWidth = isTablet ? 100 : 67;
+    double imageHeight = isTablet ? 80 : 52;
+    double starSize = isTablet ? 55 : 40;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         titleSpacing: 0,
-        title: Text("My Packages",
+        title: Text(
+          "My Packages",
           style: TextFontStyle.textFontStyle(
-            16,                         // Font size
-            Color(0xFF575959),          // Text color
-            FontWeight.w500,            // Font weight
-          ),),
+            fontLarge,
+            const Color(0xFF575959),
+            FontWeight.w500,
+          ),
+        ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
         leading: IconButton(
-          padding: const EdgeInsets.only(top: 2, left: 12),
+          padding: EdgeInsets.only(top: 2, left: isTablet ? 20 : 12),
           icon: const Icon(
             Icons.arrow_back_ios,
             size: 18,
             color: Color(0xFF575959),
           ),
           onPressed: () {
-            Navigator.pop(context); // ✅ Go back to previous screen
-            // Or use push to go to a specific screen:
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
+            Navigator.pop(context);
           },
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
             onPressed: () {
-              // Implement share functionality if needed
+              // Share functionality if needed
             },
           ),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: isTablet ? 24 : 16),
         child: ListView(
           children: [
             Center(
               child: Text(
                 "Birthday Party Package",
-                style:TextFontStyle.textFontStyle(14,Color(0XFF575959), FontWeight.w500),
+                style: TextFontStyle.textFontStyle(
+                  fontMedium,
+                  const Color(0XFF575959),
+                  FontWeight.w500,
+                ),
               ),
             ),
-            const SizedBox(height: 16),
-            ..._buildPackageItems(),
-            const SizedBox(height: 24),
-            Row(
-              children:  [
-                Expanded(child: Divider(thickness: 1)),
-                SizedBox(width: 8),
-                Text(
-                  "Bill Details",
-                  style:TextFontStyle.textFontStyle(14,Color(0XFF575959), FontWeight.w500),
-                ),
-                SizedBox(width: 8),
-                Expanded(child: Divider(thickness: 1)),
-              ],
-            ),
+            SizedBox(height: isTablet ? 24 : 16),
+            ..._buildPackageItems(imageWidth, imageHeight, fontSmall),
+            SizedBox(height: isTablet ? 32 : 16),
 
-            const SizedBox(height: 12),
-            _buildBillRow("Package Charges", "₹ 32,000", showInfo: true),
-            _buildBillRow("Platform Fee", "₹ 100"),
-            _buildBillRow("Transport Fee", "FREE"),
-            _buildBillRow("Paid", "₹ 32,100", bold: true),
-            const SizedBox(height: 24),
-
-            Row(
-              children:  [
-                Expanded(child: Divider(thickness: 1)),
-                SizedBox(width: 8),
-                Text(
-                  "Rate Service",
-                  style:TextFontStyle.textFontStyle(14,Color(0XFF575959), FontWeight.w500),
-                ),
-                SizedBox(width: 8),
-                Expanded(child: Divider(thickness: 1)),
-              ],
-            ),
-
-            const SizedBox(height: 8),
-            _buildRatingRow(),
-            const SizedBox(height: 20),
+            // Bill Details Divider
+            _buildSectionDivider("Bill Details", fontMedium),
+            SizedBox(height: isTablet ? 20 : 6),
+            _buildBillRow("Package Charges", "₹ 32,000",
+                showInfo: true, bold: false, fontSize: 12),
+            _buildBillRow("Platform Fee", "₹ 100", fontSize: 12),
+            _buildBillRow("Transport Fee", "FREE", fontSize: 12),
+            _buildBillRow("Paid", "₹ 32,100",
+                bold: true, fontSize: 12),
+            SizedBox(height: isTablet ? 32 : 16),
+            // Rate Service Divider
+            _buildSectionDivider("Rate Service", fontMedium),
+            SizedBox(height: isTablet ? 16 : 8),
+            _buildRatingRow(starSize),
+            SizedBox(height: isTablet ? 32 : 20),
           ],
         ),
       ),
     );
   }
-
-  List<Widget> _buildPackageItems() {
+  List<Widget> _buildPackageItems(
+      double imageWidth, double imageHeight, double fontSize) {
     final services = [
       {
         "title": "Decoration",
@@ -153,8 +147,8 @@ class _DetailedDeliveredmyPackagesScreen
               borderRadius: BorderRadius.circular(8),
               child: Image.asset(
                 service["image"]!,
-                width: 67,
-                height: 52,
+                width: imageWidth,
+                height: imageHeight,
                 fit: BoxFit.cover,
               ),
             ),
@@ -165,13 +159,18 @@ class _DetailedDeliveredmyPackagesScreen
                 children: [
                   Text(
                     service["title"]!,
-                    style:TextFontStyle.textFontStyle(12,Color(0XFF575959), FontWeight.w500),
+                    style: TextFontStyle.textFontStyle(
+                        fontSize, const Color(0XFF575959), FontWeight.w500),
                   ),
-                  Text(service["price"]!,
-                    style:TextFontStyle.textFontStyle(12,Color(0XFF1E535B), FontWeight.w600),
+                  Text(
+                    service["price"]!,
+                    style: TextFontStyle.textFontStyle(
+                        fontSize, const Color(0XFF1E535B), FontWeight.w600),
                   ),
-                  Text("Delivered on–23–03–25",
-                    style:TextFontStyle.textFontStyle(12,Color(0XFF757575), FontWeight.w400),
+                  Text(
+                    "Delivered on–23–03–25",
+                    style: TextFontStyle.textFontStyle(
+                        fontSize, const Color(0XFF757575), FontWeight.w400),
                   ),
                 ],
               ),
@@ -183,7 +182,9 @@ class _DetailedDeliveredmyPackagesScreen
   }
 
   Widget _buildBillRow(String label, String value,
-      {bool showInfo = false, bool bold = false}) {
+      {bool showInfo = false,
+        bool bold = false,
+        required double fontSize}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -194,13 +195,14 @@ class _DetailedDeliveredmyPackagesScreen
                 Text(
                   label,
                   style: TextStyle(
+                    fontSize: fontSize,
                     fontWeight: bold ? FontWeight.bold : FontWeight.normal,
                     fontFamily: 'Poppins',
                   ),
                 ),
                 if (showInfo) ...[
                   const SizedBox(width: 4),
-                  const Icon(Icons.info_outline, size: 14),
+                  const Icon(Icons.info_outline, size: 16),
                 ]
               ],
             ),
@@ -208,6 +210,7 @@ class _DetailedDeliveredmyPackagesScreen
           Text(
             value,
             style: TextStyle(
+              fontSize: fontSize,
               fontWeight: bold ? FontWeight.bold : FontWeight.normal,
             ),
           )
@@ -216,7 +219,7 @@ class _DetailedDeliveredmyPackagesScreen
     );
   }
 
-  Widget _buildRatingRow() {
+  Widget _buildRatingRow(double starSize) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -233,11 +236,26 @@ class _DetailedDeliveredmyPackagesScreen
             child: Icon(
               index < 4 ? Icons.star : Icons.star_border,
               color: Colors.orange,
-              size: 40,
+              size: starSize,
             ),
           ),
         ),
       ),
+    );
+  }
+  Widget _buildSectionDivider(String title, double fontSize) {
+    return Row(
+      children: [
+        const Expanded(child: Divider(thickness: 1)),
+        const SizedBox(width: 8),
+        Text(
+          title,
+          style: TextFontStyle.textFontStyle(
+              fontSize, const Color(0XFF575959), FontWeight.w500),
+        ),
+        const SizedBox(width: 8),
+        const Expanded(child: Divider(thickness: 1)),
+      ],
     );
   }
 }
