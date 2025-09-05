@@ -331,6 +331,7 @@ void _showAddNewAddress(BuildContext context) {
     ),
     builder: (context) {
       return Container(
+
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -436,12 +437,13 @@ void _showAddNewAddress(BuildContext context) {
 }
 
 /// Common textfield builder
+/// Common textfield builder
 Widget _buildTextField({
   required String hintText,
   required String label,
   TextInputType keyboardType = TextInputType.text,
   bool isNumberField = false,
-  double width = 360, // Default reduced width
+  double width = 360,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -449,27 +451,34 @@ Widget _buildTextField({
       Text(
         label,
         style: TextFontStyle.textFontStyle(
-          14,
+          13, // 👈 slightly smaller label font
           const Color(0xFF575959),
           FontWeight.w400,
         ),
       ),
-      const SizedBox(height: 6),
+      const SizedBox(height: 4), // 👈 less gap under label
       SizedBox(
-        width: width, // 👈 Apply reduced width here
+        width: width,
         child: TextField(
           keyboardType: keyboardType,
           inputFormatters: isNumberField
-              ? [FilteringTextInputFormatter.digitsOnly] // 👈 Allow only numbers
+              ? [FilteringTextInputFormatter.digitsOnly]
               : null,
+          style: TextFontStyle.textFontStyle(
+            13, // 👈 smaller input font
+            const Color(0xFF575959),
+            FontWeight.w400,
+          ),
           decoration: InputDecoration(
+            isDense: true, // 👈 makes field more compact
             hintText: hintText,
             hintStyle: TextFontStyle.textFontStyle(
-              14,
-              const Color(0xFF575959),
+              14, // 👈 smaller hint font
+              const Color(0xFF9E9E9E),
               FontWeight.w400,
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+            contentPadding:
+            const EdgeInsets.symmetric(horizontal: 10, vertical: 8), // 👈 reduced padding
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: Colors.grey.shade300),
@@ -484,6 +493,7 @@ Widget _buildTextField({
     ],
   );
 }
+
 Widget _buildSearchBar() {
   return SizedBox(
     height: 40,

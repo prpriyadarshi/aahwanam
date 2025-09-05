@@ -39,7 +39,7 @@ class CustomCircleWidget extends StatelessWidget {
                 style: TextFontStyle.textFontStyle(
                   headingFontSize,
                   const Color(0xFF575959),
-                  FontWeight.w500,
+                  FontWeight.w600,
                 ),
               ),
               if (showViewAll && onViewAll != null)
