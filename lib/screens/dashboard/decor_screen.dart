@@ -27,7 +27,6 @@ class DecorScreen extends StatelessWidget {
     );
 
     return Scaffold(
-
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -96,6 +95,7 @@ class DecorScreen extends StatelessWidget {
           ],
         ),
       ),
+
 
 
       body: BlocProvider(

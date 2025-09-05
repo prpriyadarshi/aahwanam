@@ -10,7 +10,11 @@ class ServiceCubit extends Cubit<String?> {
 
   void navigateTo(String route) {
     emit(route);
+    emit(null); // 👈 Immediately reset so next tap works
   }
+
+  void goBack() => emit('back');
+  void clearRoute() => emit(null);
 }
 
 
@@ -137,7 +141,7 @@ class ServicesScreen extends StatelessWidget {
                           crossAxisCount: 3,
                           crossAxisSpacing: 0,
                           mainAxisSpacing: 0,
-                          childAspectRatio:0.7,
+                          childAspectRatio:0.73,
                         ),
                         itemBuilder: (context, index) {
                           final service = services[index];
@@ -164,7 +168,7 @@ class ServicesScreen extends StatelessWidget {
                                       service["image"]!,
                                       fit: BoxFit.fill,
                                       width: MediaQuery.of(context).size.width * 0.28, // Responsive width
-                                      height: MediaQuery.of(context).size.width * 0.28, // Responsive height
+                                      height: MediaQuery.of(context).size.width * 0.30, // Responsive height
                                     ),
                                   ),
                                 ),

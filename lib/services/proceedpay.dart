@@ -311,7 +311,7 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
 
   Widget _cardSection() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12), // Reduced padding
+      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 10), // Reduced padding
       decoration: BoxDecoration(
         color: const Color(0xFFF8F8F8),
         border: Border.all(color: const Color(0xFFE2E2E2)),
@@ -336,7 +336,7 @@ class _PaymentOptionsScreenState extends State<PaymentOptionsScreen> {
 
   Widget _codSection() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12), // Reduced padding
+      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 10), // Reduced padding
       decoration: BoxDecoration(
         color: const Color(0xFFF8F8F8),
         border: Border.all(color: const Color(0xFFE2E2E2)),
