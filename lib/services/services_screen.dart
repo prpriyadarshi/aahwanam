@@ -8,13 +8,12 @@ import '../widgets/custom_text_field.dart';
 class ServiceCubit extends Cubit<String?> {
   ServiceCubit() : super(null);
 
-  // Trigger navigation
-  void navigateTo(String route) => emit(route);
+  void navigateTo(String route) {
+    emit(route);
+    emit(null); // 👈 Immediately reset so next tap works
+  }
 
-  // Go back
   void goBack() => emit('back');
-
-  // Reset state so next time same route can fire again
   void clearRoute() => emit(null);
 }
 
