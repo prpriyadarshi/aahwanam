@@ -6,7 +6,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../../blocs/concepts/concepts_bloc.dart';
+import '../../blocs/concepts/concepts_bloc.'
+    'dart';
 import '../../blocs/dashboard/dashboard_bloc.dart';
 import '../../blocs/dashboard/dashboard_event.dart';
 import '../../blocs/dashboard/dashboard_state.dart';
@@ -80,7 +81,7 @@ class DashboardContent extends StatelessWidget {
                 height: 25,
               ),
             ),
-            const SizedBox(width: 9),
+            const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -98,6 +99,7 @@ class DashboardContent extends StatelessWidget {
         ),
         actions: [
           IconButton(
+            padding: EdgeInsets.zero,
             onPressed: () {
               print("Cart pressed");
             },
@@ -141,17 +143,12 @@ class DashboardContent extends StatelessWidget {
                       _buildSearchBar(),
                       const SizedBox(height: 5),
                       _buildSliderSection(state.sliderImages),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 10), // Reduced from previous spacing
                       CustomCircleWidget(
                         heading: "Categories",
                         categories: state.categories,
                         showViewAll: true,
                         onCategoryTap: (String categoryName) {
-                          // Map category names to route namesMicrosoft Teams
-                          //
-                          //
-                          // Profile picture.
-                          // Renuka Chinthala
                           final Map<String, String> categoryRoutes = {
                             'Photographer': AppRoutes.photographer,
                             'Chef': AppRoutes.chef,
@@ -183,62 +180,66 @@ class DashboardContent extends StatelessWidget {
                           }
                         },
                       ),
-                      const SizedBox(height: 5),
+
                       CustomCardWidgets.buildSection(
                         context,
                         title: "Decorators in your city",
                         data: state.decorators,
                         showViewAll: true,
-                        onViewAll: () => _navigateTo(context, "Decorators"),
+                        onViewAll: () => _navigateTo(context, AppRoutes.login),
                       ),
-                      CustomCardWidgets.buildSection(
-                        context,
-                        title: "Mehndi Artists for you",
-                        data: state.mehndiArtists,
-                        showViewAll: true,
-                        onViewAll: () => _navigateTo(context, "Mehndi Artists"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 3.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                             Text(
-                              "Trending",
-                              style:TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500),
-
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left:12.0),
-                              child: TextButton(
-                                onPressed: () => _navigateTo(context, "Trending"),
-                                child:  Text(
-                                  "View All",
-                                  style:TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w500),
-
-                                ),
-                              ),
-                            ),
-                          ],
+                      Transform.translate(
+                        offset: Offset(0, -15),
+                        child: CustomCardWidgets.buildSection(
+                          context,
+                          title: "Mehndi Artists for you",
+                          data: state.mehndiArtists,
+                          showViewAll: true,
+                          onViewAll: () => _navigateTo(context, "Mehndi Artists"),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.zero,
-                        child: SizedBox(
-                          height: 110,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: state.trendingItems.length,
-                            itemBuilder: (context, index) {
-                              final item = state.trendingItems[index];
-                              return CustomImageCard(
-                                imageUrl: item['image']!,
-                                isAsset: item['image']!.startsWith('assets/'),
-                              );
-                            },
+                      // Negative margin to pull Trending section up
+                      Container(
+                        height: MediaQuery.of(context).size.height*30/812,
+                        child: Transform.translate(
+                          offset: Offset(0,-15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Trending",
+                                style:TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left:12.0),
+                                child: TextButton(
+                                  onPressed: () => _navigateTo(context, "Trending"),
+                                  child:  Text(
+                                    "View All",
+                                    style:TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w500),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
+                     // Small spacing after Trending header
+                      SizedBox(
+                        height: 110,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.trendingItems.length,
+                          itemBuilder: (context, index) {
+                            final item = state.trendingItems[index];
+                            return CustomImageCard(
+                              imageUrl: item['image']!,
+                              isAsset: item['image']!.startsWith('assets/'),
+                            );
+                          },
+                        ),
+                      ),
+                  // Spacing before Packages section
                       CustomCardWidgets.buildSection(
                         context,
                         title: "Packages for all events",
