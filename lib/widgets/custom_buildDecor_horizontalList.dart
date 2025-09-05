@@ -11,7 +11,7 @@ class CustomBuildDecorHorizontalList {
     {'image': 'assets/images/Birthdaydecoration4.jpg', 'price': '₹5600'},
   ];
   final makeupHair = [
-    {'name': 'Glam ', 'image': 'assets/images/Glam.png'},
+    {'name': 'Glam ', 'image': 'assets/images/Dewy.png'},
     {'name': 'Bridal', 'image': 'assets/images/Bridal.png'},
     {'name': 'Subtle Look', 'image': 'assets/images/Subtle Look.png'},
     {'name': 'HD ', 'image': 'assets/images/HD.png'},

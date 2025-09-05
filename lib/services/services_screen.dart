@@ -8,9 +8,14 @@ import '../widgets/custom_text_field.dart';
 class ServiceCubit extends Cubit<String?> {
   ServiceCubit() : super(null);
 
-  void navigateTo(String route) {
-    emit(route);
-  }
+  // Trigger navigation
+  void navigateTo(String route) => emit(route);
+
+  // Go back
+  void goBack() => emit('back');
+
+  // Reset state so next time same route can fire again
+  void clearRoute() => emit(null);
 }
 
 
@@ -137,7 +142,7 @@ class ServicesScreen extends StatelessWidget {
                           crossAxisCount: 3,
                           crossAxisSpacing: 0,
                           mainAxisSpacing: 0,
-                          childAspectRatio:0.7,
+                          childAspectRatio:0.73,
                         ),
                         itemBuilder: (context, index) {
                           final service = services[index];
@@ -164,7 +169,7 @@ class ServicesScreen extends StatelessWidget {
                                       service["image"]!,
                                       fit: BoxFit.fill,
                                       width: MediaQuery.of(context).size.width * 0.28, // Responsive width
-                                      height: MediaQuery.of(context).size.width * 0.28, // Responsive height
+                                      height: MediaQuery.of(context).size.width * 0.30, // Responsive height
                                     ),
                                   ),
                                 ),
