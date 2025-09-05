@@ -49,7 +49,7 @@ class _HorizBlogCardState extends State<HorizBlogCard> {
                 child: Image.asset(
                   widget.imageUrl,
                   width: double.infinity,
-                  height: 130,
+                  height: 131,
                   fit: BoxFit.fill,
                 ),
               ),
