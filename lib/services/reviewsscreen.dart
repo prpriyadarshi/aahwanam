@@ -98,7 +98,7 @@ class ReviewScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 25), // Add spacing above button
+                    const SizedBox(height: 32), // Add spacing above button
                     OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
@@ -118,7 +118,7 @@ class ReviewScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
+
                     const Text(
                       "Very Good",
                       style: TextStyle(

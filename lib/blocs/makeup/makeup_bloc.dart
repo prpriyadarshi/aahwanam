@@ -113,7 +113,7 @@ class MakeupBloc extends Bloc<MakeupEvent, MakeupState> {
       switch (event.index) {
         case 0:
           final makeupItems = [
-            {'image': 'assets/images/Makeup.png', 'price': '₹5000', 'type': 'theme'},
+            {'image': 'assets/images/Makeup Trending5.png', 'price': '₹5000', 'type': 'theme'},
             {'image': 'assets/images/Blush Makeover.png', 'price': '₹5200', 'type': 'theme'},
             {'image': 'assets/images/Makeup Trending1.png', 'price': '₹5400', 'type': 'theme'},
             {'image': 'assets/images/Makeup Trending2.png', 'price': '₹5600', 'type': 'theme'},
