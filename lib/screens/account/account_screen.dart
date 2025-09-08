@@ -49,7 +49,7 @@ class _AccountScreenState extends State<AccountScreen> {
             style: TextFontStyle.textFontStyle(
               16,                         // Font size
               Color(0xFF575959),          // Text color
-              FontWeight.w500,            // Font weight
+              FontWeight.w600,            // Font weight
             ),
           ),
           leading: IconButton(
@@ -160,7 +160,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   const SizedBox(height: 10),
                   Text("Your Information",
                       style: TextFontStyle.textFontStyle(
-                          14, Color(0xFF575959), FontWeight.w500),
+                          14, Color(0xFF575959), FontWeight.w600),
                   ),
                   CustomTile(
                     imagePath: 'assets/images/profileimage.png',

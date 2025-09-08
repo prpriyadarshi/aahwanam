@@ -39,7 +39,7 @@ class CustomCircleWidget extends StatelessWidget {
                 style: TextFontStyle.textFontStyle(
                   headingFontSize,
                   const Color(0xFF575959),
-                  FontWeight.w500,
+                  FontWeight.w600,
                 ),
               ),
               if (showViewAll && onViewAll != null)
@@ -101,10 +101,12 @@ class CategoryItem extends StatelessWidget {
   }) : super(key: key);
 
   @override
+
+
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    // Responsive sizes for small and large devices
+    // Responsive sizes
     final avatarRadius = screenWidth * 0.09; // ~32 on 360px width
     final textFontSize = screenWidth * 0.03; // ~12 on 360px width
     final verticalSpacing = screenWidth * 0.015;
@@ -112,6 +114,7 @@ class CategoryItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           CircleAvatar(
             radius: avatarRadius,
@@ -120,17 +123,25 @@ class CategoryItem extends StatelessWidget {
                 : NetworkImage(category['image']!),
           ),
           SizedBox(height: verticalSpacing),
-          Text(
-            category['name']!,
-            textAlign: TextAlign.center,
-            style: TextFontStyle.textFontStyle(
-              textFontSize,
-              const Color(0xFF575959),
-              FontWeight.w400,
+          SizedBox(
+            width: avatarRadius * 3.5, // Keep container width fixed
+            child: FittedBox( // ✅ Scales text to fit width
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.center,
+              child: Text(
+                category['name']!,
+                style: TextFontStyle.textFontStyle(
+                  textFontSize,
+                  const Color(0xFF575959),
+                  FontWeight.w400,
+                ),
+              ),
             ),
           ),
         ],
       ),
     );
   }
+
+
 }

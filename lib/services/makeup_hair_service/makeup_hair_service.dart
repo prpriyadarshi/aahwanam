@@ -57,7 +57,7 @@ class MakeupHairService extends StatelessWidget {
                   ),
                   builder: (context) => CustomDateTimeBottomSheet(
                     onConfirm: (DateTime fullDateTime) {
-                      print("Selectedd DateTime: $fullDateTime");
+                      print("Selected DateTime: $fullDateTime");
                     },
                   ),
                 );

@@ -18,7 +18,7 @@ class CustomCardMehndiWidgets {
     final viewAllFontSize = screenWidth < 350 ? 10.0 : screenWidth < 400 ? 11.0 : 12.0;
 
     // Adjust childAspectRatio for very small screens
-    final childAspectRatio = screenWidth < 350 ? 0.9 : 1.05;
+    final childAspectRatio = screenWidth < 350 ? 0.65 : 0.92;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,11 +74,22 @@ class CustomCardMehndiWidgets {
   }
 
   static Widget buildCardMehndi(BuildContext context, Map<String, String> item, double screenWidth) {
-    final imageHeight = screenWidth < 350 ? 100.0 : 110.0;
-    final nameFontSize = screenWidth < 350 ? 10.0 : screenWidth < 400 ? 11.0 : 12.0;
-    final priceFontSize = screenWidth < 350 ? 8.0 : screenWidth < 400 ? 9.0 : 12.0;
-    final ratingFontSize = screenWidth < 350 ? 8.0 : screenWidth < 400 ? 9.0 : 10.0;
-
+    final imageHeight = screenWidth < 350 ? 90.0 : 120.0;
+    final nameFontSize = screenWidth < 350
+        ? 10.0
+        : screenWidth < 400
+        ? 12.0
+        : 12.0;
+    final priceFontSize = screenWidth < 350
+        ? 10.0
+        : screenWidth < 400
+        ? 12.0
+        : 10.0;
+    final ratingFontSize = screenWidth < 350
+        ? 8.0
+        : screenWidth < 400
+        ? 8.0
+        : 10.0;
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -151,6 +162,7 @@ class CustomCardMehndiWidgets {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 2.0),
                   Text(
                     item['price'] ?? '',
                     style: TextFontStyle.textFontStyle(

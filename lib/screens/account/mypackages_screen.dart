@@ -76,7 +76,7 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
               children: [
                 // Toggle Buttons
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 10, 26, 14),
+                  padding: const EdgeInsets.fromLTRB(26, 0, 28, 12),
                   child: Row(
                     children: [
                       Expanded(
@@ -97,7 +97,7 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                           child: const Text("Booked Packages"),
                         ),
                       ),
-                      const SizedBox(width: 14),
+                      const SizedBox(width: 12),
                       Expanded(
                         child: OutlinedButton(
                           onPressed: () {
@@ -123,7 +123,7 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                 // Content Area
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 14),
                     child: isAllSelected
                         ? (packageItems.isEmpty
                         ? const Center(child: Text("Your wishlist is empty"))

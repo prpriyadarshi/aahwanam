@@ -65,7 +65,7 @@ class CartProceedToPayScreen extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center, // or .center if you prefer
             children: [
@@ -78,7 +78,7 @@ class CartProceedToPayScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 50,), // controls content padding
+                  padding: EdgeInsets.symmetric(horizontal: 45), // controls content padding
                 ),
                 child: ElevatedButton(
                   onPressed: () {
@@ -94,12 +94,12 @@ class CartProceedToPayScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5), // 👈 decreased height
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0), // 👈 decreased height
                   ),
                   child:  Text(
                     "Proceed to pay",
                     style: TextFontStyle.textFontStyle(
-                      12,                         // Font size
+                      14,                         // Font size
                       Color(0xFFFFFDFC),          // Text color
                       FontWeight.w500,            // Font weight
                     ),

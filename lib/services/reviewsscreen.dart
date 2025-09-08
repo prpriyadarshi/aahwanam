@@ -48,13 +48,13 @@ class ReviewScreen extends StatelessWidget {
                         final percent = totalRatings > 0 ? count / totalRatings : 0.0;
 
                         return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 2),
+                          padding: const EdgeInsets.symmetric(vertical: 4),
                           child: Row(
                             children: [
                               Text(
                                 "$stars",
                                 style: const TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 14,
                                   color: Color(0xFF575959),
                                 ),
                               ),
@@ -98,7 +98,7 @@ class ReviewScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 10), // Add spacing above button
+                    const SizedBox(height: 32), // Add spacing above button
                     OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
@@ -118,7 +118,7 @@ class ReviewScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
+
                     const Text(
                       "Very Good",
                       style: TextStyle(

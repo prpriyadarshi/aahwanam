@@ -12,7 +12,6 @@ import '../../services/makeup_hair_service/MakeupDecor.dart';
 import '../../widgets/package_card.dart';
 import 'account_screen.dart';
 
-
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
 
@@ -34,6 +33,11 @@ class _BookingScreenState extends State<BookingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Responsive helpers
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isTablet = screenWidth > 600;
+
     return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
         // 1. Show loading indicator while fetching data
@@ -52,11 +56,12 @@ class _BookingScreenState extends State<BookingScreen> {
               elevation: 0,
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
-              title:  Text("Bookings",
-                style: TextFontStyle.textFontStyle(
-                  16,                         // Font size
-                  Color(0xFF575959),          // Text color
-                  FontWeight.w500,            // Font weight
+              title: Text(
+                "Bookings",
+                style: TextStyle(
+                  fontSize: isTablet ? 22 : 18,
+                  color: const Color(0xFF575959),
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               leading: IconButton(
@@ -69,151 +74,167 @@ class _BookingScreenState extends State<BookingScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AccountScreen()),
+                    MaterialPageRoute(builder: (context) => const AccountScreen()),
                   );
                 },
               ),
             ),
-
-            body: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+            body: SafeArea(
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              isAllBookingsSelected = true;
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: isAllBookingsSelected
-                                ? Color(0xFF1E535B) // Highlight color
-                                : Colors.white,
-                            // Default background color
-                            foregroundColor: isAllBookingsSelected
-                                ? Colors.white // Text color when selected
-                                : Color(0xFF1E535B),
-                            // Text color when not selected
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              side: BorderSide(
-                                  color: Color(0xFF1E535B), width: 1),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  isAllBookingsSelected = true;
+                                });
+                              },
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: isTablet ? 12 : 11,
+                                ),
+                                backgroundColor: isAllBookingsSelected
+                                    ? const Color(0xFF1E535B) // Highlight color
+                                    : Colors.white,
+                                foregroundColor: isAllBookingsSelected
+                                    ? Colors.white // Text color when selected
+                                    : const Color(0xFF1E535B),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  side: const BorderSide(
+                                      color: Color(0xFF1E535B), width: 1),
+                                ),
+                              ),
+                              child: Text(
+                                "All Bookings",
+                                style: TextStyle(
+                                  fontSize: isTablet ? 12 : 13,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                             ),
                           ),
-                          child: const Text("All Bookings",),
-                        ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: OutlinedButton(
+                              onPressed: () {
+                                setState(() {
+                                  isAllBookingsSelected = false;
+                                });
+                              },
+                              style: OutlinedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: isTablet ? 18 : 11,
+                                ),
+                                foregroundColor: isAllBookingsSelected
+                                    ? const Color(0xFF1E535B)
+                                    : Colors.white,
+                                backgroundColor: isAllBookingsSelected
+                                    ? Colors.transparent
+                                    : const Color(0xFF1E535B),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  side: const BorderSide(
+                                      color: Color(0xFF1E535B), width: 1),
+                                ),
+                              ),
+                              child: Text(
+                                "In Progress",
+                                style: TextStyle(
+                                  fontSize: isTablet ? 12 : 13,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () {
-                            setState(() {
-                              isAllBookingsSelected = false;
-                            });
-                          },
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: isAllBookingsSelected
-                                ? Color(
-                                0xFF1E535B) // Text color when not selected
-                                : Colors.white,
-                            // Text color when selected
-                            backgroundColor: isAllBookingsSelected
-                                ? Colors.transparent // Default background
-                                : Color(0xFF1E535B),
-                            // Highlight color when selected
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              side: BorderSide(
-                                  color: Color(0xFF1E535B), width: 1),
+                      const SizedBox(height: 10),
+
+                      // List of bookings (scrollable inside SingleChildScrollView)
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: isAllBookingsSelected
+                            ? state.bookings.length
+                            : state.inProgressBookings.length,
+                        itemBuilder: (context, index) {
+                          final package = isAllBookingsSelected
+                              ? state.bookings[index]
+                              : state.inProgressBookings[index];
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: PackageCard(
+                              title: package['title'],
+                              description: package['description'],
+                              price: package['price'],
+                              details: package['details'],
+                              imagePath: package['imagePath'],
+                              rating: package['rating'],
+                              onTap: () {
+                                if (isAllBookingsSelected) {
+                                  // Navigate to All Bookings Details Page
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          DetailedAllBookingScreen(
+                                              package: package),
+                                    ),
+                                  );
+                                } else {
+                                  final title =
+                                      package['title']?.toLowerCase() ?? '';
+                                  if (title.contains('dream decor')) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => DecorationTheme(
+                                          decorator: {
+                                            'name': _extractDecoratorName(
+                                                package['title'] ?? ''),
+                                            'image':
+                                            package['imagePath'] ?? '',
+                                            'rating': '4.5',
+                                            'price': package['price'] ?? '',
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  } else if (title
+                                      .contains('blush makeover')) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MakeUpTheme(
+                                          makeupHair: {
+                                            'name': _extractDecoratorName(
+                                                package['title'] ?? ''),
+                                            'image':
+                                            package['imagePath'] ?? '',
+                                            'rating': '4.2',
+                                            'price': package['price'] ?? '',
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                }
+                              },
                             ),
-                          ),
-                          child: const Text("In Progress"),
-                        ),
+                          );
+                        },
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
-                  Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: isAllBookingsSelected
-                          ? state.bookings.length
-                          : state.inProgressBookings.length,
-                      itemBuilder: (context, index) {
-                        final package = isAllBookingsSelected
-                            ? state.bookings[index]
-                            : state.inProgressBookings[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          // Adjust spacing between cards
-                          child: PackageCard(
-                            title: package['title'],
-                            description: package['description'],
-                            price: package['price'],
-                            details: package['details'],
-                            imagePath: package['imagePath'],
-                            rating: package['rating'],
-                            onTap: () {
-                              if (isAllBookingsSelected) {
-                                // Navigate to All Bookings Details Page
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        DetailedAllBookingScreen(
-                                            package: package),
-                                  ),
-                                );
-                              } else {
-                                final title =
-                                    package['title']?.toLowerCase() ?? '';
-                                if (title.contains('dream decor')) {
-                                  // Pass necessary data to DecorationTheme screen
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DecorationTheme(
-                                        decorator: {
-                                          'name': _extractDecoratorName(
-                                              package['title'] ?? ''),
-                                          'image': package['imagePath'] ?? '',
-                                          'rating': '4.5',
-                                          // Provide default or real rating
-                                          'price': package['price'] ?? '',
-                                        },
-                                      ),
-                                    ),
-                                  );
-                                } else if (title.contains('blush makeover')) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MakeUpTheme(
-                                        makeupHair: {
-                                          'name': _extractDecoratorName(
-                                              package['title'] ?? ''),
-                                          'image': package['imagePath'] ?? '',
-                                          'rating': '4.2',
-                                          // Or dynamic if available
-                                          'price': package['price'] ?? '',
-                                        },
-                                      ),
-                                    ),
-                                  );
-                                }
-                              }
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           );

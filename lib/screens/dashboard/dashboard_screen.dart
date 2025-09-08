@@ -6,7 +6,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../../blocs/concepts/concepts_bloc.dart';
+import '../../blocs/concepts/concepts_bloc.'
+    'dart';
 import '../../blocs/dashboard/dashboard_bloc.dart';
 import '../../blocs/dashboard/dashboard_event.dart';
 import '../../blocs/dashboard/dashboard_state.dart';
@@ -14,6 +15,7 @@ import '../../widgets/custom_bottom_nav.dart';
 import '../../widgets/custom_card_widget.dart';
 import '../../widgets/custom_circle_widget.dart';
 import '../../widgets/custom_image_card_widget.dart';
+import '../../widgets/custom_text_field.dart';
 import '../account/account_screen.dart';
 
 
@@ -68,81 +70,57 @@ class DashboardContent extends StatelessWidget {
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    print("Location icon pressed");
-                  },
-                  child: Image.asset(
-                    'assets/images/location.png',
-                    width: 24,
-                    height: 25,
-                  ),
-                ),
-                SizedBox(width: 9),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Hyderabad",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575959),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "Financial District, Kapil Hub",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF757575),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            GestureDetector(
+              onTap: () {
+                print("Location icon pressed");
+              },
+              child: Image.asset(
+                'assets/images/location.png',
+                width: 24,
+                height: 25,
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            const SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    print("cart icon pressed");
-                  },
-                  child: Image.asset(
-                    'assets/images/cart.png',
-                    width: 24,
-                    height: 18,
-                  ),
+                Text(
+                  "Hyderabad",
+                  style: TextFontStyle.textFontStyle(14, Color(0xFF575959), FontWeight.w500),
                 ),
-                SizedBox(width: 6),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.notifications,
-                    color: Color(0xFF004d40),
-                  ),
+                Text(
+                  "Financial District, Kapil Hub",
+                  style: TextFontStyle.textFontStyle(12, Color(0xFF575959), FontWeight.w500),
                 ),
               ],
             ),
           ],
         ),
+        actions: [
+          IconButton(
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              print("Cart pressed");
+            },
+            icon: Image.asset(
+              'assets/images/cart.png',
+              width: 22,
+              height: 22,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.favorite, color: Colors.red, size: 24),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.notifications, color: Color(0xFF004d40), size: 24),
+          ),
+          const SizedBox(width: 1), // little margin from screen edge
+        ],
       ),
+
       backgroundColor: Colors.white,
       body: BlocProvider(
         create: (context) => DashboardBloc()..add(LoadDashboardData()),
@@ -157,7 +135,7 @@ class DashboardContent extends StatelessWidget {
               );
             } else if (state is DashboardLoaded) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 11.0,vertical: 5.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,17 +143,12 @@ class DashboardContent extends StatelessWidget {
                       _buildSearchBar(),
                       const SizedBox(height: 5),
                       _buildSliderSection(state.sliderImages),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 10), // Reduced from previous spacing
                       CustomCircleWidget(
                         heading: "Categories",
                         categories: state.categories,
                         showViewAll: true,
                         onCategoryTap: (String categoryName) {
-                          // Map category names to route namesMicrosoft Teams
-                          //
-                          //
-                          // Profile picture.
-                          // Renuka Chinthala
                           final Map<String, String> categoryRoutes = {
                             'Photographer': AppRoutes.photographer,
                             'Chef': AppRoutes.chef,
@@ -207,65 +180,66 @@ class DashboardContent extends StatelessWidget {
                           }
                         },
                       ),
-                      const SizedBox(height: 5),
+
                       CustomCardWidgets.buildSection(
                         context,
                         title: "Decorators in your city",
                         data: state.decorators,
                         showViewAll: true,
-                        onViewAll: () => _navigateTo(context, "Decorators"),
+                        onViewAll: () => _navigateTo(context, AppRoutes.login),
                       ),
-                      CustomCardWidgets.buildSection(
-                        context,
-                        title: "Mehndi Artists for you",
-                        data: state.mehndiArtists,
-                        showViewAll: true,
-                        onViewAll: () => _navigateTo(context, "Mehndi Artists"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, right: 8.0, bottom: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "Trending",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF575959),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () => _navigateTo(context, "Trending"),
-                              child: const Text(
-                                "View All",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xFF1E535B),
-                                ),
-                              ),
-                            ),
-                          ],
+                      Transform.translate(
+                        offset: Offset(0, -15),
+                        child: CustomCardWidgets.buildSection(
+                          context,
+                          title: "Mehndi Artists for you",
+                          data: state.mehndiArtists,
+                          showViewAll: true,
+                          onViewAll: () => _navigateTo(context, "Mehndi Artists"),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.zero,
-                        child: SizedBox(
-                          height: 110,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: state.trendingItems.length,
-                            itemBuilder: (context, index) {
-                              final item = state.trendingItems[index];
-                              return CustomImageCard(
-                                imageUrl: item['image']!,
-                                isAsset: item['image']!.startsWith('assets/'),
-                              );
-                            },
+                      // Negative margin to pull Trending section up
+                      Container(
+                        height: MediaQuery.of(context).size.height*30/812,
+                        child: Transform.translate(
+                          offset: Offset(0,-15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Trending",
+                                style:TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left:12.0),
+                                child: TextButton(
+                                  onPressed: () => _navigateTo(context, "Trending"),
+                                  child:  Text(
+                                    "View All",
+                                    style:TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w500),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
+                     // Small spacing after Trending header
+                      SizedBox(
+                        height: 110,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.trendingItems.length,
+                          itemBuilder: (context, index) {
+                            final item = state.trendingItems[index];
+                            return CustomImageCard(
+                              imageUrl: item['image']!,
+                              isAsset: item['image']!.startsWith('assets/'),
+                            );
+                          },
+                        ),
+                      ),
+                  // Spacing before Packages section
                       CustomCardWidgets.buildSection(
                         context,
                         title: "Packages for all events",
@@ -289,15 +263,21 @@ class DashboardContent extends StatelessWidget {
 }
 
 Widget _buildSearchBar() {
-  return TextField(
-    decoration: InputDecoration(
-      hintText: 'Search here...',
-      prefixIcon: const Icon(Icons.search),
-      filled: true,
-      fillColor: const Color(0xFFF8F8F8),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide.none,
+  return Container(
+    margin: EdgeInsets.only(bottom: 10),
+    child: TextField(
+      style:TextFontStyle.textFontStyle( 14, Color(0xFF575959),FontWeight.w500),
+
+      decoration: InputDecoration(
+        hintText: 'Search here...',
+        prefixIcon: const Icon(Icons.search),
+        filled: true,
+        fillColor: const Color(0xFFF8F8F8),
+        contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12), // Reduced padding
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
       ),
     ),
   );

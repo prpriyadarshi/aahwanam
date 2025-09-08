@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'Subcategory/category_tile.dart';
 import 'custom_text_field.dart';
+import '../screens/dashboard/photostudio_details_screen.dart';
+
 
 class CustomCardWidgets {
   static Widget buildSection(
@@ -15,7 +15,7 @@ class CustomCardWidgets {
 
     // Responsive font sizes
     final titleFontSize = screenWidth < 350
-        ? 14.0
+        ? 12.0
         : screenWidth < 400
         ? 15.0
         : 16.0;
@@ -25,41 +25,33 @@ class CustomCardWidgets {
         ? 11.0
         : 12.0;
 
-    // Adjust childAspectRatio for very small screens
-    final childAspectRatio = screenWidth < 350 ? 0.9 : 1.05;
+    // Adjust childAspectRatio for very small screens to avoid overflow
+    final childAspectRatio = screenWidth < 350 ? 0.65 : 0.92;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 0),
+          padding: const EdgeInsets.symmetric(horizontal: 2.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 title,
-                style: TextStyle(
-                  fontSize: titleFontSize,
-                  fontWeight: FontWeight.w600,
-                  color: const Color(0xFF575959),
-                ),
+                style:TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500),
               ),
               if (showViewAll)
                 TextButton(
                   onPressed: onViewAll,
                   child: Text(
                     "View All",
-                    style: TextFontStyle.textFontStyle(
-                      12,
-                      const Color(0xFF1E535B),
-                      FontWeight.w400,
-                    ),
+                    style:TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w500),
                   ),
                 ),
             ],
           ),
         ),
-        const SizedBox(height: 10),
+
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -73,96 +65,88 @@ class CustomCardWidgets {
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
             final item = data[index];
-            return buildCarditem(item, screenWidth);
+            return buildCardItem(context, item, screenWidth);  // Fixed: added context parameter and corrected case
           },
         ),
       ],
     );
   }
 
-  static Widget buildCarditem(Map<String, String> item, double screenWidth) {
+  static Widget buildCardItem(
+      BuildContext context, Map<String, String> item, double screenWidth) {
     // Small-device adjustments
-    final imageHeight = screenWidth < 350 ? 100.0 : 105.0;
+    final imageHeight = screenWidth < 350 ? 90.0 : 120.0;
     final nameFontSize = screenWidth < 350
         ? 10.0
         : screenWidth < 400
-        ? 11.0
+        ? 12.0
         : 12.0;
     final priceFontSize = screenWidth < 350
-        ? 8.0
+        ? 10.0
         : screenWidth < 400
-        ? 9.0
-        : 12.0;
+        ? 12.0
+        : 10.0;
     final ratingFontSize = screenWidth < 350
-        ? 8.0
+        ? 10.0
         : screenWidth < 400
-        ? 9.0
+        ? 8.0
         : 10.0;
 
-    return Card(
-      elevation: 0,
-      color: const Color(0xFFFFEFDF),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6.0),
-      ),
-      margin: EdgeInsets.zero,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(6.0),
-                ),
-                child: item['image']!.startsWith('assets/')
-                    ? Image.asset(
-                  item['image']!,
-                  height: imageHeight,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                )
-                    : Image.network(
-                  item['image']!,
-                  height: imageHeight,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const Positioned(
-                top: 8,
-                right: 8,
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 10,
-                  child: Icon(
-                    Icons.favorite_border,
-                    size: 14,
-                    color: Colors.red,
-                  ),
-                ),
-              ),
-            ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PhotostudioDetailsScreen(),
           ),
-          Flexible(
-            child: Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+        );
+      },
+      child: Card(
+        elevation: 0,
+        color: const Color(0xFFFFEFDF),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6.0),
+        ),
+        margin: EdgeInsets.only(bottom: 25),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image Section
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(6.0),
+              ),
+              child: item['image']!.startsWith('assets/')
+                  ? Image.asset(
+                item['image']!,
+                height: imageHeight,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              )
+                  : Image.network(
+                item['image']!,
+                height: imageHeight,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            // Text Section
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                         child: Text(
                           item['name'] ?? '',
-                          style: TextFontStyle.textFontStyle(
-                            nameFontSize,
-                            const Color(0xFF575959),
-                            FontWeight.w500,
-                          ),
+                          style:TextFontStyle.textFontStyle( 12, Color(0xFF575959),FontWeight.w500),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -170,15 +154,12 @@ class CustomCardWidgets {
                       Row(
                         children: [
                           const Icon(Icons.star,
-                              color: Color(0xFFEFAA37), size: 16),
+                              color: Color(0xFFEFAA37), size: 14),
                           const SizedBox(width: 4),
                           Text(
                             item['rating'] ?? "0.0",
-                            style: TextFontStyle.textFontStyle(
-                              ratingFontSize,
-                              const Color(0xFF575959),
-                              FontWeight.w400,
-                            ),
+                            style:TextFontStyle.textFontStyle( 10, Color(0xFF575959),FontWeight.w500),
+
                           ),
                         ],
                       ),
@@ -187,17 +168,14 @@ class CustomCardWidgets {
                   const SizedBox(height: 4.0),
                   Text(
                     item['price'] ?? '',
-                    style: TextFontStyle.textFontStyle(
-                      priceFontSize,
-                      const Color(0xFF1E535B),
-                      FontWeight.w600,
-                    ),
+                    style:TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w500),
+
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

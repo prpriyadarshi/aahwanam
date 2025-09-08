@@ -15,7 +15,7 @@ class CustomCardBirthdayWidgets {
 
     // Responsive font sizes
     final titleFontSize = screenWidth < 350
-        ? 14.0
+        ? 12.0
         : screenWidth < 400
         ? 15.0
         : 16.0;
@@ -26,7 +26,7 @@ class CustomCardBirthdayWidgets {
         : 12.0;
 
     // Adjust childAspectRatio for very small screens to avoid overflow
-    final childAspectRatio = screenWidth < 350 ? 0.85 : 1.0;
+    final childAspectRatio = screenWidth < 350 ? 0.65 : 0.92;
 
     return SingleChildScrollView(
       child: Column(
@@ -39,28 +39,30 @@ class CustomCardBirthdayWidgets {
               children: [
                 Text(
                   title,
-                  style: TextStyle(
-                    fontSize: titleFontSize,
-                    color: const Color(0xFF575959),
-                    fontWeight: FontWeight.w600,
+                  style: TextFontStyle.textFontStyle(
+                    12,
+                    const Color(0xFF575959),
+                    FontWeight.w600,
                   ),
+
                 ),
                 if (showViewAll)
                   TextButton(
                     onPressed: onViewAll,
                     child: Text(
                       "View All",
-                      style: TextStyle(
-                        fontSize: viewAllFontSize,
-                        color: const Color(0xFF1E535B),
-                        fontWeight: FontWeight.w400,
+                      style: TextFontStyle.textFontStyle(
+                        12,
+                        const Color(0xFF1E535B),
+                        FontWeight.w600,
                       ),
+
                     ),
                   ),
               ],
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 2),
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -89,19 +91,18 @@ class CustomCardBirthdayWidgets {
     final nameFontSize = screenWidth < 350
         ? 10.0
         : screenWidth < 400
-        ? 11.0
+        ? 12.0
         : 12.0;
     final priceFontSize = screenWidth < 350
-        ? 8.0
+        ? 10.0
         : screenWidth < 400
-        ? 9.0
+        ? 12.0
         : 10.0;
     final ratingFontSize = screenWidth < 350
         ? 8.0
         : screenWidth < 400
-        ? 9.0
+        ? 8.0
         : 10.0;
-
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -156,11 +157,12 @@ class CustomCardBirthdayWidgets {
                       Expanded(
                         child: Text(
                           item['name'] ?? '',
-                          style: TextStyle(
-                            fontSize: nameFontSize,
-                            color: const Color(0xFF575959),
-                            fontWeight: FontWeight.w500,
+                          style: TextFontStyle.textFontStyle(
+                            nameFontSize,
+                            const Color(0xFF575959),
+                            FontWeight.w500,
                           ),
+
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -172,11 +174,12 @@ class CustomCardBirthdayWidgets {
                           const SizedBox(width: 2),
                           Text(
                             item['rating'] ?? "0.0",
-                            style: TextStyle(
-                              fontSize: ratingFontSize,
-                              color: const Color(0xFF575959),
-                              fontWeight: FontWeight.w400,
+                            style: TextFontStyle.textFontStyle(
+                              ratingFontSize,
+                              const Color(0xFF575959),
+                              FontWeight.w400,
                             ),
+
                           ),
                         ],
                       ),
@@ -185,11 +188,12 @@ class CustomCardBirthdayWidgets {
                   const SizedBox(height: 2.0),
                   Text(
                     item['price'] ?? '',
-                    style: TextStyle(
-                      fontSize: priceFontSize,
-                      color: const Color(0xFF1E535B),
-                      fontWeight: FontWeight.w600,
+                    style: TextFontStyle.textFontStyle(
+                      priceFontSize,
+                      const Color(0xFF1E535B),
+                      FontWeight.w600,
                     ),
+
                   ),
                 ],
               ),
