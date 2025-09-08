@@ -76,7 +76,7 @@ class _EventScreenState extends State<EventScreen> {
           if (state.status == EventStatus.loading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state.status == EventStatus.failure) {
-            return Center(child: Text(state.errorMessage ?? "Something went wrong"));
+            return Center(child: Text(state.errorMessage ?? "Something went wrong."));
           } else if (state.status == EventStatus.success) {
             return SingleChildScrollView(
               child: Padding(
