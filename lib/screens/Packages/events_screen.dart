@@ -97,7 +97,7 @@ class _EventScreenState extends State<EventScreen> {
                         crossAxisCount: crossAxisCount,
                         mainAxisSpacing: 4,
                         crossAxisSpacing: 10,
-                        childAspectRatio: 0.69,
+                        childAspectRatio: 0.65,
                       ),
                       itemBuilder: (context, index) {
                         final event = state.events[index];
