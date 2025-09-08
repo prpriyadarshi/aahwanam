@@ -47,6 +47,14 @@ class _ConceptsScreenState extends State<ConceptsScreen>
                     //   icon: const Icon(Icons.arrow_back, color: Colors.black),
                     //   onPressed: () => Navigator.pop(context),
                     // ),
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back_ios_new,
+                          size: 24, color: Color(0xFF1E535B)),
+                      onPressed: () => Navigator.pop(context),
+                      padding: const EdgeInsets.only(left: 8),
+                      splashRadius: 20,
+                      constraints: const BoxConstraints(),
+                    ),
                     Expanded(
                       child: Container(
                         height: 40,
@@ -82,13 +90,15 @@ class _ConceptsScreenState extends State<ConceptsScreen>
             TabBar(
               controller: _tabController,
               labelColor: const Color.fromRGBO(87, 89, 89, 1),
+              dividerColor: Colors.transparent, // 🚀 removes the extra bottom line
+
               labelStyle:
                   const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               unselectedLabelStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Color.fromRGBO(117, 117, 117, 1)),
               tabs: const [
-                Tab(text: 'Trends'),
+                Tab(text: 'Trendss'),
                 Tab(text: 'Blogs'),
                 Tab(text: 'Real Stories'),
               ],
@@ -174,7 +184,7 @@ class _ConceptsScreenState extends State<ConceptsScreen>
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => BlogDetailsScreen(
+                                     builder: (_) => BlogDetailsScreen(
                                       description: blog['description'] ?? '',
                                       imageUrl: blog['imageUrl'] ?? '',
                                       date: blog['date'] ?? '',
@@ -201,7 +211,7 @@ class _ConceptsScreenState extends State<ConceptsScreen>
                               fontWeight: FontWeight.w500,
                               fontSize: 16,
                               color: Color.fromRGBO(87, 89, 89, 1))),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -209,7 +219,7 @@ class _ConceptsScreenState extends State<ConceptsScreen>
                         itemBuilder: (context, index) {
                           final blog = state.vertical_blogs[index];
                           return Padding(
-                            padding: const EdgeInsets.only(right: 10, left: 10),
+                            padding: const EdgeInsets.only(right: 5, left: 5),
                             child: VerticBlogCard(
                               imageUrl: blog['imageUrl'] ?? '',
                               title: blog['title'] ?? '',
@@ -288,7 +298,7 @@ class _ConceptsScreenState extends State<ConceptsScreen>
                               fontWeight: FontWeight.w500,
                               fontSize: 16,
                               color: Color.fromRGBO(87, 89, 89, 1))),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 5),
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -296,7 +306,7 @@ class _ConceptsScreenState extends State<ConceptsScreen>
                         itemBuilder: (context, index) {
                           final blog = state.blogs[index];
                           return Padding(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(5),
                             child: VerticBlogCard(
                               imageUrl: blog['imageUrl'] ?? '',
                               title: blog['title'] ?? '',
