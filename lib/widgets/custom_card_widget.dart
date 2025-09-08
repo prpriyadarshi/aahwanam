@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'Subcategory/category_tile.dart';
 import 'custom_text_field.dart';
-
 import '../screens/dashboard/photostudio_details_screen.dart';
-import '../services/decoration/decoration_theme.dart';
+
 
 class CustomCardWidgets {
   static Widget buildSection(
@@ -53,7 +51,7 @@ class CustomCardWidgets {
             ],
           ),
         ),
-        const SizedBox(height: 10),
+
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -109,7 +107,7 @@ class CustomCardWidgets {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6.0),
         ),
-        margin: EdgeInsets.zero,
+        margin: EdgeInsets.only(bottom: 25),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -74,7 +74,7 @@ class CustomCardMehndiWidgets {
   }
 
   static Widget buildCardMehndi(BuildContext context, Map<String, String> item, double screenWidth) {
-    final imageHeight = screenWidth < 350 ? 100.0 : 110.0;
+    final imageHeight = screenWidth < 350 ? 90.0 : 120.0;
     final nameFontSize = screenWidth < 350
         ? 10.0
         : screenWidth < 400
@@ -162,6 +162,7 @@ class CustomCardMehndiWidgets {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 2.0),
                   Text(
                     item['price'] ?? '',
                     style: TextFontStyle.textFontStyle(
