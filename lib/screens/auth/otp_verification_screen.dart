@@ -43,6 +43,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     });
   }
 
+  void _resetTimer() {
+    _timer.cancel();
+    setState(() {
+      _remainingTime = const Duration(minutes: 3);
+    });
+    _startTimer();
+  }
+
   String _formatDuration(Duration duration) {
     final minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
     final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
@@ -50,6 +58,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   void _onOtpChanged(int index, String value) {
+    // Optional: restart timer if expired and user enters OTP
+    if (_remainingTime.inSeconds == 0) {
+      _resetTimer();
+    }
+
     if (value.length == 1 && index < 5) {
       FocusScope.of(context).requestFocus(_focusNodes[index + 1]);
     }
@@ -154,19 +167,23 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 30),
-                         Text(
+                        Text(
                           "OTP Verification",
-                          style: TextFontStyle.textFontStyle(18, const Color(0xFF575959), FontWeight.w600),
+                          style: TextFontStyle.textFontStyle(
+                              18, const Color(0xFF575959), FontWeight.w600),
                         ),
                         const SizedBox(height: 4),
                         RichText(
-                          text:  TextSpan(
+                          text: TextSpan(
                             text: "Enter the code from sms we have sent to\n",
-                            style: TextFontStyle.textFontStyle(12, const Color(0xFF757575), FontWeight.w400),
+                            style: TextFontStyle.textFontStyle(
+                                12, const Color(0xFF757575), FontWeight.w400),
                             children: [
                               TextSpan(
                                 text: "9837401241",
-                                style: TextFontStyle.textFontStyle(12, const Color(0xFF757575), FontWeight.w400),
+                                style: TextFontStyle.textFontStyle(
+                                    12, const Color(0xFF757575),
+                                    FontWeight.w400),
                               )
                             ],
                           ),
@@ -175,7 +192,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         Center(
                           child: Text(
                             _formatDuration(_remainingTime),
-                            style: TextFontStyle.textFontStyle(14, const Color(0xFF1E535B), FontWeight.w500),
+                            style: TextFontStyle.textFontStyle(
+                                14, const Color(0xFF1E535B), FontWeight.w500),
                           ),
                         ),
                         const SizedBox(height: 18),
@@ -183,31 +201,35 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           children: List.generate(otpFields.length, (index) {
                             return Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4),
+                                padding:
+                                const EdgeInsets.symmetric(horizontal: 4),
                                 child: AspectRatio(
-                                  aspectRatio: 1, // makes each OTP box square
+                                  aspectRatio: 1,
                                   child: otpFields[index],
                                 ),
                               ),
                             );
                           }),
                         ),
-
                         const SizedBox(height: 18),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                             Text(
+                            Text(
                               "Didn’t get OTP? ",
-                              style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w400),
+                              style: TextFontStyle.textFontStyle(
+                                  12, const Color(0xFF575959), FontWeight.w400),
                             ),
                             GestureDetector(
                               onTap: () {
-                                // Add resend OTP logic here
+                                // TODO: Call resend OTP API here
+                                _resetTimer(); // restart timer
                               },
-                              child:  Text(
+                              child: Text(
                                 "Resend OTP",
-                                style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w400),
+                                style: TextFontStyle.textFontStyle(
+                                    12, const Color(0xFF1E535B),
+                                    FontWeight.w400),
                               ),
                             ),
                           ],
@@ -219,10 +241,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           backgroundColor: const Color(0xFF1E535B),
                           borderColor: Colors.transparent,
                           textColor: Colors.white,
-                          height: MediaQuery.of(context).size.height*43/812,
+                          height:
+                          MediaQuery.of(context).size.height * 43 / 812,
                           width: double.infinity,
                         ),
-                        const Spacer(), // pushes sign-up row to bottom
+                        const Spacer(),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 30),
                           child: Row(
@@ -230,15 +253,20 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                             children: [
                               Text(
                                 "Don’t have an account? ",
-                                style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w400),
+                                style: TextFontStyle.textFontStyle(
+                                    16, const Color(0xFF575959),
+                                    FontWeight.w400),
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.pushNamed(context, AppRoutes.signUp);
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.signUp);
                                 },
                                 child: Text(
                                   "Sign up",
-                                  style: TextFontStyle.textFontStyle(16, const Color(0xFF1E535B), FontWeight.w400),
+                                  style: TextFontStyle.textFontStyle(
+                                      16, const Color(0xFF1E535B),
+                                      FontWeight.w400),
                                 ),
                               ),
                             ],
