@@ -40,7 +40,7 @@ class ServiceOverviewTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.only(top: 16,left:10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -53,7 +53,7 @@ class ServiceOverviewTab extends StatelessWidget {
                 style: TextFontStyle.textFontStyle(
                   14,
                   const Color(0xFF575959),
-                  FontWeight.w500,
+                  FontWeight.w600,
                 ),
               ),
               Text(
@@ -72,8 +72,8 @@ class ServiceOverviewTab extends StatelessWidget {
             description,
             style: TextFontStyle.textFontStyle(
               12,
-              const Color(0xFF575959),
-              FontWeight.w500,
+              const Color(0xFF757575),
+              FontWeight.w400,
             ),
           ),
 
@@ -92,7 +92,7 @@ class ServiceOverviewTab extends StatelessWidget {
             style: TextFontStyle.textFontStyle(
               12,
               const Color(0xFF757575),
-              FontWeight.w500,
+              FontWeight.w400,
             ),
           ),
 
@@ -233,8 +233,8 @@ class ServiceOverviewTab extends StatelessWidget {
                       Text(
                         label1!,
                         style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
                             color: Color(0xFF575959)),
                       ),
                       const SizedBox(height: 8),
