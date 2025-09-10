@@ -18,7 +18,7 @@ class CustomCardMehndiWidgets {
     final viewAllFontSize = screenWidth < 350 ? 10.0 : screenWidth < 400 ? 11.0 : 12.0;
 
     // Adjust childAspectRatio for very small screens
-    final childAspectRatio = screenWidth < 350 ? 0.65 : 0.92;
+    final childAspectRatio = screenWidth < 350 ? 0.65 : 0.94;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

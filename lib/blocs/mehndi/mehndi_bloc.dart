@@ -60,6 +60,10 @@ class MehndiBloc extends Bloc<MehndiEvent, MehndiState> {
             {'image': 'assets/images/Mehndi & Beauty1.png', 'name': 'Mehndi Stars', 'price': '₹3,000 ', 'rating': '4.3'},
             {'image': 'assets/images/Mehndi & Art.png', 'name': 'Mehndi & Art', 'price': '₹4,000 ', 'rating': '4.5'},
             {'image': 'assets/images/Iconic Mehndi.png', 'name': 'Iconic Mehndi', 'price': '₹15,000 ', 'rating': '4.3'},
+            {'image': 'assets/images/Mehndi & Beauty.png', 'name': 'Mehndi & Beauty', 'price': '₹5,000 ', 'rating': '4.5'},
+            {'image': 'assets/images/Mehndi & Beauty1.png', 'name': 'Mehndi Stars', 'price': '₹3,000 ', 'rating': '4.3'},
+            {'image': 'assets/images/Mehndi & Art.png', 'name': 'Mehndi & Art', 'price': '₹4,000 ', 'rating': '4.5'},
+            {'image': 'assets/images/Iconic Mehndi.png', 'name': 'Iconic Mehndi', 'price': '₹15,000 ', 'rating': '4.3'},
           ];
           emit(ThemesMehndiLoaded(themes));
           break;

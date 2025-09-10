@@ -11,8 +11,10 @@ class CustomCardWidgets {
         required VoidCallback onViewAll,
         required bool showViewAll,
       }) {
-    final screenWidth = MediaQuery.of(context).size.width;
 
+    final screenWidth = MediaQuery.of(context).size.width;
+    // Adjust childAspectRatio for very small screens to avoid overflow
+    final childAspectRatio = screenWidth < 350 ? 0.65 : 0.81;
     // Responsive font sizes
     final titleFontSize = screenWidth < 350
         ? 12.0
@@ -24,10 +26,6 @@ class CustomCardWidgets {
         : screenWidth < 400
         ? 11.0
         : 12.0;
-
-    // Adjust childAspectRatio for very small screens to avoid overflow
-    final childAspectRatio = screenWidth < 350 ? 0.65 : 0.92;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -38,7 +36,11 @@ class CustomCardWidgets {
             children: [
               Text(
                 title,
-                style:TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500),
+                style: TextFontStyle.textFontStyle(
+                  titleFontSize,
+                  const Color(0xFF575959),
+                  FontWeight.w600,
+                ),
               ),
               if (showViewAll)
                 TextButton(
@@ -87,11 +89,10 @@ class CustomCardWidgets {
         ? 12.0
         : 10.0;
     final ratingFontSize = screenWidth < 350
-        ? 10.0
+        ? 8.0
         : screenWidth < 400
         ? 8.0
         : 10.0;
-
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -146,7 +147,12 @@ class CustomCardWidgets {
                       Expanded(
                         child: Text(
                           item['name'] ?? '',
-                          style:TextFontStyle.textFontStyle( 12, Color(0xFF575959),FontWeight.w500),
+                          style: TextFontStyle.textFontStyle(
+                            nameFontSize,
+                            const Color(0xFF575959),
+                            FontWeight.w500,
+                          ),
+
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -158,7 +164,11 @@ class CustomCardWidgets {
                           const SizedBox(width: 4),
                           Text(
                             item['rating'] ?? "0.0",
-                            style:TextFontStyle.textFontStyle( 10, Color(0xFF575959),FontWeight.w500),
+                            style: TextFontStyle.textFontStyle(
+                              ratingFontSize,
+                              const Color(0xFF575959),
+                              FontWeight.w400,
+                            ),
 
                           ),
                         ],
@@ -168,7 +178,11 @@ class CustomCardWidgets {
                   const SizedBox(height: 4.0),
                   Text(
                     item['price'] ?? '',
-                    style:TextFontStyle.textFontStyle( 12, Color(0xFF1E535B),FontWeight.w500),
+                    style: TextFontStyle.textFontStyle(
+                      priceFontSize,
+                      const Color(0xFF1E535B),
+                      FontWeight.w600,
+                    ),
 
                   ),
                 ],

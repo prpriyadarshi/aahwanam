@@ -204,7 +204,7 @@ class CustomValetServiceCard extends StatelessWidget {
                             ),
                           ),
                           SingleChildScrollView(
-                            padding: const EdgeInsets.all(16),
+                            padding: const EdgeInsets.all(20),
                             child: Column(
                               children: mediaSections.map((section) {
                                 return GallerySectionWidget(

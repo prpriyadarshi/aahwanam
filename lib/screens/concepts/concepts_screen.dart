@@ -98,7 +98,7 @@ class _ConceptsScreenState extends State<ConceptsScreen>
                   fontWeight: FontWeight.bold,
                   color: Color.fromRGBO(117, 117, 117, 1)),
               tabs: const [
-                Tab(text: 'Trendss'),
+                Tab(text: 'Trends'),
                 Tab(text: 'Blogs'),
                 Tab(text: 'Real Stories'),
               ],

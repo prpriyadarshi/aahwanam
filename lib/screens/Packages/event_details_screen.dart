@@ -7,6 +7,7 @@ import '../../blocs/Subcategory/subcategory bloc.dart';
 import '../../widgets/Subcategory/service_card_details.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../widgets/custom_top_bar.dart';
+import 'mypackage_cart.dart';
 
 class EventDetailsScreen extends StatefulWidget {
   final String serviceId;
@@ -105,7 +106,12 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    print('Checking out with quantity: $_currentQuantity');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MyPackageCart(),
+                      ),
+                    );
                   },
                   style: OutlinedButton.styleFrom(
                     foregroundColor: const Color(0xFF233B32),
