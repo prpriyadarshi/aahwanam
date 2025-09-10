@@ -16,7 +16,6 @@ import '../../widgets/custom_cart_card.dart';
 class MyPackagesScreen extends StatefulWidget {
   const MyPackagesScreen({super.key});
 
-
   @override
   State<MyPackagesScreen> createState() => _MyPackagesScreen();
 }
@@ -26,6 +25,16 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // ✅ Responsive sizing helpers
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isTablet = screenWidth > 600;
+
+    double getResponsiveFont(double size) =>
+        isTablet ? size * 1.3 : size; // Scale font on tablets
+    double getResponsivePadding(double size) =>
+        isTablet ? size * 1.5 : size;
+
     return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
         if (state is AccountLoading) {
@@ -41,33 +50,36 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
             backgroundColor: Colors.white,
             appBar: AppBar(
               titleSpacing: 0,
-              title: Text("My Packages",
+              title: Text(
+                "My Packages",
                 style: TextFontStyle.textFontStyle(
-                  16,                         // Font size
-                  Color(0xFF575959),          // Text color
-                  FontWeight.w500,            // Font weight
-                ),),
+                  getResponsiveFont(16),
+                  const Color(0xFF575959),
+                  FontWeight.w500,
+                ),
+              ),
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
               elevation: 0,
               leading: IconButton(
-                padding: const EdgeInsets.only(top: 2, left: 10),
+                padding: EdgeInsets.only(
+                  top: getResponsivePadding(2),
+                  left: getResponsivePadding(10),
+                ),
                 icon: const Icon(
                   Icons.arrow_back_ios,
                   size: 18,
                   color: Color(0xFF575959),
                 ),
                 onPressed: () {
-                  Navigator.pop(context); // ✅ Go back to previous screen
-                  // Or use push to go to a specific screen:
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
+                  Navigator.pop(context);
                 },
               ),
               actions: [
                 IconButton(
                   icon: const Icon(Icons.share),
                   onPressed: () {
-                    // Implement share functionality if needed
+                    // Share logic
                   },
                 ),
               ],
@@ -76,7 +88,12 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
               children: [
                 // Toggle Buttons
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(26, 0, 28, 12),
+                  padding: EdgeInsets.fromLTRB(
+                    getResponsivePadding(26),
+                    0,
+                    getResponsivePadding(28),
+                    getResponsivePadding(12),
+                  ),
                   child: Row(
                     children: [
                       Expanded(
@@ -87,17 +104,30 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                             });
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: isAllSelected ? const Color(0xFF1E535B) : Colors.white,
-                            foregroundColor: isAllSelected ? Colors.white : const Color(0xFF1E535B),
+                            backgroundColor: isAllSelected
+                                ? const Color(0xFF1E535B)
+                                : Colors.white,
+                            foregroundColor: isAllSelected
+                                ? Colors.white
+                                : const Color(0xFF1E535B),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
-                              side: const BorderSide(color: Color(0xFF1E535B), width: 1),
+                              side: const BorderSide(
+                                color: Color(0xFF1E535B),
+                                width: 1,
+                              ),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              vertical: getResponsivePadding(12),
                             ),
                           ),
-                          child: const Text("Booked Packages"),
+                          child: Text(
+                            "Booked Packages",
+                            style: TextStyle(fontSize: getResponsiveFont(14)),
+                          ),
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: getResponsivePadding(12)),
                       Expanded(
                         child: OutlinedButton(
                           onPressed: () {
@@ -106,14 +136,27 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                             });
                           },
                           style: OutlinedButton.styleFrom(
-                            backgroundColor: isAllSelected ? Colors.transparent : const Color(0xFF1E535B),
-                            foregroundColor: isAllSelected ? const Color(0xFF1E535B) : Colors.white,
+                            backgroundColor: isAllSelected
+                                ? Colors.transparent
+                                : const Color(0xFF1E535B),
+                            foregroundColor: isAllSelected
+                                ? const Color(0xFF1E535B)
+                                : Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
-                              side: const BorderSide(color: Color(0xFF1E535B), width: 1),
+                              side: const BorderSide(
+                                color: Color(0xFF1E535B),
+                                width: 1,
+                              ),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              vertical: getResponsivePadding(12),
                             ),
                           ),
-                          child: const Text("Cart"),
+                          child: Text(
+                            "Cart",
+                            style: TextStyle(fontSize: getResponsiveFont(14)),
+                          ),
                         ),
                       ),
                     ],
@@ -123,36 +166,53 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                 // Content Area
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 14),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: getResponsivePadding(14),
+                    ),
                     child: isAllSelected
                         ? (packageItems.isEmpty
-                        ? const Center(child: Text("Your wishlist is empty"))
+                        ? Center(
+                      child: Text(
+                        "Your wishlist is empty",
+                        style: TextStyle(
+                          fontSize: getResponsiveFont(14),
+                        ),
+                      ),
+                    )
                         : ListView.builder(
                       itemCount: packageItems.length,
                       itemBuilder: (context, index) {
                         final package = packageItems[index];
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 0),
+                          padding:
+                          const EdgeInsets.only(bottom: 8.0),
                           child: CustomPackageCard(
                             title: package['title'],
-                            servicesIncluded: package['servicesIncluded'],
+                            servicesIncluded:
+                            package['servicesIncluded'],
                             price: package['price'],
                             status: package['status'],
                             onTap: () {
-                              final status = package['status'].toString().toLowerCase();
+                              final status = package['status']
+                                  .toString()
+                                  .toLowerCase();
 
                               if (status == 'delivered') {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => DetailedDeliveredmyPackagesScreen(package: package),
+                                    builder: (context) =>
+                                        DetailedDeliveredmyPackagesScreen(
+                                            package: package),
                                   ),
                                 );
                               } else if (status == 'deliver soon') {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => DetailedDeliverSoonScreen(package: package), // <-- create this screen
+                                    builder: (context) =>
+                                        DetailedDeliverSoonScreen(
+                                            package: package),
                                   ),
                                 );
                               }
@@ -162,13 +222,21 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                       },
                     ))
                         : (cartdata.isEmpty
-                        ? const Center(child: Text("Your cart is empty"))
+                        ? Center(
+                      child: Text(
+                        "Your cart is empty",
+                        style: TextStyle(
+                          fontSize: getResponsiveFont(14),
+                        ),
+                      ),
+                    )
                         : ListView.builder(
                       itemCount: cartdata.length,
                       itemBuilder: (context, index) {
                         final cartItem = cartdata[index];
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
+                          padding:
+                          const EdgeInsets.only(bottom: 12),
                           child: CustomCartCard(
                             title: cartItem['title'],
                             description: cartItem['description'],
@@ -178,10 +246,11 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => EventDetailsScreen(
-                                    serviceId: cartItem['id'], // using index as ID
-                                    showIncludedPackages: true,
-                                  ),
+                                  builder: (context) =>
+                                      EventDetailsScreen(
+                                        serviceId: cartItem['id'],
+                                        showIncludedPackages: true,
+                                      ),
                                 ),
                               );
                             },
@@ -196,8 +265,14 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                 if (!isAllSelected)
                   Container(
                     width: double.infinity,
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    margin: EdgeInsets.symmetric(
+                      horizontal: getResponsivePadding(16),
+                      vertical: getResponsivePadding(12),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: getResponsivePadding(16),
+                      vertical: getResponsivePadding(12),
+                    ),
                     child: Row(
                       children: [
                         Expanded(
@@ -207,43 +282,57 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                                 context,
                                 AppRoutes.Subcategory,
                               );
-                              // TODO: Add other services logic
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
                               foregroundColor: Colors.black,
                               side: const BorderSide(color: Colors.black26),
-                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              padding: EdgeInsets.symmetric(
+                                vertical: getResponsivePadding(14),
+                              ),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            child: Text("Add Other Services",
-                              style: TextFontStyle.textFontStyle(14, Color(0xFF1E535B), FontWeight.w500),
+                            child: Text(
+                              "Add Other Services",
+                              style: TextFontStyle.textFontStyle(
+                                getResponsiveFont(14),
+                                const Color(0xFF1E535B),
+                                FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: getResponsivePadding(12)),
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const DetailedPackageCartScreen(),
+                                  builder: (context) =>
+                                  const DetailedPackageCartScreen(),
                                 ),
                               );
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF1E535B),
                               foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              padding: EdgeInsets.symmetric(
+                                vertical: getResponsivePadding(14),
+                              ),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            child: Text("Create Package",
-                              style: TextFontStyle.textFontStyle(14, Color(0xFFFFFFFF), FontWeight.w500),
+                            child: Text(
+                              "Create Package",
+                              style: TextFontStyle.textFontStyle(
+                                getResponsiveFont(14),
+                                const Color(0xFFFFFFFF),
+                                FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
@@ -252,7 +341,6 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                   ),
               ],
             ),
-
           );
         }
 
@@ -263,5 +351,3 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
     );
   }
 }
-
-
