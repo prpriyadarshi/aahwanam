@@ -60,7 +60,7 @@ class ReviewList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Rating & Reviews",
+                      "Ratings & Reviews",
                       style: TextFontStyle.textFontStyle(
                         16,
                         const Color(0xFF575959),

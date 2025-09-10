@@ -86,7 +86,7 @@ class PanditServiceScreen extends StatelessWidget {
             constraints: const BoxConstraints(),
           ),
           title: Text(
-            'Book Service',
+            'Book Services',
 
             style: TextFontStyle.textFontStyle(18,  Color(0xFF575959), FontWeight.w500),
           ),
