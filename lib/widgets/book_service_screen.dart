@@ -79,16 +79,27 @@ class BookServiceScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title:  Text('Book Service',
-              style:  TextFontStyle.textFontStyle(  18,Colors.black,FontWeight.bold)),
           backgroundColor: Colors.white,
           elevation: 0,
-          centerTitle: true,
-          iconTheme: const IconThemeData(color: Colors.black),
+          automaticallyImplyLeading: false, // ✅ To avoid default back arrow
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios_new, size: 24, color: Color(0xFF575959)),
+            onPressed: () => Navigator.pop(context),
+            padding: const EdgeInsets.only(left:8),
+            splashRadius: 20,
+            constraints: const BoxConstraints(),
+          ),
+          title: Text(
+            'Book Service',
+
+            style: TextFontStyle.textFontStyle(18,  Color(0xFF575959), FontWeight.w500),
+          ),
+
+          iconTheme: const IconThemeData(color: Color(0xFF575959)),
           actions: [
             IconButton(
-              icon: const Icon(Icons.share, color: Colors.black),
-              onPressed: _shareBookingDetailsPdf,
+              icon: const Icon(Icons.share, color: Color(0xFF575959)),
+              onPressed: () {},
             )
           ],
         ),
@@ -107,14 +118,12 @@ class BookServiceScreen extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(package["imagePath"], width: 60, height: 60),
-                    const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(package["title"],
-                              style:  TextFontStyle.textFontStyle( 16, Colors.black87,FontWeight.bold) ),
+                              style:  TextFontStyle.textFontStyle( 17, Color(0xFF575959),FontWeight.w600) ),
                           const SizedBox(height: 4),
                           Text(package["description"],
                               style:  TextFontStyle.textFontStyle( 14, Colors.grey.shade700)),
@@ -123,7 +132,7 @@ class BookServiceScreen extends StatelessWidget {
                     ),
                     Text(
                       "₹ ${package["price"]}",
-                      style: TextFontStyle.textFontStyle( 16, Color(0xFF184A45),FontWeight.bold),
+                      style: TextFontStyle.textFontStyle( 16, Color(0xFF184A45),FontWeight.w600),
                     )
 
                   ],
@@ -316,12 +325,12 @@ class BookServiceScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-               Text("Portable Bar Table", style: TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w500)),
+               Text("Portable Bar Table", style: TextFontStyle.textFontStyle( 14, Color(0xFF575959),FontWeight.w500)),
               Row(
                 children: [
                   Text(
                     "₹ ${state.barTablePrice * state.quantity}",
-                    style: TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w600),
+                    style: TextFontStyle.textFontStyle( 14, Color(0xFF575959),FontWeight.w600),
                   ),
                   const SizedBox(width: 12),
                   Container(
@@ -513,9 +522,9 @@ class BookServiceScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextFontStyle.textFontStyle( 14, Colors.black87, bold ? FontWeight.bold : FontWeight.normal)),
+          Text(label, style: TextFontStyle.textFontStyle( 14, Color(0xFF575959), bold ? FontWeight.w600 : FontWeight.normal)),
           Text(amount,
-              style:TextFontStyle.textFontStyle( 14,highlight ?  Color(0xFF184A45) : Colors.black, bold ? FontWeight.bold : FontWeight.normal)
+              style:TextFontStyle.textFontStyle( 14,highlight ?  Color(0xFF184A45) : Color(0xFF575959), bold ? FontWeight.w600 : FontWeight.normal)
           ),
         ],
       ),

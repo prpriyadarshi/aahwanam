@@ -160,8 +160,8 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                                       widget.pooja["title"],
                                       style: TextFontStyle.textFontStyle(
                                         16,
-                                        Colors.black87,
-                                        FontWeight.bold,
+                                        Color(0xFF575959),
+                                        FontWeight.w500,
                                       ),
                                     ),
                                     const SizedBox(height: 6),
@@ -183,7 +183,7 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                                     style: TextFontStyle.textFontStyle(
                                       16,
                                       const Color(0xFF184A45),
-                                      FontWeight.bold,
+                                      FontWeight.w600,
                                     ),
                                   ),
                                   const SizedBox(height: 26),
@@ -206,7 +206,7 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                       TabBar(
                         indicatorColor: Colors.teal, // underline stays
                         dividerColor: Colors.transparent, // 🚀 removes the extra bottom line
-                        labelColor: Colors.black,
+                        labelColor: Color(0xFF575959),
                         unselectedLabelColor: Colors.grey,
                         labelStyle: TextFontStyle.textFontStyle(
                           18,
@@ -289,7 +289,7 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                   child: Text(
                     "About",
                     style: TextFontStyle.textFontStyle(
-                        16, const Color(0xFF575959), FontWeight.w500),
+                        19, const Color(0xFF575959), FontWeight.w500),
                   ),
                 ),
 
@@ -312,7 +312,7 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
               Text(
                 "${pooja['details_heading']}-",
                 style: TextFontStyle.textFontStyle(
-                    16, const Color(0xFF575959), FontWeight.w500),
+                    19, const Color(0xFF575959), FontWeight.w500),
               ),
               const SizedBox(height: 6),
 
@@ -403,7 +403,7 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
 
             /// Guests & Bartenders
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
 
             /// Address Section
             CustomChangeAddressSheet(),

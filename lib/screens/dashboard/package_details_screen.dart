@@ -78,22 +78,29 @@ class PackageDetailScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                bottom: TabBar(
-                  indicatorColor: Colors.teal, // underline stays
-                  dividerColor: Colors.transparent, // 🚀 removes the extra bottom line
-                  labelColor: Colors.black,
-                  unselectedLabelColor: Colors.grey,
-                  labelStyle: TextFontStyle.textFontStyle(
-                    18,
-                    const Color(0xFF575959),
-                    FontWeight.w500,
+                bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(50),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8.0), // 👈 space between row and TabBar
+                    child: TabBar(
+                      indicatorColor: Colors.teal,
+                      dividerColor: Colors.transparent,
+                      labelColor: Color(0xFF575959),
+                      unselectedLabelColor: Colors.grey,
+                      labelStyle: TextFontStyle.textFontStyle(
+                        18,
+                        const Color(0xFF575959),
+                        FontWeight.w600,
+                      ),
+                      tabs: const [
+                        Tab(text: "All Details"),
+                        Tab(text: "Gallery"),
+                        Tab(text: "Review"),
+                      ],
+                    ),
                   ),
-                  tabs: const [
-                    Tab(text: "All Details"),
-                    Tab(text: "Gallery"),
-                    Tab(text: "Review"),
-                  ],
                 ),
+
               ),
               body: TabBarView(
                 children: [
@@ -144,12 +151,12 @@ class PackageDetailScreen extends StatelessWidget {
               Text(
                 "About ${state.package?['title']}",
                 style:
-                  TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500)
+                  TextFontStyle.textFontStyle( 18, Color(0xFF575959),FontWeight.w500)
               ),
               Text(
                 "₹${state.package?['price']}",
                 style:
-                  TextFontStyle.textFontStyle( 16, Colors.teal,FontWeight.bold)
+                  TextFontStyle.textFontStyle( 18, Colors.teal,FontWeight.bold)
               ),
             ],
           ),
@@ -157,21 +164,21 @@ class PackageDetailScreen extends StatelessWidget {
           Text(
             state.package?['description'],
             style:
-              TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w400)
+              TextFontStyle.textFontStyle( 15, Color(0xFF575959),FontWeight.w400)
           ),
           const SizedBox(height: 16),
           Text(
             "Included in this Package are:",
             style:
-              TextFontStyle.textFontStyle( 16,Color(0xFF575959),FontWeight.w500)
+              TextFontStyle.textFontStyle( 18,Color(0xFF575959),FontWeight.w500)
           ),
           const SizedBox(height: 6),
           ...((package["included"] as List<String>)
               .map((item) => Padding(
-            padding: const EdgeInsets.only(bottom: 4.0),
+            padding: const EdgeInsets.only(bottom: 4.0,left:8.0),
             child: Text("• $item",
                 style:
-                TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w400)),
+                TextFontStyle.textFontStyle( 15, Color(0xFF575959),FontWeight.w400)),
 
           )).toList()),
           // const SizedBox(height: 20),
@@ -190,7 +197,8 @@ class PackageDetailScreen extends StatelessWidget {
               const Expanded(
                 child: Divider(
                   thickness: 1,
-                  color: Color(0xFFDDDDDD), // Light grey color
+                  color: Color(0xFFE4E4E4)
+                  , // Light grey color
                 ),
               ),
               const SizedBox(width: 10),
@@ -204,7 +212,7 @@ class PackageDetailScreen extends StatelessWidget {
               const Expanded(
                 child: Divider(
                   thickness: 1,
-                  color: Color(0xFFDDDDDD),
+                  color: Color(0xFFE4E4E4),
                 ),
               ),
             ],
@@ -236,7 +244,7 @@ class PackageDetailScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 10),
           CustomChangeAddressSheet(),
           const SizedBox(height: 20),
         ],
