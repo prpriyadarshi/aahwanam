@@ -216,7 +216,7 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                         tabs: [
                           Tab(text: "All Details"),
                           Tab(text: "Gallery"),
-                          Tab(text: "Reviews"),
+                          Tab(text: "Review"),
                         ],
                       ),
 

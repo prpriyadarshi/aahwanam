@@ -95,7 +95,7 @@ class PackageDetailScreen extends StatelessWidget {
                       tabs: const [
                         Tab(text: "All Details"),
                         Tab(text: "Gallery"),
-                        Tab(text: "Reviews"),
+                        Tab(text: "Review"),
                       ],
                     ),
                   ),

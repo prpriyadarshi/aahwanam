@@ -114,7 +114,7 @@ class _PanditScreenState extends State<PanditScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 14.0), // 👈 shift right
                             child: Text(
-                              "Pooja Themes",
+                              "Pooja Theme",
                               style: TextFontStyle.textFontStyle(
                                 16,
                                 const Color(0xFF575959),

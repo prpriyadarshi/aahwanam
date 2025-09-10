@@ -107,7 +107,7 @@ class _PanditThemeState extends State<PanditTheme> {
                         Padding(
                           padding: const EdgeInsets.only(left: 5.0), // 👈 shift right
                           child: Text(
-                            "Pooja Theme",
+                            "Pooja Themes",
                             style: TextFontStyle.textFontStyle(
                               16,
                               const Color(0xFF575959),
