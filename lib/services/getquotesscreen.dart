@@ -60,9 +60,9 @@ class _GetquotescreenState extends State<Getquotescreen> {
                     child: Text(
                       "Add Your Decoration Inspirations",
                       style: TextFontStyle.textFontStyle(
-                        12,
+                        14,
                         const Color(0xFF575959),
-                        FontWeight.w500,
+                        FontWeight.w600,
                       ),
 
 
@@ -124,9 +124,9 @@ class _GetquotescreenState extends State<Getquotescreen> {
                     child: Text(
                       "Add your thoughts",
                       style: TextFontStyle.textFontStyle(
-                        12,
+                        14,
                         const Color(0xFF575959),
-                        FontWeight.w500,
+                        FontWeight.w600,
                       ),
 
                     ),
@@ -161,9 +161,9 @@ class _GetquotescreenState extends State<Getquotescreen> {
                     child: Text(
                       "Choose budget range",
                       style: TextFontStyle.textFontStyle(
-                        12,
+                        14,
                         const Color(0xFF575959),
-                        FontWeight.w500,
+                        FontWeight.w600,
                       ),
 
                     ),
@@ -226,9 +226,9 @@ class _GetquotescreenState extends State<Getquotescreen> {
                     child: Text(
                       "Connect with us",
                       style: TextFontStyle.textFontStyle(
-                        12,
+                        14,
                         const Color(0xFF575959),
-                        FontWeight.w500,
+                        FontWeight.w600,
                       ),
 
                     ),
