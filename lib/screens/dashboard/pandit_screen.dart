@@ -111,9 +111,16 @@ class _PanditScreenState extends State<PanditScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            "Pooja Theme",
-                            style:  TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w600),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 14.0), // 👈 shift right
+                            child: Text(
+                              "Pooja Theme",
+                              style: TextFontStyle.textFontStyle(
+                                16,
+                                const Color(0xFF575959),
+                                FontWeight.w600,
+                              ),
+                            ),
                           ),
                           Flexible( // Ensures the dropdown gets a proper size within the Row
                             child: CustomDropdown(

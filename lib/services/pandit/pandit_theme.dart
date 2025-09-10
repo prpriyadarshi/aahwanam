@@ -104,10 +104,16 @@ class _PanditThemeState extends State<PanditTheme> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Text(
-                          "Pooja Theme",
-                          style:
-                            TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w600),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0), // 👈 shift right
+                          child: Text(
+                            "Pooja Themes",
+                            style: TextFontStyle.textFontStyle(
+                              16,
+                              const Color(0xFF575959),
+                              FontWeight.w600,
+                            ),
+                          ),
                         ),
                         CustomDropdown(
                           hintText: "Select Language",
