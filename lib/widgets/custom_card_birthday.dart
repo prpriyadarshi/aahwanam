@@ -40,7 +40,7 @@ class CustomCardBirthdayWidgets {
                 Text(
                   title,
                   style: TextFontStyle.textFontStyle(
-                    12,
+                    16,
                     const Color(0xFF575959),
                     FontWeight.w600,
                   ),

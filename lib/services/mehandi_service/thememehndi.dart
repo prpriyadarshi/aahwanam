@@ -32,7 +32,7 @@ class ThemesMehndiScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
-                padding: EdgeInsets.only(left: 20, top: 10),
+                padding: EdgeInsets.only(left: 25, top: 0, bottom: 10),
                 child: Text(
                   "Bridal Mehndi",
                   style: TextStyle(
@@ -49,12 +49,12 @@ class ThemesMehndiScreen extends StatelessWidget {
               ),
 
               const Padding(
-                padding: EdgeInsets.only(left: 20, top: 10),
+                padding: EdgeInsets.only(left: 25, top: 0, bottom: 10),
                 child: Text(
                   "Natural Mehndi",
                   style: TextStyle(
                     fontSize: 12,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                     color: Color(0xFF575959),
                   ),
                 ),
@@ -63,21 +63,23 @@ class ThemesMehndiScreen extends StatelessWidget {
               if (splitList(mehndiItems, 4).length > 1)
                 CustomBuildDecorHorizontalList.build(
                   title: "",
-                  items: splitList(mehndiItems, 4)[1],
+                  items: splitList(mehndiItems, 4).isNotEmpty ? splitList(mehndiItems, 4)[0] : [],
                 ),
             ],
           ),
 
           const Padding(
-            padding: EdgeInsets.only(left: 20, top: 10),
+            padding: EdgeInsets.only(left: 25, top: 0, bottom: 10),
             child: Text(
               "HD Mehndi",
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF575959)),
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF575959)),
             ),
           ),
-          ...splitList(mehndiItems, 4)
-              .map((chunk) => CustomBuildDecorHorizontalList.build(title: "", items: chunk))
-              .toList(),
+          if (splitList(mehndiItems, 4).length > 1)
+            CustomBuildDecorHorizontalList.build(
+              title: "",
+              items: splitList(mehndiItems, 4).isNotEmpty ? splitList(mehndiItems, 4)[0] : [],
+            ),
         ],
       ),
     );

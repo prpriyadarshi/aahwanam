@@ -24,12 +24,12 @@ class _HorizBlogCardState extends State<HorizBlogCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height: 235,
       width: 230,
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Colors.white,
+         color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade200,
@@ -49,7 +49,7 @@ class _HorizBlogCardState extends State<HorizBlogCard> {
                 child: Image.asset(
                   widget.imageUrl,
                   width: double.infinity,
-                  height: 130,
+                  height: 131,
                   fit: BoxFit.fill,
                 ),
               ),

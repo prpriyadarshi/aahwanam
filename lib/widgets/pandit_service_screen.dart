@@ -79,21 +79,22 @@ class PanditServiceScreen extends StatelessWidget {
           elevation: 0,
           automaticallyImplyLeading: false, // ✅ To avoid default back arrow
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new, size: 24, color: Color(0xFF1E535B)),
+            icon: const Icon(Icons.arrow_back_ios_new, size: 24, color: Color(0xFF575959)),
             onPressed: () => Navigator.pop(context),
-            padding: const EdgeInsets.only(left: 8),
+            padding: const EdgeInsets.only(left:8),
             splashRadius: 20,
             constraints: const BoxConstraints(),
           ),
           title: Text(
             'Book Service',
-            style: TextFontStyle.textFontStyle(18, Colors.black, FontWeight.bold),
+
+            style: TextFontStyle.textFontStyle(18,  Color(0xFF575959), FontWeight.w500),
           ),
-          centerTitle: true,
-          iconTheme: const IconThemeData(color: Colors.black),
+
+          iconTheme: const IconThemeData(color: Color(0xFF575959)),
           actions: [
             IconButton(
-              icon: const Icon(Icons.share, color: Colors.black),
+              icon: const Icon(Icons.share, color: Color(0xFF575959)),
               onPressed: () {},
             )
           ],
@@ -114,14 +115,7 @@ class PanditServiceScreen extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(
-                      (package["gallery"] != null && (package["gallery"] as List).isNotEmpty)
-                          ? (package["gallery"] as List)[0]
-                          : 'assets/images/placeholder.png',
-                      width: 60,
-                      height: 60,
-                      fit: BoxFit.cover,
-                    ),
+
 
                     const SizedBox(width: 12),
                     Expanded(
@@ -129,7 +123,7 @@ class PanditServiceScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(package["title"],
-                              style:  TextFontStyle.textFontStyle( 16, Colors.black87,FontWeight.bold) ),
+                              style:  TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w600) ),
                           const SizedBox(height: 4),
                           Text(package["description"],
                               style:  TextFontStyle.textFontStyle( 14, Colors.grey.shade700)),
@@ -144,7 +138,7 @@ class PanditServiceScreen extends StatelessWidget {
                           style: TextFontStyle.textFontStyle(
                             16,
                             const Color(0xFF184A45),
-                            FontWeight.bold,
+                            FontWeight.w600,
                           ),
                         ),
                         const SizedBox(height: 26),
@@ -165,9 +159,7 @@ class PanditServiceScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: 20),
-              package['title'] == 'Mixologist package'
-                  ? buildPortableBarTableItem()
-                  : SizedBox.shrink(), // Empty widget if condition is false
+              package['title']=SizedBox.shrink(), // Empty widget if condition is false
 
 
 
@@ -186,7 +178,7 @@ class PanditServiceScreen extends StatelessWidget {
                       const SizedBox(width: 10),
 
                       Text(
-                          "Event & Service Details",
+                          "Event Details",
                           style:
                           TextFontStyle.textFontStyle( 18, Color(0xFF575959),FontWeight.w500)
                       ),
@@ -251,7 +243,7 @@ class PanditServiceScreen extends StatelessWidget {
                       _buildBillRow("Package service charges", "₹ ${state.basePackagePrice}"),
                       _buildBillRow("Platform Fee", "₹ ${state.platformFee}"),
                       _buildBillRow("Transport Fee", "FREE", highlight: true),
-                      _buildBillRow("Total", "₹ ${state.total}", bold: true),
+                      _buildBillRow("Total", "₹ ${state.total}", bold:true),
                     ],
                   );
                 },
@@ -312,63 +304,7 @@ class PanditServiceScreen extends StatelessWidget {
   }
 
   /// ✅ Portable Bar Table Item with Bloc
-  Widget buildPortableBarTableItem() {
-    return BlocBuilder<BookingCubit, BookingState>(
-      builder: (context, state) {
-        return Container(
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: const Color(0xFFFFF7F2),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.grey.shade300),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Portable Bar Table", style: TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w500)),
-              Row(
-                children: [
-                  Text(
-                    "₹ ${state.barTablePrice * state.quantity}",
-                    style: TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w600),
-                  ),
-                  const SizedBox(width: 12),
-                  Container(
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF184A45),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        GestureDetector(
-                          onTap: () => context.read<BookingCubit>().decrementQuantity(),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8),
-                            child: Icon(Icons.remove, color: Colors.white, size: 16),
-                          ),
-                        ),
-                        Text("${state.quantity}", style: TextFontStyle.textFontStyle( 14, Colors.white)),
-                        GestureDetector(
-                          onTap: () => context.read<BookingCubit>().incrementQuantity(),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8),
-                            child: Icon(Icons.add, color: Colors.white, size: 16),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+
 
   /// ✅ Reusable Widgets
   Widget _buildInput(String label, String value, [IconData? icon]) {
@@ -403,9 +339,9 @@ class PanditServiceScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextFontStyle.textFontStyle( 14, Colors.black87, bold ? FontWeight.bold : FontWeight.normal)),
+          Text(label, style: TextFontStyle.textFontStyle( 14, Color(0xFF575959), bold ? FontWeight.w600 : FontWeight.normal)),
           Text(amount,
-              style:TextFontStyle.textFontStyle( 14,highlight ?  Color(0xFF184A45) : Colors.black, bold ? FontWeight.bold : FontWeight.normal)
+              style:TextFontStyle.textFontStyle( 14,highlight ?  Color(0xFF575959) : Color(0xFF575959), bold ? FontWeight.w600 : FontWeight.normal)
           ),
         ],
       ),

@@ -76,7 +76,7 @@ class _EventScreenState extends State<EventScreen> {
           if (state.status == EventStatus.loading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state.status == EventStatus.failure) {
-            return Center(child: Text(state.errorMessage ?? "Something went wrong"));
+            return Center(child: Text(state.errorMessage ?? "Something went wrong."));
           } else if (state.status == EventStatus.success) {
             return SingleChildScrollView(
               child: Padding(
@@ -96,7 +96,7 @@ class _EventScreenState extends State<EventScreen> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: crossAxisCount,
                         mainAxisSpacing: 4,
-                        crossAxisSpacing: 20,
+                        crossAxisSpacing: 10,
                         childAspectRatio: 0.65,
                       ),
                       itemBuilder: (context, index) {

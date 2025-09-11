@@ -17,31 +17,37 @@ class MediaGallery extends StatelessWidget {
     }
 
     return Scaffold(
-
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// ✅ Title
-              Text(
-                "Photos and Videos",
-                style: TextFontStyle.textFontStyle(18, Colors.black87, FontWeight.w500),
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+       child:Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// ✅ Title
+            Text(
+              "Photos and Videos",
+              style: TextFontStyle.textFontStyle(
+                18,
+                Color(0xFF575959),
+                FontWeight.w500,
               ),
-              const SizedBox(height:12),
-              /// ✅ Grid without extra space
-              GridView.builder(
-                padding: EdgeInsets.zero, // ✅ Remove default padding
-                shrinkWrap: true, // ✅ Allow GridView inside Column
-                physics: const NeverScrollableScrollPhysics(), // ✅ Disable inner scroll
+            ),
+            const SizedBox(height: 12),
+
+            /// ✅ Grid with fixed height (no vertical scrolling)
+            SizedBox(
+              height:390, // 👈 adjust height as needed
+              child: GridView.builder(
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(), // ✅ no scrolling
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8,
                   childAspectRatio: 1.0,
                 ),
-                itemCount: media.length,
+                itemCount: media.length > 9 ? 9 : media.length, // ✅ optional: limit items
                 itemBuilder: (context, index) {
                   final item = media[index];
                   final String url = item['url'];
@@ -83,8 +89,11 @@ class MediaGallery extends StatelessWidget {
                           if (isVideo)
                             Container(
                               color: Colors.black26,
-                              child: const Icon(Icons.play_circle_fill,
-                                  color: Colors.white, size: 40),
+                              child: const Icon(
+                                Icons.play_circle_fill,
+                                color: Colors.white,
+                                size: 40,
+                              ),
                             ),
                         ],
                       ),
@@ -92,12 +101,14 @@ class MediaGallery extends StatelessWidget {
                   );
                 },
               ),
-            ],
-          ),
-
-        )
-
+            ),
+          ],
+        ),
+      ),
+      ),
     );
+
+
   }
 }
 

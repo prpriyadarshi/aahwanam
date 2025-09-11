@@ -47,7 +47,7 @@ class ReviewList extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.shade300),
+            border: Border.all(color: Colors.grey.shade200),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
@@ -67,7 +67,7 @@ class ReviewList extends StatelessWidget {
                         FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 18),
                     _buildRatingRow(5, 80),
                     _buildRatingRow(4, 60),
                     _buildRatingRow(3, 30),
@@ -82,13 +82,16 @@ class ReviewList extends StatelessWidget {
               // RIGHT SIDE (summary box)
               Expanded(
                 flex: 2, // give less space for summary
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 50),
                 child: Column(
+
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                         side: const BorderSide(color: Color(0xFF1E535B), width: 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -130,6 +133,7 @@ class ReviewList extends StatelessWidget {
                       style: TextFontStyle.textFontStyle(14, Colors.grey),
                     ),
                   ],
+                ),
                 ),
               ),
             ],
