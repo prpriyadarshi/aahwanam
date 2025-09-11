@@ -61,16 +61,15 @@ class _EventScreenState extends State<EventScreen> {
         onSearchChanged: (value) {
           print("Search typed: $value");
         },
-        onCalendarTap: () {
-          print("Calendar tapped");
-        },
         onCartTap: () {
           print("Cart tapped");
         },
         onFavoriteTap: () {
           print("Favorite tapped");
         },
+        showCalendar: false, // ✅ hide calendar here
       ),
+
       body: BlocBuilder<EventBloc, EventState>(
         builder: (context, state) {
           if (state.status == EventStatus.loading) {
