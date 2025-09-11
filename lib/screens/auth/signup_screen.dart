@@ -200,7 +200,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 _obscurePassword
                     ? Icons.visibility_off_outlined
                     : Icons.visibility_outlined,
-                color: const Color(0xFFB8B8B8),
+                color: const Color(0xFF757575),
               ),
               onPressed: () {
                 setState(() {
@@ -210,6 +210,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
           ),
         ),
+        // const SizedBox(height: 18),
       ],
     );
   }
