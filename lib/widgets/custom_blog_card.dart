@@ -20,9 +20,13 @@ class BlogDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
          title: const Text('Blogs'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+        leading:   IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new,
+              size: 24, color: Color(0xFF1E535B)),
           onPressed: () => Navigator.pop(context),
+          padding: const EdgeInsets.only(left: 8),
+          splashRadius: 20,
+          constraints: const BoxConstraints(),
         ),
 
         actions: [

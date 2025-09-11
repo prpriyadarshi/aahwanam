@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../widgets/custom_text_field.dart';
 
 class RateServiceScreen extends StatefulWidget {
@@ -12,7 +11,6 @@ class RateServiceScreen extends StatefulWidget {
 }
 
 class _RateServiceScreenState extends State<RateServiceScreen> {
-  // File? selectedImage;
   List<File> selectedImages = [];
 
   Future<void> _pickImage() async {
@@ -27,16 +25,26 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Scale values dynamically (adjustable ratios for responsive design)
+    double fontSize(double size) => size * (screenWidth / 380);
+    double boxWidth(double size) => size * (screenWidth / 400);
+    double boxHeight(double size) => size * (screenHeight / 950);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         titleSpacing: 0,
-        title: Text("Rate Service",
+        title: Text(
+          "Rate Service",
           style: TextFontStyle.textFontStyle(
-            16,                         // Font size
-            Color(0xFF575959),          // Text color
-            FontWeight.w500,            // Font weight
-          ),),
+            fontSize(16),
+            const Color(0xFF575959),
+            FontWeight.w500,
+          ),
+        ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -47,102 +55,112 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
             size: 18,
             color: Color(0xFF575959),
           ),
-          onPressed: () {
-            Navigator.pop(context); // ✅ Go back to previous screen
-            // Or use push to go to a specific screen:
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
             onPressed: () {
-              // Implement share functionality if needed
+              // Share functionality
             },
           ),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        padding: EdgeInsets.symmetric(
+          horizontal: boxWidth(16),
+          vertical: boxHeight(16),
+        ),
         child: ListView(
           children: [
             Text(
               'Rating',
-              style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
+              style: TextFontStyle.textFontStyle(
+                  fontSize(14), const Color(0xFF575959), FontWeight.w500),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: boxHeight(12)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 5,
                     (index) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  padding: EdgeInsets.symmetric(horizontal: boxWidth(14)),
                   child: Icon(
                     index < 4 ? Icons.star : Icons.star_border,
                     color: Colors.orange,
-                    size: 40,
+                    size: boxWidth(40),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: boxHeight(24)),
             Text(
               'Write Review',
-              style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
+              style: TextFontStyle.textFontStyle(
+                  fontSize(14), const Color(0xFF575959), FontWeight.w500),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: boxHeight(12)),
             TextField(
               maxLines: 1,
               decoration: InputDecoration(
                 hintText: 'Very good service',
-                hintStyle:TextFontStyle.textFontStyle(12,Color(0xFF575959), FontWeight.w500),
-                contentPadding:
-                EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                border: OutlineInputBorder(
+                hintStyle: TextFontStyle.textFontStyle(
+                    fontSize(12), const Color(0xFF575959), FontWeight.w500),
+                contentPadding: EdgeInsets.symmetric(
+                    horizontal: boxWidth(12), vertical: boxHeight(8)),
+                border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 ),
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: boxHeight(12)),
             TextField(
               maxLines: 5,
               decoration: InputDecoration(
                 hintText:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                hintStyle:TextFontStyle.textFontStyle(12,Color(0xFF575959), FontWeight.w500),
-                contentPadding:
-                EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                border: OutlineInputBorder(
+                hintStyle: TextFontStyle.textFontStyle(
+                    fontSize(12), const Color(0xFF575959), FontWeight.w500),
+                contentPadding: EdgeInsets.symmetric(
+                    horizontal: boxWidth(12), vertical: boxHeight(12)),
+                border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: boxHeight(16)),
             Text(
               "Add photos",
-              style:TextFontStyle.textFontStyle(14,Color(0xFF575959), FontWeight.w500),
+              style: TextFontStyle.textFontStyle(
+                  fontSize(14), const Color(0xFF575959), FontWeight.w500),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: boxHeight(8)),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  ...selectedImages.map((imgFile) => Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: _buildImageBox(null, file: imgFile),
-                  )),
+                  ...selectedImages.map(
+                        (imgFile) => Padding(
+                      padding: EdgeInsets.only(right: boxWidth(10)),
+                      child: _buildImageBox(null,
+                          file: imgFile,
+                          width: boxWidth(96),
+                          height: boxHeight(52)),
+                    ),
+                  ),
                   GestureDetector(
                     onTap: _pickImage,
-                    child: _buildImageBox(null),
+                    child: _buildImageBox(null,
+                        width: boxWidth(96), height: boxHeight(52)),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 280),
+            SizedBox(height: screenHeight * 0.25), // dynamic spacing
             Center(
               child: SizedBox(
-                width: 158,
-                height: 40,
+                width: boxWidth(158),
+                height: boxHeight(40),
                 child: ElevatedButton(
                   onPressed: () {
                     // Submit review
@@ -156,7 +174,8 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
                   ),
                   child: Text(
                     "Submit",
-                    style:TextFontStyle.textFontStyle(14,Colors.white, FontWeight.w500),
+                    style: TextFontStyle.textFontStyle(
+                        fontSize(14), Colors.white, FontWeight.w500),
                   ),
                 ),
               ),
@@ -167,10 +186,11 @@ class _RateServiceScreenState extends State<RateServiceScreen> {
     );
   }
 
-  Widget _buildImageBox(String? assetPath, {File? file}) {
+  Widget _buildImageBox(String? assetPath,
+      {File? file, required double width, required double height}) {
     return Container(
-      width: 96,
-      height: 52,
+      width: width,
+      height: height,
       decoration: BoxDecoration(
         color: (assetPath == null && file == null)
             ? const Color(0xFFF8F8F8)

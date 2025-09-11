@@ -32,10 +32,10 @@ class MakeUpThemesScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
                Padding(
-                padding: EdgeInsets.only(left: 20, top: 10),
+                 padding: EdgeInsets.only(left: 25, top: 0, bottom: 10),
                 child: Text(
                   "Bridal Makeup",
-                  style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500),
+                  style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w600),
 
                 ),
               ),
@@ -46,10 +46,10 @@ class MakeUpThemesScreen extends StatelessWidget {
               ),
 
                Padding(
-                padding: EdgeInsets.only(left: 20, top: 10),
+                 padding: EdgeInsets.only(left: 25, top: 0, bottom: 10),
                 child: Text(
                   "Natural Makeup",
-                  style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500),
+                  style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w600),
 
                 ),
               ),
@@ -63,7 +63,7 @@ class MakeUpThemesScreen extends StatelessWidget {
           ),
 
            Padding(
-            padding: EdgeInsets.only(left: 20, top: 10),
+             padding: EdgeInsets.only(left: 25, top: 0, bottom: 10),
             child: Text(
               "HD Makeup",
               style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w400), // smaller text

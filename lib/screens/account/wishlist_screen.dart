@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/account/account_bloc.dart';
 import '../../blocs/account/account_state.dart';
 import '../../widgets/custom_image_card_widget.dart';
-import '../../widgets/package_card.dart'; // Your custom card
+import '../../widgets/package_card.dart';
 
 class WishlistScreen extends StatefulWidget {
   const WishlistScreen({super.key});
@@ -15,14 +15,16 @@ class WishlistScreen extends StatefulWidget {
 }
 
 class _WishlistScreenState extends State<WishlistScreen> {
-  bool isAllSelected = true; // Toggle state
+  bool isAllSelected = true;
 
   @override
   Widget build(BuildContext context) {
-    // Screen dimensions for responsiveness
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final isTablet = screenWidth > 600; // Tablet/iPad check
+    final screen = MediaQuery.of(context).size;
+    final shortestSide = screen.shortestSide;
+    final isTablet = shortestSide > 600;
+
+    // Scale factor for responsiveness
+    double scale(double size) => size * (screen.width / 390);
 
     return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
@@ -43,7 +45,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
               title: Text(
                 "Wishlist",
                 style: TextFontStyle.textFontStyle(
-                  isTablet ? 20 : 16, // Responsive font size
+                  isTablet ? 22 : scale(16),
                   const Color(0xFF575959),
                   FontWeight.w600,
                 ),
@@ -52,34 +54,25 @@ class _WishlistScreenState extends State<WishlistScreen> {
               foregroundColor: Colors.black,
               elevation: 0,
               leading: IconButton(
-                padding: EdgeInsets.only(
-                  top: 2,
-                  left: isTablet ? 20 : 12,
-                ),
-                icon: const Icon(
+                padding: EdgeInsets.only(left: scale(8)),
+                icon: Icon(
                   Icons.arrow_back_ios,
-                  size: 18,
-                  color: Color(0xFF575959),
+                  size: scale(18),
+                  color: const Color(0xFF575959),
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                onPressed: () => Navigator.pop(context),
               ),
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.share),
-                  onPressed: () {
-                    // Share functionality if needed
-                  },
+                  icon: Icon(Icons.share, size: scale(20)),
+                  onPressed: () {},
                 ),
               ],
             ),
             body: Padding(
-              padding: EdgeInsets.fromLTRB(
-                isTablet ? 30 : 18,
-                0,
-                isTablet ? 30 : 18,
-                isTablet ? 30 : 18,
+              padding: EdgeInsets.symmetric(
+                horizontal: isTablet ? 30 : scale(14),
+                vertical: isTablet ? 15 : scale(4),
               ),
               child: Column(
                 children: [
@@ -88,11 +81,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                     children: [
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              isAllSelected = true;
-                            });
-                          },
+                          onPressed: () => setState(() => isAllSelected = true),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: isAllSelected
                                 ? const Color(0xFF1E535B)
@@ -108,26 +97,22 @@ class _WishlistScreenState extends State<WishlistScreen> {
                               ),
                             ),
                             padding: EdgeInsets.symmetric(
-                              vertical: isTablet ? 16 : 10,
+                              vertical: isTablet ? 16 : scale(8),
                             ),
                           ),
                           child: Text(
                             "Services",
                             style: TextStyle(
-                              fontSize: isTablet ? 18 : 14,
+                              fontSize: isTablet ? 16 : scale(14),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: scale(8)),
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () {
-                            setState(() {
-                              isAllSelected = false;
-                            });
-                          },
+                          onPressed: () => setState(() => isAllSelected = false),
                           style: OutlinedButton.styleFrom(
                             backgroundColor: isAllSelected
                                 ? Colors.transparent
@@ -143,13 +128,13 @@ class _WishlistScreenState extends State<WishlistScreen> {
                               ),
                             ),
                             padding: EdgeInsets.symmetric(
-                              vertical: isTablet ? 16 : 10,
+                              vertical: isTablet ? 16 : scale(8),
                             ),
                           ),
                           child: Text(
                             "Concepts",
                             style: TextStyle(
-                              fontSize: isTablet ? 18 : 14,
+                              fontSize: isTablet ? 18 : scale(14),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -157,22 +142,27 @@ class _WishlistScreenState extends State<WishlistScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: isTablet ? 20 : 10),
+                  SizedBox(height: isTablet ? 20 : scale(12)),
 
                   // Cards List
                   Expanded(
                     child: wishlistItems.isEmpty
-                        ? const Center(child: Text("Your wishlist is empty"))
+                        ? Center(
+                      child: Text(
+                        "Your wishlist is empty",
+                        style: TextStyle(
+                          fontSize: isTablet ? 18 : scale(14),
+                        ),
+                      ),
+                    )
                         : isAllSelected
-                    // For "Services"
                         ? ListView.builder(
                       itemCount: wishlistItems.length,
                       itemBuilder: (context, index) {
                         final item = wishlistItems[index];
                         return Padding(
                           padding: EdgeInsets.only(
-                            bottom: isTablet ? 20 : 12,
-                          ),
+                              bottom: isTablet ? 20 : scale(12)),
                           child: PackageCard(
                             title: item['title'],
                             description: item['description'],
@@ -211,23 +201,26 @@ class _WishlistScreenState extends State<WishlistScreen> {
                         );
                       },
                     )
-                    // For "Concepts"
                         : GridView.builder(
                       padding: EdgeInsets.zero,
                       itemCount: conceptsTabImages.length,
                       gridDelegate:
                       SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: isTablet ? 3 : 2, // ✅ Tablet support
-                        mainAxisSpacing: isTablet ? 16 : 8,
-                        crossAxisSpacing: isTablet ? 16 : 8,
-                        childAspectRatio: isTablet ? 1.3 : 1.2,
+                        crossAxisCount: isTablet
+                            ? 3
+                            : (screen.width < 350 ? 2 : 2),
+                        mainAxisSpacing: isTablet ? 16 : scale(8),
+                        crossAxisSpacing: isTablet ? 16 : scale(8),
+                        childAspectRatio:
+                        isTablet ? 1.3 : (screen.height > 800 ? 1.1 : 1),
                       ),
                       itemBuilder: (context, index) {
                         final item = conceptsTabImages[index];
                         return CustomImageCard(
                           imageUrl: item['imagePath'],
-                          width: screenWidth / (isTablet ? 3 : 2),
-                          height: isTablet ? 180 : 146,
+                          width: screen.width /
+                              (isTablet ? 3 : (screen.width < 350 ? 2 : 2)),
+                          height: isTablet ? 180 : scale(146),
                           isAsset: true,
                           favoriteSelected: item['isLiked'],
                           onFavoriteToggle: () {

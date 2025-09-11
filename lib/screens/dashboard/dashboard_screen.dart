@@ -99,7 +99,6 @@ class DashboardContent extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            padding: EdgeInsets.zero,
             onPressed: () {
               print("Cart pressed");
             },
@@ -117,7 +116,7 @@ class DashboardContent extends StatelessWidget {
             onPressed: () {},
             icon: const Icon(Icons.notifications, color: Color(0xFF004d40), size: 24),
           ),
-          const SizedBox(width: 1), // little margin from screen edge
+           // little margin from screen edge
         ],
       ),
 
@@ -145,7 +144,7 @@ class DashboardContent extends StatelessWidget {
                       _buildSliderSection(state.sliderImages),
                       const SizedBox(height: 10), // Reduced from previous spacing
                       CustomCircleWidget(
-                        heading: "Categories",
+                        heading: "Services",
                         categories: state.categories,
                         showViewAll: true,
                         onCategoryTap: (String categoryName) {
@@ -189,7 +188,7 @@ class DashboardContent extends StatelessWidget {
                         onViewAll: () => _navigateTo(context, AppRoutes.login),
                       ),
                       Transform.translate(
-                        offset: Offset(0, -15),
+                        offset: Offset(0, -5),
                         child: CustomCardWidgets.buildSection(
                           context,
                           title: "Mehndi Artists for you",
@@ -198,11 +197,12 @@ class DashboardContent extends StatelessWidget {
                           onViewAll: () => _navigateTo(context, "Mehndi Artists"),
                         ),
                       ),
+                      SizedBox(height: 10,),
                       // Negative margin to pull Trending section up
                       Container(
                         height: MediaQuery.of(context).size.height*30/812,
                         child: Transform.translate(
-                          offset: Offset(0,-15),
+                          offset: Offset(0,-5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -224,7 +224,7 @@ class DashboardContent extends StatelessWidget {
                           ),
                         ),
                       ),
-                     // Small spacing after Trending header
+                      // Small spacing after Trending header
                       SizedBox(
                         height: 110,
                         child: ListView.builder(
@@ -239,7 +239,7 @@ class DashboardContent extends StatelessWidget {
                           },
                         ),
                       ),
-                  // Spacing before Packages section
+                      // Spacing before Packages section
                       CustomCardWidgets.buildSection(
                         context,
                         title: "Packages for all events",
