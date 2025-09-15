@@ -33,6 +33,8 @@ class AppRoutes {
   static const String Subcategory = '/subcategory';
   static const String EventDetail = '/EventDetail';
   static const String packagecartadded = '/packagecartadded';
+  static const String trending = '/trending';
+
   // static const String events = '/events';
   // static const String eventDetails = '/event-details';
 }
