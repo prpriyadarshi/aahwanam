@@ -232,7 +232,7 @@ class DashboardContent extends StatelessWidget {
                       SizedBox(height: 10),
                       // Negative margin to pull Trending section up
                       Container(
-                        height: MediaQuery.of(context).size.height * 30 / 812,
+                        height: MediaQuery.of(context).size.height * 40 / 812,
                         child: Transform.translate(
                           offset: Offset(0, -5),
                           child: Row(
