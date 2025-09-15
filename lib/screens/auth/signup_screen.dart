@@ -110,7 +110,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
 
-                    const SizedBox(height: 195),
+                     const SizedBox(height: 131),
 
                     // SizedBox(height: constraints.maxHeight * 0.1),
 
