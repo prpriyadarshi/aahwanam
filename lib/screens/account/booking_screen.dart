@@ -170,7 +170,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               ? state.bookings[index]
                               : state.inProgressBookings[index];
                           return Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
+                            padding: const EdgeInsets.only(bottom: 6.0),
                             child: PackageCard(
                               title: package['title'],
                               description: package['description'],

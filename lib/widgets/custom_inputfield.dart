@@ -22,7 +22,7 @@ class CustomInputField extends StatelessWidget {
           Text(
             labelText,
             style: TextFontStyle.textFontStyle(
-              14,                      // font size
+              16,                      // font size
               Color(0xFF575959),       // color
               FontWeight.w500,         // weigh// optional if you're not using GoogleFonts
             ),
