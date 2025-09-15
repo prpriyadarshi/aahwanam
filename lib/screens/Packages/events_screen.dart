@@ -61,16 +61,15 @@ class _EventScreenState extends State<EventScreen> {
         onSearchChanged: (value) {
           print("Search typed: $value");
         },
-        onCalendarTap: () {
-          print("Calendar tapped");
-        },
         onCartTap: () {
           print("Cart tapped");
         },
         onFavoriteTap: () {
           print("Favorite tapped");
         },
+        showCalendar: false, // ✅ hide calendar here
       ),
+
       body: BlocBuilder<EventBloc, EventState>(
         builder: (context, state) {
           if (state.status == EventStatus.loading) {
@@ -80,7 +79,7 @@ class _EventScreenState extends State<EventScreen> {
           } else if (state.status == EventStatus.success) {
             return SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -129,10 +128,10 @@ class _EventScreenState extends State<EventScreen> {
                                 child: Text(
                                   event['name'] ?? '',
                                   textAlign: TextAlign.center,
-                                  maxLines: 2,
+                                  maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextFontStyle.textFontStyle(
-                                      12, const Color(0xFF575959), FontWeight.w500),
+                                      10.7, const Color(0xFF575959), FontWeight.w500),
                                 ),
                               ),
                             ],
