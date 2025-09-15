@@ -21,6 +21,12 @@ class AccountScreen extends StatefulWidget {
   @override
   State<AccountScreen> createState() => _AccountScreenState();
 }
+Widget _supportSectionTitle(String title) {
+  return Text(
+    title,
+    style: TextFontStyle.textFontStyle(16, const Color(0xFF1E535B), FontWeight.w500),
+  );
+}
 
 class _AccountScreenState extends State<AccountScreen> {
   File? _profileImage; // ✅ store picked image
@@ -255,21 +261,40 @@ class _AccountScreenState extends State<AccountScreen> {
             Color(0xFF575959),          // Text color
             FontWeight.w500,            // Font weight
             ),                  ),
-                  CustomTile(
-                      imagePath: 'assets/images/budget planner1.png',
-                      title: 'Budget Planner',
-                      bgColor: Color(0xFFFFF4DF),
-                      onTap: () {}),
+                  // CustomTile(
+                  //     imagePath: 'assets/images/budget planner1.png',
+                  //     title: 'Budget Planner',
+                  //     bgColor: Color(0xFFFFF4DF),
+                  //     onTap: () {}),
                   CustomTile(
                       imagePath: 'assets/images/refer people1.png',
                       title: 'Refer People',
                       bgColor: Color(0xFFFFE8FB),
                       onTap: () {}),
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 10),
+                  _supportSectionTitle('Aahwanam Support*'),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(6),
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF1E535B),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(Icons.call, color: Colors.white, size: 14),
+                      ),
+                      const SizedBox(width: 14),
+                      Text(
+                        '3659252957',
+                        style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w500),
+                      ),
+                    ],
+                  ),
                   Container(
                     width: 328,
                     height: 40,
-                    margin: const EdgeInsets.only(left: 10, top: 10),
+                    margin: const EdgeInsets.only(left: 10, top: 68),
                     // Optional: Matches your `left` and `top`
                     child: OutlinedButton(
                       onPressed: () {

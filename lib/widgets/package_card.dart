@@ -61,7 +61,7 @@ class _PackageCardState extends State<PackageCard> {
                     borderRadius: BorderRadius.circular(6),
                     child: Image.asset(
                       widget.imagePath,
-                      height: 130,
+                      height: 115,
                       width: 80,
                       fit: BoxFit.cover,
                     ),
@@ -108,14 +108,6 @@ class _PackageCardState extends State<PackageCard> {
                           child: Text(
                             widget.title,
                             style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w500), // smaller text
-                            // style: const TextStyle(
-                            //   fontFamily: 'Poppins', // Font family
-                            //   fontSize: 14, // Size in px (Flutter uses logical pixels)
-                            //   fontWeight: FontWeight.w500, // Equivalent to weight 500 (Medium)
-                            //   // height: 1.0, // Line height = 100% (1.0 means 100%)
-                            //   letterSpacing: 0.0, // 0% letter spacing
-                            //   color: Color(0xFF575959), // Text color
-                            // ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -130,7 +122,7 @@ class _PackageCardState extends State<PackageCard> {
                               const SizedBox(width: 4),
                               Text(
                                 widget.rating.toString(),
-                                style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500),
+                                style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w400),
                               ),
                             ],
                           ),
@@ -140,9 +132,9 @@ class _PackageCardState extends State<PackageCard> {
                     // Description
                     Text(
                       widget.description,
-                      style: TextFontStyle.textFontStyle(12, const Color(0xFF757575), FontWeight.w500),
+                      style: TextFontStyle.textFontStyle(13, const Color(0xFF757575), FontWeight.w400),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 4),
                     // Price and Details
                     Row(
                       children: [
@@ -157,12 +149,12 @@ class _PackageCardState extends State<PackageCard> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 0),
                     if (widget.details != null) ...[
                       const SizedBox(height: 4),
                       Text(
                         widget.details!,
-                        style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500),
+                        style: TextFontStyle.textFontStyle(13, const Color(0xFF575959), FontWeight.w600),
                       ),
                     ],
 
