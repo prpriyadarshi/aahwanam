@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'custom_text_field.dart';
-import '../screens/dashboard/photostudio_details_screen.dart';
 
 class CustomCardWidgets {
-  static Widget buildSection(
-      BuildContext context, {
-        required String title,
-        required List<Map<String, String>> data,
-        required VoidCallback onViewAll,
-        required bool showViewAll,
-        bool showFavorites = true,
-        Function(int index, bool isFavorite)? onFavoriteChanged,
-      }) {
-    final screenWidth = MediaQuery.of(context).size.width;
+  static Widget buildSection(BuildContext context, {
+    required String title,
+    required List<Map<String, String>> data,
+    required VoidCallback onViewAll,
+    required bool showViewAll,
+    String? sectionType, // Added section identifier parameter
+    bool showFavorites = true,
+    Function(int index, bool isFavorite)? onFavoriteChanged,
+  }) {
+    final screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
 
     // Responsive font sizes
     final titleFontSize = screenWidth < 350
@@ -39,14 +41,20 @@ class CustomCardWidgets {
             children: [
               Text(
                 title,
-                style: TextFontStyle.textFontStyle(16, Color(0xFF575959), FontWeight.w500),
+                style: TextFontStyle.textFontStyle(
+                    16, Color(0xFF575959), FontWeight.w500),
               ),
               if (showViewAll)
                 TextButton(
-                  onPressed: onViewAll,
+                  onPressed: () {
+                    // You can add section-specific logic here if needed
+                    print('Navigating to section: $sectionType');
+                    onViewAll();
+                  },
                   child: Text(
                     "View All",
-                    style: TextFontStyle.textFontStyle(12, Color(0xFF1E535B), FontWeight.w500),
+                    style: TextFontStyle.textFontStyle(
+                        12, Color(0xFF1E535B), FontWeight.w500),
                   ),
                 ),
             ],
@@ -70,6 +78,7 @@ class CustomCardWidgets {
               item,
               screenWidth,
               index: index,
+              sectionType: sectionType, // Pass section type to individual cards
               showFavorite: showFavorites,
               onFavoriteChanged: onFavoriteChanged,
             );
@@ -79,11 +88,11 @@ class CustomCardWidgets {
     );
   }
 
-  static Widget buildCardItem(
-      BuildContext context,
+  static Widget buildCardItem(BuildContext context,
       Map<String, String> item,
       double screenWidth, {
         required int index,
+        String? sectionType, // Added section type parameter
         bool showFavorite = true,
         Function(int index, bool isFavorite)? onFavoriteChanged,
       }) {
@@ -110,12 +119,11 @@ class CustomCardWidgets {
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PhotostudioDetailsScreen(),
-          ),
-        );
+        // You can add section-specific navigation logic here
+        print('Card tapped in section: $sectionType, item: ${item['name']}');
+
+        // Navigate to different detail screens based on section type
+
       },
       child: Card(
         elevation: 0,
@@ -139,7 +147,10 @@ class CustomCardWidgets {
                       ? Image.asset(
                     item['image']!,
                     height: imageHeight,
-                    width: MediaQuery.of(context).size.width * 188 / 375,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 188 / 375,
                     fit: BoxFit.cover,
                   )
                       : Image.network(
@@ -166,6 +177,8 @@ class CustomCardWidgets {
                       onTap: () {
                         // Toggle favorite status
                         bool newFavoriteStatus = !isFavorite;
+                        print(
+                            'Favorite toggled for ${item['name']} in section: $sectionType');
                         onFavoriteChanged?.call(index, newFavoriteStatus);
                       },
                       child: Container(
@@ -195,7 +208,8 @@ class CustomCardWidgets {
 
             // Text Section
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 7.0),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 6.0, vertical: 7.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -207,18 +221,21 @@ class CustomCardWidgets {
                       Expanded(
                         child: Text(
                           item['name'] ?? '',
-                          style: TextFontStyle.textFontStyle(12, Color(0xFF575959), FontWeight.w500),
+                          style: TextFontStyle.textFontStyle(12, Color(
+                              0xFF575959), FontWeight.w500),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.star, color: Color(0xFFEFAA37), size: 14),
+                          const Icon(Icons.star, color: Color(0xFFEFAA37),
+                              size: 14),
                           const SizedBox(width: 4),
                           Text(
                             item['rating'] ?? "0.0",
-                            style: TextFontStyle.textFontStyle(10, Color(0xFF575959), FontWeight.w500),
+                            style: TextFontStyle.textFontStyle(10,
+                                Color(0xFF575959), FontWeight.w500),
                           ),
                         ],
                       ),
@@ -227,7 +244,8 @@ class CustomCardWidgets {
                   const SizedBox(height: 4.0),
                   Text(
                     item['price'] ?? '',
-                    style: TextFontStyle.textFontStyle(12, Color(0xFF1E535B), FontWeight.w500),
+                    style: TextFontStyle.textFontStyle(
+                        12, Color(0xFF1E535B), FontWeight.w500),
                   ),
                 ],
               ),
@@ -237,4 +255,5 @@ class CustomCardWidgets {
       ),
     );
   }
+
 }
