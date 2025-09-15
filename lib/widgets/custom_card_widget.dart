@@ -27,7 +27,7 @@ class CustomCardWidgets {
         : 12.0;
 
     // Adjust childAspectRatio for very small screens to avoid overflow
-    final childAspectRatio = screenWidth < 350 ? 0.44 : 1.1;
+    final childAspectRatio = screenWidth < 350 ? 0.44 : 1.0;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +123,7 @@ class CustomCardWidgets {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6.0),
         ),
-        margin: EdgeInsets.only(bottom: 10),
+        margin: EdgeInsets.zero,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

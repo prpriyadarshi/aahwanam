@@ -25,6 +25,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   late Timer _timer;
   Duration _remainingTime = const Duration(minutes: 3);
 
+  bool _isResendEnabled = false; // Added for resend enable/disable
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +41,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         });
       } else {
         timer.cancel();
+        setState(() {
+          _isResendEnabled = true; //  Timer 0 -> enable resend
+        });
       }
     });
   }
@@ -47,6 +52,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     _timer.cancel();
     setState(() {
       _remainingTime = const Duration(minutes: 3);
+      _isResendEnabled = false; //Reset -> disable resend
     });
     _startTimer();
   }
@@ -153,7 +159,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     });
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDF3EA),
+      backgroundColor: const Color(0xFFFFF6ED),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -221,15 +227,21 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                                   12, const Color(0xFF575959), FontWeight.w400),
                             ),
                             GestureDetector(
-                              onTap: () {
+                              onTap: _isResendEnabled
+                                  ? () {
                                 // TODO: Call resend OTP API here
                                 _resetTimer(); // restart timer
-                              },
+                              }
+                                  : null,
                               child: Text(
                                 "Resend OTP",
                                 style: TextFontStyle.textFontStyle(
-                                    12, const Color(0xFF1E535B),
-                                    FontWeight.w400),
+                                  12,
+                                  _isResendEnabled
+                                      ? const Color(0xFF1E535B)
+                                      : Colors.grey,
+                                  FontWeight.w400,
+                                ),
                               ),
                             ),
                           ],
