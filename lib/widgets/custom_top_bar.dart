@@ -7,6 +7,11 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onCartTap;
   final VoidCallback? onFavoriteTap;
 
+  // ✅ control visibility
+  final bool showCalendar;
+  final bool showCart;
+  final bool showFavorite;
+
   const CustomTopBar({
     super.key,
     this.onBack,
@@ -14,13 +19,16 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
     this.onCalendarTap,
     this.onCartTap,
     this.onFavoriteTap,
+    this.showCalendar = true,
+    this.showCart = true,
+    this.showFavorite = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
         child: Row(
           children: [
             IconButton(
@@ -53,28 +61,37 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 10),
-            GestureDetector(
-              onTap: onCalendarTap,
-              child: Image.asset(
-                'assets/images/timer.png',
-                width: 20,
-                height: 24,
+            const SizedBox(width: 5),
+
+            // ✅ conditional calendar
+            if (showCalendar)
+              GestureDetector(
+                onTap: onCalendarTap,
+                child: Image.asset(
+                  'assets/images/timer.png',
+                  width: 20,
+                  height: 24,
+                ),
               ),
-            ),
-            GestureDetector(
-              onTap: onCartTap,
-              child: Image.asset(
-                'assets/images/mypackages.png',
-                width: 34,
-                height: 34,
+
+            // ✅ conditional cart
+            if (showCart)
+              GestureDetector(
+                onTap: onCartTap,
+                child: Image.asset(
+                  'assets/images/mypackages.png',
+                  width: 34,
+                  height: 34,
+                ),
               ),
-            ),
-            IconButton(
-              icon: const Icon(Icons.favorite, color: Colors.red),
-              onPressed: onFavoriteTap,
-              iconSize: 28,
-            ),
+
+            // ✅ conditional favorite
+            if (showFavorite)
+              IconButton(
+                icon: const Icon(Icons.favorite, color: Colors.red),
+                onPressed: onFavoriteTap,
+                iconSize: 28,
+              ),
           ],
         ),
       ),
