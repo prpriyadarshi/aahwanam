@@ -71,14 +71,12 @@ class _CustomCartCardState extends State<CustomCartCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text( widget.title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500, fontSize: 12, color: Color(0xFF575959),)
-                    ),
+                      style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500),),
                     const SizedBox(height: 4),
-                    Text( widget.description, style: const TextStyle( fontWeight: FontWeight.w300, fontSize: 12, color: Color(0xFF757575),)),
+                    Text( widget.description, style: TextFontStyle.textFontStyle(12, const Color(0xFF757575), FontWeight.w300),),
                     const SizedBox(height: 4),
                     Text('₹${ widget.price}',
-                        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: Color(0xFF1E535B),)),
+                      style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w600),),
                   ],
                 ),
               ),

@@ -22,7 +22,7 @@ class _ConceptsScreenState extends State<ConceptsScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
-    context.read<ConceptsBloc>().add(LoadConceptBlogs());
+    // context.read<ConceptsBloc>().add(LoadConceptBlogs());
   }
 
   @override
@@ -109,61 +109,66 @@ class _ConceptsScreenState extends State<ConceptsScreen>
       body: TabBarView(
         controller: _tabController,
         children: [
-          BlocBuilder<ConceptsBloc, ConceptsState>(
-            builder: (context, state) {
-              if (state is ConceptsBlogLoaded) {
-                return MasonryGridView.count(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  padding: const EdgeInsets.all(10),
-                  itemCount: state.trendImages.length,
-                    itemBuilder: (context, index) {
-                      final imagePath = state.trendImages[index];
-                      return GestureDetector(
-                          onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => FullImagePage(imagePath: imagePath),
-                          ),
-                        );
-                      },
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Stack(
-                          children: [
-                            AspectRatio(
-                              aspectRatio: 3 / 4, // Adjust as needed (e.g. 4:5, 3:4)
-                              child: Image.asset(
-                                imagePath,
-                                fit: BoxFit.cover,
-                              ),
+          BlocProvider(
+            create: (context) => ConceptsBloc()..add(LoadConceptBlogs()),
+            child: BlocBuilder<ConceptsBloc, ConceptsState>(
+              builder: (context, state) {
+                if (state is ConceptsBlogLoaded) {
+                  return MasonryGridView.count(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    padding: const EdgeInsets.all(10),
+                    itemCount: state.trendImages.length,
+                      itemBuilder: (context, index) {
+                        final imagePath = state.trendImages[index];
+                        return GestureDetector(
+                            onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => FullImagePage(imagePath: imagePath),
                             ),
-                            Positioned(
-                              top: 8,
-                              right: 8,
-                              child: Container(
-                                padding: const EdgeInsets.all(4),
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
+                          );
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Stack(
+                            children: [
+                              AspectRatio(
+                                aspectRatio: 3 / 4, // Adjust as needed (e.g. 4:5, 3:4)
+                                child: Image.asset(
+                                  imagePath,
+                                  fit: BoxFit.cover,
                                 ),
-                                child: const Icon(Icons.favorite, size: 16, color: Colors.red),
                               ),
-                            ),
-                          ],
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(Icons.favorite, size: 16, color: Colors.red),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      );
-                    }
-                );
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            },
+                        );
+                      }
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
           ),
-          BlocBuilder<ConceptsBloc, ConceptsState>(
+          BlocProvider(
+            create: (context) => ConceptsBloc()..add(LoadConceptBlogs()),
+            child: BlocBuilder<ConceptsBloc, ConceptsState>(
             builder: (context, state) {
               if (state is ConceptsBlogLoaded) {
                 return SingleChildScrollView(
@@ -262,7 +267,10 @@ class _ConceptsScreenState extends State<ConceptsScreen>
               }
             },
           ),
-          BlocBuilder<ConceptsBloc, ConceptsState>(
+),
+          BlocProvider(
+            create: (context) => ConceptsBloc()..add(LoadConceptBlogs()),
+            child: BlocBuilder<ConceptsBloc, ConceptsState>(
             builder: (context, state) {
               if (state is ConceptsBlogLoaded) {
                 return SingleChildScrollView(
@@ -349,6 +357,7 @@ class _ConceptsScreenState extends State<ConceptsScreen>
               }
             },
           ),
+),
         ],
       ),
     );

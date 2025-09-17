@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/account/account_bloc.dart';
 import '../../blocs/account/account_state.dart';
 import '../../routes/app_routes.dart';
+import '../../widgets/custom_text_field.dart';
 import 'mypackage_details.dart';
 
 class MyPackageCart extends StatefulWidget {
@@ -34,17 +35,13 @@ class _MyPackageCartState extends State<MyPackageCart> {
               titleSpacing: 0,
               title: Text(
                 "Package Cart",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: const Color(0xFF575959),
-                  fontWeight: FontWeight.w500,
-                ),
+                style: TextFontStyle.textFontStyle(16, const Color(0xFF575959), FontWeight.w500),
               ),
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
               elevation: 0,
               leading: IconButton(
-                padding: const EdgeInsets.only(top: 2, left: 12),
+                padding: const EdgeInsets.only(top: 2, left: 16),
                 icon: const Icon(
                   Icons.arrow_back_ios,
                   size: 18,
@@ -55,11 +52,14 @@ class _MyPackageCartState extends State<MyPackageCart> {
                 },
               ),
               actions: [
-                IconButton(
-                  icon: const Icon(Icons.share),
-                  onPressed: () {
-                    // Implement share functionality
-                  },
+                Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: IconButton(
+                    icon: const Icon(Icons.share),
+                    onPressed: () {
+                      // Implement share functionality
+                    },
+                  ),
                 ),
               ],
             ),
@@ -123,11 +123,7 @@ class _MyPackageCartState extends State<MyPackageCart> {
                           ),
                           child: Text(
                             "Add Other Services",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: const Color(0xFF1E535B),
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: TextFontStyle.textFontStyle(12, Color(0xFF1E535B), FontWeight.w500),
                           ),
                         ),
                       ),
@@ -152,11 +148,8 @@ class _MyPackageCartState extends State<MyPackageCart> {
                           ),
                           child: Text(
                             "Create Package",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: const Color(0xFFFFFFFF),
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: TextFontStyle.textFontStyle(12, Color(0xFFFFFFFF), FontWeight.w500),
+
                           ),
                         ),
                       ),
