@@ -168,7 +168,7 @@ class _PanditThemeState extends State<PanditTheme> {
                                           child: Text(
                                             pooja['title'] ?? '',
                                             style:
-                                            TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w500),
+                                            TextFontStyle.textFontStyle( 15, Color(0xFF575959),FontWeight.w500),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
@@ -186,7 +186,7 @@ class _PanditThemeState extends State<PanditTheme> {
                                     Text(
                                       pooja['description'] ?? '',
                                       style:
-                                      TextFontStyle.textFontStyle( 14, Color(0xFF757575),FontWeight.w500),
+                                      TextFontStyle.textFontStyle( 12, Color(0xFF757575),FontWeight.w500),
                                     ),
 
                                     /// Heading and Details
@@ -196,7 +196,7 @@ class _PanditThemeState extends State<PanditTheme> {
                                         child: Text(
                                           pooja['details_heading']!,
                                           style:
-                                            TextFontStyle.textFontStyle( 14, Color(0xFF575959),FontWeight.w600)
+                                            TextFontStyle.textFontStyle( 14, Color(0xFF575959),FontWeight.w500)
                                         ),
                                       ),
 
@@ -206,7 +206,7 @@ class _PanditThemeState extends State<PanditTheme> {
                                         child: Text(
                                           pooja['details']!,
                                           style:
-                                            TextFontStyle.textFontStyle( 14, Color(0xFF575959),FontWeight.w500)
+                                            TextFontStyle.textFontStyle( 12, Color(0xFF757575),FontWeight.w500)
                                         ),
                                       ),
 
@@ -216,7 +216,7 @@ class _PanditThemeState extends State<PanditTheme> {
                                     Text(
                                       "Duration - ${pooja['duration'] ?? 'N/A'}",
                                       style:
-                                        TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w500)
+                                        TextFontStyle.textFontStyle( 14, Color(0xFF575959),FontWeight.w500)
                                     ),
                                     const SizedBox(height: 12),
 
@@ -228,7 +228,7 @@ class _PanditThemeState extends State<PanditTheme> {
                                         Expanded(
                                           child: Text(
                                             pooja['address'] ?? '',
-                                            style: TextFontStyle.textFontStyle( 12, Colors.black87,FontWeight.w500),
+                                            style: TextFontStyle.textFontStyle( 12, Color(0xFF757575),FontWeight.w500),
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -236,11 +236,11 @@ class _PanditThemeState extends State<PanditTheme> {
                                         const SizedBox(width: 6),
                                         Row(
                                           children: [
-                                            const Icon(Icons.star, color: Colors.orange, size: 18),
-                                            const SizedBox(width: 4),
+                                            const Icon(Icons.star, color: Colors.orange, size: 14),
+                                            const SizedBox(width: 2),
                                             Text(
                                               pooja['rating'] ?? '0',
-                                              style:  TextFontStyle.textFontStyle( 14, Colors.black87,FontWeight.w500),
+                                              style:  TextFontStyle.textFontStyle( 12, Color(0xFF757575),FontWeight.w500),
                                             ),
                                           ],
                                         ),

@@ -133,9 +133,10 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                 pinned: true,
                 floating: true,
                 bottom: PreferredSize(
-                  preferredSize: const Size.fromHeight(180),
+                  preferredSize: Size.fromHeight(kToolbarHeight + 160),
                   // height for container + tabs
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
 
                       /// Your Container ABOVE Tabs
@@ -209,14 +210,14 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
                         labelColor: Color(0xFF575959),
                         unselectedLabelColor: Colors.grey,
                         labelStyle: TextFontStyle.textFontStyle(
-                          18,
+                          16,
                           Color(0xFF575959),
                           FontWeight.w500,
                         ),
                         tabs: [
                           Tab(text: "All Details"),
                           Tab(text: "Gallery"),
-                          Tab(text: "Review"),
+                          Tab(text: "Reviews"),
                         ],
                       ),
 
@@ -273,148 +274,126 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
     );
   }
   Widget _buildDetailsTab(Map<String, dynamic> pooja) {
-    print('parr and mani ${widget.pooja['category'] }');
     return Container(
       color: Colors.white,
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            /// About Section
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    "About",
-                    style: TextFontStyle.textFontStyle(
-                        19, const Color(0xFF575959), FontWeight.w500),
-                  ),
-                ),
-
-              ],
+      child: ListView(
+        padding: const EdgeInsets.fromLTRB(19, 16, 16, 80),
+        children: [
+          /// About Section
+          Text(
+            "About",
+            style: TextFontStyle.textFontStyle(
+              17,
+              const Color(0xFF575959),
+              FontWeight.w500,
             ),
-            const SizedBox(height: 8),
+          ),
+          const SizedBox(height: 8),
+
+          Text(
+            "${pooja['About'] ?? ''} ${pooja['description'] ?? ''}",
+            style: TextFontStyle.textFontStyle(
+              13,
+              const Color(0xFF575959),
+              FontWeight.w400,
+            ),
+          ),
+
+          const SizedBox(height: 4),
+
+          if (pooja["details"] != null && pooja["details"].toString().isNotEmpty) ...[
             Text(
-              "${pooja['About'] ?? ''} ${pooja['description'] ?? ''}",
+              "${pooja['details_heading']}-",
+              style: TextFontStyle.textFontStyle(
+                17,
+                const Color(0xFF575959),
+                FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 6),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 4.0),
+              child: Text(
+                "${pooja['details']},",
+                style: TextFontStyle.textFontStyle(
+                  13,
+                  const Color(0xFF575959),
+                  FontWeight.w400,
+                ),
+              ),
+            ),
+          ],
+
+          const SizedBox(height: 20),
+
+          Row(
+            children: [
+              const Expanded(child: Divider(thickness: 1, color: Color(0xFFDDDDDD))),
+              const SizedBox(width: 10),
+              Text(
+                "Details & Requirements",
+                style: TextFontStyle.textFontStyle(
+                  18,
+                  const Color(0xFF575959),
+                  FontWeight.w500,
+                ),
+              ),
+              const SizedBox(width: 10),
+              const Expanded(child: Divider(thickness: 1, color: Color(0xFFDDDDDD))),
+            ],
+          ),
+          const SizedBox(height: 20),
+
+          EventDateTimePicker(),
+          const SizedBox(height: 16),
+
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Don't know the date? Find perfect Muhurat",
+              style: TextFontStyle.textFontStyle(13, const Color(0xFF757575)),
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          OutlinedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return MuhuratPopup(label: widget.pooja['category']);
+                },
+              );
+            },
+            style: OutlinedButton.styleFrom(
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            ),
+            child: Text(
+              "Find My Muhurat",
               style: TextFontStyle.textFontStyle(
                 16,
-                const Color(0xFF575959),
-                FontWeight.w400,
+                const Color(0xFF184A45),
+                FontWeight.w500,
               ),
             ),
+          ),
 
-            const SizedBox(height: 16),
+          const SizedBox(height: 20),
 
-            /// Included Items
-            if (pooja["details"] != null && pooja["details"].toString().isNotEmpty) ...[
-              Text(
-                "${pooja['details_heading']}-",
-                style: TextFontStyle.textFontStyle(
-                    19, const Color(0xFF575959), FontWeight.w500),
-              ),
-              const SizedBox(height: 6),
-
-              /// Split the string by comma and trim spaces
-              Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text(
-                  "${pooja['details']},",
-                  style: TextFontStyle.textFontStyle(
-                      16, const Color(0xFF575959), FontWeight.w400),
-                ),
-              ),
-            ],
-            const SizedBox(height: 20),
-
-
-
-            /// Divider + Section Heading
-            Row(
-              children: [
-                const Expanded(
-                  child: Divider(
-                    thickness: 1,
-                    color: Color(0xFFDDDDDD),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  "Details & Requirements",
-                  style: TextFontStyle.textFontStyle(
-                      18, const Color(0xFF575959), FontWeight.w500),
-                ),
-                const SizedBox(width: 10),
-                const Expanded(
-                  child: Divider(
-                    thickness: 1,
-                    color: Color(0xFFDDDDDD),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            /// Event Date and Time Picker
-            EventDateTimePicker(),
-
-            const SizedBox(height: 16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child:  Text(
-                      "Don't know the date? Find perfect Muhurat",
-                      style:
-                      TextFontStyle.textFontStyle( 16, Color(0xFF757575))
-                  ),
-                ),
-
-                const SizedBox(height: 12),
-                SizedBox(
-                  width: double.infinity, // Full width
-                  child: OutlinedButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return MuhuratPopup(label:widget.pooja['category']);
-                        },
-                      );
-                    },
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                    ),
-
-                    child: Text(
-                        "Find My Muhurat",
-                        style:
-                        TextFontStyle.textFontStyle( 16, Color(0xFF184A45),FontWeight.w500)
-                    ),
-                  ),
-
-                ),
-              ],
-            ),
-
-            /// Guests & Bartenders
-
-            const SizedBox(height: 20),
-
-            /// Address Section
-            CustomChangeAddressSheet(),
-            const SizedBox(height: 20),
-          ],
-        ),
+          CustomChangeAddressSheet(),
+          const SizedBox(height: 20),
+        ],
       ),
     );
   }
 
 }
+
+
 class MuhuratPopup extends StatelessWidget {
   final String? label;
 

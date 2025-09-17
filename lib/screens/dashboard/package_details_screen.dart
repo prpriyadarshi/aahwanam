@@ -88,14 +88,14 @@ class PackageDetailScreen extends StatelessWidget {
                       labelColor: Color(0xFF575959),
                       unselectedLabelColor: Colors.grey,
                       labelStyle: TextFontStyle.textFontStyle(
-                        18,
+                        16,
                         const Color(0xFF575959),
                         FontWeight.w600,
                       ),
                       tabs: const [
                         Tab(text: "All Details"),
                         Tab(text: "Gallery"),
-                        Tab(text: "Review"),
+                        Tab(text: "Reviews"),
                       ],
                     ),
                   ),
@@ -151,12 +151,12 @@ class PackageDetailScreen extends StatelessWidget {
               Text(
                 "About ${state.package?['title']}",
                 style:
-                  TextFontStyle.textFontStyle( 18, Color(0xFF575959),FontWeight.w500)
+                  TextFontStyle.textFontStyle( 15, Color(0xFF575959),FontWeight.w500)
               ),
               Text(
                 "₹${state.package?['price']}",
                 style:
-                  TextFontStyle.textFontStyle( 18, Colors.teal,FontWeight.bold)
+                  TextFontStyle.textFontStyle( 15, Colors.teal,FontWeight.w600)
               ),
             ],
           ),
@@ -164,13 +164,13 @@ class PackageDetailScreen extends StatelessWidget {
           Text(
             state.package?['description'],
             style:
-              TextFontStyle.textFontStyle( 15, Color(0xFF575959),FontWeight.w400)
+              TextFontStyle.textFontStyle( 13, Color(0xFF575959),FontWeight.w400)
           ),
           const SizedBox(height: 16),
           Text(
             "Included in this Package are:",
             style:
-              TextFontStyle.textFontStyle( 18,Color(0xFF575959),FontWeight.w500)
+              TextFontStyle.textFontStyle( 15,Color(0xFF575959),FontWeight.w500)
           ),
           const SizedBox(height: 6),
           ...((package["included"] as List<String>)
@@ -178,7 +178,7 @@ class PackageDetailScreen extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 4.0,left:8.0),
             child: Text("• $item",
                 style:
-                TextFontStyle.textFontStyle( 15, Color(0xFF575959),FontWeight.w400)),
+                TextFontStyle.textFontStyle( 13, Color(0xFF575959),FontWeight.w400)),
 
           )).toList()),
           // const SizedBox(height: 20),
