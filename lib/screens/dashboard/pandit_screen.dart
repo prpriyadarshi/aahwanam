@@ -143,7 +143,7 @@ class _PanditScreenState extends State<PanditScreen> {
                       // Decorators Section
                       CustomPanditCardWidgets.buildSection(
                         context,
-                        title: "Pooja Themes",
+                        title: "Pooja Theme",
                         data: state.poojaTheme, // ✅ Works now
                         showViewAll: true,
                         onViewAll: () {

@@ -281,7 +281,7 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
         children: [
           /// About Section
           Text(
-            "About",
+            "about",
             style: TextFontStyle.textFontStyle(
               17,
               const Color(0xFF575959),
