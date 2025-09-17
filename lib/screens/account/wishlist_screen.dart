@@ -20,6 +20,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
+    final screenWidth = screen.width;
     final shortestSide = screen.shortestSide;
     final isTablet = shortestSide > 600;
 
@@ -63,10 +64,22 @@ class _WishlistScreenState extends State<WishlistScreen> {
                 onPressed: () => Navigator.pop(context),
               ),
               actions: [
-                IconButton(
-                  icon: Icon(Icons.share, size: scale(20)),
-                  onPressed: () {},
-                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    right: screenWidth * 0.01,
+                    left: screenWidth * 0.02,
+                  ),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.share_outlined,
+                      size: screenWidth * 0.06,
+                      color: const Color(0xFF1E535B),
+                    ),
+                    onPressed: () {
+                      // Implement share functionality
+                    },
+                  ),
+                )
               ],
             ),
             body: Padding(
@@ -112,7 +125,8 @@ class _WishlistScreenState extends State<WishlistScreen> {
                       SizedBox(width: scale(8)),
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () => setState(() => isAllSelected = false),
+                          onPressed: () =>
+                              setState(() => isAllSelected = false),
                           style: OutlinedButton.styleFrom(
                             backgroundColor: isAllSelected
                                 ? Colors.transparent
@@ -146,7 +160,8 @@ class _WishlistScreenState extends State<WishlistScreen> {
 
                   // Cards List
                   Expanded(
-                    child: wishlistItems.isEmpty
+                    child: isAllSelected
+                        ? (wishlistItems.isEmpty
                         ? Center(
                       child: Text(
                         "Your wishlist is empty",
@@ -155,8 +170,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                         ),
                       ),
                     )
-                        : isAllSelected
-                        ? ListView.builder(
+                        : ListView.builder(
                       itemCount: wishlistItems.length,
                       itemBuilder: (context, index) {
                         final item = wishlistItems[index];
@@ -170,14 +184,19 @@ class _WishlistScreenState extends State<WishlistScreen> {
                             imagePath: item['imagePath'],
                             rating: item['rating'],
                             showLikeIcon: true,
+                            imageType: PackageImageType
+                                .wishlist, // ✅ Wishlist usage
                             primaryButtonText: "Book Now",
                             onPrimaryButtonPressed: () {
                               showModalBottomSheet(
                                 context: context,
                                 isScrollControlled: true,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(20)),
+                                shape:
+                                const RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.vertical(
+                                    top: Radius.circular(20),
+                                  ),
                                 ),
                                 builder: (context) {
                                   return BookingBottomSheet(
@@ -200,37 +219,48 @@ class _WishlistScreenState extends State<WishlistScreen> {
                           ),
                         );
                       },
+                    ))
+                        : (conceptsTabImages.isEmpty
+                        ? Center(
+                      child: Text(
+                        "No concepts available",
+                        style: TextStyle(
+                          fontSize: isTablet ? 18 : scale(14),
+                        ),
+                      ),
                     )
                         : GridView.builder(
                       padding: EdgeInsets.zero,
                       itemCount: conceptsTabImages.length,
                       gridDelegate:
                       SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: isTablet
-                            ? 3
-                            : (screen.width < 350 ? 2 : 2),
-                        mainAxisSpacing: isTablet ? 16 : scale(8),
-                        crossAxisSpacing: isTablet ? 16 : scale(8),
-                        childAspectRatio:
-                        isTablet ? 1.3 : (screen.height > 800 ? 1.1 : 1),
+                        crossAxisCount: isTablet ? 3 : 2,
+                        mainAxisSpacing:
+                        isTablet ? 16 : scale(8),
+                        crossAxisSpacing:
+                        isTablet ? 16 : scale(8),
+                        childAspectRatio: isTablet
+                            ? 1.3
+                            : (screen.height > 800 ? 1.1 : 1),
                       ),
                       itemBuilder: (context, index) {
                         final item = conceptsTabImages[index];
                         return CustomImageCard(
                           imageUrl: item['imagePath'],
                           width: screen.width /
-                              (isTablet ? 3 : (screen.width < 350 ? 2 : 2)),
+                              (isTablet ? 3 : 2),
                           height: isTablet ? 180 : scale(146),
                           isAsset: true,
                           favoriteSelected: item['isLiked'],
                           onFavoriteToggle: () {
                             setState(() {
-                              item['isLiked'] = !item['isLiked'];
+                              item['isLiked'] =
+                              !item['isLiked'];
                             });
                           },
                         );
                       },
-                    ),
+                    )),
                   ),
                 ],
               ),
