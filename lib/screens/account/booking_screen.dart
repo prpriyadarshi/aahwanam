@@ -35,7 +35,6 @@ class _BookingScreenState extends State<BookingScreen> {
   Widget build(BuildContext context) {
     // Responsive helpers
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     final isTablet = screenWidth > 600;
 
     return BlocBuilder<AccountBloc, AccountState>(
@@ -87,6 +86,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Toggle buttons: All Bookings / In Progress
                       Row(
                         children: [
                           Expanded(
@@ -101,10 +101,10 @@ class _BookingScreenState extends State<BookingScreen> {
                                   vertical: isTablet ? 12 : 11,
                                 ),
                                 backgroundColor: isAllBookingsSelected
-                                    ? const Color(0xFF1E535B) // Highlight color
+                                    ? const Color(0xFF1E535B)
                                     : Colors.white,
                                 foregroundColor: isAllBookingsSelected
-                                    ? Colors.white // Text color when selected
+                                    ? Colors.white
                                     : const Color(0xFF1E535B),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
@@ -158,7 +158,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       ),
                       const SizedBox(height: 10),
 
-                      // List of bookings (scrollable inside SingleChildScrollView)
+                      // ✅ List of Bookings (All / In Progress)
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -169,6 +169,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           final package = isAllBookingsSelected
                               ? state.bookings[index]
                               : state.inProgressBookings[index];
+
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 6.0),
                             child: PackageCard(
@@ -178,15 +179,15 @@ class _BookingScreenState extends State<BookingScreen> {
                               details: package['details'],
                               imagePath: package['imagePath'],
                               rating: package['rating'],
+                              imageType: PackageImageType.booking, // ✅ Booking usage
                               onTap: () {
                                 if (isAllBookingsSelected) {
-                                  // Navigate to All Bookings Details Page
+                                  // Navigate to All Bookings Details
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          DetailedAllBookingScreen(
-                                              package: package),
+                                          DetailedAllBookingScreen(package: package),
                                     ),
                                   );
                                 } else {
@@ -200,16 +201,14 @@ class _BookingScreenState extends State<BookingScreen> {
                                           decorator: {
                                             'name': _extractDecoratorName(
                                                 package['title'] ?? ''),
-                                            'image':
-                                            package['imagePath'] ?? '',
+                                            'image': package['imagePath'] ?? '',
                                             'rating': '4.5',
                                             'price': package['price'] ?? '',
                                           },
                                         ),
                                       ),
                                     );
-                                  } else if (title
-                                      .contains('blush makeover')) {
+                                  } else if (title.contains('blush makeover')) {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -217,8 +216,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                           makeupHair: {
                                             'name': _extractDecoratorName(
                                                 package['title'] ?? ''),
-                                            'image':
-                                            package['imagePath'] ?? '',
+                                            'image': package['imagePath'] ?? '',
                                             'rating': '4.2',
                                             'price': package['price'] ?? '',
                                           },
