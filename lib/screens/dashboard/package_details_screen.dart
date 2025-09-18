@@ -94,7 +94,7 @@ class PackageDetailScreen extends StatelessWidget {
                       ),
                       tabs: const [
                         Tab(text: "All Details"),
-                        Tab(text: "Galleries"),
+                        Tab(text: "Gallery"),
                         Tab(text: "Reviews"),
                       ],
                     ),
@@ -149,7 +149,7 @@ class PackageDetailScreen extends StatelessWidget {
 
             children: [
               Text(
-                "about ${state.package?['title']}",
+                "About ${state.package?['title']}",
                 style:
                   TextFontStyle.textFontStyle( 15, Color(0xFF575959),FontWeight.w500)
               ),

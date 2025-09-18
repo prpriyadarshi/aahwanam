@@ -154,7 +154,7 @@ class _PackageCardState extends State<PackageCard> {
                       const SizedBox(height: 4),
                       Text(
                         widget.details!,
-                        style: TextFontStyle.textFontStyle(13, const Color(0xFF575959), FontWeight.w600),
+                        style: TextFontStyle.textFontStyle(13,const Color(0xFF757575), FontWeight.w400),
                       ),
                     ],
 

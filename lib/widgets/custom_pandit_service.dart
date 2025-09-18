@@ -96,7 +96,7 @@ class CustomPanditCardWidgets {
                         child: item['image'] != null && item['image']!.startsWith('assets/')
                             ? Image.asset(
                           item['image']!,
-                          height: screenHeight * 0.14, // 🔹 responsive height
+                          height: screenHeight * 0.16, // 🔹 responsive height
                           width: double.infinity,
                           fit: BoxFit.cover,
                         )
@@ -171,7 +171,7 @@ class CustomPanditCardWidgets {
                             ),
                           ],
                         ),
-                        SizedBox(height: screenHeight * 0.004),
+                        SizedBox(height: screenHeight * 0.005),
                         Text(
                           item['price'] ?? '',
                           style: TextFontStyle.textFontStyle(
