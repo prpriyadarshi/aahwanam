@@ -173,7 +173,7 @@ class CustomPanditCardWidgets {
                         ),
                         SizedBox(height: screenHeight * 0.005),
                         Text(
-                          item['price'] ?? '',
+                           item['price'] ?? '',
                           style: TextFontStyle.textFontStyle(
                             screenWidth * 0.034,
                               const Color(0xFF1E535B),

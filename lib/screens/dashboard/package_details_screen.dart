@@ -160,7 +160,7 @@ class PackageDetailScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 8),
+           const SizedBox(height: 8),
           Text(
             state.package?['description'],
             style:
