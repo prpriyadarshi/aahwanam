@@ -76,12 +76,22 @@ class _MyPackagesScreen extends State<MyPackagesScreen> {
                 },
               ),
               actions: [
-                IconButton(
-                  icon: const Icon(Icons.share),
-                  onPressed: () {
-                    // Share logic
-                  },
-                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    right: screenWidth * 0.01, // Adjust right spacing
+                    left: screenWidth * 0.02, // Adjust left spacing
+                  ),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.share_outlined,
+                      size: screenWidth * 0.06,
+                      color: Color(0xFF1E535B), // ✅ Set custom color
+                    ),
+                    onPressed: () {
+                      // Implement share functionality
+                    },
+                  ),
+                )
               ],
             ),
             body: Column(

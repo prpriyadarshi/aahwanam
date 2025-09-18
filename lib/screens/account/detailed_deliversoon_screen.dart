@@ -26,16 +26,21 @@ class DetailedDeliverSoonScreen extends StatefulWidget {
 class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         titleSpacing: 0,
-        title: Text("My Packages",
+        title: Text(
+          "My Packages",
           style: TextFontStyle.textFontStyle(
-            16,                         // Font size
-            Color(0xFF575959),          // Text color
-            FontWeight.w500,            // Font weight
-          ),),
+            16 * textScale,
+            const Color(0xFF575959),
+            FontWeight.w500,
+          ),
+        ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -46,17 +51,13 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
             size: 18,
             color: Color(0xFF575959),
           ),
-          onPressed: () {
-            Navigator.pop(context); // ✅ Go back to previous screen
-            // Or use push to go to a specific screen:
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.share),
+            icon: const Icon(Icons.share, color: Color(0xFF575959)),
             onPressed: () {
-              // Implement share functionality if needed
+              // Share functionality here
             },
           ),
         ],
@@ -68,27 +69,32 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
             Center(
               child: Text(
                 "Anniversary Package",
-                style:TextFontStyle.textFontStyle(14,Color(0XFF575959), FontWeight.w500),
-
+                style: TextFontStyle.textFontStyle(
+                  14 * textScale,
+                  const Color(0XFF575959),
+                  FontWeight.w500,
+                ),
               ),
             ),
-            const SizedBox(height: 16),
-            ..._buildPackageItems(),
-            // const SizedBox(height: 5),
-
+            const SizedBox(height: 12),
+            ..._buildPackageItems(textScale),
             Padding(
-              padding: EdgeInsets.only(top: 12, left: 8),
+              padding: const EdgeInsets.only(top: 8, left: 8),
               child: Text(
                 "Connect with us",
-                style:TextFontStyle.textFontStyle(12,Color(0XFF575959), FontWeight.w500),
+                style: TextFontStyle.textFontStyle(
+                  12 * textScale,
+                  const Color(0XFF575959),
+                  FontWeight.w500,
+                ),
               ),
             ),
             Container(
-              width: 320,
-              height: 60,
-              margin: EdgeInsets.only(top: 8),
+              width: screenWidth,
+              height: 65,
+              margin: const EdgeInsets.only(top: 8),
               decoration: BoxDecoration(
-                color: Color(0xFFF8F8F8),
+                color: const Color(0xFFF8F8F8),
                 borderRadius: BorderRadius.circular(23),
               ),
               child: Row(
@@ -96,7 +102,7 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
                   const Padding(
                     padding: EdgeInsets.only(top: 10, bottom: 10, left: 8),
                     child: CircleAvatar(
-                      radius: 17.5, // 35/2
+                      radius: 17.5,
                       backgroundImage: AssetImage('assets/images/profile.png'),
                     ),
                   ),
@@ -107,11 +113,19 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
                     children: [
                       Text(
                         "Janey Cooper",
-                        style:TextFontStyle.textFontStyle(12,Color(0XFF575959), FontWeight.w500),
+                        style: TextFontStyle.textFontStyle(
+                          12 * textScale,
+                          const Color(0XFF575959),
+                          FontWeight.w500,
+                        ),
                       ),
                       Text(
                         "Support Team",
-                        style:TextFontStyle.textFontStyle(10,Color(0XFF575959), FontWeight.w300),
+                        style: TextFontStyle.textFontStyle(
+                          10 * textScale,
+                          const Color(0XFF575959),
+                          FontWeight.w300,
+                        ),
                       ),
                     ],
                   ),
@@ -119,34 +133,30 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
                   Row(
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const ConnectingScreen()),
-                          );
-                        },
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const ConnectingScreen()),
+                        ),
                         child: const CircleAvatar(
-                          radius: 13, // for 26x26
+                          radius: 13,
                           backgroundColor: Color(0xFF1E535B),
-                          child:
-                          Icon(Icons.call, size: 14, color: Colors.white),
+                          child: Icon(Icons.call,
+                              size: 14, color: Colors.white),
                         ),
                       ),
                       const SizedBox(width: 10),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const Chatscreen()),
-                          );
-                        },
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const Chatscreen()),
+                        ),
                         child: const CircleAvatar(
-                          radius: 13, // for 26x26
+                          radius: 13,
                           backgroundColor: Color(0xFF1E535B),
-                          child:
-                          Icon(Icons.chat, size: 14, color: Colors.white),
+                          child: Icon(Icons.chat,
+                              size: 14, color: Colors.white),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -155,26 +165,30 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
                 ],
               ),
             ),
-
-            SizedBox(height: 20),
+            const SizedBox(height: 15),
             Row(
-              children:  [
-                Expanded(child: Divider(thickness: 1)),
-                SizedBox(width: 8),
+              children: [
+                const Expanded(child: Divider(thickness: 1)),
+                const SizedBox(width: 8),
                 Text(
                   "Bill Details",
-                  style:TextFontStyle.textFontStyle(14,Color(0XFF575959), FontWeight.w500),
+                  style: TextFontStyle.textFontStyle(
+                    14 * textScale,
+                    const Color(0XFF575959),
+                    FontWeight.w500,
+                  ),
                 ),
-                SizedBox(width: 8),
-                Expanded(child: Divider(thickness: 1)),
+                const SizedBox(width: 8),
+                const Expanded(child: Divider(thickness: 1)),
               ],
             ),
-
             const SizedBox(height: 12),
-            _buildBillRow("Package Charges", "₹ 32,000", showInfo: true),
-            _buildBillRow("Platform Fee", "₹ 100"),
-            _buildBillRow("Transport Fee", "FREE"),
-            _buildBillRow("Paid", "₹ 32,100", bold: true),
+            _buildBillRow("Package Charges", "₹ 32,000",
+                textScale: textScale, showInfo: true),
+            _buildBillRow("Platform Fee", "₹ 100", textScale: textScale),
+            _buildBillRow("Transport Fee", "FREE", textScale: textScale),
+            _buildBillRow("Total", "₹ 32,100",
+                textScale: textScale, bold: true),
             const SizedBox(height: 24),
           ],
         ),
@@ -182,7 +196,7 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
     );
   }
 
-  List<Widget> _buildPackageItems() {
+  List<Widget> _buildPackageItems(double textScale) {
     final services = [
       {
         "title": "Decoration",
@@ -211,7 +225,7 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: const Color(0xFFFCEFEA),
+          color: const Color(0xFFFFF2E4),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
@@ -232,13 +246,27 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
                 children: [
                   Text(
                     service["title"]!,
-                    style:TextFontStyle.textFontStyle(12,Color(0XFF575959), FontWeight.w500),
+                    style: TextFontStyle.textFontStyle(
+                      12 * textScale,
+                      const Color(0XFF575959),
+                      FontWeight.w500,
+                    ),
                   ),
-                  Text(service["price"]!,
-                    style:TextFontStyle.textFontStyle(12,Color(0XFF1E535B), FontWeight.w600),
+                  Text(
+                    service["price"]!,
+                    style: TextFontStyle.textFontStyle(
+                      12 * textScale,
+                      const Color(0XFF1E535B),
+                      FontWeight.w600,
+                    ),
                   ),
-                  Text("Delivered on–23–03–25",
-                    style:TextFontStyle.textFontStyle(12,Color(0XFF757575), FontWeight.w400),
+                  Text(
+                    "Delivered on–23–03–25",
+                    style: TextFontStyle.textFontStyle(
+                      11 * textScale,
+                      const Color(0XFF757575),
+                      FontWeight.w400,
+                    ),
                   ),
                 ],
               ),
@@ -249,25 +277,8 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
     }).toList();
   }
 
-  Widget _buildCircleIcon(IconData icon) {
-    return Container(
-      width: 36,
-      height: 36,
-      decoration: BoxDecoration(
-        color: Color(0xFF1E535B), // Background color
-        shape: BoxShape.circle,
-      ),
-      child: IconButton(
-        icon: Icon(icon, color: Colors.white, size: 18), // White icon
-        onPressed: () {},
-        padding: EdgeInsets.zero, // Remove extra padding
-        constraints: BoxConstraints(), // Remove IconButton constraints
-      ),
-    );
-  }
-
   Widget _buildBillRow(String label, String value,
-      {bool showInfo = false, bool bold = false}) {
+      {bool showInfo = false, bool bold = false, required double textScale}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -277,21 +288,26 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
               children: [
                 Text(
                   label,
-                  style: TextStyle(
-                    fontFamily: 'Poppins',fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+                  style: TextFontStyle.textFontStyle(
+                    12 * textScale,
+                    const Color(0XFF575959),
+                    bold ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),
                 if (showInfo) ...[
                   const SizedBox(width: 4),
-                  const Icon(Icons.info_outline, size: 14),
+                  const Icon(Icons.info_outline,
+                      size: 14, color: Color(0XFF757575)),
                 ]
               ],
             ),
           ),
           Text(
             value,
-            style: TextStyle(
-              fontFamily: 'Poppins',fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+            style: TextFontStyle.textFontStyle(
+              12 * textScale,
+              const Color(0XFF575959),
+              bold ? FontWeight.bold : FontWeight.normal,
             ),
           )
         ],
@@ -299,7 +315,7 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
     );
   }
 
-  Widget _buildRatingRow() {
+  Widget _buildRatingRow(double textScale) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -316,7 +332,7 @@ class _DetailedDeliverSoonScreen extends State<DetailedDeliverSoonScreen> {
             child: Icon(
               index < 4 ? Icons.star : Icons.star_border,
               color: Colors.orange,
-              size: 40,
+              size: 40 * textScale,
             ),
           ),
         ),

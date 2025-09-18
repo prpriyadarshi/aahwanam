@@ -1,10 +1,7 @@
-import 'package:aahwanam/blocs/account/account_bloc.dart';
-import 'package:aahwanam/blocs/account/account_event.dart';
-import 'package:aahwanam/blocs/account/account_state.dart';
 import 'package:aahwanam/screens/account/RateServiceScreen.dart';
-import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../widgets/custom_text_field.dart';
 
 class DetailedDeliveredmyPackagesScreen extends StatefulWidget {
   final Map<String, dynamic> package;
@@ -16,24 +13,24 @@ class DetailedDeliveredmyPackagesScreen extends StatefulWidget {
 
   @override
   State<DetailedDeliveredmyPackagesScreen> createState() =>
-      _DetailedDeliveredmyPackagesScreen();
+      _DetailedDeliveredmyPackagesScreenState();
 }
 
-class _DetailedDeliveredmyPackagesScreen
+class _DetailedDeliveredmyPackagesScreenState
     extends State<DetailedDeliveredmyPackagesScreen> {
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final isTablet = screenWidth > 600;
+    // Screen size
+    final size = MediaQuery.of(context).size;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
 
-    // Dynamic sizes
-    double fontSmall = isTablet ? 16 : 12;
-    double fontMedium = isTablet ? 18 : 14;
-    double fontLarge = isTablet ? 20 : 16;
-    double imageWidth = isTablet ? 100 : 67;
-    double imageHeight = isTablet ? 80 : 52;
-    double starSize = isTablet ? 55 : 40;
+    // Responsive scaling factors
+    double textScale = screenWidth / 390; // base iPhone width
+    if (textScale < 0.8) textScale = 0.8;
+    if (textScale > 1.3) textScale = 1.3;
+
+    double imageScale = screenWidth / 390;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -42,74 +39,70 @@ class _DetailedDeliveredmyPackagesScreen
         title: Text(
           "My Packages",
           style: TextFontStyle.textFontStyle(
-            fontLarge,
-            const Color(0xFF575959),
-            FontWeight.w500,
-          ),
+              16 * textScale, const Color(0xFF575959), FontWeight.w500),
         ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
         leading: IconButton(
-          padding: EdgeInsets.only(top: 2, left: isTablet ? 20 : 12),
+          padding: EdgeInsets.only(left: screenWidth * 0.03),
           icon: const Icon(
             Icons.arrow_back_ios,
             size: 18,
             color: Color(0xFF575959),
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
             onPressed: () {
-              // Share functionality if needed
+              // Share functionality
             },
           ),
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: isTablet ? 24 : 16),
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
         child: ListView(
           children: [
             Center(
               child: Text(
                 "Birthday Party Package",
                 style: TextFontStyle.textFontStyle(
-                  fontMedium,
-                  const Color(0XFF575959),
-                  FontWeight.w500,
-                ),
+                    14 * textScale, const Color(0xFF575959), FontWeight.w500),
               ),
             ),
-            SizedBox(height: isTablet ? 24 : 16),
-            ..._buildPackageItems(imageWidth, imageHeight, fontSmall),
-            SizedBox(height: isTablet ? 32 : 16),
+            SizedBox(height: screenHeight * 0.02),
+            ..._buildPackageItems(screenWidth, imageScale, textScale),
+            SizedBox(height: screenHeight * 0.01),
 
             // Bill Details Divider
-            _buildSectionDivider("Bill Details", fontMedium),
-            SizedBox(height: isTablet ? 20 : 6),
+            _buildSectionDivider("Bill Details", textScale),
+            SizedBox(height: screenHeight * 0.010),
             _buildBillRow("Package Charges", "₹ 32,000",
-                showInfo: true, bold: false, fontSize: 12),
-            _buildBillRow("Platform Fee", "₹ 100", fontSize: 12),
-            _buildBillRow("Transport Fee", "FREE", fontSize: 12),
+                showInfo: true, bold: false, textScale: textScale),
+            _buildBillRow("Platform Fee", "₹ 100",
+                bold: false, textScale: textScale),
+            _buildBillRow("Transport Fee", "FREE",
+                bold: false, textScale: textScale),
             _buildBillRow("Paid", "₹ 32,100",
-                bold: true, fontSize: 12),
-            SizedBox(height: isTablet ? 32 : 16),
+                bold: true, textScale: textScale),
+            SizedBox(height: screenHeight * 0.02),
+
             // Rate Service Divider
-            _buildSectionDivider("Rate Service", fontMedium),
-            SizedBox(height: isTablet ? 16 : 8),
-            _buildRatingRow(starSize),
-            SizedBox(height: isTablet ? 32 : 20),
+            _buildSectionDivider("Rate Service", textScale),
+            SizedBox(height: screenHeight * 0.020),
+            _buildRatingRow(screenWidth, textScale),
+            SizedBox(height: screenHeight * 0.03),
           ],
         ),
       ),
     );
   }
+
   List<Widget> _buildPackageItems(
-      double imageWidth, double imageHeight, double fontSize) {
+      double screenWidth, double imageScale, double textScale) {
     final services = [
       {
         "title": "Decoration",
@@ -138,7 +131,7 @@ class _DetailedDeliveredmyPackagesScreen
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: const Color(0xFFFCEFEA),
+          color: const Color(0xFFFFF2E4),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
@@ -147,8 +140,8 @@ class _DetailedDeliveredmyPackagesScreen
               borderRadius: BorderRadius.circular(8),
               child: Image.asset(
                 service["image"]!,
-                width: imageWidth,
-                height: imageHeight,
+                width: screenWidth * 0.2,
+                height: screenWidth * 0.15,
                 fit: BoxFit.cover,
               ),
             ),
@@ -160,17 +153,17 @@ class _DetailedDeliveredmyPackagesScreen
                   Text(
                     service["title"]!,
                     style: TextFontStyle.textFontStyle(
-                        fontSize, const Color(0XFF575959), FontWeight.w500),
+                        12 * textScale, const Color(0XFF575959), FontWeight.w500),
                   ),
                   Text(
                     service["price"]!,
                     style: TextFontStyle.textFontStyle(
-                        fontSize, const Color(0XFF1E535B), FontWeight.w600),
+                        12 * textScale, const Color(0XFF1E535B), FontWeight.w600),
                   ),
                   Text(
                     "Delivered on–23–03–25",
                     style: TextFontStyle.textFontStyle(
-                        fontSize, const Color(0XFF757575), FontWeight.w400),
+                        11 * textScale, const Color(0XFF757575), FontWeight.w400),
                   ),
                 ],
               ),
@@ -182,9 +175,7 @@ class _DetailedDeliveredmyPackagesScreen
   }
 
   Widget _buildBillRow(String label, String value,
-      {bool showInfo = false,
-        bool bold = false,
-        required double fontSize}) {
+      {bool showInfo = false, bool bold = false, required double textScale}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -194,11 +185,10 @@ class _DetailedDeliveredmyPackagesScreen
               children: [
                 Text(
                   label,
-                  style: TextStyle(
-                    fontSize: fontSize,
-                    fontWeight: bold ? FontWeight.bold : FontWeight.normal,
-                    fontFamily: 'Poppins',
-                  ),
+                  style: TextFontStyle.textFontStyle(
+                      12 * textScale,
+                      const Color(0XFF575959),
+                      bold ? FontWeight.bold : FontWeight.normal),
                 ),
                 if (showInfo) ...[
                   const SizedBox(width: 4),
@@ -209,17 +199,17 @@ class _DetailedDeliveredmyPackagesScreen
           ),
           Text(
             value,
-            style: TextStyle(
-              fontSize: fontSize,
-              fontWeight: bold ? FontWeight.bold : FontWeight.normal,
-            ),
+            style: TextFontStyle.textFontStyle(
+                12 * textScale,
+                const Color(0XFF575959),
+                bold ? FontWeight.bold : FontWeight.normal),
           )
         ],
       ),
     );
   }
 
-  Widget _buildRatingRow(double starSize) {
+  Widget _buildRatingRow(double screenWidth, double textScale) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -232,18 +222,19 @@ class _DetailedDeliveredmyPackagesScreen
         children: List.generate(
           5,
               (index) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14),
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
             child: Icon(
               index < 4 ? Icons.star : Icons.star_border,
               color: Colors.orange,
-              size: starSize,
+              size: 28 * textScale,
             ),
           ),
         ),
       ),
     );
   }
-  Widget _buildSectionDivider(String title, double fontSize) {
+
+  Widget _buildSectionDivider(String title, double textScale) {
     return Row(
       children: [
         const Expanded(child: Divider(thickness: 1)),
@@ -251,7 +242,7 @@ class _DetailedDeliveredmyPackagesScreen
         Text(
           title,
           style: TextFontStyle.textFontStyle(
-              fontSize, const Color(0XFF575959), FontWeight.w500),
+              14 * textScale, const Color(0XFF575959), FontWeight.w500),
         ),
         const SizedBox(width: 8),
         const Expanded(child: Divider(thickness: 1)),

@@ -1,6 +1,66 @@
 import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
+/// 🛒 Cart Image Widget
+class CartImage extends StatelessWidget {
+  final String imagePath;
+  const CartImage({Key? key, required this.imagePath}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(6),
+      child: Image.asset(
+        imagePath,
+        height: 125,
+        width: 80,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+}
+
+/// 📅 Booking Image Widget
+class BookingImage extends StatelessWidget {
+  final String imagePath;
+  const BookingImage({Key? key, required this.imagePath}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(6),
+      child: Image.asset(
+        imagePath,
+        height: 110,
+        width: 80,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+}
+
+/// ❤️ Wishlist Image Widget
+class WishlistImage extends StatelessWidget {
+  final String imagePath;
+  const WishlistImage({Key? key, required this.imagePath}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(6),
+      child: Image.asset(
+        imagePath,
+        height: 125,
+        width: 85,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+}
+
+/// Enum to select which image widget to use
+enum PackageImageType { cart, booking, wishlist }
+
 class PackageCard extends StatefulWidget {
   final String title;
   final String description;
@@ -16,6 +76,7 @@ class PackageCard extends StatefulWidget {
   final VoidCallback? onSecondaryButtonPressed;
   final VoidCallback? onTap;
 
+  final PackageImageType imageType; // NEW field
 
   const PackageCard({
     Key? key,
@@ -31,12 +92,27 @@ class PackageCard extends StatefulWidget {
     this.onSecondaryButtonPressed,
     this.showLikeIcon = false,
     this.onTap,
+    this.imageType = PackageImageType.cart, // default is Cart
   }) : super(key: key);
+
   @override
   State<PackageCard> createState() => _PackageCardState();
 }
+
 class _PackageCardState extends State<PackageCard> {
   bool isLiked = true;
+
+  /// Chooses which image widget to render
+  Widget _buildImage() {
+    switch (widget.imageType) {
+      case PackageImageType.cart:
+        return CartImage(imagePath: widget.imagePath);
+      case PackageImageType.booking:
+        return BookingImage(imagePath: widget.imagePath);
+      case PackageImageType.wishlist:
+        return WishlistImage(imagePath: widget.imagePath);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,21 +127,13 @@ class _PackageCardState extends State<PackageCard> {
         color: const Color(0xFFFFEFDF),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Row( // <-- Changed: Top Row only (Image + Details + Buttons)
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Image Section
+              // Image + like icon
               Stack(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: Image.asset(
-                      widget.imagePath,
-                      height: 130,
-                      width: 80,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  _buildImage(),
                   if (widget.showLikeIcon)
                     Positioned(
                       top: 4,
@@ -82,7 +150,7 @@ class _PackageCardState extends State<PackageCard> {
                             color: Colors.white,
                           ),
                           padding: const EdgeInsets.all(2),
-                          child:  Icon(
+                          child: Icon(
                             isLiked ? Icons.favorite : Icons.favorite_border,
                             size: 16,
                             color: isLiked ? Colors.red : Colors.grey,
@@ -100,22 +168,15 @@ class _PackageCardState extends State<PackageCard> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Title and Rating Row
+                    // Title + Rating
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: Text(
                             widget.title,
-                            style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w500), // smaller text
-                            // style: const TextStyle(
-                            //   fontFamily: 'Poppins', // Font family
-                            //   fontSize: 14, // Size in px (Flutter uses logical pixels)
-                            //   fontWeight: FontWeight.w500, // Equivalent to weight 500 (Medium)
-                            //   // height: 1.0, // Line height = 100% (1.0 means 100%)
-                            //   letterSpacing: 0.0, // 0% letter spacing
-                            //   color: Color(0xFF575959), // Text color
-                            // ),
+                            style: TextFontStyle.textFontStyle(
+                                14, const Color(0xFF575959), FontWeight.w500),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -130,20 +191,24 @@ class _PackageCardState extends State<PackageCard> {
                               const SizedBox(width: 4),
                               Text(
                                 widget.rating.toString(),
-                                style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500),
+                                style: TextFontStyle.textFontStyle(
+                                    12, const Color(0xFF575959), FontWeight.w400),
                               ),
                             ],
                           ),
                       ],
                     ),
                     const SizedBox(height: 6),
+
                     // Description
                     Text(
                       widget.description,
-                      style: TextFontStyle.textFontStyle(12, const Color(0xFF757575), FontWeight.w500),
+                      style: TextFontStyle.textFontStyle(
+                          13, const Color(0xFF757575), FontWeight.w400),
                     ),
-                    const SizedBox(height: 8),
-                    // Price and Details
+                    const SizedBox(height: 4),
+
+                    // Price
                     Row(
                       children: [
                         const Icon(
@@ -153,21 +218,24 @@ class _PackageCardState extends State<PackageCard> {
                         ),
                         Text(
                           widget.price,
-                          style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w600),
+                          style: TextFontStyle.textFontStyle(
+                              12, const Color(0xFF1E535B), FontWeight.w600),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+
                     if (widget.details != null) ...[
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 6),
                       Text(
                         widget.details!,
-                        style: TextFontStyle.textFontStyle(12, const Color(0xFF575959), FontWeight.w500),
+                        style: TextFontStyle.textFontStyle(
+                            13, const Color(0xFF575959), FontWeight.w600),
                       ),
                     ],
 
-                    // Now the buttons immediately after text!
-                    if (widget.primaryButtonText != null || widget.secondaryButtonText != null) ...[
+                    // Buttons
+                    if (widget.primaryButtonText != null ||
+                        widget.secondaryButtonText != null) ...[
                       const SizedBox(height: 12),
                       Row(
                         children: [
@@ -178,7 +246,7 @@ class _PackageCardState extends State<PackageCard> {
                               child: OutlinedButton(
                                 onPressed: widget.onSecondaryButtonPressed,
                                 style: OutlinedButton.styleFrom(
-                                  backgroundColor: const Color(0xFFFFFDFC), // ✅ correct bg color
+                                  backgroundColor: const Color(0xFFFFFDFC),
                                   side: const BorderSide(
                                     color: Color(0xFF1E535B),
                                     width: 1,
@@ -186,21 +254,21 @@ class _PackageCardState extends State<PackageCard> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(9),
                                   ),
-                                  padding: EdgeInsets.zero, // ✅ remove default padding
+                                  padding: EdgeInsets.zero,
                                 ),
                                 child: Text(
                                   widget.secondaryButtonText!,
-                                  style: TextFontStyle.textFontStyle(12, const Color(0xFF1E535B), FontWeight.w500),
+                                  style: TextFontStyle.textFontStyle(
+                                      12, const Color(0xFF1E535B), FontWeight.w500),
                                 ),
                               ),
                             ),
-
-                          if (widget.secondaryButtonText != null && widget.primaryButtonText != null)
+                          if (widget.secondaryButtonText != null &&
+                              widget.primaryButtonText != null)
                             const SizedBox(width: 8),
-
                           if (widget.primaryButtonText != null)
                             SizedBox(
-                              width: 74,
+                              width: 130,
                               height: 29,
                               child: ElevatedButton(
                                 onPressed: widget.onPrimaryButtonPressed,
@@ -211,9 +279,10 @@ class _PackageCardState extends State<PackageCard> {
                                   ),
                                   padding: EdgeInsets.zero,
                                 ),
-                                child:  Text(
-                                  "Book Now",
-                                  style: TextFontStyle.textFontStyle(12,  Colors.white, FontWeight.w500),
+                                child: Text(
+                                  "Move to Cart",
+                                  style: TextFontStyle.textFontStyle(
+                                      12, Colors.white, FontWeight.w500),
                                 ),
                               ),
                             ),
@@ -227,9 +296,6 @@ class _PackageCardState extends State<PackageCard> {
           ),
         ),
       ),
-
     );
-
   }
-
 }

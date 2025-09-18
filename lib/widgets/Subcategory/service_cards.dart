@@ -90,7 +90,7 @@ class EventServiceCard extends StatelessWidget {
                     children: [
                       Text(
                         price,
-                        style: TextFontStyle.textFontStyle(15, commonTealColor, FontWeight.w500),
+                        style: TextFontStyle.textFontStyle(12, commonTealColor, FontWeight.w500),
                       ),
                       countWidget,
                     ],
@@ -113,7 +113,7 @@ class EventServiceCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(6),
                   child: Image.asset(
                     imageUrl,
-                    height: 140,
+                    height: 130,
                     width: 140,
                     fit: BoxFit.cover,
                   ),

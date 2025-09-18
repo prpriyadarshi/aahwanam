@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aahwanam/blocs/account/account_bloc.dart';
 import 'package:aahwanam/blocs/account/account_event.dart';
 import 'package:aahwanam/blocs/account/account_state.dart';
-import '../../widgets/custom_inputfield.dart'; // Your custom widget for input fields
+import '../../widgets/custom_inputfield.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
@@ -36,100 +36,102 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   /// Show confirmation dialog before deleting account
   void _showDeleteConfirmationDialog() {
+    final size = MediaQuery.of(context).size;
+    final textScale = size.width / 390; // Reference width: iPhone 12
+
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (_) => Center(
         child: Dialog(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xFFF4F6FB), // light blue-gray bg
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(9),
+            borderRadius: BorderRadius.circular(16),
           ),
-          child: SizedBox(
-            width: 450,
-            height: 200,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 34, vertical: 24),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        'Are you sure you want to\ndelete account?',
-                        textAlign: TextAlign.center,
-                        style: TextFontStyle.textFontStyle(
-                          14,
-                          const Color(0xFF575959),
-                          FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Deleting your account will remove all the orders and history of your account.',
-                        textAlign: TextAlign.center,
-                        style: TextFontStyle.textFontStyle(
-                          13,
-                          const Color(0xFF6B6B6B),
-                          FontWeight.w400,
-                        ),
-                      ),
-                    ],
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: size.width * 0.08,
+              vertical: size.height * 0.03,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Title
+                Text(
+                  "Are you sure you want to\ndelete account?",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16 * textScale,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF333333),
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () => Navigator.pop(context),
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Color(0xFF78A3EB)),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: const EdgeInsets.symmetric(vertical: 4),
-                          ),
-                          child: Text(
-                            'No',
-                            style: TextFontStyle.textFontStyle(
-                              14,
-                              const Color(0xFF78A3EB),
-                              FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            _showAccountDeletedDialog();
-
-                            /// Trigger delete event here if needed
-                            /// context.read<AccountBloc>().add(DeleteAccount());
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF78A3EB),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: const EdgeInsets.symmetric(vertical: 4),
-                          ),
-                          child: Text(
-                            'Yes',
-                            style: TextFontStyle.textFontStyle(
-                              14,
-                              Colors.white,
-                              FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                ),
+                SizedBox(height: size.height * 0.015),
+                // Subtitle
+                Text(
+                  "Lorem ipsum dolor sit amet, consectetur\nipiscing elit, sed do eiusmod tempor cididunt.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14 * textScale,
+                    fontWeight: FontWeight.w400,
+                    color: const Color(0xFF6B6B6B),
                   ),
-                ],
-              ),
+                ),
+                SizedBox(height: size.height * 0.03),
+                // Buttons
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () => Navigator.pop(context),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Color(0xFF78A3EB), width: 1.5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: size.height * 0.015,
+                          ),
+                        ),
+                        child: Text(
+                          "No",
+                          style: TextStyle(
+                            fontSize: 14 * textScale,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xFF78A3EB),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: size.width * 0.04),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          _showAccountDeletedDialog();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF78A3EB),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: size.height * 0.015,
+                          ),
+                        ),
+                        child: Text(
+                          "Yes",
+                          style: TextStyle(
+                            fontSize: 14 * textScale,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
@@ -137,37 +139,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  /// Show dialog after account is deleted
+  /// Show "Account Deleted" dialog
   void _showAccountDeletedDialog() {
+    final size = MediaQuery.of(context).size;
+    final textScale = size.width / 390;
+
     showDialog(
       context: context,
       builder: (_) => Center(
         child: Dialog(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xFFF4F6FB),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(28),
+            padding: EdgeInsets.all(size.width * 0.07),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Account Deleted!',
-                  style: TextFontStyle.textFontStyle(
-                    14,
-                    const Color(0xFF575959),
-                    FontWeight.w500,
+                  "Account Deleted!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16 * textScale,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF333333),
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: size.height * 0.015),
                 Text(
-                  'Your account has been successfully deleted.',
+                  "Lorem ipsum dolor sit amet, consectetur\nipiscing elit, sed do eiusmod tempor cididunt.",
                   textAlign: TextAlign.center,
-                  style: TextFontStyle.textFontStyle(
-                    13,
-                    const Color(0xFF575959),
-                    FontWeight.w400,
+                  style: TextStyle(
+                    fontSize: 14 * textScale,
+                    fontWeight: FontWeight.w400,
+                    color: const Color(0xFF6B6B6B),
                   ),
                 ),
               ],
@@ -180,6 +186,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final textScale = size.width / 390; // Scale all text based on screen width
+
     return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
         if (state is AccountLoading) {
@@ -201,16 +210,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               elevation: 0,
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
-              title: const Text(
+              title: Text(
                 "Profile",
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 18 * textScale,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF575959),
+                  color: const Color(0xFF575959),
                 ),
               ),
               leading: IconButton(
-                padding: const EdgeInsets.only(top: 2, left: 12),
+                padding: EdgeInsets.only(top: 2, left: size.width * 0.02),
                 icon: const Icon(
                   Icons.arrow_back_ios,
                   size: 18,
@@ -219,13 +228,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AccountScreen()),
+                    MaterialPageRoute(builder: (context) => const AccountScreen()),
                   );
                 },
               ),
             ),
             body: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: EdgeInsets.symmetric(
+                horizontal: size.width * 0.05,
+                vertical: size.height * 0.010,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -234,7 +246,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Stack(
                       children: [
                         CircleAvatar(
-                          radius: 40,
+                          radius: size.width * 0.10,
                           backgroundImage: _profileImage != null
                               ? FileImage(_profileImage!)
                               : const AssetImage('assets/images/profile.png')
@@ -246,10 +258,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: GestureDetector(
                             onTap: _pickProfileImage,
                             child: Container(
-                              padding: const EdgeInsets.all(2),
-                              decoration: BoxDecoration(
+                              padding: EdgeInsets.all(size.width * 0.006),
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
-                                gradient: const LinearGradient(
+                                gradient: LinearGradient(
                                   colors: [
                                     Color(0xFF1E535B),
                                     Colors.pinkAccent,
@@ -259,14 +271,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                               child: Container(
-                                padding: const EdgeInsets.all(3),
+                                padding: EdgeInsets.all(size.width * 0.01),
                                 decoration: const BoxDecoration(
                                   color: Colors.white,
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Icon(
+                                child: Icon(
                                   Icons.edit,
-                                  size: 10,
+                                  size: size.width * 0.02,
                                   color: Colors.black,
                                 ),
                               ),
@@ -276,18 +288,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 18),
+                  SizedBox(height: size.height * 0.020),
                   Text(
                     "Profile Details",
                     style: TextFontStyle.textFontStyle(
-                      18,
+                      17 * textScale,
                       const Color(0xFF575959),
                       FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: size.height * 0.00),
 
-                  // Reusable InputFields widgets
+                  // Input fields
                   Row(
                     children: [
                       Expanded(
@@ -297,7 +309,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           keyboardType: TextInputType.text,
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: size.width * 0.01),
                       Expanded(
                         child: CustomInputField(
                           controller: _lastNameController,
@@ -307,14 +319,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 2),
+                  SizedBox(height: size.height * 0.004),
 
                   CustomInputField(
                     controller: _phoneController,
                     labelText: "Phone Number *",
                     keyboardType: TextInputType.phone,
                   ),
-                  const SizedBox(height: 2),
+                  SizedBox(height: size.height * 0.004),
 
                   CustomInputField(
                     controller: _emailController,
@@ -322,13 +334,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     keyboardType: TextInputType.emailAddress,
                   ),
 
-                  const SizedBox(height: 20),
+                  SizedBox(height: size.height * 0.03),
 
                   // Submit button
                   Center(
                     child: SizedBox(
-                      width: 280,
-                      height: 45,
+                      width: size.width * 0.8,
+                      height: size.height * 0.055,
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.pop(context);
@@ -345,12 +357,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 10),
                         ),
                         child: Text(
                           "Submit",
                           style: TextFontStyle.textFontStyle(
-                            14,
+                            14 * textScale,
                             Colors.white,
                             FontWeight.w500,
                           ),
@@ -358,10 +369,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: size.height * 0.02),
 
                   const Divider(thickness: 1, color: Color(0xFFE4E4E4)),
-                  const SizedBox(height: 10),
+                  SizedBox(height: size.height * 0.03),
 
                   // Delete Account Section
                   GestureDetector(
@@ -369,17 +380,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Text(
                       "Delete Account",
                       style: TextFontStyle.textFontStyle(
-                        14,
+                        14 * textScale,
                         const Color(0xFFD75252),
                         FontWeight.w500,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  SizedBox(height: size.height * 0.01),
                   Text(
                     "Deleting your account will remove all the orders and history of your account.",
                     style: TextFontStyle.textFontStyle(
-                      14,
+                      14 * textScale,
                       const Color(0xFF757575),
                       FontWeight.w400,
                     ),

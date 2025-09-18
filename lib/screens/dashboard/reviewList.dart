@@ -108,7 +108,7 @@ class ReviewList extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "Very Good",
+                      "Verry Good",
                       style: TextFontStyle.textFontStyle(
                         16,
                         const Color(0xFF575959),
@@ -193,7 +193,7 @@ class ReviewList extends StatelessWidget {
                           Text(
                             review['comment'],
                             style:
-                            TextFontStyle.textFontStyle( 16, Color(0xFF575959),FontWeight.w400),
+                            TextFontStyle.textFontStyle( 15, Color(0xFF575959),FontWeight.w400),
                           ),
                         ],
                       ),
@@ -201,7 +201,7 @@ class ReviewList extends StatelessWidget {
                       Text(
                           review['description'],
                           style:
-                          TextFontStyle.textFontStyle( 15, Color(0xFF575959),FontWeight.w400)
+                          TextFontStyle.textFontStyle( 13, Color(0xFF575959),FontWeight.w400)
                       ),
                       const SizedBox(height: 10),
                       Row(

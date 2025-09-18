@@ -1,5 +1,6 @@
 import 'package:aahwanam/screens/account/cart_screen.dart';
 import 'package:aahwanam/screens/account/mypackages_screen.dart';
+import 'package:aahwanam/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,7 +26,7 @@ class AddToCartBottomBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFEFDF),
+        color: const Color(0xFFFFFFFF),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(15),
           topRight: Radius.circular(15),
@@ -58,19 +59,13 @@ class AddToCartBottomBar extends StatelessWidget {
               children: [
                 Text(
                   '$itemCount Service in Your Package',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF575959),
-                  ),
+                  style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w500),
+
                 ),
                 Text(
                   price,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF1E535B),
-                  ),
+                  style: TextFontStyle.textFontStyle(14, const Color(0xFF1E535B), FontWeight.w500),
+
                 ),
               ],
             ),

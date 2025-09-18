@@ -10,6 +10,7 @@ import '../../widgets/Subcategory/service_cards.dart';
 import '../../widgets/custom_category_menu.dart';
 import '../../widgets/custom_top_bar.dart';
 import '../Packages/event_details_screen.dart';
+
 class SubcategoryScreen extends StatelessWidget {
   const SubcategoryScreen({super.key});
 
@@ -50,11 +51,16 @@ class SubcategoryScreen extends StatelessWidget {
                   selectedCategory?.name == 'Photography' ||
                   selectedCategory?.name == 'Chef';
 
+              // Calculate total items and total price from the serviceCounts map.
+              final int totalItems = state.serviceCounts.values.fold(0, (sum, count) => sum + count);
+
+              // Find a service to display in the bottom bar, preferably the last one added.
+              // To get the last added item, you'd need a timestamp or a different state model.
+              // For simplicity, we can get the first one with a count > 0.
               final String? selectedServiceId = state.serviceCounts.keys.firstWhereOrNull(
                     (id) => (state.serviceCounts[id] ?? 0) > 0,
               );
-
-              final ServiceItem? selectedService = selectedCategory?.services.firstWhereOrNull(
+              final ServiceItem? firstAddedService = allCategories.expand((category) => category.services).firstWhereOrNull(
                     (service) => service.id == selectedServiceId,
               );
 
@@ -92,9 +98,7 @@ class SubcategoryScreen extends StatelessWidget {
                                   context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, newCount));
                                 },
                                 onAddTap: (uniqueKey) {
-                                  // Check if the service has not been added before
                                   if ((state.serviceCounts[item.id] ?? 0) == 0) {
-                                    // Navigate to EventDetailsScreen
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -104,10 +108,8 @@ class SubcategoryScreen extends StatelessWidget {
                                         ),
                                       ),
                                     );
-                                    // Update count to 1 after navigating
                                     context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, 1));
                                   } else {
-                                    // Just update the count without navigating
                                     context.read<SubcategoryBloc>().add(UpdateServiceCount(item.id, (state.serviceCounts[item.id] ?? 0) + 1));
                                   }
                                 },
@@ -159,14 +161,14 @@ class SubcategoryScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  if (selectedService != null)
+                  if (totalItems > 0 && firstAddedService != null)
                     Positioned(
                       bottom: 0,
                       left: 0,
                       right: 0,
                       child: AddToCartBottomBar(
-                        imageUrl: selectedService.imageUrl,
-                        price: selectedService.price,
+                        imageUrl: firstAddedService.imageUrl, // Use the image of the first added item
+                        price: firstAddedService.price, // The text from your screenshot
                         itemCount: state.serviceCounts[selectedServiceId!] ?? 0,
                         onGoToCartTap: () {},
                       ),
