@@ -4,27 +4,42 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/account/account_bloc.dart';
 import '../../blocs/account/account_state.dart';
 import '../../widgets/custom_text_field.dart';
-import '../../widgets/package_card.dart'; // Import your PackageCard
+import '../../widgets/package_card.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
-  // ✅ Responsive text size based on screen width
+  // ✅ Responsive font size based on screen width
   double _getResponsiveFontSize(double screenWidth, double baseSize) {
     if (screenWidth < 360) {
-      return baseSize * 0.85; // Small devices
+      return baseSize * 0.85; // Small phones
     } else if (screenWidth > 600) {
       return baseSize * 1.2; // Tablets
     }
     return baseSize; // Normal phones
   }
 
-  // ✅ Responsive padding
+  // ✅ Responsive padding based on screen width
   EdgeInsets _getResponsivePadding(double screenWidth) {
     if (screenWidth > 600) {
       return const EdgeInsets.fromLTRB(28, 0, 28, 28); // Tablet
     }
     return const EdgeInsets.fromLTRB(18, 0, 18, 18); // Phones
+  }
+
+  // ✅ Responsive icon size
+  double _getResponsiveIconSize(double screenWidth, double baseSize) {
+    if (screenWidth < 360) {
+      return baseSize * 0.85;
+    } else if (screenWidth > 600) {
+      return baseSize * 1.2;
+    }
+    return baseSize;
+  }
+
+  // ✅ Responsive spacing (vertical)
+  double _getResponsiveHeight(double screenHeight, double baseHeight) {
+    return screenHeight * baseHeight;
   }
 
   @override
@@ -60,12 +75,11 @@ class CartScreen extends StatelessWidget {
                   elevation: 0,
                   leading: IconButton(
                     padding: EdgeInsets.only(
-                      top: screenHeight * 0.005,
                       left: screenWidth * 0.03,
                     ),
                     icon: Icon(
                       Icons.arrow_back_ios,
-                      size: screenWidth * 0.045, // Responsive icon size
+                      size: _getResponsiveIconSize(screenWidth, 20),
                       color: const Color(0xFF575959),
                     ),
                     onPressed: () => Navigator.pop(context),
@@ -73,14 +87,13 @@ class CartScreen extends StatelessWidget {
                   actions: [
                     Padding(
                       padding: EdgeInsets.only(
-                        right: screenWidth * 0.01, // Adjust right spacing
-                        left: screenWidth * 0.02, // Adjust left spacing
+                        right: screenWidth * 0.02,
                       ),
                       child: IconButton(
                         icon: Icon(
                           Icons.share_outlined,
-                          size: screenWidth * 0.06,
-                          color: Color(0xFF1E535B), // ✅ Set custom color
+                          size: _getResponsiveIconSize(screenWidth, 24),
+                          color: const Color(0xFF1E535B),
                         ),
                         onPressed: () {
                           // Implement share functionality
@@ -98,16 +111,15 @@ class CartScreen extends StatelessWidget {
                         final booking = state.addToCart[index];
                         return Padding(
                           padding: EdgeInsets.only(
-                            bottom: screenHeight * 0.015,
-                          ), // Responsive spacing
+                            bottom: _getResponsiveHeight(screenHeight, 0.015),
+                          ),
                           child: PackageCard(
                             title: booking['title'],
                             description: booking['description'],
                             price: booking['price'],
                             imagePath: booking['imagePath'],
                             rating: booking['rating'],
-                            imageType: PackageImageType
-                                .cart, // ✅ Force Cart Image style
+                            imageType: PackageImageType.cart,
                             primaryButtonText: "Book Now",
                             onPrimaryButtonPressed: () {
                               showModalBottomSheet(
@@ -131,13 +143,13 @@ class CartScreen extends StatelessWidget {
                                 SnackBar(
                                   content: Text(
                                     "${booking['title']} moved to Wishlist",
-                                    style: TextStyle(
-                                      fontSize: _getResponsiveFontSize(
-                                        screenWidth,
-                                        14,
-                                      ),
+                                    style: TextFontStyle.textFontStyle(
+                                      _getResponsiveFontSize(screenWidth, 14),
+                                      Colors.white,
+                                      FontWeight.normal,
                                     ),
                                   ),
+                                  backgroundColor: Colors.black87,
                                 ),
                               );
                             },

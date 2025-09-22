@@ -74,9 +74,16 @@ class PackageCard extends StatefulWidget {
   final String? secondaryButtonText;
   final VoidCallback? onPrimaryButtonPressed;
   final VoidCallback? onSecondaryButtonPressed;
+  final bool isWishlist;
   final VoidCallback? onTap;
 
-  final PackageImageType imageType; // NEW field
+  final PackageImageType imageType;
+
+  // NEW: Button size properties
+  final double? primaryButtonWidth;
+  final double? primaryButtonHeight;
+  final double? secondaryButtonWidth;
+  final double? secondaryButtonHeight;
 
   const PackageCard({
     Key? key,
@@ -90,9 +97,15 @@ class PackageCard extends StatefulWidget {
     this.secondaryButtonText,
     this.onPrimaryButtonPressed,
     this.onSecondaryButtonPressed,
+    this.isWishlist = false,
     this.showLikeIcon = false,
     this.onTap,
-    this.imageType = PackageImageType.cart, // default is Cart
+    this.imageType = PackageImageType.cart,
+    // NEW: Button size parameters with defaults
+    this.primaryButtonWidth,
+    this.primaryButtonHeight,
+    this.secondaryButtonWidth,
+    this.secondaryButtonHeight,
   }) : super(key: key);
 
   @override
@@ -233,7 +246,9 @@ class _PackageCardState extends State<PackageCard> {
                       ),
                     ],
 
-                    // Buttons
+                    // ... existing code ...
+
+// Buttons
                     if (widget.primaryButtonText != null ||
                         widget.secondaryButtonText != null) ...[
                       const SizedBox(height: 12),
@@ -241,8 +256,8 @@ class _PackageCardState extends State<PackageCard> {
                         children: [
                           if (widget.secondaryButtonText != null)
                             SizedBox(
-                              width: 122,
-                              height: 29,
+                              width: widget.secondaryButtonWidth ?? 120, // Use custom width or default
+                              height: widget.secondaryButtonHeight ?? 29, // Use custom height or default
                               child: OutlinedButton(
                                 onPressed: widget.onSecondaryButtonPressed,
                                 style: OutlinedButton.styleFrom(
@@ -268,8 +283,8 @@ class _PackageCardState extends State<PackageCard> {
                             const SizedBox(width: 8),
                           if (widget.primaryButtonText != null)
                             SizedBox(
-                              width: 130,
-                              height: 29,
+                              width: widget.primaryButtonWidth ?? 90, // Use custom width or default
+                              height: widget.primaryButtonHeight ?? 29, // Use custom height or default
                               child: ElevatedButton(
                                 onPressed: widget.onPrimaryButtonPressed,
                                 style: ElevatedButton.styleFrom(
@@ -280,7 +295,7 @@ class _PackageCardState extends State<PackageCard> {
                                   padding: EdgeInsets.zero,
                                 ),
                                 child: Text(
-                                  "Move to Cart",
+                                  widget.primaryButtonText ?? "",
                                   style: TextFontStyle.textFontStyle(
                                       12, Colors.white, FontWeight.w500),
                                 ),

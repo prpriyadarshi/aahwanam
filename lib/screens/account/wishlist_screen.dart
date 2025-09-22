@@ -20,11 +20,10 @@ class _WishlistScreenState extends State<WishlistScreen> {
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
-    final screenWidth = screen.width;
     final shortestSide = screen.shortestSide;
     final isTablet = shortestSide > 600;
 
-    // Scale factor for responsiveness
+    // Scaling function based on screen width (reference width 390)
     double scale(double size) => size * (screen.width / 390);
 
     return BlocBuilder<AccountBloc, AccountState>(
@@ -66,13 +65,13 @@ class _WishlistScreenState extends State<WishlistScreen> {
               actions: [
                 Padding(
                   padding: EdgeInsets.only(
-                    right: screenWidth * 0.01,
-                    left: screenWidth * 0.02,
+                    right: scale(12),
+                    left: scale(8),
                   ),
                   child: IconButton(
                     icon: Icon(
                       Icons.share_outlined,
-                      size: screenWidth * 0.06,
+                      size: scale(24),
                       color: const Color(0xFF1E535B),
                     ),
                     onPressed: () {
@@ -85,7 +84,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
             body: Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: isTablet ? 30 : scale(14),
-                vertical: isTablet ? 15 : scale(4),
+                vertical: isTablet ? 20 : scale(10),
               ),
               child: Column(
                 children: [
@@ -103,21 +102,22 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                 ? Colors.white
                                 : const Color(0xFF1E535B),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(scale(12)),
                               side: const BorderSide(
                                 color: Color(0xFF1E535B),
                                 width: 1,
                               ),
                             ),
                             padding: EdgeInsets.symmetric(
-                              vertical: isTablet ? 16 : scale(8),
+                              vertical: isTablet ? 16 : scale(10),
                             ),
                           ),
                           child: Text(
                             "Services",
-                            style: TextStyle(
-                              fontSize: isTablet ? 16 : scale(14),
-                              fontWeight: FontWeight.w500,
+                            style: TextFontStyle.textFontStyle(
+                              isTablet ? 16 : scale(14),
+                              isAllSelected ? Colors.white : const Color(0xFF1E535B),
+                              FontWeight.w500,
                             ),
                           ),
                         ),
@@ -125,8 +125,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                       SizedBox(width: scale(8)),
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () =>
-                              setState(() => isAllSelected = false),
+                          onPressed: () => setState(() => isAllSelected = false),
                           style: OutlinedButton.styleFrom(
                             backgroundColor: isAllSelected
                                 ? Colors.transparent
@@ -135,21 +134,22 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                 ? const Color(0xFF1E535B)
                                 : Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(scale(12)),
                               side: const BorderSide(
                                 color: Color(0xFF1E535B),
                                 width: 1,
                               ),
                             ),
                             padding: EdgeInsets.symmetric(
-                              vertical: isTablet ? 16 : scale(8),
+                              vertical: isTablet ? 16 : scale(10),
                             ),
                           ),
                           child: Text(
                             "Concepts",
-                            style: TextStyle(
-                              fontSize: isTablet ? 18 : scale(14),
-                              fontWeight: FontWeight.w500,
+                            style: TextFontStyle.textFontStyle(
+                              isTablet ? 16 : scale(14),
+                              isAllSelected ? const Color(0xFF1E535B) : Colors.white,
+                              FontWeight.w500,
                             ),
                           ),
                         ),
@@ -165,8 +165,10 @@ class _WishlistScreenState extends State<WishlistScreen> {
                         ? Center(
                       child: Text(
                         "Your wishlist is empty",
-                        style: TextStyle(
-                          fontSize: isTablet ? 18 : scale(14),
+                        style: TextFontStyle.textFontStyle(
+                          isTablet ? 18 : scale(14),
+                          Colors.black,
+                          FontWeight.w400,
                         ),
                       ),
                     )
@@ -175,8 +177,8 @@ class _WishlistScreenState extends State<WishlistScreen> {
                       itemBuilder: (context, index) {
                         final item = wishlistItems[index];
                         return Padding(
-                          padding: EdgeInsets.only(
-                              bottom: isTablet ? 20 : scale(12)),
+                          padding:
+                          EdgeInsets.only(bottom: isTablet ? 20 : scale(12)),
                           child: PackageCard(
                             title: item['title'],
                             description: item['description'],
@@ -184,31 +186,15 @@ class _WishlistScreenState extends State<WishlistScreen> {
                             imagePath: item['imagePath'],
                             rating: item['rating'],
                             showLikeIcon: true,
-                            imageType: PackageImageType
-                                .wishlist, // ✅ Wishlist usage
-                            primaryButtonText: "Book Now",
-                            onPrimaryButtonPressed: () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                shape:
-                                const RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.vertical(
-                                    top: Radius.circular(20),
-                                  ),
-                                ),
-                                builder: (context) {
-                                  return BookingBottomSheet(
-                                    booking: item,
-                                  );
-                                },
-                              );
-                            },
+                            imageType: PackageImageType.wishlist,
+                            primaryButtonText: "Move to Cart",
+                            onPrimaryButtonPressed: () {},
+                            // Add these properties to control button sizes
+                            primaryButtonWidth: 145, // Set width for primary button
+                            primaryButtonHeight: 29, // Set height for primary button
                             secondaryButtonText: "Remove",
                             onSecondaryButtonPressed: () {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(
+                              ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
                                     "${item['title']} removed from Wishlist",
@@ -216,6 +202,9 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                 ),
                               );
                             },
+                            // Add these properties to control button sizes
+                            secondaryButtonWidth: 75, // Set width for secondary button
+                            secondaryButtonHeight: 29, // Set height for secondary button
                           ),
                         );
                       },
@@ -224,8 +213,10 @@ class _WishlistScreenState extends State<WishlistScreen> {
                         ? Center(
                       child: Text(
                         "No concepts available",
-                        style: TextStyle(
-                          fontSize: isTablet ? 18 : scale(14),
+                        style: TextFontStyle.textFontStyle(
+                          isTablet ? 18 : scale(14),
+                          Colors.black,
+                          FontWeight.w400,
                         ),
                       ),
                     )
@@ -235,10 +226,8 @@ class _WishlistScreenState extends State<WishlistScreen> {
                       gridDelegate:
                       SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: isTablet ? 3 : 2,
-                        mainAxisSpacing:
-                        isTablet ? 16 : scale(8),
-                        crossAxisSpacing:
-                        isTablet ? 16 : scale(8),
+                        mainAxisSpacing: isTablet ? 16 : scale(10),
+                        crossAxisSpacing: isTablet ? 16 : scale(10),
                         childAspectRatio: isTablet
                             ? 1.3
                             : (screen.height > 800 ? 1.1 : 1),
@@ -247,15 +236,15 @@ class _WishlistScreenState extends State<WishlistScreen> {
                         final item = conceptsTabImages[index];
                         return CustomImageCard(
                           imageUrl: item['imagePath'],
-                          width: screen.width /
+                          width: (screen.width -
+                              (isTablet ? 64 : scale(28))) /
                               (isTablet ? 3 : 2),
                           height: isTablet ? 180 : scale(146),
                           isAsset: true,
                           favoriteSelected: item['isLiked'],
                           onFavoriteToggle: () {
                             setState(() {
-                              item['isLiked'] =
-                              !item['isLiked'];
+                              item['isLiked'] = !item['isLiked'];
                             });
                           },
                         );
