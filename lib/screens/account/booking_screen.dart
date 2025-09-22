@@ -179,7 +179,11 @@ class _BookingScreenState extends State<BookingScreen> {
                               details: package['details'],
                               imagePath: package['imagePath'],
                               rating: package['rating'],
-                              imageType: PackageImageType.booking, // ✅ Booking usage
+                              imageType: PackageImageType.booking,
+                              // Add fixed aspect ratio for consistent display
+                              // imageAspectRatio: 16 / 9, // Standard aspect ratio
+                              // Ensure proper image alignment
+                              // imageAlignment: Alignment.center,
                               onTap: () {
                                 if (isAllBookingsSelected) {
                                   // Navigate to All Bookings Details
