@@ -27,17 +27,17 @@ class _SignInScreenState extends State<SignInScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-               Text(
+              Text(
                 "Verify your phone number",
                 style: TextFontStyle.textFontStyle(18, const Color(0xFF575959), FontWeight.w600),
               ),
               const SizedBox(height: 4),
-                Text(
+              Text(
                 "We will send you a confirmation code",
                 style: TextFontStyle.textFontStyle(12, const Color(0xFF757575), FontWeight.w400),
               ),
               const SizedBox(height: 18),
-               Text(
+              Text(
                 "Phone Number *",
                 style: TextFontStyle.textFontStyle(14, const Color(0xFF575959), FontWeight.w500),
               ),
@@ -77,7 +77,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 height: MediaQuery.of(context).size.height*43/812,
                 width: double.infinity,
               ),
-              const Spacer(), // pushes sign-up row to bottom
+              // const Spacer(), // pushes sign-up row to bottom
+              const SizedBox(height: 18),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -94,7 +95,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 18),
+              // const SizedBox(height: 18),
             ],
           ),
         ),

@@ -15,9 +15,8 @@ class WelcomeScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              const SizedBox(height: 174), // Top space
+              const SizedBox(height: 174),
 
-              // Middle content
               Column(
                 children: [
                   Image.asset(
@@ -26,17 +25,20 @@ class WelcomeScreen extends StatelessWidget {
                     width: 313,
                     fit: BoxFit.contain,
                   ),
-                   Text(
+                  Text(
                     "Let’s make your day special!",
-                    style: TextFontStyle.textFontStyle(20, const Color(0xFF575959), FontWeight.w500),
-                     textAlign: TextAlign.center,
+                    style: TextFontStyle.textFontStyle(
+                      20,
+                      const Color(0xFF575959),
+                      FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
 
-              const Spacer(), // pushes buttons to bottom
+              const Spacer(),
 
-              // Buttons
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -47,7 +49,7 @@ class WelcomeScreen extends StatelessWidget {
                     backgroundColor: const Color(0xFF1E535B),
                     borderColor: const Color(0XFF1E535B),
                     textColor: const Color(0XFFFFFFFF),
-                    height: MediaQuery.of(context).size.height*43/812,
+                    height: MediaQuery.of(context).size.height * 43 / 812,
                     width: double.infinity,
                   ),
                   const SizedBox(height: 12),
@@ -55,13 +57,13 @@ class WelcomeScreen extends StatelessWidget {
                     text: "Sign up",
                     onPressed: () =>
                         Navigator.pushNamed(context, AppRoutes.signUp),
-                    backgroundColor: Colors.white,
+                    backgroundColor: const Color(0XFFFFF6ED),
                     borderColor: const Color(0xFF1E535B),
                     textColor: const Color(0xFF575959),
-                    height: MediaQuery.of(context).size.height*43/812,
+                    height: MediaQuery.of(context).size.height * 43 / 812,
                     width: double.infinity,
                   ),
-                  const SizedBox(height: 40), // Bottom space
+                  const SizedBox(height: 40),
                 ],
               ),
             ],
