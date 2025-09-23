@@ -84,6 +84,7 @@ class PackageCard extends StatefulWidget {
   final double? primaryButtonHeight;
   final double? secondaryButtonWidth;
   final double? secondaryButtonHeight;
+  final double? scalingFactor;
 
   const PackageCard({
     Key? key,
@@ -101,11 +102,11 @@ class PackageCard extends StatefulWidget {
     this.showLikeIcon = false,
     this.onTap,
     this.imageType = PackageImageType.cart,
-    // NEW: Button size parameters with defaults
     this.primaryButtonWidth,
     this.primaryButtonHeight,
     this.secondaryButtonWidth,
     this.secondaryButtonHeight,
+    this.scalingFactor = 1.0, // Default scaling factor
   }) : super(key: key);
 
   @override
@@ -115,31 +116,42 @@ class PackageCard extends StatefulWidget {
 class _PackageCardState extends State<PackageCard> {
   bool isLiked = true;
 
-  /// Chooses which image widget to render
+  double _getScaledValue(double value) {
+    return value * (widget.scalingFactor ?? 1.0);
+  }
+
   Widget _buildImage() {
-    switch (widget.imageType) {
-      case PackageImageType.cart:
-        return CartImage(imagePath: widget.imagePath);
-      case PackageImageType.booking:
-        return BookingImage(imagePath: widget.imagePath);
-      case PackageImageType.wishlist:
-        return WishlistImage(imagePath: widget.imagePath);
-    }
+    final scaledHeight = _getScaledValue(
+        widget.imageType == PackageImageType.booking ? 110 : 125
+    );
+    final scaledWidth = _getScaledValue(
+        widget.imageType == PackageImageType.wishlist ? 85 : 80
+    );
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(_getScaledValue(6)),
+      child: Image.asset(
+        widget.imagePath,
+        height: scaledHeight,
+        width: scaledWidth,
+        fit: BoxFit.cover,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: widget.onTap,
-      borderRadius: BorderRadius.circular(6),
+      borderRadius: BorderRadius.circular(_getScaledValue(6)),
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(_getScaledValue(6)),
         ),
         elevation: 0,
         color: const Color(0xFFFFEFDF),
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: EdgeInsets.all(_getScaledValue(12)),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -149,8 +161,8 @@ class _PackageCardState extends State<PackageCard> {
                   _buildImage(),
                   if (widget.showLikeIcon)
                     Positioned(
-                      top: 4,
-                      right: 4,
+                      top: _getScaledValue(4),
+                      right: _getScaledValue(4),
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
@@ -162,10 +174,10 @@ class _PackageCardState extends State<PackageCard> {
                             shape: BoxShape.circle,
                             color: Colors.white,
                           ),
-                          padding: const EdgeInsets.all(2),
+                          padding: EdgeInsets.all(_getScaledValue(2)),
                           child: Icon(
                             isLiked ? Icons.favorite : Icons.favorite_border,
-                            size: 16,
+                            size: _getScaledValue(16),
                             color: isLiked ? Colors.red : Colors.grey,
                           ),
                         ),
@@ -174,7 +186,7 @@ class _PackageCardState extends State<PackageCard> {
                 ],
               ),
 
-              const SizedBox(width: 12),
+              SizedBox(width: _getScaledValue(12)),
 
               // Text + Buttons Section
               Expanded(
@@ -189,75 +201,91 @@ class _PackageCardState extends State<PackageCard> {
                           child: Text(
                             widget.title,
                             style: TextFontStyle.textFontStyle(
-                                14, const Color(0xFF575959), FontWeight.w500),
+                                _getScaledValue(14),
+                                const Color(0xFF575959),
+                                FontWeight.w500
+                            ),
                             overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                           ),
                         ),
                         if (widget.rating != null)
                           Row(
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.star,
-                                size: 16,
-                                color: Color(0xFFEFAA37),
+                                size: _getScaledValue(16),
+                                color: const Color(0xFFEFAA37),
                               ),
-                              const SizedBox(width: 4),
+                              SizedBox(width: _getScaledValue(4)),
                               Text(
                                 widget.rating.toString(),
                                 style: TextFontStyle.textFontStyle(
-                                    12, const Color(0xFF575959), FontWeight.w400),
+                                    _getScaledValue(12),
+                                    const Color(0xFF575959),
+                                    FontWeight.w400
+                                ),
                               ),
                             ],
                           ),
                       ],
                     ),
-                    const SizedBox(height: 6),
+                    SizedBox(height: _getScaledValue(6)),
 
                     // Description
                     Text(
                       widget.description,
                       style: TextFontStyle.textFontStyle(
-                          13, const Color(0xFF757575), FontWeight.w400),
+                          _getScaledValue(13),
+                          const Color(0xFF757575),
+                          FontWeight.w400
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: _getScaledValue(4)),
 
                     // Price
                     Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.currency_rupee,
-                          size: 14,
-                          color: Color(0xFF1E535B),
+                          size: _getScaledValue(14),
+                          color: const Color(0xFF1E535B),
                         ),
                         Text(
                           widget.price,
                           style: TextFontStyle.textFontStyle(
-                              12, const Color(0xFF1E535B), FontWeight.w600),
+                              _getScaledValue(12),
+                              const Color(0xFF1E535B),
+                              FontWeight.w600
+                          ),
                         ),
                       ],
                     ),
 
                     if (widget.details != null) ...[
-                      const SizedBox(height: 6),
+                      SizedBox(height: _getScaledValue(6)),
                       Text(
                         widget.details!,
                         style: TextFontStyle.textFontStyle(
-                            13, const Color(0xFF575959), FontWeight.w600),
+                            _getScaledValue(13),
+                            const Color(0xFF575959),
+                            FontWeight.w600
+                        ),
                       ),
                     ],
 
-                    // ... existing code ...
-
-// Buttons
+                    // Buttons
                     if (widget.primaryButtonText != null ||
                         widget.secondaryButtonText != null) ...[
-                      const SizedBox(height: 12),
+                      SizedBox(height: _getScaledValue(12)),
                       Row(
                         children: [
                           if (widget.secondaryButtonText != null)
                             SizedBox(
-                              width: widget.secondaryButtonWidth ?? 120, // Use custom width or default
-                              height: widget.secondaryButtonHeight ?? 29, // Use custom height or default
+                              width: widget.secondaryButtonWidth ?? _getScaledValue(120),
+                              height: widget.secondaryButtonHeight ?? _getScaledValue(29),
                               child: OutlinedButton(
                                 onPressed: widget.onSecondaryButtonPressed,
                                 style: OutlinedButton.styleFrom(
@@ -267,37 +295,43 @@ class _PackageCardState extends State<PackageCard> {
                                     width: 1,
                                   ),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(9),
+                                    borderRadius: BorderRadius.circular(_getScaledValue(9)),
                                   ),
                                   padding: EdgeInsets.zero,
                                 ),
                                 child: Text(
                                   widget.secondaryButtonText!,
                                   style: TextFontStyle.textFontStyle(
-                                      12, const Color(0xFF1E535B), FontWeight.w500),
+                                      _getScaledValue(12),
+                                      const Color(0xFF1E535B),
+                                      FontWeight.w500
+                                  ),
                                 ),
                               ),
                             ),
                           if (widget.secondaryButtonText != null &&
                               widget.primaryButtonText != null)
-                            const SizedBox(width: 8),
+                            SizedBox(width: _getScaledValue(8)),
                           if (widget.primaryButtonText != null)
                             SizedBox(
-                              width: widget.primaryButtonWidth ?? 90, // Use custom width or default
-                              height: widget.primaryButtonHeight ?? 29, // Use custom height or default
+                              width: widget.primaryButtonWidth ?? _getScaledValue(90),
+                              height: widget.primaryButtonHeight ?? _getScaledValue(29),
                               child: ElevatedButton(
                                 onPressed: widget.onPrimaryButtonPressed,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF1E535B),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(9),
+                                    borderRadius: BorderRadius.circular(_getScaledValue(9)),
                                   ),
                                   padding: EdgeInsets.zero,
                                 ),
                                 child: Text(
                                   widget.primaryButtonText ?? "",
                                   style: TextFontStyle.textFontStyle(
-                                      12, Colors.white, FontWeight.w500),
+                                      _getScaledValue(12),
+                                      Colors.white,
+                                      FontWeight.w500
+                                  ),
                                 ),
                               ),
                             ),
