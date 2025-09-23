@@ -9,44 +9,47 @@ import 'package:aahwanam/blocs/account/account_state.dart';
 
 import '../../services/decoration/decoration_theme.dart';
 import '../../services/makeup_hair_service/MakeupDecor.dart';
+import '../../utils/responsive_utils.dart';
 import '../../widgets/package_card.dart';
 import 'account_screen.dart';
 
 class BookingScreen extends StatefulWidget {
-  const BookingScreen({super.key});
+  // const BookingScreen({super.key});
+  bool isAllBookingsSelected = true;
 
   @override
   _BookingScreenState createState() => _BookingScreenState();
 }
 
 class _BookingScreenState extends State<BookingScreen> {
+  bool isAllBookingsSelected = true;
+
+  double _getScalingFactor(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    return screenWidth / 390;
+  }
+
   String _extractDecoratorName(String fullTitle) {
     final parts = fullTitle.split('by');
     if (parts.length > 1) {
-      return parts[1].trim(); // Get the text after "by"
+      return parts[1].trim();
     }
-    return fullTitle; // fallback if "by" is not found
+    return fullTitle;
   }
-
-  // Track which button is selected
-  bool isAllBookingsSelected = true; // Set default to All Bookings
 
   @override
   Widget build(BuildContext context) {
-    // Responsive helpers
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth > 600;
+    final scalingFactor = _getScalingFactor(context);
+    final isTablet = ResponsiveUtils.isTablet(context);
 
     return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
-        // 1. Show loading indicator while fetching data
         if (state is AccountLoading) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         }
 
-        // 2. Show booking info when data is loaded
         if (state is AccountLoaded) {
           return Scaffold(
             backgroundColor: Colors.white,
@@ -58,17 +61,17 @@ class _BookingScreenState extends State<BookingScreen> {
               title: Text(
                 "Bookings",
                 style: TextStyle(
-                  fontSize: isTablet ? 22 : 18,
+                  fontSize: ResponsiveUtils.getResponsiveFontSize(context, 19),
                   color: const Color(0xFF575959),
                   fontWeight: FontWeight.w600,
                 ),
               ),
               leading: IconButton(
-                padding: const EdgeInsets.only(top: 2, left: 12),
-                icon: const Icon(
+                padding: ResponsiveUtils.getResponsivePadding(context, horizontal: 22),
+                icon: Icon(
                   Icons.arrow_back_ios,
-                  size: 18,
-                  color: Color(0xFF575959),
+                  size: ResponsiveUtils.getResponsiveFontSize(context, 18),
+                  color: const Color(0xFF575959),
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -82,11 +85,11 @@ class _BookingScreenState extends State<BookingScreen> {
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
+                  padding: ResponsiveUtils.getResponsivePadding(context, horizontal: 16, vertical: 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Toggle buttons: All Bookings / In Progress
+                      // Toggle buttons
                       Row(
                         children: [
                           Expanded(
@@ -98,7 +101,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               },
                               style: ElevatedButton.styleFrom(
                                 padding: EdgeInsets.symmetric(
-                                  vertical: isTablet ? 12 : 11,
+                                  vertical: ResponsiveUtils.getResponsiveHeight(context, 11),
                                 ),
                                 backgroundColor: isAllBookingsSelected
                                     ? const Color(0xFF1E535B)
@@ -107,7 +110,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                     ? Colors.white
                                     : const Color(0xFF1E535B),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
+                                  borderRadius: BorderRadius.circular(ResponsiveUtils.getResponsiveWidth(context, 12)),
                                   side: const BorderSide(
                                       color: Color(0xFF1E535B), width: 1),
                                 ),
@@ -115,13 +118,13 @@ class _BookingScreenState extends State<BookingScreen> {
                               child: Text(
                                 "All Bookings",
                                 style: TextStyle(
-                                  fontSize: isTablet ? 12 : 13,
+                                  fontSize: ResponsiveUtils.getResponsiveFontSize(context, 13),
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
                           ),
-                          const SizedBox(width: 8),
+                          SizedBox(width: ResponsiveUtils.getResponsiveWidth(context, 8)),
                           Expanded(
                             child: OutlinedButton(
                               onPressed: () {
@@ -131,7 +134,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               },
                               style: OutlinedButton.styleFrom(
                                 padding: EdgeInsets.symmetric(
-                                  vertical: isTablet ? 18 : 11,
+                                  vertical: ResponsiveUtils.getResponsiveHeight(context, 11),
                                 ),
                                 foregroundColor: isAllBookingsSelected
                                     ? const Color(0xFF1E535B)
@@ -140,7 +143,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                     ? Colors.transparent
                                     : const Color(0xFF1E535B),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
+                                  borderRadius: BorderRadius.circular(ResponsiveUtils.getResponsiveWidth(context, 12)),
                                   side: const BorderSide(
                                       color: Color(0xFF1E535B), width: 1),
                                 ),
@@ -148,7 +151,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               child: Text(
                                 "In Progress",
                                 style: TextStyle(
-                                  fontSize: isTablet ? 12 : 13,
+                                  fontSize: ResponsiveUtils.getResponsiveFontSize(context, 13),
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -156,9 +159,9 @@ class _BookingScreenState extends State<BookingScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: ResponsiveUtils.getResponsiveHeight(context, 10)),
 
-                      // ✅ List of Bookings (All / In Progress)
+                      // Bookings List
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -171,7 +174,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               : state.inProgressBookings[index];
 
                           return Padding(
-                            padding: const EdgeInsets.only(bottom: 6.0),
+                            padding: EdgeInsets.only(bottom: ResponsiveUtils.getResponsiveHeight(context, 6)),
                             child: PackageCard(
                               title: package['title'],
                               description: package['description'],
@@ -180,13 +183,8 @@ class _BookingScreenState extends State<BookingScreen> {
                               imagePath: package['imagePath'],
                               rating: package['rating'],
                               imageType: PackageImageType.booking,
-                              // Add fixed aspect ratio for consistent display
-                              // imageAspectRatio: 16 / 9, // Standard aspect ratio
-                              // Ensure proper image alignment
-                              // imageAlignment: Alignment.center,
                               onTap: () {
                                 if (isAllBookingsSelected) {
-                                  // Navigate to All Bookings Details
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -195,16 +193,14 @@ class _BookingScreenState extends State<BookingScreen> {
                                     ),
                                   );
                                 } else {
-                                  final title =
-                                      package['title']?.toLowerCase() ?? '';
+                                  final title = package['title']?.toLowerCase() ?? '';
                                   if (title.contains('dream decor')) {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => DecorationTheme(
                                           decorator: {
-                                            'name': _extractDecoratorName(
-                                                package['title'] ?? ''),
+                                            'name': _extractDecoratorName(package['title'] ?? ''),
                                             'image': package['imagePath'] ?? '',
                                             'rating': '4.5',
                                             'price': package['price'] ?? '',
@@ -218,8 +214,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                       MaterialPageRoute(
                                         builder: (context) => MakeUpTheme(
                                           makeupHair: {
-                                            'name': _extractDecoratorName(
-                                                package['title'] ?? ''),
+                                            'name': _extractDecoratorName(package['title'] ?? ''),
                                             'image': package['imagePath'] ?? '',
                                             'rating': '4.2',
                                             'price': package['price'] ?? '',
@@ -230,6 +225,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                   }
                                 }
                               },
+                              scalingFactor: scalingFactor, // Pass scaling factor
                             ),
                           );
                         },
@@ -242,7 +238,6 @@ class _BookingScreenState extends State<BookingScreen> {
           );
         }
 
-        // 3. Handle unknown or error state
         return const Scaffold(
           body: Center(child: Text("Something went wrong.")),
         );
