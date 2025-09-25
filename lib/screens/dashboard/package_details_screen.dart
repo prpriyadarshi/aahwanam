@@ -138,7 +138,7 @@ class PackageDetailScreen extends StatelessWidget {
       color: Colors.white,
     child: SingleChildScrollView(
 
-      padding: const EdgeInsets.fromLTRB(19, 16, 16, 80),
+      padding: const EdgeInsets.fromLTRB(19, 16, 26, 5),
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

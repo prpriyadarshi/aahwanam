@@ -12,7 +12,7 @@ class CartImage extends StatelessWidget {
       borderRadius: BorderRadius.circular(6),
       child: Image.asset(
         imagePath,
-        height: 125,
+        height: 144,
         width: 80,
         fit: BoxFit.cover,
       ),
