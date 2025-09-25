@@ -228,7 +228,7 @@ class PackageDetailScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomInputField(
-                  labelText: 'No. Of Guests*',
+                  labelText: 'No. of Guests*',
                   controller: TextEditingController(),
                   keyboardType: TextInputType.number,
                 ),
@@ -236,7 +236,7 @@ class PackageDetailScreen extends StatelessWidget {
               const SizedBox(width: 16),
               Expanded(
                 child: CustomInputField(
-                  labelText: 'No. Of Bartenders*',
+                  labelText: 'No. of Bartenders*',
 
                   controller: TextEditingController(),
                   keyboardType: TextInputType.number,

@@ -374,7 +374,7 @@ class _PoojaDetailPageState extends State<PoojaDetailPage> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             ),
             child: Text(
-              "Find My Muhurat",
+              "Find my Muhurat",
               style: TextFontStyle.textFontStyle(
                 16,
                 const Color(0xFF184A45),
