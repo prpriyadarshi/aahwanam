@@ -27,7 +27,7 @@ class MediaGallery extends StatelessWidget {
             children: [
               /// ✅ Title
               Text(
-                "Photos And Videos",
+                "Photos and Videos",
                 style: TextFontStyle.textFontStyle(
                   15,
                   const Color(0xFF575959),
