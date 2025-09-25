@@ -3,28 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/account/account_bloc.dart';
 import '../../blocs/account/account_state.dart';
+import '../../utils/responsive_utils.dart';
 import '../../widgets/custom_text_field.dart';
-import '../../widgets/package_card.dart'; // Import your PackageCard
+import '../../widgets/package_card.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
-  // ✅ Responsive text size based on screen width
-  double _getResponsiveFontSize(double screenWidth, double baseSize) {
-    if (screenWidth < 360) {
-      return baseSize * 0.85; // Small devices
-    } else if (screenWidth > 600) {
-      return baseSize * 1.2; // Tablets
-    }
-    return baseSize; // Normal phones
-  }
-
-  // ✅ Responsive padding
-  EdgeInsets _getResponsivePadding(double screenWidth) {
-    if (screenWidth > 600) {
-      return const EdgeInsets.fromLTRB(28, 0, 28, 28); // Tablet
-    }
-    return const EdgeInsets.fromLTRB(18, 0, 18, 18); // Phones
+  double _getScalingFactor(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    return screenWidth / 390;
   }
 
   @override
@@ -38,117 +26,107 @@ class CartScreen extends StatelessWidget {
         }
 
         if (state is AccountLoaded) {
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final screenWidth = constraints.maxWidth;
-              final screenHeight = constraints.maxHeight;
+          final scalingFactor = _getScalingFactor(context);
+          final isTablet = ResponsiveUtils.isTablet(context);
 
-              return Scaffold(
-                backgroundColor: Colors.white,
-                appBar: AppBar(
-                  titleSpacing: 0,
-                  title: Text(
-                    "Cart",
-                    style: TextFontStyle.textFontStyle(
-                      _getResponsiveFontSize(screenWidth, 16),
-                      const Color(0xFF575959),
-                      FontWeight.w500,
-                    ),
-                  ),
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
-                  elevation: 0,
-                  leading: IconButton(
-                    padding: EdgeInsets.only(
-                      top: screenHeight * 0.005,
-                      left: screenWidth * 0.03,
-                    ),
+          return Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              titleSpacing: 0,
+              title: Text(
+                "Cart",
+                style: TextFontStyle.textFontStyle(
+                  ResponsiveUtils.getResponsiveFontSize(context, 18),
+                  const Color(0xFF575959),
+                  FontWeight.w500,
+                ),
+              ),
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.black,
+              elevation: 0,
+              leading: IconButton(
+                padding: ResponsiveUtils.getResponsivePadding(context, horizontal: 12),
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  size: ResponsiveUtils.getResponsiveFontSize(context, 18),
+                  color: const Color(0xFF575959),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+              actions: [
+                Padding(
+                  padding: ResponsiveUtils.getResponsivePadding(context, horizontal: 14,vertical: 10),
+                  child: IconButton(
                     icon: Icon(
-                      Icons.arrow_back_ios,
-                      size: screenWidth * 0.045, // Responsive icon size
-                      color: const Color(0xFF575959),
+                      Icons.share_outlined,
+                      size: ResponsiveUtils.getResponsiveFontSize(context, 24),
+                      color: const Color(0xFF1E535B),
                     ),
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () {
+                      // Implement share functionality
+                    },
                   ),
-                  actions: [
-                    Padding(
+                )
+              ],
+            ),
+            body: SafeArea(
+              child: Padding(
+                padding: ResponsiveUtils.getResponsivePadding(context, horizontal: 18, vertical: 0),
+                child: ListView.builder(
+                  itemCount: state.addToCart.length,
+                  itemBuilder: (context, index) {
+                    final booking = state.addToCart[index];
+                    return Padding(
                       padding: EdgeInsets.only(
-                        right: screenWidth * 0.01, // Adjust right spacing
-                        left: screenWidth * 0.02, // Adjust left spacing
+                        bottom: ResponsiveUtils.getResponsiveHeight(context, 12),
                       ),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.share_outlined,
-                          size: screenWidth * 0.06,
-                          color: Color(0xFF1E535B), // ✅ Set custom color
-                        ),
-                        onPressed: () {
-                          // Implement share functionality
+                      child: PackageCard(
+                        title: booking['title'],
+                        description: booking['description'],
+                        price: booking['price'],
+                        imagePath: booking['imagePath'],
+                        rating: booking['rating'],
+                        imageType: PackageImageType.cart,
+                        primaryButtonText: "Book Now",
+                        onPrimaryButtonPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20),
+                              ),
+                            ),
+                            builder: (context) {
+                              return BookingBottomSheet(
+                                booking: booking,
+                              );
+                            },
+                          );
                         },
+                        secondaryButtonText: "Move to Wishlist",
+                        onSecondaryButtonPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                "${booking['title']} moved to Wishlist",
+                                style: TextFontStyle.textFontStyle(
+                                  ResponsiveUtils.getResponsiveFontSize(context, 14),
+                                  Colors.white,
+                                  FontWeight.normal,
+                                ),
+                              ),
+                              backgroundColor: Colors.black87,
+                            ),
+                          );
+                        },
+                        scalingFactor: scalingFactor, // Pass scaling factor
                       ),
-                    )
-                  ],
+                    );
+                  },
                 ),
-                body: SafeArea(
-                  child: Padding(
-                    padding: _getResponsivePadding(screenWidth),
-                    child: ListView.builder(
-                      itemCount: state.addToCart.length,
-                      itemBuilder: (context, index) {
-                        final booking = state.addToCart[index];
-                        return Padding(
-                          padding: EdgeInsets.only(
-                            bottom: screenHeight * 0.015,
-                          ), // Responsive spacing
-                          child: PackageCard(
-                            title: booking['title'],
-                            description: booking['description'],
-                            price: booking['price'],
-                            imagePath: booking['imagePath'],
-                            rating: booking['rating'],
-                            imageType: PackageImageType
-                                .cart, // ✅ Force Cart Image style
-                            primaryButtonText: "Book Now",
-                            onPrimaryButtonPressed: () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20),
-                                  ),
-                                ),
-                                builder: (context) {
-                                  return BookingBottomSheet(
-                                    booking: booking,
-                                  );
-                                },
-                              );
-                            },
-                            secondaryButtonText: "Move to Wishlist",
-                            onSecondaryButtonPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    "${booking['title']} moved to Wishlist",
-                                    style: TextStyle(
-                                      fontSize: _getResponsiveFontSize(
-                                        screenWidth,
-                                        14,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              );
-            },
+              ),
+            ),
           );
         }
 

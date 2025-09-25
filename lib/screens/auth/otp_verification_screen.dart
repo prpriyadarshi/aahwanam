@@ -260,29 +260,29 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         const Spacer(),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 30),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Don’t have an account? ",
-                                style: TextFontStyle.textFontStyle(
-                                    16, const Color(0xFF575959),
-                                    FontWeight.w400),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, AppRoutes.signUp);
-                                },
-                                child: Text(
-                                  "Sign up",
-                                  style: TextFontStyle.textFontStyle(
-                                      16, const Color(0xFF1E535B),
-                                      FontWeight.w400),
-                                ),
-                              ),
-                            ],
-                          ),
+                          // child: Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: [
+                          //     Text(
+                          //       "Don’t have an account? ",
+                          //       style: TextFontStyle.textFontStyle(
+                          //           16, const Color(0xFF575959),
+                          //           FontWeight.w400),
+                          //     ),
+                          //     GestureDetector(
+                          //       onTap: () {
+                          //         Navigator.pushNamed(
+                          //             context, AppRoutes.signUp);
+                          //       },
+                          //       child: Text(
+                          //         "Sign up",
+                          //         style: TextFontStyle.textFontStyle(
+                          //             16, const Color(0xFF1E535B),
+                          //             FontWeight.w400),
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                         ),
                         const SizedBox(height: 18),
                       ],

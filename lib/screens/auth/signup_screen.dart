@@ -56,7 +56,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: _labeledField("Last Name", lastNameController),
+                          child: _labeledField("Last Name *", lastNameController),
                         ),
                       ],
                     ),
@@ -110,9 +110,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
 
-                     // const SizedBox(height: 380),
+                    // const SizedBox(height: 380),
 
-                    SizedBox(height: constraints.maxHeight * 0.30),
+                    SizedBox(height: constraints.maxHeight * 0.05),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

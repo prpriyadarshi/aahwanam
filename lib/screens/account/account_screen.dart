@@ -197,7 +197,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             builder: (_) {
                               return BlocProvider.value(
                                 value: BlocProvider.of<AccountBloc>(context),
-                                child: const BookingScreen(),
+                                child:  BookingScreen(),
                               );
                             },
                           ),

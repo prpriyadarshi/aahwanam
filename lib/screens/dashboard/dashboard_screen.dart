@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:aahwanam/routes/app_routes.dart';
 import 'package:aahwanam/screens/Packages/events_screen.dart';
 import 'package:aahwanam/screens/concepts/concepts_screen.dart';
@@ -6,6 +7,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter/services.dart';
 import '../../blocs/concepts/concepts_bloc.dart';
 import '../../blocs/dashboard/dashboard_bloc.dart';
 import '../../blocs/dashboard/dashboard_event.dart';
@@ -21,6 +23,7 @@ class DashboardScreen extends StatefulWidget {
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
+
 class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
 
@@ -32,7 +35,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: ConceptsScreen(), // Index 2
     ),
     const AccountScreen(), // Index 3
-    const EventScreen(showPopupOnLoad: true), // Index 4: Event Screen with popup flag
+    const EventScreen(showPopupOnLoad: true), // Index 4
   ];
 
   void _onItemTapped(int index) {
@@ -44,14 +47,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: _selectedIndex != 3
-          ? CustomBottomNavBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      )
-          : null,
+    return WillPopScope(
+      onWillPop: () async {
+        // Close the app instead of going back to signup
+        if (Platform.isAndroid) {
+          SystemNavigator.pop();
+        } else if (Platform.isIOS) {
+          exit(0); // For iOS
+        }
+        return false;
+      },
+      child: Scaffold(
+        body: _screens[_selectedIndex],
+        bottomNavigationBar: _selectedIndex != 3
+            ? CustomBottomNavBar(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+        )
+            : null,
+      ),
     );
   }
 }
@@ -129,20 +143,18 @@ class DashboardContent extends StatelessWidget {
                       color: Color(0xFF004d40),
                       size: 22,
                     ),
-                    // Notification badge - show only when hasNotification is true
-                    if (true) // Replace with your notification condition (e.g., hasNewNotifications)
-                      Positioned(
-                        right: 0,
-                        top: 0,
-                        child: Container(
-                          width: 8,
-                          height: 8,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF1E535B),
-                            shape: BoxShape.circle,
-                          ),
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      child: Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF1E535B),
+                          shape: BoxShape.circle,
                         ),
                       ),
+                    ),
                   ],
                 ),
               ),
@@ -209,7 +221,6 @@ class DashboardContent extends StatelessWidget {
                           }
                         },
                       ),
-
                       CustomCardWidgets.buildSection(
                         context,
                         title: "Decorators in your city",
@@ -230,7 +241,6 @@ class DashboardContent extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 10),
-                      // Negative margin to pull Trending section up
                       Container(
                         height: MediaQuery.of(context).size.height * 40 / 812,
                         child: Transform.translate(
@@ -256,7 +266,6 @@ class DashboardContent extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Small spacing after Trending header
                       SizedBox(
                         height: 110,
                         child: ListView.builder(
@@ -271,7 +280,6 @@ class DashboardContent extends StatelessWidget {
                           },
                         ),
                       ),
-                      // Spacing before Packages section
                       CustomCardWidgets.buildSection(
                         context,
                         title: "Packages for all events",
@@ -342,14 +350,12 @@ Widget _buildSliderSection(List<String> images) {
   );
 }
 
-
 void _navigateToSection(BuildContext context, String sectionType) {
-  // Define route mappings for different sections
   final Map<String, String> sectionRoutes = {
     'decorators': AppRoutes.decor,
     'mehndi': AppRoutes.mehndi,
     'packages': AppRoutes.event,
-    'trending':  AppRoutes.concepts
+    'trending': AppRoutes.concepts
   };
 
   final routeName = sectionRoutes[sectionType];
@@ -357,7 +363,6 @@ void _navigateToSection(BuildContext context, String sectionType) {
   if (routeName != null) {
     Navigator.pushNamed(context, routeName);
   } else {
-    // Fallback navigation or show message
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Page for $sectionType is under development'),
@@ -365,9 +370,4 @@ void _navigateToSection(BuildContext context, String sectionType) {
       ),
     );
   }
-}
-
-// Keep the old function for backward compatibility if needed elsewhere
-void _navigateTo(BuildContext context, String section) {
-  Navigator.pushNamed(context, '/$section');
 }
