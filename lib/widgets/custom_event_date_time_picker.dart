@@ -430,7 +430,7 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
     crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Event Date*",
+          "Event date*",
           style: TextFontStyle.textFontStyle(
             widget.label == 'Pooja'? MediaQuery.of(context).size.width * 0.030:MediaQuery.of(context).size.width * 0.035, // responsive font size
             const Color(0xFF575959),
@@ -490,7 +490,7 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
     Text(
-    "Event Time*",
+    "Event time*",
     style: TextFontStyle.textFontStyle(
       widget.label == 'Pooja'? MediaQuery.of(context).size.width * 0.030:MediaQuery.of(context).size.width * 0.035, // responsive font size
 

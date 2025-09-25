@@ -67,43 +67,12 @@ class ReviewList extends StatelessWidget {
                             FontWeight.w500,
                           ),
                         ),
-<<<<<<< HEAD
-                      ),
-                      child: Text(
-                        "Rate Service",
-                        style: TextFontStyle.textFontStyle(
-                          14,
-                          const Color(0xFF1E535B),
-                          FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      "Very Good",
-                      style: TextFontStyle.textFontStyle(
-                        16,
-                        const Color(0xFF575959),
-                        FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(Icons.star, color: Colors.amber, size: 18),
-                        Icon(Icons.star, color: Colors.amber, size: 18),
-                        Icon(Icons.star, color: Colors.amber, size: 18),
-                        Icon(Icons.star, color: Colors.amber, size: 18),
-                        Icon(Icons.star_half, color: Colors.amber, size: 18),
-=======
                         const SizedBox(height: 18),
                         _buildRatingRow(5, 80),
                         _buildRatingRow(4, 60),
                         _buildRatingRow(3, 30),
                         _buildRatingRow(2, 20),
                         _buildRatingRow(1, 10),
->>>>>>> 72794da33709d9c9bf70607013e6e2ea9449e4b3
                       ],
                     ),
                   ),
@@ -139,7 +108,7 @@ class ReviewList extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            "Verry Good",
+                            "Very Good",
                             style: TextFontStyle.textFontStyle(
                               16,
                               const Color(0xFF575959),

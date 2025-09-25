@@ -22,11 +22,13 @@ class CartImage extends StatelessWidget {
 
 /// 📅 Booking Image Widget
 class BookingImage extends StatelessWidget {
+
   final String imagePath;
   const BookingImage({Key? key, required this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print('hii');
     return ClipRRect(
       borderRadius: BorderRadius.circular(6),
       child: Image.asset(
