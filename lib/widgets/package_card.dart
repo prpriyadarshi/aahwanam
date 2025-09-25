@@ -28,7 +28,7 @@ class BookingImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('hii');
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(6),
       child: Image.asset(
