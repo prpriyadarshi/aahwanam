@@ -284,7 +284,7 @@ class _EventDateTimePickerState extends State<EventDateTimePicker> {
               child: Column(
                 children: [
                   Text(
-                    "Select Event Time",
+                    "Select Event time",
                     style: TextFontStyle.textFontStyle(
                       18,
                       const Color(0xFF333333),
