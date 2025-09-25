@@ -108,7 +108,7 @@ class ReviewList extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            "Very good",
+                            "Very Good",
                             style: TextFontStyle.textFontStyle(
                               16,
                               const Color(0xFF575959),
